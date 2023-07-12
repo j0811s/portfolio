@@ -8,8 +8,8 @@ export default async function StaticPage() {
   const hasContents = contents.length > 0;
 
   return (
-    <>
-      <section className="blogList">
+    <div className="blogList">
+      <section className="blogList-content">
         <h1>投稿一覧</h1>
         {
           hasContents ? 
@@ -28,7 +28,7 @@ export default async function StaticPage() {
             </>
         }
       </section>
-      <BlogAside modClassName="mod-blogList" />
-    </>
+      <BlogAside modClassName="blogList-aside" />
+    </div>
   );
 }

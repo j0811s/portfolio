@@ -18,6 +18,7 @@ export async function generateStaticParams() {
   return [...paths];
 }
 
+
 export default async function StaticDetailPage(
   { params: { endpoint, postId } }: { params: { endpoint: string, postId: string }; }
 ) {
@@ -25,8 +26,8 @@ export default async function StaticDetailPage(
   if (!post) notFound();
   
   return (
-    <>
-      <article id={post.id} className='post'>
+    <div className='post'>
+      <article id={post.id} className='post-content'>
         <h1 className='post-title'>{post.title}</h1>
         <div className='post-date'>
           <p>公開日：{post.publishedAt}</p>
@@ -40,7 +41,7 @@ export default async function StaticDetailPage(
         }
         <div className='post-content'>{parse(post.content)}</div>
       </article>
-      <BlogAside modClassName='mod-blogPost' />
-    </>
+      <BlogAside modClassName='post-aside' />
+    </div>
  );
 }
