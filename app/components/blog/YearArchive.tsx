@@ -31,7 +31,7 @@ export const YearArchive = async () => {
       <h2>年別アーカイブ</h2>
       <ul>
         {years.map(year => (
-          <Link href={`/blog/${year}`}>{year}年</Link>
+          <Link href={`/blog/archive/${year}`}>{year}年</Link>
         ))}
       </ul>
     </div>
