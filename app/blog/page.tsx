@@ -2,7 +2,6 @@ import Link from "next/link";
 import { getList, getDetail } from "../libs/microcms";
 import { BlogAside } from "../components/blog/BlogAside";
 
-
 export default async function StaticPage() {
   const { contents } = await getList('blog');
   const hasContents = contents.length > 0;

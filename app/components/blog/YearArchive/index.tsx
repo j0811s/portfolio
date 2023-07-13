@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { client } from "../../libs/microcms";
+import { client } from "../../../libs/microcms";
 
 
 // ブログの年別を取得

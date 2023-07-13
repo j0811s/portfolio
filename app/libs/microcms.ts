@@ -75,7 +75,8 @@ export const getList = async (
     endpoint,
     queries,
     customRequestInit,
-  });
+  })
+  .catch(notFound);
 
   return listData;
 };
@@ -90,7 +91,8 @@ export const getDetail = async (
     endpoint,
     contentId,
     queries
-  });
+  })
+  .catch(notFound);
 
   return detailData;
 };

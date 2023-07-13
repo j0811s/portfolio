@@ -1,6 +1,6 @@
-import { Categories } from "./Categories";
-import { Tags } from "./Tags";
-import { YearArchive } from "./YearArchive";
+import { Categories } from "../Categories";
+import { Tags } from "../Tags";
+import { YearArchive } from "../YearArchive";
 
 type BlogAside = {
   modClassName?: string
