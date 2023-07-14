@@ -3,6 +3,9 @@ import { style, globalStyle } from "@vanilla-extract/css";
 export const postContainer = style({
   margin: '0 auto',
   '@media': {
+    'screen and (max-width: 767px)': {
+      padding: '14px',
+    },
     'screen and (min-width: 768px)': {
       maxWidth: 1280,
       padding: '0 20px',
@@ -27,25 +30,26 @@ export const postWrapper = style({
 });
 
 export const postHead = style({
-  // position: 'relative'
 });
 
 export const postEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: '#eee'
+  backgroundColor: '#1d1f21',
+  margin: '30px 0 0',
 });
 
 export const postEyecatch = style({
+  aspectRatio: '16 / 9',
+  objectFit: 'contain',
   '@media': {
     'screen and (min-width: 768px)': {
-      maxHeight: 630,
-      objectFit: 'contain'
+      maxHeight: 315,
     }
   }
 });
 
 export const postTextContainer = style({
-  margin: '30px 0 0'
+  // margin: '30px 0 0'
 });
 
 export const postTitle = style({
@@ -103,13 +107,12 @@ export const postDate = style({
 
 export const postContent = style({
   margin: '15px 0 0',
-  padding: '14px',
   '@media': {
     'screen and (min-width: 768px)': {
-      padding: '16px',
+      padding: '32px',
     },
     'screen and (min-width: 960px)': {
-      padding: '16px',
+      padding: '32px',
     }
   }
 });

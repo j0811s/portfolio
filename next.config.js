@@ -8,7 +8,7 @@ const nextConfig = {
   //   includePaths: [path.join(__dirname, 'styles')]
   // },
   images: {
-    domains: ['images.microcms-assets.io']
+    domains: ['images.microcms-assets.io', 'placehold.jp']
   }
 };
 
