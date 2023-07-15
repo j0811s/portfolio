@@ -31,6 +31,7 @@ export const Article = async ({ post }: { post: Blog }) => {
   }
   
   return (
+    <>
     <div className={postContainer}>
       <article id={post.id} className={postWrapper}>
         <div className={postHead}>
@@ -52,6 +53,7 @@ export const Article = async ({ post }: { post: Blog }) => {
       </article>
       
       <BlogAside modClassName='post-aside' />
-    </div>
+      </div>
+    </>
   )
 }
