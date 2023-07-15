@@ -5,7 +5,7 @@ import {
 } from './index.css';
 import Image from 'next/image';
 import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
-import hljs, { HighlightResult } from 'highlight.js';
+import hljs, { HighlightResult, AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
 import { BlogAside } from "../../../components/blog/BlogAside";
 import { Blog } from '../../../libs/microcms';
@@ -16,16 +16,15 @@ export const Article = async ({ post }: { post: Blog }) => {
   const parseOptions: HTMLReactParserOptions = {
     replace: (domNode) => {
       if (!(domNode instanceof Element && domNode?.attribs)) return undefined
-      if (domNode.name === 'code') {
-        const code: string = (domNode.children[0] as Text).data // https://github.com/remarkablemark/html-react-parser/issues/591
-        const language = ((domNode.children[0] as Text).parent as Element).attribs.class.replace("language-", "")
-        
-        const highlightCode: HighlightResult = hljs.highlight(code, {
-          language: language
-        })
+
+      if (domNode.name === 'pre') {
+        const code: string = ((domNode.children[0] as Element).children[0] as Text).data // https://github.com/remarkablemark/html-react-parser/issues/591
+        const highlightCode: AutoHighlightResult = hljs.highlightAuto(code)
         
         return (
-          <code className="hljs">{parse(highlightCode.value)}</code>
+          <pre>
+            <code className="hljs">{parse(highlightCode.value)}</code>
+          </pre>
         )
       }
     },

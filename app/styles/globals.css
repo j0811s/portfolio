@@ -229,3 +229,23 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+blockquote {
+  margin: 0;
+}
+
+pre {
+  margin: 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+s {
+  text-decoration: line-through;
+}

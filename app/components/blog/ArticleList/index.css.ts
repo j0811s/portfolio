@@ -90,7 +90,7 @@ export const postListWrapper = style({
 
 export const postListEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: '#1d1f21',
+  backgroundColor: '#F4F5F6',
   transition: 'opacity 0.6s ease',
   selectors: {
     [`${postListItemLink} &:hover`]: {

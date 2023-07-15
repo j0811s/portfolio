@@ -34,7 +34,7 @@ export const postHead = style({
 
 export const postEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: '#1d1f21',
+  backgroundColor: '#F4F5F6',
   margin: '30px 0 0',
 });
 
@@ -117,11 +117,29 @@ export const postContent = style({
   }
 });
 
-globalStyle(`${postContent} > * + *`, {
-  margin: '10px 0 0'
+globalStyle(`${postContent} * + *:not(h1, h2, h3, h4, h5, h6)`, {
+  margin: '30px 0 0'
 });
 
-globalStyle(`${postContent} > p`, {
+globalStyle(`${postContent} * + h1, * + h2, * + h3, * + h4, * + h5, * + h6`, {
+  margin: '90px 0 0'
+});
+
+globalStyle(`${postContent} h1, h2, h3, h4, h5, h6`, {
+  fontSize: 26,
+  lineHeight: 1.4,
+  fontWeight: 700,
+  '@media': {
+    'screen and (min-width: 768px)': {
+      fontSize: 30,
+    },
+    'screen and (min-width: 960px)': {
+      fontSize: 32,
+    }
+  }
+});
+
+globalStyle(`${postContent} p`, {
   fontSize: 14,
   lineHeight: 1.4,
   fontWeight: 400,
@@ -135,10 +153,23 @@ globalStyle(`${postContent} > p`, {
   }
 });
 
-globalStyle(`${postContent} strong`, {
-  fontWeight: 700,
+globalStyle(`${postContent} figure`, {
+  boxShadow: '4px 4px 12px #eee'
 });
 
-globalStyle(`${postContent} em`, {
-  fontStyle: 'italic'
+globalStyle(`${postContent} blockquote`, {
+  borderLeft: '0.25em solid #d0d7de',
+  paddingLeft: '1em',
+  color: '#656d76'
+});
+
+globalStyle(`${postContent} blockquote > blockquote`, {
+  marginTop: '1em'
+});
+
+globalStyle(`${postContent} code:not(.hljs)`, {
+  display: 'inline-block',
+  backgroundColor: '#F4F5F6',
+  color: '#3E4B5B',
+  padding: '0.25em'
 });
