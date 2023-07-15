@@ -20,7 +20,7 @@ const load = keyframes({
 });
 
 export const loader = style({
-  color: '#000',
+  color: '#eee',
   textIndent: '-9999em',
   position: 'fixed',
   inset: 0,
@@ -29,7 +29,7 @@ export const loader = style({
   fontSize: '11px',
   transform: 'translateZ(0)',
   animationDelay: '-0.16s',
-  backgroundColor: '#000',
+  backgroundColor: '#eee',
   animation: `${load} 1s infinite ease-in-out`,
   width: '1em',
   height: '4em',
@@ -42,7 +42,7 @@ export const loader = style({
       position: 'absolute',
       top: 0,
       content: '',
-      backgroundColor: '#000',
+      backgroundColor: '#eee',
       animation: `${load} 1s infinite ease-in-out`,
       width: '1em',
       height: '4em',
