@@ -1,3 +1,4 @@
+import { container, list, listItem, listIetmLink } from "./index.css";
 import Link from "next/link";
 import { client } from "../../../libs/microcms";
 
@@ -27,12 +28,12 @@ export const YearArchive = async () => {
   const years = await getBlogYears();
   
   return (
-    <div className='yearArchive'>
+    <div className={container}>
       <h2>年別アーカイブ</h2>
-      <ul>
+      <ul className={list}>
         {years.map(year => (
-          <li key={year}>
-            <Link href={`/blog/archive/${year}`}>{year}年</Link>
+          <li className={listItem} key={year}>
+            <Link className={listIetmLink} href={`/blog/archive/${year}`}>{year}年</Link>
           </li>
         ))}
       </ul>

@@ -1,3 +1,4 @@
+import { container, list, listItem, listIetmLink } from "./index.css";
 import Link from "next/link";
 import { getList } from "../../../libs/microcms";
 
@@ -7,12 +8,12 @@ export const Categories = async () => {
   if (contents.length === 0) return;
 
   return (
-    <div className='categories'>
-      <h2 className='categories_title'>カテゴリー</h2>
-      <ul className='categories_list'>
+    <div className={container}>
+      <h2>カテゴリー</h2>
+      <ul className={list}>
         {
-          contents.map(cat => <li className='categories_listItem' key={cat.id}>{
-            <Link className='categories_link' href={`/blog/categories/${cat.id}`}>{cat.name}</Link>
+          contents.map(cat => <li className={listItem} key={cat.id}>{
+            <Link className={listIetmLink} href={`/blog/categories/${cat.id}`}>{cat.name}</Link>
           }</li>)
         }
       </ul>
