@@ -22,7 +22,7 @@ export const Header = () => {
             </li>
           </ul>
         </nav>
-        <HumburgerButton />
+        <HumburgerButton modClass={'js-drawerTrigger'} />
       </div>
     </header>
   )

@@ -1,11 +1,16 @@
+import { type } from "os"
 import {
   container, lines, line, textContainer, text
 } from "./index.css"
 
-export const HumburgerButton = () => {
+type HumburgerButtonOption = {
+  modClass?: string
+}
+
+export const HumburgerButton = ({modClass}: HumburgerButtonOption) => {
 
   return (
-    <button className={container} type="button">
+    <button className={`${container} ${modClass}`} type="button">
       <div className={lines}>
         <span className={line}></span>
         <span className={line}></span>
