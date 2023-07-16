@@ -21,7 +21,7 @@ export const ArticleList = async ({ contents }: { contents: Blog[] }) => {
           <ul className={postList}>
             {contents.map((post) => (
               <li key={post.id} className={postListItem}>
-                <Link className={postListItemLink} href={`/blog/${post.id}`}>
+                <Link className={postListItemLink} href={`/blog/${post.id}`} scroll={true}>
                   <figure className={postListEyecatchContainer}>
                     {post.eyecatch ?
                       <Image className={postListEyecatch} src={post.eyecatch.url} alt="" width={post.eyecatch.width} height={post.eyecatch.height} /> :

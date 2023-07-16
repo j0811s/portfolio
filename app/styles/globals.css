@@ -183,6 +183,10 @@ template {
 }
 
 /* Add */
+* {
+  box-sizing: border-box;
+}
+
 body {
   overflow-y: scroll;
   font-family: 'Zen Maru Gothic', -apple-system,
