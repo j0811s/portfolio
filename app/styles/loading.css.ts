@@ -22,7 +22,7 @@ const load = keyframes({
 export const loader = style({
   color: '#eee',
   textIndent: '-9999em',
-  position: 'fixed',
+  position: 'absolute',
   inset: 0,
   margin: 'auto',
   zIndex: 10,

@@ -4,7 +4,10 @@ export const asideContainer = style({
   display: 'block',
   '@media': {
     'screen and (min-width: 768px)': {
-      
+      position: 'sticky',
+      top: 80,
+      left: 0,
+      height: '100%',
     },
     'screen and (min-width: 960px)': {
       width: 280
