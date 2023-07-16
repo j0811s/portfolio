@@ -11,7 +11,9 @@ export const Header = () => {
   return (
     <header className={container}>
       <div className={wrapper}>
-        <h1 className={pageTitle}>J.Sato Portfolio</h1>
+        <h1 className={pageTitle}>
+          <Link href={`/`}>J.Sato Portfolio</Link>
+        </h1>
         <nav className={navigation}>
           <ul className={navigationList}>
             <li className={navigationListItem}>
