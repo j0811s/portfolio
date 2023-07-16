@@ -1,5 +1,5 @@
 import {
-  postListContainer, postListWrapper,
+  postListWrapper,
   postListEyecatchContainer, postListEyecatch,
   postListTitle,
   postList, postListItem, postListItemLink,
