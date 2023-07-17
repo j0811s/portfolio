@@ -1,5 +1,9 @@
-import { loader } from './styles/loading.css'
+import { loaderContainer, loader } from './styles/loading.css'
 
 export default function Loading() {
- return <div className={loader}></div>;
+  return (
+    <div className={loaderContainer}>
+      <div className={loader}></div>
+    </div>
+  )
 }

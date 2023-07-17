@@ -1,4 +1,9 @@
-import { style, globalStyle, keyframes } from "@vanilla-extract/css";
+import { style, keyframes } from "@vanilla-extract/css";
+
+export const loaderContainer = style({
+  position: 'relative',
+  height: 'calc(100vh - 90px)'
+});
 
 const load = keyframes({
   '0%': {
@@ -20,16 +25,16 @@ const load = keyframes({
 });
 
 export const loader = style({
-  color: '#eee',
+  color: '#000',
   textIndent: '-9999em',
   position: 'absolute',
   inset: 0,
   margin: 'auto',
   zIndex: 10,
-  fontSize: '11px',
+  fontSize: 10,
   transform: 'translateZ(0)',
   animationDelay: '-0.16s',
-  backgroundColor: '#eee',
+  backgroundColor: '#000',
   animation: `${load} 1s infinite ease-in-out`,
   width: '1em',
   height: '4em',
@@ -42,7 +47,7 @@ export const loader = style({
       position: 'absolute',
       top: 0,
       content: '',
-      backgroundColor: '#eee',
+      backgroundColor: '#000',
       animation: `${load} 1s infinite ease-in-out`,
       width: '1em',
       height: '4em',

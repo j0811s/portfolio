@@ -1,31 +1,9 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 
-// export const postListContainer = style({
-//   margin: '0 auto',
-//   '@media': {
-//     'screen and (max-width: 767px)': {
-//       padding: '14px',
-//     },
-//     'screen and (min-width: 768px)': {
-//       maxWidth: 1280,
-//       padding: '0 20px',
-//     },
-//     'screen and (min-width: 960px)': {
-//       display: 'flex',
-//       flexDirection: 'row-reverse',
-//       justifyContent: 'space-between'
-//     }
-//   }
-// });
 
 export const postListEyecatch = style({
   aspectRatio: '16 / 9',
-  objectFit: 'contain',
-  '@media': {
-    'screen and (min-width: 768px)': {
-      // maxHeight: 315,
-    }
-  }
+  objectFit: 'contain'
 });
 
 export const postListTitle = style({
@@ -53,7 +31,12 @@ export const postList = style({
 });
 
 export const postListItem = style({
+  boxShadow: '4px 4px 10px #eee',
+  transition: 'box-shadow 0.6s ease',
   '@media': {
+    'screen and (max-width: 767px)': {
+      marginTop: 40,
+    },
     'screen and (min-width: 768px)': {
       width: 'calc(100% / 3 - 10px)',
     }
@@ -73,6 +56,13 @@ export const postListItem = style({
         }
       },
     },
+    [`&:hover`]: {
+      '@media': {
+        'screen and (min-width: 960px)': {
+          boxShadow: 'none'
+        }
+      }
+    }
   }
 });
 
@@ -93,22 +83,12 @@ export const postListWrapper = style({
 
 export const postListEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: '#F4F5F6',
-  transition: 'opacity 0.6s ease',
-  selectors: {
-    [`${postListItemLink} &:hover`]: {
-      '@media': {
-        'screen and (min-width: 960px)': {
-          opacity: 0.7
-        }
-      }
-    }
-  }
+  backgroundColor: '#F4F5F6'
 });
 
 export const postData = style({
   display: 'block',
-  padding: '10px 0'
+  padding: '0.5em'
 });
 
 export const postDataTitle = style({

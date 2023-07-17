@@ -5,6 +5,8 @@ export default async function StaticPage() {
   const { contents } = await getList('blog');
   
   return (
-    <ArticleList contents={contents} />
+    <>
+      <ArticleList contents={contents} />
+    </>
   );
 }
