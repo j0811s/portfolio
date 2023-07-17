@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { getList, getCategory } from "../../../libs/microcms";
+import { getList, getDetail } from "../../../libs/microcms";
+import { ArticleList } from "../../../components/blog/ArticleList";
 
 type Props = {
   params: {
@@ -9,17 +9,11 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { catId } = params;
-  const category = await getCategory(catId);
-  console.log(category);
+  const category = await getDetail('categories', catId);
+  
+  const { contents } = await getList('blog', {
+    filters: `category[contains]${category.id}`
+  });
 
-  // const data = await getList({
-  //   filters: `tags[contains]${tagId}`,
-  // });
-  // const tag = await getTagList(tagId);
-
-  return (
-    <section>
-      <h1>Category: { category.name }</h1>
-    </section>
-  );
+  return (<ArticleList contents={contents} type={category.name} />)
 }

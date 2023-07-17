@@ -10,12 +10,12 @@ import Image from 'next/image';
 import { Blog } from '../../../libs/microcms';
 import ConvertDate from "../../../components/common/convertdate";
 
-export const ArticleList = async ({ contents }: { contents: Blog[] }) => {
+export const ArticleList = async ({ contents, type }: { contents: Blog[], type?: string }) => {
   const hasContents = contents.length > 0;
 
   return (
     <section className={postListWrapper}>
-      <h1 className={postListTitle}>投稿一覧</h1>
+      <h1 className={postListTitle}>投稿一覧{type ? `: ${ type }` : ''}</h1>
       {
         hasContents ? 
           <ul className={postList}>

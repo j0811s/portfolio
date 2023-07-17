@@ -72,7 +72,7 @@ export const client = createClient({
     }
     return fetch(input, init)
   },
-});
+})
 
 // ブログ一覧を取得
 export const getList = async (
@@ -89,7 +89,7 @@ export const getList = async (
   .catch(notFound);
 
   return listData;
-};
+}
 
 // ブログの詳細を取得
 export const getDetail = async (
@@ -105,54 +105,4 @@ export const getDetail = async (
   .catch(notFound);
 
   return detailData;
-};
-
-// カテゴリの一覧を取得
-export const getCatgoryList = async (queries?: MicroCMSQueries) => {
-  const listData = await client
-    .getList<Category>({
-      endpoint: 'categories',
-      queries,
-    })
-    .catch(notFound);
-
-  return listData;
-};
-
-// カテゴリの詳細を取得
-export const getCategory = async (contentId: string, queries?: MicroCMSQueries) => {
-  const detailData = await client
-    .getListDetail<Category>({
-      endpoint: 'categories',
-      contentId,
-      queries,
-    })
-    .catch(notFound);
-
-  return detailData;
-};
-
-// タグの一覧を取得
-export const getTagList = async (queries?: MicroCMSQueries) => {
-  const listData = await client
-    .getList<Tag>({
-      endpoint: 'tag',
-      queries,
-    })
-    .catch(notFound);
-
-  return listData;
-};
-
-// タグの詳細を取得
-export const getTag = async (contentId: string, queries?: MicroCMSQueries) => {
-  const detailData = await client
-    .getListDetail<Tag>({
-      endpoint: 'tag',
-      contentId,
-      queries,
-    })
-    .catch(notFound);
-
-  return detailData;
-};
+}

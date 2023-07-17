@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getList, getDetail } from "../../../libs/microcms";
+import { ArticleList } from "../../../components/blog/ArticleList";
 
 type Props = {
   params: {
@@ -8,10 +9,10 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { year } = params;
-  console.log(year)
-  return (
-    <section>
-      <h1>年: {year}</h1>
-    </section>
-  );
+  
+  const { contents } = await getList('blog', {
+    filters: `publishedAt[contains]${year}`
+  });
+
+  return (<ArticleList contents={contents} type={`${year}年`} />)
 }
