@@ -1,5 +1,5 @@
 import './styles/globals.css';
-import { container } from './styles/layout.css';
+import { html, body, container, footer } from './styles/layout.css';
 import { Header } from './components/common/header';
 import { Footer } from './components/common/footer';
 
@@ -9,11 +9,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja">
-      <body>
+    <html lang="ja" className={html}>
+      <body className={body}>
         <Header />
         <main className={container}>{children}</main>
-        <Footer />
+        <Footer modClassName={footer} />
       </body>
     </html>
   )

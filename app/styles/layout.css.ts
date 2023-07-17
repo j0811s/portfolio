@@ -1,5 +1,13 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 
+export const html = style({
+  height: '100%'
+})
+
+export const body = style({
+  minHeight: '100%'
+})
+
 export const container = style({
   display: 'block',
   position: 'relative',
@@ -12,3 +20,8 @@ export const container = style({
     }
   }
 });
+
+export const footer = style({
+  position: 'sticky',
+  top: '100vh'
+})

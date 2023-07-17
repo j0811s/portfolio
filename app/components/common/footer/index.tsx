@@ -1,13 +1,11 @@
 import {
   container, copyright
 } from "./index.css"
-import Link from "next/link";
-import Image from 'next/image';
 
-export const Footer = () => {
+export const Footer = ({modClassName}: {modClassName: string}) => {
 
   return (
-    <footer className={container}>
+    <footer className={`${container} ${modClassName}`}>
       <small className={copyright}>&copy; 2023 J.Sato Portfolio</small>
     </footer>
   )
