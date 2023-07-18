@@ -2,8 +2,12 @@ import { getList, getDetail } from "../../../../../libs/microcms";
 import { ArticleList } from "../../../../../components/blog/ArticleList";
 import { Metadata, ResolvingMetadata } from 'next';
 
+
 type generateMetadataProps = {
-  params: { catId: string }
+  params: {
+    catId: string;
+    num: string;
+  }
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
@@ -11,14 +15,15 @@ export async function generateMetadata(
   { params, searchParams }: generateMetadataProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const cat = await getDetail('categories', params.catId);
+  const { catId, num } = params;
+  const cat = await getDetail('categories', catId);
   
   return {
     metadataBase: new URL('https://portfolio-doe4gyax2-mormo.vercel.app'),
-    title: `${cat?.name} | ブログ | J.Sato Portfolio`,
-    description: `「${cat?.name}」の一覧ページです。`,
+    title: `${num}ページ目 | ${cat?.name} | ブログ | J.Sato Portfolio`,
+    description: `「${cat?.name}」の${num}ページ目です。`,
     openGraph: {
-      description:`「${cat?.name}」の一覧ページです。`
+      description:`「${cat?.name}」の${num}ページ目です。`
     }
   }
 }
@@ -29,7 +34,6 @@ type Props = {
     num: string;
   }
 }
-
 
 export default async function Page({ params }: Props) {
   const { catId, num } = params;
