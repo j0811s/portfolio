@@ -31,10 +31,18 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { year } = params;
+  const limit = 12;
   
-  const { contents } = await getList('blog', {
-    filters: `publishedAt[contains]${year}`
+  const { contents, totalCount } = await getList('blog', {
+    filters: `publishedAt[contains]${year}`,
+    limit
   });
 
-  return (<ArticleList contents={contents} type={`${year}年`} />)
+  const type = {
+    slug: 'archive',
+    id: year,
+    name: `${year}年`
+  }
+
+  return (<ArticleList contents={contents} type={type} totalCount={totalCount} limit={limit} />)
 }

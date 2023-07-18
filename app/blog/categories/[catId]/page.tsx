@@ -31,11 +31,20 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { catId } = params;
-  const category = await getDetail('categories', catId);
+  const typeName = 'categories';
+  const category = await getDetail(typeName, catId);
+  const limit = 12;
   
-  const { contents } = await getList('blog', {
-    filters: `category[contains]${category.id}`
+  const { contents, totalCount } = await getList('blog', {
+    filters: `category[contains]${category.id}`,
+    limit
   });
 
-  return (<ArticleList contents={contents} type={category.name} />)
+  const type = {
+    slug: typeName,
+    id: category.id,
+    name: category.name
+  }
+
+  return (<ArticleList contents={contents} type={type} totalCount={totalCount} limit={limit} />)
 }

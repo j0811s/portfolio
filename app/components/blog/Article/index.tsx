@@ -5,30 +5,33 @@ import {
 } from './index.css';
 import Image from 'next/image';
 import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
-import hljs, { HighlightResult, AutoHighlightResult } from 'highlight.js';
+import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
-import { BlogAside } from "../../../components/blog/BlogAside";
 import { Blog } from '../../../libs/microcms';
 import ConvertDate from "../../../components/common/convertdate";
+  
+const parseOptions: HTMLReactParserOptions = {
+  replace: (domNode) => {
+    if (!(domNode instanceof Element && domNode?.attribs)) return undefined
+
+    if (domNode.name === 'pre') {
+      const code: string = ((domNode.children[0] as Element).children[0] as Text).data // https://github.com/remarkablemark/html-react-parser/issues/591
+      const highlightCode: AutoHighlightResult = hljs.highlightAuto(code)
+      
+      return (
+        <pre>
+          <code className="hljs">{parse(highlightCode.value)}</code>
+        </pre>
+      )
+    }
+  },
+}
+
+const PostContentElement = ({content = '', parseOptions}: {content: string, parseOptions: HTMLReactParserOptions}): JSX.Element => {
+  return content !== '' ? <div className={postContent}>{parse(content, parseOptions)}</div> : <></>;
+}
 
 export const Article = async ({ post }: { post: Blog }) => {
-  
-  const parseOptions: HTMLReactParserOptions = {
-    replace: (domNode) => {
-      if (!(domNode instanceof Element && domNode?.attribs)) return undefined
-
-      if (domNode.name === 'pre') {
-        const code: string = ((domNode.children[0] as Element).children[0] as Text).data // https://github.com/remarkablemark/html-react-parser/issues/591
-        const highlightCode: AutoHighlightResult = hljs.highlightAuto(code)
-        
-        return (
-          <pre>
-            <code className="hljs">{parse(highlightCode.value)}</code>
-          </pre>
-        )
-      }
-    },
-  }
   
   return (
     <article id={post.id} className={postWrapper}>
@@ -47,7 +50,7 @@ export const Article = async ({ post }: { post: Blog }) => {
           }
         </figure>
       </div>
-      <div className={postContent}>{parse(post.content, parseOptions)}</div>
+      <PostContentElement content={post?.content} parseOptions={parseOptions} />
     </article>
   )
 }

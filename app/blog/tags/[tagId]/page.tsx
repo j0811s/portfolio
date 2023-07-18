@@ -11,7 +11,7 @@ export async function generateMetadata(
   { params, searchParams }: generateMetadataProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const tag = await getDetail('tag', params.tagId);
+  const tag = await getDetail('tags', params.tagId);
   
   return {
     metadataBase: new URL('https://portfolio-doe4gyax2-mormo.vercel.app'),
@@ -27,15 +27,26 @@ type Props = {
   params: {
     tagId: string;
   };
-};
+}
 
 export default async function Page({ params }: Props) {
   const { tagId } = params;
-  const tag = await getDetail('tag', tagId);
+  const typeName = 'tags';
+  const tag = await getDetail(typeName, tagId);
+  const limit = 12;
   
-  const { contents } = await getList('blog', {
-    filters: `tag[contains]${tag.id}`
+  const { contents, totalCount } = await getList('blog', {
+    filters: `tag[contains]${tag.id}`,
+    limit
   });
 
-  return (<ArticleList contents={contents} type={tag.name} />)
+  const type = {
+    slug: typeName,
+    id: tag.id,
+    name: tag.name
+  }
+
+  return (
+    <ArticleList contents={contents} type={type} totalCount={totalCount} limit={limit} />
+  )
 }
