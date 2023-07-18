@@ -3,7 +3,7 @@ import { style, globalStyle } from "@vanilla-extract/css";
 export const asideContainer = style({
   display: 'block',
   '@media': {
-    'screen and (max-width: 767px)': {
+    'screen and (max-width: 959px)': {
       marginTop: 60,
     },
     'screen and (min-width: 768px)': {

@@ -20,11 +20,11 @@ type ArticleListParam = {
   };
   totalCount: number;
   limit: number;
+  currentPage?: number;
 }
 
-export const ArticleList = async ({ contents, type, totalCount, limit }: ArticleListParam) => {
+export const ArticleList = async ({ contents, type, totalCount, limit, currentPage }: ArticleListParam) => {
   const hasContents = totalCount > 0;
-  const pager: number[] = [...Array(Math.ceil(totalCount / limit)).keys()];
   
   return (
     <section className={postListWrapper}>
@@ -55,7 +55,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit }: Article
                 </li>
               ))}
             </ul>
-            <Pagenation pager={pager} type={type} />
+            <Pagenation pager={{totalCount, limit, currentPage}} type={type} />
           </>
           :
           <div>

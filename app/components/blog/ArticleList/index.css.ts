@@ -21,31 +21,34 @@ export const postListTitle = style({
 });
 
 export const postList = style({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: 10,
   marginTop: 30,
   '@media': {
     'screen and (min-width: 768px)': {
-      display: 'flex',
-      flexWrap: 'wrap',
+      gap: 15
     }
   }
 });
 
 export const postListItem = style({
-  boxShadow: '4px 4px 10px #eee',
   transition: 'box-shadow 0.6s ease',
   '@media': {
     'screen and (max-width: 767px)': {
-      marginTop: 40,
+      width: 'calc(50% - 5px)',
+      boxShadow: '1px 1px 4px #eee',
     },
     'screen and (min-width: 768px)': {
       width: 'calc(100% / 3 - 10px)',
+      boxShadow: '4px 4px 10px #eee',
     }
   },
   selectors: {
-    '&:not(:nth-of-type(3n + 1))': {
+    '&:nth-of-type(n + 3)': {
       '@media': {
-        'screen and (min-width: 768px)': {
-          marginLeft: 15
+        'screen and (max-width: 767px)': {
+          marginTop: 10
         }
       },
     },
