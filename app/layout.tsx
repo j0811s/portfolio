@@ -4,11 +4,13 @@ import { Header } from './components/common/header';
 import { Footer } from './components/common/footer';
 import { Metadata } from 'next';
 
+const SITE_URL: string = process.env.SITE_URL || '';
+
 const myMeta = {
   title: 'J.Sato Portfolio',
   sitename: 'J.Sato Portfolio',
   description: "個人のポートフォリオサイトです。",
-  siteUrl: new URL('https://portfolio-doe4gyax2-mormo.vercel.app')
+  siteUrl: new URL(SITE_URL)
 }
 
 export const metadata: Metadata = {

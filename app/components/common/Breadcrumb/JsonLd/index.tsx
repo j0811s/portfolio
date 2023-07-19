@@ -17,7 +17,7 @@ export const JsonLd = ({type = {}, post = {}}: Props) => {
   const { slug, id: typeId, name: typeName } = type;
   
   const getJsonLd = (id?: string, title?: string, slug?: string): WithContext<BreadcrumbList> => {
-    const SITE_URL = 'https://portfolio-doe4gyax2-mormo.vercel.app';
+    const SITE_URL = process.env.SITE_URL;
 
     switch (slug) {
       case 'blog': {
