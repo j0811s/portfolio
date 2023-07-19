@@ -1,4 +1,5 @@
 import { getList, getDetail } from "../../../../../libs/microcms";
+import { Breadcrumb } from '../../../../../components/common/Breadcrumb';
 import { ArticleList } from "../../../../../components/blog/ArticleList";
 import { Metadata, ResolvingMetadata } from 'next';
 
@@ -55,6 +56,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <Breadcrumb type={type} />
       <ArticleList contents={contents} type={type} totalCount={totalCount} limit={limit} currentPage={Number(num)} />
     </>
   )

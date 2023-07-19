@@ -1,4 +1,5 @@
 import { getList, getDetail } from "../libs/microcms";
+import { Breadcrumb } from '../components/common/Breadcrumb';
 import { ArticleList } from "../components/blog/ArticleList";
 
 export default async function StaticPage() {
@@ -10,6 +11,7 @@ export default async function StaticPage() {
 
   return (
     <>
+      <Breadcrumb />
       <ArticleList contents={contents} totalCount={totalCount} limit={limit} />
     </>
   );

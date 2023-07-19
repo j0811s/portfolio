@@ -45,20 +45,6 @@ export const postListItem = style({
     }
   },
   selectors: {
-    '&:nth-of-type(n + 3)': {
-      '@media': {
-        'screen and (max-width: 767px)': {
-          marginTop: 10
-        }
-      },
-    },
-    '&:nth-of-type(n + 4)': {
-      '@media': {
-        'screen and (min-width: 768px)': {
-          marginTop: 30
-        }
-      },
-    },
     [`&:hover`]: {
       '@media': {
         'screen and (min-width: 960px)': {
@@ -70,7 +56,9 @@ export const postListItem = style({
 });
 
 export const postListItemLink = style({
-  display: 'block'
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%'
 });
 
 export const postListWrapper = style({
@@ -90,8 +78,10 @@ export const postListEyecatchContainer = style({
 });
 
 export const postData = style({
-  display: 'block',
-  padding: '0.5em'
+  display: 'flex',
+  padding: '0.5em',
+  flexDirection: 'column',
+  flex: '1'
 });
 
 export const postDataTitle = style({
@@ -99,12 +89,13 @@ export const postDataTitle = style({
   lineHeight: 1.4,
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
-  WebkitLineClamp: 3,
+  WebkitLineClamp: 2,
   overflow: 'hidden'
 });
 
 export const postDataDesc = style({
-  marginTop: 6
+  marginTop: 'auto',
+  paddingTop: '1em'
 });
 
 export const postDateContainer = style({
@@ -113,4 +104,5 @@ export const postDateContainer = style({
 export const postDate = style({
   fontSize: 12,
   lineHeight: 1.4,
+  textAlign: 'right',
 });

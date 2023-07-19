@@ -1,4 +1,4 @@
-import { blogLayoutContainer } from '../styles/blog/layout.css'
+import { container, wrapper } from '../styles/blog/layout.css'
 import { BlogAside } from "../components/blog/BlogAside";
 import { Metadata } from 'next';
 
@@ -11,10 +11,13 @@ type BlogLayout = {
 }
 
 export default function BlogLayout({ children }: BlogLayout) {
+  
   return (
-    <div className={blogLayoutContainer}>
-      {children}
-      <BlogAside modClassName='blogLayoutContainer' />
+    <div className={container}>
+      <div className={wrapper}>
+        {children}
+        <BlogAside />
+      </div>
     </div>
   )
 }
