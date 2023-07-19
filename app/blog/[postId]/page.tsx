@@ -1,5 +1,6 @@
 import { getDetail, getList } from "../../libs/microcms";
-import { Article } from '../../components/blog/Article';
+import { Breadcrumb } from "@/app/components/common/Breadcrumb";
+import { Article } from '@/app/components/blog/Article';
 import { Metadata, ResolvingMetadata } from 'next';
 
 type generateMetadataProps = {
@@ -35,10 +36,26 @@ export async function generateStaticParams() {
   return [...paths];
 }
 
+type StaticDetailPage = {
+  params: {
+    endpoint: string;
+    postId: string;
+  }
+}
 
-export default async function StaticDetailPage(
-  { params: { endpoint, postId } }: { params: { endpoint: string, postId: string }; }
-) {
+export default async function StaticDetailPage({ params: { endpoint, postId } }: StaticDetailPage) {
   const post = await getDetail(endpoint, postId);
-  return <Article post={post} />;
+
+  const type = {
+    slug: 'post',
+    id: post.id,
+    name: post.title
+  }
+
+  return (
+    <>
+      <Breadcrumb type={type} />
+      <Article post={post} />
+    </>
+  )
 }

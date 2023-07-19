@@ -13,25 +13,45 @@ const SetListItem = ({ type }: BreadcrumbParam) => {
   const { slug, id, name } = { ...type };
 
   switch (slug) {
-    case 'categories': {
+    case 'blog': {
       return (
-        <li className={listItem}>
-          <Link className={listItemLink} href={`/blog/${slug}/${id}`}>{name}</Link>
-        </li>
+        <>
+          <li className={listItem}>
+            <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
+          </li>
+        </>
       )
     }
-    case 'tags': {
+    case 'post': {
       return (
-        <li className={listItem}>
-          <Link className={listItemLink} href={`/blog/${slug}/${id}`}>{name}</Link>
-        </li>
+        <>
+          <li className={listItem}>
+            <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
+          </li>
+          <li className={listItem}>
+            <Link className={listItemLink} href={`/blog/${id}`}>{name}</Link>
+          </li>
+        </>
       )
     }
+    case 'categories':
+    case 'tags':
     case 'archive': {
       return (
-        <li className={listItem}>
-          <Link className={listItemLink} href={`/blog/${slug}/${id}`}>{name}</Link>
-        </li>
+        <>
+          <li className={listItem}>
+            <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
+          </li>
+          <li className={listItem}>
+            <Link className={listItemLink} href={`/blog/${slug}/${id}`}>{name}</Link>
+          </li>
+        </>
+      )
+    }
+    default: {
+      return (
+        <>
+        </>
       )
     }
   }
@@ -43,9 +63,6 @@ export const Breadcrumb = ({ type }: BreadcrumbParam) => {
     <ul className={list}>
       <li className={listItem}>
         <Link className={listItemLink} href={'/'}>トップページ</Link>
-      </li>
-      <li className={listItem}>
-        <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
       </li>
       <SetListItem type={type} />
     </ul>
