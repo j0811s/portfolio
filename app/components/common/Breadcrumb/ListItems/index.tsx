@@ -1,4 +1,5 @@
 import { listItem, listItemLink } from "../index.css";
+import { Blog } from "@/app/libs/microcms";
 import Link from "next/link";
 
 export type BreadcrumbParam = {

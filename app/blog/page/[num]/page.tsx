@@ -1,4 +1,5 @@
 import { getList, getDetail } from "../../../libs/microcms";
+import { JsonLd } from "@/app/components/common/Breadcrumb/JsonLd";
 import { Breadcrumb } from "@/app/components/common/Breadcrumb";
 import { ArticleList } from "../../../components/blog/ArticleList";
 import { Metadata, ResolvingMetadata } from 'next';
@@ -42,6 +43,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <JsonLd type={{slug: 'blog'}} />
       <Breadcrumb type={ {slug: 'blog'} }/>
       <ArticleList contents={contents} totalCount={totalCount} limit={limit} currentPage={Number(num)} />
     </>
