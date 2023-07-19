@@ -19,7 +19,7 @@ export const wrapper = style({
     'screen and (min-width: 960px)': {
       display: 'flex',
       flexWrap: 'wrap',
-      flexDirection: 'row-reverse',
+      // flexDirection: 'row-reverse',
       justifyContent: 'space-between'
     }
   }
