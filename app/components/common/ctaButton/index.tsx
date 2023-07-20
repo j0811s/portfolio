@@ -4,21 +4,29 @@ import type { ReactNode } from 'react';
 
 type CtaButton = {
   modClass?: string,
-  href: string,
+  href?: string,
   children: ReactNode
 }
 
 export const CtaButton = ({
   modClass = '',
-  href = '/',
+  href,
   children
 }: CtaButton) => {
+
   return (
     <div className={modClass}>
-      <Link className={button} href={href}>
-        <span className={buttonText}>{children}</span>
-        <span className={buttonIcon}></span>
-      </Link>
+      {
+        !href ?
+          <div className={button}>
+            <span className={buttonText}>{children}</span>
+            <span className={buttonIcon}></span>
+          </div> :
+          <Link className={button} href={href}>
+            <span className={buttonText}>{children}</span>
+            <span className={buttonIcon}></span>
+          </Link>
+      }
     </div>
   )
 } 

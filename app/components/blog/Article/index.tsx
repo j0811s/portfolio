@@ -7,8 +7,9 @@ import Image from 'next/image';
 import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
-import { Blog } from '../../../libs/microcms';
+import { Blog, Tag } from '../../../libs/microcms';
 import ConvertDate from "../../../components/common/convertdate";
+import { TagsElement } from '../Tags/TagsElement';
   
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -32,12 +33,14 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 }
 
 export const Article = async ({ post }: { post: Blog }) => {
+  const { tag }: { tag: Tag[] } = post;
   
   return (
     <article id={post.id} className={postWrapper}>
       <div className={postHead}>
         <div className={postTextContainer}>
           <h1 className={postTitle}>{post.title}</h1>
+          <TagsElement tagData={tag} modClass={{ul: '', li: ''}} />
           <div className={postDateContainer}>
             <p className={postDate}>公開日：<ConvertDate date={post.publishedAt} /></p>
             { post.updatedAt && <p className={postDate}>更新日：<ConvertDate date={post.updatedAt} /></p> }

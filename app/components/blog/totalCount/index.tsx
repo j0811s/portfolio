@@ -1,6 +1,6 @@
 import { Blog } from "../../../libs/microcms"
 
-type Data = {
+type GetTotalCountData = {
   [key: string]: {
     name?: string,
     count: number,
@@ -8,8 +8,8 @@ type Data = {
   }
 }
 
-export const GetTotalCount = (contents: Blog[], type: string): Data => {
-  const data: Data = {}
+export const GetTotalCount = (contents: Blog[], type: string): GetTotalCountData => {
+  const data: GetTotalCountData = {}
 
   contents.forEach((post: {
     [type: string]: any

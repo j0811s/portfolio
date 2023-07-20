@@ -4,12 +4,14 @@ import {
   postListTitle,
   postList, postListItem, postListItemLink,
   postData, postDataTitle, postDataDesc, postDateContainer, postDate,
+  postBtn
 } from './index.css';
 import Link from "next/link";
 import Image from 'next/image';
 import { Blog } from '../../../libs/microcms';
 import ConvertDate from "../../../components/common/convertdate";
 import { Pagenation } from '../Pagenation';
+import { CtaButton } from '../../common/ctaButton';
 
 type ArticleListParam = {
   contents: Blog[];
@@ -51,6 +53,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
                         </div>
                       </dd>
                     </dl>
+                    <CtaButton modClass={postBtn}>詳細を読む</CtaButton>
                   </Link>
                 </li>
               ))}

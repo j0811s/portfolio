@@ -31,8 +31,7 @@ export type Blog = {
     updatedAt: string,
     publishedAt: string,
     revisedAt: string,
-    name: string,
-    slug: string
+    name: string
   }[],
   contents: any[],
   name: string,

@@ -1,9 +1,15 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 
 
+export const postListEyecatchContainer = style({
+  overflow: 'hidden',
+  backgroundColor: '#F4F5F6'
+});
+
 export const postListEyecatch = style({
   aspectRatio: '16 / 9',
-  objectFit: 'contain'
+  objectFit: 'cover',
+  // transition: 'transform .4s ease'
 });
 
 export const postListTitle = style({
@@ -33,7 +39,9 @@ export const postList = style({
 });
 
 export const postListItem = style({
-  transition: 'box-shadow 0.6s ease',
+  overflow: 'hidden',
+  borderRadius: 4,
+  backgroundColor: '#fff',
   '@media': {
     'screen and (max-width: 767px)': {
       width: 'calc(50% - 5px)',
@@ -42,18 +50,29 @@ export const postListItem = style({
     'screen and (min-width: 768px)': {
       width: 'calc(100% / 3 - 10px)',
       boxShadow: '4px 4px 10px #eee',
+    },
+    'screen and (min-width: 960px)': {
+      transition: 'box-shadow .4s ease'
     }
   },
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        'screen and (min-width: 960px)': {
-          boxShadow: 'none'
-        }
-      }
-    }
-  }
+  // selectors: {
+  //   '&:hover': {
+  //     '@media': {
+  //       'screen and (min-width: 960px)': {
+  //         boxShadow: 'none',
+  //       }
+  //     }
+  //   }
+  // }
 });
+
+// globalStyle(`${postListItem}:hover ${postListEyecatch}`, {
+//   '@media': {
+//     'screen and (min-width: 960px)': {
+//       transform: 'scale(1.05)'
+//     }
+//   }
+// });
 
 export const postListItemLink = style({
   display: 'flex',
@@ -72,11 +91,6 @@ export const postListWrapper = style({
   }
 });
 
-export const postListEyecatchContainer = style({
-  overflow: 'hidden',
-  backgroundColor: '#F4F5F6'
-});
-
 export const postData = style({
   display: 'flex',
   padding: '0.5em',
@@ -85,24 +99,39 @@ export const postData = style({
 });
 
 export const postDataTitle = style({
-  fontSize: '15px',
+  fontSize: 13,
   lineHeight: 1.4,
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  overflow: 'hidden'
+  overflow: 'hidden',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      fontSize: 15
+    }
+  }
 });
 
 export const postDataDesc = style({
   marginTop: 'auto',
-  paddingTop: '1em'
+  paddingTop: '0.5em'
 });
 
 export const postDateContainer = style({
 });
 
 export const postDate = style({
-  fontSize: 12,
+  fontSize: 10,
   lineHeight: 1.4,
+  textAlign: 'left',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      fontSize: 12
+    }
+  }
+});
+
+export const postBtn = style({
   textAlign: 'right',
+  padding: '0 0.5em 0.75em',
 });

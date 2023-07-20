@@ -12,7 +12,7 @@ export const listIetm = style({
   border: '1px solid #000',
   borderRadius: 1000,
   display: 'inline-block',
-  margin: '0 0.25em 0.25em 0',
+  margin: '0 0.25em 0.35em 0',
   '@media': {
     'screen and (max-width: 767px)': {
       fontSize: 12,
