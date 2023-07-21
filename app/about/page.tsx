@@ -1,5 +1,25 @@
 import { container } from "../styles/about/index.css";
 import { Breadcrumb } from "@/app/components/common/Breadcrumb";
+import { Metadata, ResolvingMetadata } from 'next';
+
+type generateMetadataProps = {
+  params: { catId: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+  { params, searchParams }: generateMetadataProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  return {
+    metadataBase: new URL('https://portfolio-doe4gyax2-mormo.vercel.app'),
+    title: `私について`,
+    description: `自身の紹介ページです。`,
+    openGraph: {
+      description:`自身の紹介ページです。`
+    }
+  }
+}
 
 export default function About() {
   return (
