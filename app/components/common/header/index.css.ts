@@ -41,23 +41,6 @@ export const wrapper = style({
   }
 });
 
-export const pageTitle = style({
-  fontSize: 30,
-  fontWeight: 700,
-  lineHeight: 1,
-  '@media': {
-    'screen and (max-width: 767px)': {
-      
-    },
-    'screen and (min-width: 768px)': {
-      
-    },
-    'screen and (min-width: 960px)': {
-      
-    }
-  }
-});
-
 export const navigation = style({
   fontSize: 14,
   '@media': {

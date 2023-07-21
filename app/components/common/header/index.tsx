@@ -1,19 +1,21 @@
+'use client'
 import {
-  container, wrapper, pageTitle,
+  container, wrapper,
   navigation, navigationList, navigationListItem, navigationListItemLink
 } from "./index.css"
 import Link from "next/link";
-import Image from 'next/image';
+import { usePathname } from "next/navigation";
 import { HumburgerButton } from "../humburgerButton";
+import { Logo } from "./Logo";
+
 
 export const Header = () => {
+  const pathname = usePathname();
 
   return (
     <header className={container}>
       <div className={wrapper}>
-        <h1 className={pageTitle}>
-          <Link href={`/`}>J.Sato Portfolio</Link>
-        </h1>
+        <Logo pathname={pathname} />
         <nav className={navigation}>
           <ul className={navigationList}>
             <li className={navigationListItem}>

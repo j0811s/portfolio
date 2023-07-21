@@ -1,7 +1,8 @@
 import './styles/globals.css';
 import { html, body, container, footer } from './styles/layout.css';
-import { Header } from './components/common/header';
-import { Footer } from './components/common/footer';
+import { Suspense } from 'react';
+import { Header } from './components/common/Header';
+import { Footer } from './components/common/Footer';
 import { Metadata } from 'next';
 
 const SITE_URL: string = process.env.SITE_URL || '';
@@ -39,6 +40,10 @@ export const metadata: Metadata = {
   }
 }
 
+function HeaderFallback() {
+  return <div>読み込み中</div>
+}
+
 type RootLayout = {
   children: React.ReactNode
 }
@@ -47,7 +52,9 @@ export default function RootLayout({ children }: RootLayout ) {
   return (
     <html lang="ja" className={html}>
       <body className={body}>
-        <Header />
+        <Suspense fallback={HeaderFallback()}>
+          <Header />
+        </Suspense>
         <main className={container}>{children}</main>
         <Footer modClassName={footer} />
       </body>
