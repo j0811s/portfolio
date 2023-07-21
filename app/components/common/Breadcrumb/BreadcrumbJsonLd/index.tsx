@@ -12,7 +12,7 @@ type Props = {
   }
 }
 
-export const JsonLd = ({type = {}, post = {}}: Props) => {
+export const BreadcrumbJsonLd = ({type = {}, post = {}}: Props) => {
   const { id, title } = post;
   const { slug, id: typeId, name: typeName } = type;
   

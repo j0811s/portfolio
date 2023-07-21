@@ -1,5 +1,5 @@
 import { getDetail, getList } from "../../libs/microcms";
-import { JsonLd } from "@/app/components/common/Breadcrumb/JsonLd";
+import { BreadcrumbJsonLd } from "@/app/components/common/Breadcrumb/BreadcrumbJsonLd";
 import { Breadcrumb } from "@/app/components/common/Breadcrumb";
 import { Article } from '@/app/components/blog/Article';
 import { Metadata, ResolvingMetadata } from 'next';
@@ -55,7 +55,7 @@ export default async function StaticDetailPage({ params: { endpoint, postId } }:
 
   return (
     <>
-      <JsonLd type={type} post={post} />
+      <BreadcrumbJsonLd type={type} post={post} />
       <Breadcrumb type={type} />
       <Article post={post} />
     </>

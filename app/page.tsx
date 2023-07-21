@@ -1,10 +1,10 @@
-import { JsonLd } from "@/app/components/common/Breadcrumb/JsonLd"
+import { BreadcrumbJsonLd } from "@/app/components/common/Breadcrumb/BreadcrumbJsonLd"
 import { Breadcrumb } from "@/app/components/common/Breadcrumb"
 
 export default function Home() {
   return (
     <>
-      <JsonLd />
+      <BreadcrumbJsonLd />
       <Breadcrumb />
       <h2 className="">
         TOP
