@@ -10,5 +10,6 @@ export const vars = createGlobalTheme(':root', {
       normal: '#eee',
       dark: '#79747E'
     },
+    link: '#0969da'
   }
 });
