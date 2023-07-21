@@ -20,6 +20,26 @@ export const BreadcrumbJsonLd = ({type = {}, post = {}}: Props) => {
     const SITE_URL = process.env.SITE_URL;
 
     switch (slug) {
+      case 'about': {
+        return {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "トップページ",
+              "item": `${SITE_URL}`
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "私について",
+              "item": `${SITE_URL}/blog/about/`
+            }
+          ]
+        }
+      }
       case 'blog': {
         return {
           "@context": "https://schema.org",
@@ -35,7 +55,7 @@ export const BreadcrumbJsonLd = ({type = {}, post = {}}: Props) => {
               "@type": "ListItem",
               "position": 2,
               "name": "ブログ",
-              "item": `${SITE_URL}/blog`
+              "item": `${SITE_URL}/blog/`
             }
           ]
         }
@@ -55,13 +75,13 @@ export const BreadcrumbJsonLd = ({type = {}, post = {}}: Props) => {
               "@type": "ListItem",
               "position": 2,
               "name": "ブログ",
-              "item": `${SITE_URL}/blog`
+              "item": `${SITE_URL}/blog/`
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": title,
-              "item": `${SITE_URL}/blog/${id}`
+              "item": `${SITE_URL}/blog/${id}/`
             }
           ]
         }
@@ -83,13 +103,13 @@ export const BreadcrumbJsonLd = ({type = {}, post = {}}: Props) => {
               "@type": "ListItem",
               "position": 2,
               "name": "ブログ",
-              "item": `${SITE_URL}/blog`
+              "item": `${SITE_URL}/blog/`
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": typeName,
-              "item": `${SITE_URL}/blog/${slug}/${typeId}`
+              "item": `${SITE_URL}/blog/${slug}/${typeId}/`
             }
           ]
         }

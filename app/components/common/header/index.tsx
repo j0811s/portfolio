@@ -22,6 +22,9 @@ export const Header = () => {
               <Link className={navigationListItemLink} href={`/`}>トップページ</Link>
             </li>
             <li className={navigationListItem}>
+              <Link className={navigationListItemLink} href={`/about/`}>私について</Link>
+            </li>
+            <li className={navigationListItem}>
               <Link className={navigationListItemLink} href={`/blog/`}>ブログ</Link>
             </li>
           </ul>
