@@ -14,6 +14,15 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
   const { slug, id, name } = { ...type };
 
   switch (slug) {
+    case 'about': {
+      return (
+        <>
+          <li className={listItem}>
+            <Link className={listItemLink} href={'/about/'}>私について</Link>
+          </li>
+        </>
+      )
+    }
     case 'blog': {
       return (
         <>
