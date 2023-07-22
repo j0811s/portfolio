@@ -1,4 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css";
+import { vars } from "@/app/styles/common/variables.css";
 
 
 export const postListEyecatchContainer = style({
@@ -13,15 +14,15 @@ export const postListEyecatch = style({
 });
 
 export const postListTitle = style({
-  fontSize: 30,
+  fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
   '@media': {
-    'screen and (min-width: 768px)': {
-      
+    'screen and (min-width: 600px) and (max-width: 959px)': {
+      fontSize: `calc( 36 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 960px)': {
-      fontSize: 40,
+      fontSize: `calc( 40 / ${vars.font.size} * 1rem )`,
     }
   }
 });

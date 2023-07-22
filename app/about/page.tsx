@@ -1,4 +1,4 @@
-import { container, mainTitle } from "../styles/about/index.css";
+import { container, mainTitle, contents } from "../styles/about/index.css";
 import { Breadcrumb } from "@/app/components/common/Breadcrumb";
 import { SkillSet } from "@/app/components/about/SkillSet";
 import { Metadata, ResolvingMetadata } from 'next';
@@ -161,10 +161,12 @@ export default function About() {
       <Breadcrumb type={{slug: 'about'}} />
       <section className={container}>
         <h2 className={mainTitle}>スキルセット</h2>
-        <SkillSet skill={language} />
-        <SkillSet skill={lib} />
-        <SkillSet skill={cms} />
-        <SkillSet skill={other} />
+        <div className={contents}>
+          <SkillSet skill={language} />
+          <SkillSet skill={lib} />
+          <SkillSet skill={cms} />
+          <SkillSet skill={other} />
+        </div>
       </section>
     </>
   )
