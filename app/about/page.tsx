@@ -123,7 +123,7 @@ const cms = {
     },
     {
       logo: {
-        path: '/logo/cms/MicroCMS.svg',
+        path: '/logo/cms/microCMS.svg',
       },
       name: 'microCMS'
     }
