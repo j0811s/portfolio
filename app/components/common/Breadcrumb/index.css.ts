@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { vars } from "@/app/styles/common/variables.css";
 
 export const list = style({
   display: 'flex',
@@ -9,7 +10,7 @@ export const list = style({
 export const listItem = style({
   display: 'flex',
   alignItems: 'center',
-  fontSize: 14,
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   selectors: {
     '&:not(:last-of-type)::after': {
       content: '>',

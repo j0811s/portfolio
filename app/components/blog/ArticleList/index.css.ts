@@ -4,13 +4,13 @@ import { vars } from "@/app/styles/common/variables.css";
 
 export const postListEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: '#F4F5F6'
+  backgroundColor: '#F4F5F6',
+  borderRadius: 12,
 });
 
 export const postListEyecatch = style({
   aspectRatio: '16 / 9',
   objectFit: 'cover',
-  // transition: 'transform .4s ease'
 });
 
 export const postListTitle = style({
@@ -41,39 +41,16 @@ export const postList = style({
 
 export const postListItem = style({
   overflow: 'hidden',
-  borderRadius: 4,
   backgroundColor: '#fff',
   '@media': {
     'screen and (max-width: 767px)': {
       width: 'calc(50% - 5px)',
-      boxShadow: '1px 1px 4px #eee',
     },
     'screen and (min-width: 768px)': {
       width: 'calc(100% / 3 - 10px)',
-      boxShadow: '4px 4px 10px #eee',
-    },
-    'screen and (min-width: 960px)': {
-      transition: 'box-shadow .4s ease'
     }
-  },
-  // selectors: {
-  //   '&:hover': {
-  //     '@media': {
-  //       'screen and (min-width: 960px)': {
-  //         boxShadow: 'none',
-  //       }
-  //     }
-  //   }
-  // }
+  }
 });
-
-// globalStyle(`${postListItem}:hover ${postListEyecatch}`, {
-//   '@media': {
-//     'screen and (min-width: 960px)': {
-//       transform: 'scale(1.05)'
-//     }
-//   }
-// });
 
 export const postListItemLink = style({
   display: 'flex',
@@ -83,9 +60,6 @@ export const postListItemLink = style({
 
 export const postListWrapper = style({
   '@media': {
-    'screen and (min-width: 768px)': {
-      
-    },
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'
     }
@@ -100,7 +74,7 @@ export const postData = style({
 });
 
 export const postDataTitle = style({
-  fontSize: 13,
+  fontSize: `calc( 13 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
@@ -108,7 +82,7 @@ export const postDataTitle = style({
   overflow: 'hidden',
   '@media': {
     'screen and (min-width: 960px)': {
-      fontSize: 15
+      fontSize: `calc( 15 / ${vars.font.size} * 1rem )`,
     }
   }
 });
@@ -122,12 +96,12 @@ export const postDateContainer = style({
 });
 
 export const postDate = style({
-  fontSize: 10,
+  fontSize: `calc( 10 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   textAlign: 'left',
   '@media': {
     'screen and (min-width: 960px)': {
-      fontSize: 12
+      fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
     }
   }
 });

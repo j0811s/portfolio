@@ -1,4 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css";
+import { vars } from "@/app/styles/common/variables.css";
 
 export const container = style({
   display: 'block',
@@ -6,7 +7,7 @@ export const container = style({
   top: 0,
   left: 0,
   zIndex: 999,
-  padding: '0 15px',
+  padding: '0 1em',
   backgroundColor: '#fff',
   borderBottom: '1px solid #eee',
   color: '#000',
@@ -16,9 +17,6 @@ export const container = style({
     },
     'screen and (min-width: 768px)': {
       height: 60,
-    },
-    'screen and (min-width: 960px)': {
-      
     }
   }
 });
@@ -27,22 +25,11 @@ export const wrapper = style({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  height: '100%',
-  '@media': {
-    'screen and (max-width: 767px)': {
-      
-    },
-    'screen and (min-width: 768px)': {
-      
-    },
-    'screen and (min-width: 960px)': {
-      
-    }
-  }
+  height: '100%'
 });
 
 export const navigation = style({
-  fontSize: 14,
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   '@media': {
     'screen and (max-width: 767px)': {
       position: 'fixed',
@@ -60,7 +47,7 @@ export const navigation = style({
     'screen and (min-width: 768px)': {
       display: 'block',
       marginLeft: 'auto',
-      fontSize: 16,
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   },
   selectors: {

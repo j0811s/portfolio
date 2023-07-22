@@ -1,4 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css";
+import { vars } from "@/app/styles/common/variables.css";
 
 export const asideContainer = style({
   display: 'block',
@@ -20,28 +21,17 @@ export const asideContainer = style({
 
 globalStyle(`${asideContainer} > div + div`, {
   margin: '15px 0 0',
-  '@media': {
-    'screen and (min-width: 768px)': {
-      
-    },
-    'screen and (min-width: 960px)': {
-      
-    }
-  }
 });
 
 globalStyle(`${asideContainer} > div > h2`, {
-  fontSize: 14,
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
   backgroundColor: '#eee',
   padding: '0.5em',
   borderRadius: '4px',
   '@media': {
     'screen and (min-width: 768px)': {
-      fontSize: 16,
-    },
-    'screen and (min-width: 960px)': {
-      fontSize: 16,
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   }
 });

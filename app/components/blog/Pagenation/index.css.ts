@@ -1,4 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css";
+import { vars } from "@/app/styles/common/variables.css";
 
 export const container = style({
   margin: '40px auto 0',
@@ -14,7 +15,7 @@ export const list = style({
 });
 
 export const listItem = style({
-  fontSize: 18,
+  fontSize: `calc( 18 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
   textAlign: 'center',
 });

@@ -1,4 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css";
+import { vars } from "@/app/styles/common/variables.css";
 
 export const container = style({
   
@@ -15,10 +16,10 @@ export const listIetm = style({
   margin: '0 0.25em 0.35em 0',
   '@media': {
     'screen and (max-width: 767px)': {
-      fontSize: 12,
+      fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 768px)': {
-      fontSize: 14,
+      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
     }
   }
 });

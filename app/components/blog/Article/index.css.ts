@@ -36,15 +36,12 @@ export const postTextContainer = style({
 });
 
 export const postTitle = style({
-  fontSize: 30,
+  fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
   '@media': {
-    'screen and (min-width: 768px)': {
-      
-    },
     'screen and (min-width: 960px)': {
-      fontSize: 40,
+      fontSize: `calc( 40 / ${vars.font.size} * 1rem )`,
     }
   }
 });
@@ -63,15 +60,12 @@ export const postDateContainer = style({
 });
 
 export const postDate = style({
-  fontSize: 12,
+  fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 400,
   '@media': {
     'screen and (min-width: 768px)': {
-      fontSize: 14,
-    },
-    'screen and (min-width: 960px)': {
-      fontSize: 14,
+      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
     }
   },
   selectors: {
@@ -79,9 +73,6 @@ export const postDate = style({
       '@media': {
         'screen and (min-width: 768px)': {
           margin: '0 0 0 1em',
-        },
-        'screen and (min-width: 960px)': {
-          
         }
       },
     }
@@ -106,30 +97,24 @@ globalStyle(`${postContent} * + *`, {
 });
 
 globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postContent} h4, ${postContent} h5, ${postContent} h6`, {
-  fontSize: 26,
+  fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 700,
   margin: '60px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
-      fontSize: 30,
-    },
-    'screen and (min-width: 960px)': {
-      fontSize: 32,
+      fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
     }
   }
 });
 
 globalStyle(`${postContent} p`, {
-  fontSize: 14,
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 400,
   '@media': {
     'screen and (min-width: 768px)': {
-      fontSize: 16,
-    },
-    'screen and (min-width: 960px)': {
-      fontSize: 16,
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   }
 });

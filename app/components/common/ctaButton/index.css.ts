@@ -4,7 +4,7 @@ import { vars } from "@/app/styles/common/variables.css";
 export const button = style({
   display: 'inline-flex',
   gap: 10,
-  fontSize: 10,
+  fontSize: `calc( 10 / ${vars.font.size} * 1rem )`,
   alignItems: 'center',
   maxWidth: 320,
   height: 26,
@@ -19,7 +19,7 @@ export const button = style({
   '@media': {
     '(min-width: 960px)': {
       height: 36,
-      fontSize: 14,
+      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
       padding: '4px 16px 4px 26px',
       transition: 'background-color .4s ease, color .4s ease',
     }
