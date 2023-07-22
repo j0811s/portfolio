@@ -21,10 +21,9 @@ export default async function Image({ params: { tagId } }: Props) {
   const typeName = 'tags';
   const tag = await getDetail(typeName, tagId);
  
-  // Font
-  const notoSansBold = await fetch(
-    new URL('../../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
-  ).then((res) => res.arrayBuffer())
+  // const notoSansBold = await fetch(
+  //   new URL('../../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
+  // ).then((res) => res.arrayBuffer())
     
   return new ImageResponse(
     (
@@ -40,21 +39,23 @@ export default async function Image({ params: { tagId } }: Props) {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-      >{tag.name}</div>
+      >
+       {tag.id} | ブログ {/* {tag.name} */}
+      </div>
     ),
     // ImageResponse options
     {
       // For convenience, we can re-use the exported opengraph-image
       // size config to also set the ImageResponse's width and height.
       ...size,
-      fonts: [
-        {
-          name: 'NotoSansJP',
-          data: notoSansBold,
-          style: 'normal',
-          weight: 700,
-        },
-      ],
+      // fonts: [
+      //   {
+      //     name: 'NotoSansJP',
+      //     data: notoSansBold,
+      //     style: 'normal',
+      //     weight: 700,
+      //   },
+      // ],
     }
   )
 }

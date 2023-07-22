@@ -19,10 +19,9 @@ type Props = {
 };
 export default async function Image({ params: { postId } }: Props) {
  
-  // Font
-  const notoSansBold = await fetch(
-    new URL('../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
-  ).then((res) => res.arrayBuffer())
+  // const notoSansBold = await fetch(
+  //   new URL('../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
+  // ).then((res) => res.arrayBuffer())
     
   const post = await getDetail('blog', postId);
 
@@ -45,7 +44,7 @@ export default async function Image({ params: { postId } }: Props) {
           justifyContent: 'center',
         }}
       >
-        {post.title}
+        {/* {post.title} */}{post.id} | ブログ
       </div>
     ),
     // ImageResponse options
@@ -53,14 +52,14 @@ export default async function Image({ params: { postId } }: Props) {
       // For convenience, we can re-use the exported opengraph-image
       // size config to also set the ImageResponse's width and height.
       ...size,
-      fonts: [
-        {
-          name: 'NotoSansJP',
-          data: notoSansBold,
-          style: 'normal',
-          weight: 700,
-        },
-      ],
+      // fonts: [
+      //   {
+      //     name: 'NotoSansJP',
+      //     data: notoSansBold,
+      //     style: 'normal',
+      //     weight: 700,
+      //   },
+      // ],
     }
   )
 }

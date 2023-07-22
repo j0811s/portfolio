@@ -15,11 +15,9 @@ export const contentType = 'image/png'
  
 // Image generation
 type Props = {
-  params: { catId: string };
+  params: { year: string };
 };
-export default async function Image({ params: { catId } }: Props) {
-  const typeName = 'categories';
-  const category = await getDetail(typeName, catId);
+export default async function Image({ params: { year } }: Props) {
  
   // const notoSansBold = await fetch(
   //   new URL('../../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
@@ -40,7 +38,7 @@ export default async function Image({ params: { catId } }: Props) {
           justifyContent: 'center',
         }}
       >
-        {category.id} | ブログ{/* {category.name} */}
+        {year} | ブログ{/* {category.name} */}
       </div>
     ),
     // ImageResponse options
