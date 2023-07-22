@@ -40,7 +40,7 @@ export default async function Image({ params: { catId } }: Props) {
           alignItems: 'center',
           justifyContent: 'center',
         }}
-      >{category.name} | カテゴリー | ブログ</div>
+      >{category.name}</div>
     ),
     // ImageResponse options
     {
