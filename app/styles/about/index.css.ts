@@ -30,7 +30,7 @@ export const contents = style({
     'screen and (min-width: 960px)': {
       display: 'flex',
       flexWrap: 'wrap',
-      justifyContent: 'center'
+      // justifyContent: 'center'
     }
   }
 });

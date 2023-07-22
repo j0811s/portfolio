@@ -64,6 +64,18 @@ const language = {
   ]
 }
 
+const templateEngine  = {
+  title: 'テンプレートエンジン',
+  items: [
+    {
+      logo: {
+        path: '/logo/templateengine/ejs.svg',
+      },
+      name: 'EJS'
+    }
+  ]
+}
+
 const lib = {
   title: 'ライブラリ・フレームワーク',
   items: [
@@ -113,7 +125,7 @@ const cms = {
       logo: {
         path: '/logo/cms/MicroCMS.svg',
       },
-      name: 'MicroCMS'
+      name: 'microCMS'
     }
   ]
 }
@@ -137,13 +149,13 @@ const other = {
       logo: {
         path: '/logo/other/webpack.svg',
       },
-      name: 'webpack'
+      name: 'webpack5'
     },
     {
       logo: {
         path: '/logo/other/gulp.svg',
       },
-      name: 'Gulp'
+      name: 'Gulp4'
     },
     {
       logo: {
@@ -164,6 +176,7 @@ export default function About() {
         <div className={contents}>
           <SkillSet skill={language} />
           <SkillSet skill={lib} />
+          <SkillSet skill={templateEngine} />
           <SkillSet skill={cms} />
           <SkillSet skill={other} />
         </div>

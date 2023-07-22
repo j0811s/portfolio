@@ -52,14 +52,14 @@ export const logoWrap = style({
 
 export const logo = style({
   display: 'block',
-  width: 64,
-  height: 64,
+  width: `calc( 64 / ${vars.font.size} * 1rem )`,
+  height: `calc( 64 / ${vars.font.size} * 1rem )`,
   margin: '0 auto',
   objectFit: 'contain',
   '@media': {
     'screen and (min-width: 600px)': {
-      width: 80,
-      height: 80,
+      width: `calc( 80 / ${vars.font.size} * 1rem )`,
+      height: `calc( 80 / ${vars.font.size} * 1rem )`,
     }
   },
 });
