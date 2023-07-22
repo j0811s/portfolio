@@ -31,12 +31,7 @@ export const metadata: Metadata = {
     url: myMeta.siteUrl,
     title: myMeta.title,
     description: myMeta.description,
-    siteName: myMeta.sitename,
-    images: [{
-      url: '/ogp.png',
-      width: 1200,
-      height: 630,
-    }]
+    siteName: myMeta.sitename
   },
   manifest: `${myMeta.siteUrl}manifest.json`,
 }

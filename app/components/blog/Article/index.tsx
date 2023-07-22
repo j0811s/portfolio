@@ -49,7 +49,7 @@ export const Article = async ({ post }: { post: Blog }) => {
         <figure className={postEyecatchContainer}>
           {post.eyecatch ?
             <Image className={postEyecatch} src={post.eyecatch.url} alt="" width={post.eyecatch.width} height={post.eyecatch.height} /> :
-            <Image className={postEyecatch} src="https://placehold.jp/750x750.png" alt="" width="750" height="750" />
+            <Image className={postEyecatch} src="/dummy.jpg" alt="" width="375" height="210" />
           }
         </figure>
       </div>

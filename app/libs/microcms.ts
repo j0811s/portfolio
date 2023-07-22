@@ -8,6 +8,7 @@ import type {
   CustomRequestInit,
   MicroCMSContentId
 } from "microcms-js-sdk";
+import { ReactNode } from 'react';
 
 //ブログの型定義
 export type Blog = {

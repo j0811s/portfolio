@@ -41,7 +41,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
                     <figure className={postListEyecatchContainer}>
                       {post.eyecatch ?
                         <Image className={postListEyecatch} src={post.eyecatch.url} alt="" width={post.eyecatch.width} height={post.eyecatch.height} /> :
-                        <Image className={postListEyecatch} src="https://placehold.jp/750x750.png" alt="" width="750" height="750" />
+                        <Image className={postListEyecatch} src="/dummy.jpg" alt="" width="375" height="210" />
                       }
                     </figure>
                     <dl className={postData}>
