@@ -23,7 +23,7 @@ const TagItems = ({ tagData, modClass }: Props) => {
     tagData.map(tag => (
       <li className={`${listIetm} ${modClass?.li}`} key={tag.id}>
         <Link className={listIetmLink} href={`/blog/tags/${tag.id}`}>
-          { tag.name }
+          #{ tag.name }
         </Link>
       </li>
     ))
