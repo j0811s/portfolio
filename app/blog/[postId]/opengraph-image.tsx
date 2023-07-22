@@ -21,7 +21,7 @@ export default async function Image({ params: { postId } }: Props) {
  
   // Font
   const notoSansBold = await fetch(
-    new URL('../../../public/fonts/NotoSansJP-Bold.otf', import.meta.url)
+    new URL('../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
   ).then((res) => res.arrayBuffer())
     
   const post = await getDetail('blog', postId);

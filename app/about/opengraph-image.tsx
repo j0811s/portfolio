@@ -18,7 +18,7 @@ export default async function Image() {
  
   // Font
   const notoSansBold = await fetch(
-    new URL('../../public/fonts/NotoSansJP-Bold.otf', import.meta.url)
+    new URL('../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
   ).then((res) => res.arrayBuffer())
     
   return new ImageResponse(
