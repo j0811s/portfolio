@@ -11,5 +11,8 @@ export const vars = createGlobalTheme(':root', {
       dark: '#79747E'
     },
     link: '#0969da'
+  },
+  font: {
+    size: '16' // fontSize: `calc( 32 / ${vars.font.size} * 1rem )`,
   }
 });

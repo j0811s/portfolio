@@ -9,6 +9,7 @@ export const mq = createThemeContract({
     xl: 'screen and (min-width: 1920px) and (max-width: 2559px)',
     xxl: 'screen and (min-width: 2560px)',
     mobile: 'screen and (max-width: 959px)',
+    tablet: 'screen and (min-width: 600px) and (max-width: 959px)',
     desktop: 'screen and (min-width: 960px)',
   }
 });

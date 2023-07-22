@@ -1,5 +1,6 @@
-import { container } from "../styles/about/index.css";
+import { container, mainTitle } from "../styles/about/index.css";
 import { Breadcrumb } from "@/app/components/common/Breadcrumb";
+import { SkillSet } from "@/app/components/about/SkillSet";
 import { Metadata, ResolvingMetadata } from 'next';
 
 type generateMetadataProps = {
@@ -21,37 +22,149 @@ export async function generateMetadata(
   }
 }
 
+const language = {
+  title: 'マークアップ・プログラム言語',
+  items: [
+    {
+      logo: {
+        path: '/logo/language/htmlls.svg',
+      },
+      name: 'HTML Living Standard'
+    },
+    {
+      logo: {
+        path: '/logo/language/css3.svg',
+      },
+      name: 'CSS3'
+    },
+    {
+      logo: {
+        path: '/logo/language/sass.png',
+      },
+      name: 'Sass'
+    },
+    {
+      logo: {
+        path: '/logo/language/js.png',
+      },
+      name: 'JavaScript'
+    },
+    {
+      logo: {
+        path: '/logo/language/ts.svg',
+      },
+      name: 'TypeScript'
+    },
+    {
+      logo: {
+        path: '/logo/language/php.svg',
+      },
+      name: 'PHP'
+    }
+  ]
+}
+
+const lib = {
+  title: 'ライブラリ・フレームワーク',
+  items: [
+    {
+      logo: {
+        path: '/logo/lib/jQuery.svg',
+      },
+      name: 'jQuery'
+    },
+    {
+      logo: {
+        path: '/logo/lib/react.svg',
+      },
+      name: 'React'
+    },
+    {
+      logo: {
+        path: '/logo/lib/vue.svg',
+      },
+      name: 'Vue3'
+    },
+    {
+      logo: {
+        path: '/logo/lib/next.svg',
+      },
+      name: 'Next.js'
+    },
+    {
+      logo: {
+        path: '/logo/lib/nuxt.svg',
+      },
+      name: 'Nuxt.js'
+    }
+  ]
+}
+
+const cms = {
+  title: 'CMS',
+  items: [
+    {
+      logo: {
+        path: '/logo/cms/WordPress.png',
+      },
+      name: 'WordPress'
+    },
+    {
+      logo: {
+        path: '/logo/cms/MicroCMS.svg',
+      },
+      name: 'MicroCMS'
+    }
+  ]
+}
+
+const other = {
+  title: 'その他',
+  items: [
+    {
+      logo: {
+        path: '/logo/other/Git.svg',
+      },
+      name: 'Git'
+    },
+    {
+      logo: {
+        path: '/logo/other/GitHub.svg',
+      },
+      name: 'GitHub'
+    },
+    {
+      logo: {
+        path: '/logo/other/webpack.svg',
+      },
+      name: 'webpack'
+    },
+    {
+      logo: {
+        path: '/logo/other/gulp.svg',
+      },
+      name: 'Gulp'
+    },
+    {
+      logo: {
+        path: '/logo/other/docker.jpg',
+      },
+      name: 'docker'
+    }
+  ]
+}
+
 export default function About() {
+  
   return (
     <>
       <Breadcrumb type={{slug: 'about'}} />
       <section className={container}>
-        <h2>スキルセット</h2>
-        <dl>
-          <dt>言語</dt>
-          <dd>HTML</dd>
-          <dd>CSS(SCSS)</dd>
-          <dd>JavaScript(TypeScript)</dd>
-          <dd>PHP</dd>
-        </dl>
-        <dl>
-          <dt>ライブラリ・フレームワーク</dt>
-          <dd>React(Next13)</dd>
-          <dd>Vue3(Nuxt3)</dd>
-          <dd>jQuery</dd>
-        </dl>
-        <dl>
-          <dt>CMS</dt>
-          <dd>WordPress</dd>
-          <dd>MicroCMS</dd>
-        </dl>
-        <dl>
-          <dt>その他</dt>
-          <dd>Git</dd>
-          <dd>GitHub</dd>
-          <dd>Webpack</dd>
-          <dd>Gulp</dd>
-        </dl>
+        <h2 className={mainTitle}>スキルセット</h2>
+        <SkillSet skill={language} />
+        <SkillSet skill={lib} />
+        <SkillSet skill={cms} />
+        <SkillSet skill={other} />
       </section>
     </>
   )
