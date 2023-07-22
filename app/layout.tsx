@@ -1,8 +1,8 @@
 import './styles/globals.css';
 import { html, body, container, footer } from './styles/layout.css';
 import { Suspense } from 'react';
-import { Header } from './components/common/Header';
-import { Footer } from './components/common/Footer';
+import { Header } from '@/app/components/common/Header';
+import { Footer } from '@/app/components/common/Footer';
 import { Metadata } from 'next';
 
 const SITE_URL: string = process.env.SITE_URL || '';
