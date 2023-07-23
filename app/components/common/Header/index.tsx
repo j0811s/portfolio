@@ -5,12 +5,26 @@ import {
 } from "./index.css"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HumburgerButton } from "../humburgerButton";
+import DrawerMenu from "@/app/components/common/Modal";
 import { Logo } from "./Logo";
 
 
 export const Header = () => {
   const pathname = usePathname();
+
+  const DrawerMenuOptions = {
+    // initialValue: true,
+    // animation: false,
+    // classes: {
+    //   modClassName: 'mod-humb',
+    // },
+    // disableScroll: false,
+    // on: {
+    //   afterOpen: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    //     console.log('merge')
+    //   }
+    // }
+  }
 
   return (
     <header className={container}>
@@ -29,7 +43,22 @@ export const Header = () => {
             </li>
           </ul>
         </nav>
-        <HumburgerButton modClass={'js-drawerTrigger'} />
+        
+        <DrawerMenu options={DrawerMenuOptions}>
+          <nav>
+            <ul>
+              <li className={navigationListItem}>
+                <Link className={navigationListItemLink} href={`/`}>トップページ</Link>
+              </li>
+              <li className={navigationListItem}>
+                <Link className={navigationListItemLink} href={`/about/`}>私について</Link>
+              </li>
+              <li className={navigationListItem}>
+                <Link className={navigationListItemLink} href={`/blog/`}>ブログ</Link>
+              </li>
+            </ul>
+          </nav>
+        </DrawerMenu>
       </div>
     </header>
   )
