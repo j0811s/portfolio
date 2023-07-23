@@ -13,7 +13,7 @@ export const Header = () => {
   const pathname = usePathname();
 
   const DrawerMenuOptions = {
-    // initialValue: true,
+    // initOpen: true,
     // animation: false,
     // classes: {
     //   modClassName: 'mod-humb',

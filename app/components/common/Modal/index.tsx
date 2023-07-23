@@ -13,12 +13,12 @@ import useScrollLock from "@/app/components/common/hooks/useScrollLock";
 type Options = {
   initOpen?: boolean;
   animation?: boolean;
+  disableScroll?: boolean;
   classes?: {
     openClassName?: string;
     closeClassName?: string;
     modClassName?: string;
   };
-  disableScroll?: boolean;
   on?: {
     beforeOpen?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {},
     afterOpen?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {},
@@ -32,12 +32,12 @@ type Options = {
 const defaultOptions = {
   initOpen: false,
   animation: true,
+  disableScroll: true,
   classes: {
     openClassName: 'add-modalOpen',
     closeClassName: 'add-modalClose',
     modClassName: ''
   },
-  disableScroll: true,
   on: {
     beforeOpen: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {},
     afterOpen: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {},
@@ -62,7 +62,7 @@ export default function GenerateModal({ options, children }: {options: Options, 
 
   // 状態
   const [isReady, setIsReady] = useState(false);
-  const { isOpen, modalOpen, modalClose } = useModalStatus({ initialValue: initOpen });
+  const { isOpen, modalOpen, modalClose } = useModalStatus({ initialValue: false });
 
   // 要素
   const modalBtnRef = useRef<HTMLButtonElement>(null);
@@ -97,6 +97,7 @@ export default function GenerateModal({ options, children }: {options: Options, 
   // 初期化
   useEffect(() => {
     setIsReady(true);
+    if (initOpen) modalOpen();
     return () => {
       setIsReady(false);
     }
