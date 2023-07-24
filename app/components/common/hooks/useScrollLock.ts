@@ -1,5 +1,5 @@
 
-import { GetDeviceType } from "../GetDeviceType";
+import useDeviceType from "./useDeviceType";
 
 export default class useScrollLock {
   // 対象
@@ -18,7 +18,7 @@ export default class useScrollLock {
   constructor(target?: HTMLElement) {
     this.target = target == null ? document.documentElement : target;
 
-    const device = new GetDeviceType();
+    const device = useDeviceType();
     this.iOS = device.is.ios;
     this.PC = device.is.pc;
     this.toucheStartY = 0;

@@ -5,9 +5,8 @@ import {
 } from "./index.css"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import DrawerMenu, {isMatches, isOpen} from "@/app/components/common/Modal";
+import DrawerMenu from "@/app/components/common/Modal";
 import { Logo } from "./Logo";
-
 
 export const Header = () => {
   const pathname = usePathname();
