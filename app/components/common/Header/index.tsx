@@ -5,7 +5,7 @@ import {
 } from "./index.css"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import DrawerMenu, {isMatches, onMethodMqCallbackParams} from "@/app/components/common/Modal";
+import DrawerMenu, {isMatches, isOpen} from "@/app/components/common/Modal";
 import { Logo } from "./Logo";
 
 
@@ -15,24 +15,22 @@ export const Header = () => {
   const DrawerMenuOptions = {
     // initOpen: true,
     // animation: false,
-    disableMediaQuery: 'screen and (min-width: 960px)',
+    // disableMediaQuery: 'screen and (min-width: 768px)',
     // classes: {
     //   modClassName: 'mod-humb',
     // },
     // disableScroll: false,
-    on: {
-      // afterOpen: (e) => {
-      //   console.log('merge')
-      // },
-      matches: (isMatches: isMatches, {modalOpen, modalClose, isOpen}: onMethodMqCallbackParams) => {
-        // console.log(isMatches)
-        if (isMatches) {
-          if (!isOpen) return;
-          // console.log('IS OPEN')
-          if (isOpen && modalClose) modalClose();
-        }
-      }
-    }
+    // on: {
+    //   afterOpen: (e: Event) => {
+    //     console.log('afterOpen', e)
+    //   },
+    //   matches: (isMatches: isMatches, isOpen: boolean) => {
+    //     if (isMatches) {
+    //       console.log('IS MATCHES')
+    //       if (isOpen) { console.log('IS OPEN') };
+    //     }
+    //   }
+    // }
   }
 
   return (

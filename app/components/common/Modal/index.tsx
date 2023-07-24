@@ -12,15 +12,16 @@ import useMediaQuery from "@/app/components/common/hooks/useMediaQuery";
 
 /** 型 */
 export type isMatches = boolean;
+export type isOpen = boolean;
 
 type onMethodCommon = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, isMatches: isMatches) => void;
 
 export type onMethodMqCallbackParams = {
   modalOpen?: () => void;
   modalClose?: () => void;
-  isOpen?: boolean;
+  isOpen?: isOpen;
 }
-type onMethodMq = (isMatches: isMatches, {modalOpen, modalClose}: onMethodMqCallbackParams) => void;
+type onMethodMq = (isMatches: isMatches, isOpen: isOpen) => void;
 
 type Options = {
   initOpen?: boolean;
@@ -59,7 +60,7 @@ const defaultOptions = {
     afterOpen: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, isMatches: isMatches) => {},
     beforeClose: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, isMatches: isMatches) => {},
     afterClose: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, isMatches: isMatches) => { },
-    matches: (isMatches: isMatches, {modalOpen, modalClose, isOpen}: onMethodMqCallbackParams) => { }
+    matches: (isMatches: isMatches, isOpen: isOpen) => { }
   }
 }
 
@@ -72,7 +73,7 @@ export default function GenerateModal({ options, children }: { options: Options,
   const modClassName = classes?.modClassName;
   const animationOpenClass = 'add-openAnimation';
   const animationCloseClass = 'add-closeAnimation';
-  const isMatches = Boolean(disableMediaQuery && useMediaQuery(disableMediaQuery));
+  const isMatches = disableMediaQuery ? useMediaQuery(disableMediaQuery) : false;
 
   // ページ情報
   const pathname = usePathname();
@@ -126,13 +127,12 @@ export default function GenerateModal({ options, children }: { options: Options,
   useEffect(() => {
     if (!isReady) return;
     modalClose();
-  }, [pathname, searchParams]);
+  }, [pathname, searchParams, isMatches]);
 
   // matchMedia
   useEffect(() => {
     if (!isReady) return;
-    
-    if (config?.on?.matches) config.on.matches(isMatches, { modalOpen, modalClose, isOpen });
+    if (config?.on?.matches) config.on.matches(isMatches, isOpen);
   }, [isMatches]);
 
   // モーダルコンテンツ操作
