@@ -7,8 +7,8 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useState, useEffect, useRef } from "react";
 import { ContentPortal } from "./ContentPortal";
 import useModalStatus from "./hooks/useModalStatus";
-// import useScrollLock from "@/app/components/common/hooks/useScrollLock";
-import useMediaQuery from "@/app/components/common/hooks/useMediaQuery";
+// import useScrollLock from "@/app/components/hooks/useScrollLock";
+import useMediaQuery from "@/app/components/hooks/useMediaQuery";
 
 /** 型 */
 export type isMatches = boolean;
