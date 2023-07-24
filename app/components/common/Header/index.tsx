@@ -15,7 +15,7 @@ export const Header = () => {
   const DrawerMenuOptions = {
     // initOpen: true,
     // animation: false,
-    // disableMediaQuery: 'screen and (min-width: 768px)',
+    disableMediaQuery: 'screen and (min-width: 960px)',
     // classes: {
     //   modClassName: 'mod-humb',
     // },
