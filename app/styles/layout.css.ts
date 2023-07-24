@@ -12,7 +12,7 @@ export const container = style({
   display: 'block',
   position: 'relative',
   '@media': {
-    'screen and (min-width: 768px)': {
+    'screen and (min-width: 960px)': {
       padding: '30px 0',
     }
   }
@@ -21,4 +21,4 @@ export const container = style({
 export const footer = style({
   position: 'sticky',
   top: '100vh'
-})
+});

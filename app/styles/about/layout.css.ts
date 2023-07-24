@@ -3,10 +3,10 @@ import { style } from "@vanilla-extract/css";
 export const container = style({
   margin: '0 auto',
   '@media': {
-    'screen and (max-width: 767px)': {
+    'screen and (max-width: 959px)': {
       padding: '14px',
     },
-    'screen and (min-width: 768px)': {
+    'screen and (min-width: 960px)': {
       maxWidth: 1280,
       padding: '0 20px',
     }

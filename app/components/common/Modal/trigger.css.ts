@@ -8,10 +8,10 @@ export const btn = style({
   marginLeft: 'auto',
   padding: '0.5em 0',
   '@media': {
-    'screen and (max-width: 767px)': {
+    'screen and (max-width: 959px)': {
       width: '5em'
     },
-    'screen and (min-width: 768px)': {
+    'screen and (min-width: 960px)': {
       display: 'none'
     }
   }

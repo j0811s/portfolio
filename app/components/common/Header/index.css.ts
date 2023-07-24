@@ -7,18 +7,11 @@ export const container = style({
   top: 0,
   left: 0,
   zIndex: 999,
+  height: 60,
   padding: '0 1em',
   backgroundColor: '#fff',
   borderBottom: '1px solid #eee',
-  color: '#000',
-  '@media': {
-    'screen and (max-width: 767px)': {
-      height: 60
-    },
-    'screen and (min-width: 768px)': {
-      height: 60,
-    }
-  }
+  color: '#000'
 });
 
 export const wrapper = style({
@@ -31,7 +24,7 @@ export const wrapper = style({
 export const navigation = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   '@media': {
-    'screen and (max-width: 767px)': {
+    'screen and (max-width: 959px)': {
       position: 'fixed',
       top: 60,
       left: 0,
@@ -44,7 +37,7 @@ export const navigation = style({
       backgroundColor: '#fff',
       textAlign: 'center'
     },
-    'screen and (min-width: 768px)': {
+    'screen and (min-width: 960px)': {
       display: 'block',
       marginLeft: 'auto',
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
@@ -53,14 +46,14 @@ export const navigation = style({
   selectors: {
     ':not(.add-active) &': {
       '@media': {
-        'screen and (max-width: 767px)': {
+        'screen and (max-width: 959px)': {
           display: 'none'
         }
       }
     },
     '.add-active &': {
       '@media': {
-        'screen and (max-width: 767px)': {
+        'screen and (max-width: 959px)': {
           display: 'block'
         }
       }
@@ -70,10 +63,10 @@ export const navigation = style({
 
 export const navigationList = style({
   '@media': {
-    'screen and (max-width: 767px)': {
+    'screen and (max-width: 959px)': {
       
     },
-    'screen and (min-width: 768px)': {
+    'screen and (min-width: 960px)': {
       display: 'flex',
       alignItems: 'center',
     }
@@ -85,7 +78,7 @@ export const navigationListItem = style({
   selectors: {
     '&:not(:first-of-type)': {
       '@media': {
-        'screen and (min-width: 768px)': {
+        'screen and (min-width: 960px)': {
           marginLeft: '1em'
         }
       }

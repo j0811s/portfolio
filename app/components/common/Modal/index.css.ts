@@ -32,10 +32,10 @@ export const modalAnimation = style({
   opacity: 0,
   selectors: {
     "&.add-openAnimation": {
-      animation: `${modalOpen} 1s forwards ease`,
+      animation: `${modalOpen} 0.6s forwards ease`,
     },
     "&.add-closeAnimation": {
-      animation: `${modalClose} 1s forwards ease`,
+      animation: `${modalClose} 0.6s forwards ease`,
     }
   }
 });
@@ -47,7 +47,7 @@ export const modalOverlay = style({
   width: '100%',
   height: 'calc(100% - 60px)',
   zIndex: 9999,
-  backgroundColor: 'rgb(238, 238, 238, .8)',
+  backgroundColor: 'rgb(238, 238, 238, .9)'
 });
 
 export const modalContainer = style({
@@ -61,12 +61,16 @@ export const modalContainer = style({
   color: '#fff',
   display: 'flex',
   flexDirection: 'column',
-  padding: '1em'
+  padding: '1em',
+  backgroundColor: 'transparent',
 });
 
 export const modalWrapper = style({
   margin: 'auto',
   color: '#000',
-  backgroundColor: '#fff',
-  padding: '1em'
+  backgroundColor: 'transparent',
+});
+
+export const modalInner = style({
+  
 });
