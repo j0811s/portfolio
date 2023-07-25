@@ -3,24 +3,22 @@
 import merge from "ts-deepmerge";
 import { btn, lines, line, textContainer, text } from "./trigger.css";
 import { modalAnimation, modalContainer, modalOverlay, modalWrapper, modalInner } from "./index.css";
+
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { ContentPortal } from "./ContentPortal";
+import { useModalContext } from '@/app/context/ModalContext';
+
 import useModalStatus from "./hooks/useModalStatus";
-// import useScrollLock from "@/app/components/hooks/useScrollLock";
+import useScrollLock from "@/app/components/hooks/useScrollLock";
 import useMediaQuery from "@/app/components/hooks/useMediaQuery";
+
 
 /** 型 */
 export type isMatches = boolean;
 export type isOpen = boolean;
 
 type onMethodCommon = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, isMatches: isMatches) => void;
-
-export type onMethodMqCallbackParams = {
-  modalOpen?: () => void;
-  modalClose?: () => void;
-  isOpen?: isOpen;
-}
 type onMethodMq = (isMatches: isMatches, isOpen: isOpen) => void;
 
 type Options = {
@@ -51,8 +49,8 @@ const defaultOptions = {
   disableScroll: true,
   disableMediaQuery: undefined,
   classes: {
-    openClassName: 'add-modalOpen',
-    closeClassName: 'add-modalClose',
+    openClassName: 'add-openModal',
+    closeClassName: 'add-closeModal',
     modClassName: ''
   },
   on: {
@@ -79,13 +77,15 @@ export default function GenerateModal({ options, children }: { options: Options,
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // 状態
-  const [isReady, setIsReady] = useState(false);
-  const { isOpen, modalOpen, modalClose } = useModalStatus({ initialValue: false });
-
   // 要素
   const modalTriggerRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // 状態
+  const [isReady, setIsReady] = useState(false);
+  // const { isOpen, openModal, closeModal } = useModalStatus({ initialValue: false });
+  const [isOpen, openModal, closeModal] = useModalContext();
+  const scrollLock = useScrollLock();
 
   // イベント用 関数
   const cancelEvent = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -98,13 +98,13 @@ export default function GenerateModal({ options, children }: { options: Options,
 
   const openEvent: callbackProps = (e, isMatches) => {
     if (config?.on?.beforeOpen) config.on.beforeOpen(e, isMatches);
-    modalOpen();
+    openModal();
     if (config?.on?.afterOpen) config.on.afterOpen(e, isMatches);
   }
 
   const closeEvent: callbackProps = (e, isMatches) => {
     if (config?.on?.beforeClose) config.on.beforeClose(e, isMatches);
-    modalClose();
+    closeModal();
     if (config?.on?.afterClose) config.on.afterClose(e, isMatches);
   }
 
@@ -116,7 +116,7 @@ export default function GenerateModal({ options, children }: { options: Options,
   // 初期化
   useEffect(() => {
     setIsReady(true);
-    if (initOpen) modalOpen();
+    if (initOpen) openModal();
 
     return () => {
       setIsReady(false);
@@ -126,7 +126,7 @@ export default function GenerateModal({ options, children }: { options: Options,
   // URL監視
   useEffect(() => {
     if (!isReady) return;
-    modalClose();
+    closeModal();
   }, [pathname, searchParams, isMatches]);
 
   // matchMedia
@@ -138,10 +138,7 @@ export default function GenerateModal({ options, children }: { options: Options,
   // モーダルコンテンツ操作
   useEffect(() => {
     if (!isReady) return;
-    
-    if (disableScroll) {
-      document.body.classList[isOpen ? "add" : "remove"]('add-disableScroll');
-    }
+    if (disableScroll && isOpen) scrollLock.enable();
 
     if (openClassName && closeClassName) {
       modalTriggerRef.current?.classList.add(isOpen ? openClassName : closeClassName);
@@ -157,13 +154,14 @@ export default function GenerateModal({ options, children }: { options: Options,
       modalRef.current?.classList.add(isOpen ? animationOpenClass : animationCloseClass);
       modalRef.current?.addEventListener('animationend', modalAnimationEvent);
     }
-
+    
     return () => {
+      if (disableScroll && isOpen) scrollLock.disable();
       if (animation && isOpen) {
         modalRef.current?.removeEventListener('animationend', modalAnimationEvent);
       }
     }
-  }, [isOpen]);
+  }, [isOpen, scrollLock.isLock]);
 
 
   // トリガー要素
@@ -189,11 +187,11 @@ export default function GenerateModal({ options, children }: { options: Options,
     const condition = animation ? (isReady) : (isReady && isOpen);
 
     return (
-      condition &&
-      <ContentPortal insertElement={document?.body} >
-        <div className={`${modalAnimation} ${modClassName}`} ref={modalRef}>
-          <div className={modalOverlay} onClick={modalClose}></div>
-          <div className={`${modalContainer}`} onClick={modalClose}>
+      condition && 
+      <ContentPortal>
+        <div className={`${modalAnimation} ${modClassName}`} ref={modalRef} role="dialog" aria-modal>
+          <div className={modalOverlay} onClick={closeModal}></div>
+          <div className={`${modalContainer}`} onClick={closeModal}>
             <div className={modalWrapper} onClick={cancelEvent}>
               <div className={modalInner}>
                 {children}

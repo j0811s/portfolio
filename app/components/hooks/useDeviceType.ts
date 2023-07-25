@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from "react";
 
 /** 型定義 */
@@ -7,9 +8,7 @@ type DeviceList = {
   }
 };
 
-type GetDeviceType = () => DeviceList;
-
-const useDeviceType: GetDeviceType = () => {
+const useDeviceType = (): DeviceList => {
   if (typeof window === 'undefined') {
     return {}
   }
@@ -64,8 +63,12 @@ const useDeviceType: GetDeviceType = () => {
     }
 
     getDeviceType();
-  }, []);
 
+    return () => {
+
+    }
+  }, []);
+  
   return deviceType;
 }
 

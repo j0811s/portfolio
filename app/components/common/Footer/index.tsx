@@ -1,3 +1,5 @@
+// 'use client'
+
 import {
   container, copyright
 } from "./index.css"

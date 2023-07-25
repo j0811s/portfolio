@@ -64,10 +64,10 @@ export const line = style({
       animation: `${lineAnim1} 0.2s forwards ease`,
       animationPlayState: 'paused'
     },
-    '.add-modalOpen &:first-of-type': {
+    '.add-openModal &:first-of-type': {
       animationPlayState: 'running'
     },
-    '.add-modalClose &:first-of-type': {
+    '.add-closeModal &:first-of-type': {
       animationDirection: 'reverse',
       animationPlayState: 'running',
     },
@@ -77,10 +77,10 @@ export const line = style({
       animation: `${lineAnim2} 0.2s forwards ease`,
       animationPlayState: 'paused',
     },
-    '.add-modalOpen &:nth-of-type(2)': {
+    '.add-openModal &:nth-of-type(2)': {
       animationPlayState: 'running'
     },
-    '.add-modalClose &:nth-of-type(2)': {
+    '.add-closeModal &:nth-of-type(2)': {
       animationDirection: 'reverse',
       animationPlayState: 'running',
     },
@@ -89,10 +89,10 @@ export const line = style({
       animation: `${lineAnim3} 0.2s forwards ease`,
       animationPlayState: 'paused'
     },
-    '.add-modalOpen &:nth-of-type(3)': {
+    '.add-openModal &:nth-of-type(3)': {
       animationPlayState: 'running'
     },
-    '.add-modalClose &:nth-of-type(3)': {
+    '.add-closeModal &:nth-of-type(3)': {
       animationDirection: 'reverse',
       animationPlayState: 'running',
     },
@@ -110,13 +110,13 @@ export const textContainer = style({
 
 export const text = style({
   selectors: {
-    '.add-modalOpen &:first-of-type': {
+    '.add-openModal &:first-of-type': {
       display: 'none'
     },
-    ':not(.add-modalOpen) &:last-of-type': {
+    ':not(.add-openModal) &:last-of-type': {
       display: 'none'
     },
-    '.add-modalOpen &:last-of-type': {
+    '.add-openModal &:last-of-type': {
       display: 'block'
     }
   }

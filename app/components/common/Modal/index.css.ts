@@ -5,7 +5,7 @@ globalStyle('body.add-disableScroll', {
   overflow: 'hidden'
 });
 
-const modalOpen = keyframes({
+const openModal = keyframes({
   '0%': {
     visibility: 'hidden',
     opacity: 0,
@@ -16,7 +16,7 @@ const modalOpen = keyframes({
   }
 });
 
-const modalClose = keyframes({
+const closeModal = keyframes({
   '0%': {
     visibility: 'visible',
     opacity: 1,
@@ -32,10 +32,10 @@ export const modalAnimation = style({
   opacity: 0,
   selectors: {
     "&.add-openAnimation": {
-      animation: `${modalOpen} 0.6s forwards ease`,
+      animation: `${openModal} 0.6s forwards ease`,
     },
     "&.add-closeAnimation": {
-      animation: `${modalClose} 0.6s forwards ease`,
+      animation: `${closeModal} 0.6s forwards ease`,
     }
   }
 });

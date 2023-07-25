@@ -7,13 +7,13 @@ type Props = {
 export default function useModalStatus({ initialValue = false }: Props) { 
   const [isOpen, setIsOpen] = useState(initialValue);
 
-  const modalOpen = () => setIsOpen(true);
-  const modalClose = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   const statusProps = {
     isOpen,
-    modalOpen,
-    modalClose
+    openModal,
+    closeModal
   }
 
   return statusProps;
