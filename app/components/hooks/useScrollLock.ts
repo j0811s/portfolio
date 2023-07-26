@@ -3,13 +3,13 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useModalContext } from '@/app/context/ModalContext';
 import useDeviceType from "./useDeviceType";
 
-type UseScrollLock = () => {
+type UseScrollLock = (target?: React.RefObject<HTMLElement | null>) => {
   enable: () => void;
   disable: () => void;
   isLock: boolean;
 };
 
-const useScrollLock: UseScrollLock = () => {
+const useScrollLock: UseScrollLock = (target) => {
   if (typeof window === 'undefined') {
     return {
       enable: () => { },
@@ -17,6 +17,11 @@ const useScrollLock: UseScrollLock = () => {
       isLock: false,
     }
   }
+
+  /** 対象要素 */
+  const html = document.documentElement;
+  const body = document.body;
+  const targetElem = target?.current || null;
 
   /** デバイス判定 */
   const deviceType = useDeviceType();
@@ -31,15 +36,16 @@ const useScrollLock: UseScrollLock = () => {
   const [currentBodyPaddingRight, setCurrentBodyPaddingRight] = useState(0);
   const [scrollBarWidth, setScrollBarWidth] = useState(0);
 
-  const [toucheStartY, setToucheStartY] = useState(0);
-  const [toucheCurrentY, setToucheCurrentY] = useState(0);
+  const [touchStartY, setToucheStartY] = useState(0);
+  const [previousBodyPosition, setPreviousBodyPosition] = useState({
+    position: '',
+    top: '',
+    left: ''
+  });
 
-  const [isOpen, openModal, closeModal] = useModalContext();
+  // const [isOpen, openModal, closeModal] = useModalContext();
   
   /** スクロールバーを考慮したウィンドウ幅のイベント処理 */
-  const html = document.documentElement;
-  const body = document.body;
-
   const getScrollBarWidth = () => {
     const bars = window.innerWidth - html.clientWidth;
     setScrollBarWidth(bars);
@@ -57,16 +63,96 @@ const useScrollLock: UseScrollLock = () => {
   const setWidthExcludingScrollBars = () => {
     getScrollBarWidth();
     getBodyPaddingRight();
-    body.style.paddingRight = `${currentBodyPaddingRight + scrollBarWidth}px`;
-    body.style.overflow = 'hidden';
   }
 
   const unsetWidthExcludingScrollBars = () => {
-    body.style.paddingRight = '';
-    body.style.overflow = '';
     setScrollBarWidth(0);
     setPreviousBodyPaddingRight('');
     setCurrentBodyPaddingRight(0);
+  }
+
+  // iOS以外
+  const setOverflowHidden = () => {
+    setWidthExcludingScrollBars();
+    body.style.overflow = 'hidden';
+    body.style.paddingRight = `${currentBodyPaddingRight + scrollBarWidth}px`;
+  }
+
+  const unsetOverflowHidden = () => {
+    unsetWidthExcludingScrollBars();
+    body.style.paddingRight = '';
+    body.style.overflow = '';
+  }
+
+  // iOS用
+  const getPreviousBodyPosition = () => {
+    setPreviousBodyPosition({
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left
+    });
+  }
+
+  const setFixedBodyPosition = () => {
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+    const innerHeight = window.innerHeight;
+
+    body.style.position = 'fixed';
+    body.style.top = -scrollY + 'px';
+    body.style.left = -scrollX + 'px';
+
+    setTimeout(() => {
+      const bottomBarHeight = innerHeight - window.innerHeight;
+      if (bottomBarHeight && scrollY >= innerHeight) {
+        body.style.top = `${-(scrollY + bottomBarHeight)}`;
+      }
+    }, 0);
+  }
+
+  const resetFixedBodyPotision = () => {
+    const y = -parseInt(body.style.top, 10);
+    const x = -parseInt(body.style.left, 10);
+
+    body.style.position = previousBodyPosition.position;
+    body.style.top = previousBodyPosition.top;
+    body.style.left = previousBodyPosition.left;
+
+    window.scrollTo(x, y);
+
+    setPreviousBodyPosition({
+      position: '',
+      top: '',
+      left: '',
+    });
+  }
+
+  const updateTouchStart = (e: TouchEvent) => {
+    setToucheStartY(e.targetTouches[0].clientY);
+  }
+
+  const handleIOS = (e: TouchEvent): void => {
+    const touchY = e.targetTouches[0].clientY - touchStartY;
+    
+    const currentScrollTop = touchY > 0 && targetElem?.scrollTop === 0;
+    const currentScrollBottom = targetElem ? touchY < 0 && targetElem.scrollHeight - targetElem.scrollTop <= targetElem.clientHeight : false;
+    
+    if (currentScrollTop || currentScrollBottom) e.preventDefault();
+    e.stopPropagation();
+  }
+
+  const setTouchCancel = (): void => {
+    document.addEventListener('touchstart', updateTouchStart);
+
+    const options: AddEventListenerOptions & EventListenerOptions = { passive: false };
+    document.addEventListener('touchmove', handleIOS, options);
+  }
+
+  const unsetTouchCancel = (): void => {
+    document.removeEventListener('touchstart', updateTouchStart);
+
+    const options: AddEventListenerOptions & EventListenerOptions = { passive: false };
+    document.removeEventListener('touchmove', handleIOS, options);
   }
 
   /** スクロールロックのイベント処理 */
@@ -82,134 +168,42 @@ const useScrollLock: UseScrollLock = () => {
     }
   }, []);
 
+
   useEffect(() => {
     if (isPC) {
       getScrollBarWidth();
       getBodyPaddingRight();
+      if (isLock) setOverflowHidden();
     }
-    if (isPC && isLock) setWidthExcludingScrollBars();
 
     return () => {
-      if (isPC && isLock) unsetWidthExcludingScrollBars();
+      if (isPC && isLock) unsetOverflowHidden();
     }
   }, [isReady, isLock]);
-    
 
-  /** return */
+
+  useEffect(() => {
+    if (isiOS && isLock) {
+      getPreviousBodyPosition();
+      setFixedBodyPosition();
+      setTouchCancel();
+    }
+
+    return () => {
+      if (isiOS && isLock) {
+        resetFixedBodyPotision();
+        unsetTouchCancel();
+      }
+    }
+  }, [isReady, touchStartY]);
+    
+  
+  
   return {
-    enable, disable, isLock
+    enable,
+    disable,
+    isLock
   }
 }
 
 export default useScrollLock;
-
-// export default class useScrollLock {
-//   // 対象
-//   target: HTMLElement;
-//   // デバイス判定
-//   iOS: boolean;
-//   PC: boolean;
-//   // タッチポイント
-//   private toucheStartY: number;
-//   private toucheCurrentY: number;
-//   // ステータス
-//   isLock: boolean;
-//   // ウィンドウ幅
-//   scrollBarWidth: number;
-
-//   constructor(target?: any) {
-//     this.target = target == null ? document.documentElement : target;
-
-//     const device = useDeviceType();
-//     this.iOS = device.is?.ios;
-//     this.PC = device.is?.pc;
-//     this.toucheStartY = 0;
-//     this.toucheCurrentY = 0;
-//     this._iOSLock = this._iOSLock.bind(this);
-
-//     this.isLock = false;
-
-//     this.scrollBarWidth = this._getWidthScrollBars();
-//     this._setWidthExcludingScrollBars = this._setWidthExcludingScrollBars.bind(this);
-//   }
-
-//   get status(): boolean {
-//     return this.isLock;
-//   }
-
-//   private _getWidthScrollBars(): number {
-//     return window.innerWidth - document.documentElement.clientWidth;
-//   }
-
-//   private _setWidthExcludingScrollBars(): void {
-//     const width = window.innerWidth - this.scrollBarWidth;
-
-//     document.documentElement.style.width = `${width}px`;
-//     this.target.style.width = `${width}px`;
-//   }
-
-//   private _addResize(): void {
-//     window.addEventListener('resize', this._setWidthExcludingScrollBars);
-//   }
-
-//   private _removeResize(): void {
-//     window.removeEventListener('resize', this._setWidthExcludingScrollBars);
-//   }
-
-//   private _iOSLock(e: TouchEvent): void {
-//     this.toucheCurrentY = e.changedTouches[0].pageY;
-//     const height = this.target.offsetHeight;
-//     const currentScrollTop = this.toucheStartY <= this.toucheCurrentY && this.target.scrollTop === 0;
-//     const currentScrollBottom =
-//       this.toucheStartY >= this.toucheCurrentY && this.target.scrollHeight - this.target.scrollTop === height;
-
-//     if (currentScrollTop || currentScrollBottom) e.preventDefault();
-//   }
-
-//   private _setTouchCancel(): void {
-//     document.addEventListener('touchstart', (e) => {
-//       this.toucheStartY = e.changedTouches[0].pageY;
-//     });
-
-//     const options: AddEventListenerOptions & EventListenerOptions = { passive: false };
-//     document.addEventListener('touchmove', this._iOSLock, options);
-//   }
-
-//   private _unsetTouchCancel(): void {
-//     const options: AddEventListenerOptions & EventListenerOptions = { passive: false };
-//     document.removeEventListener('touchmove', this._iOSLock, options);
-//   }
-
-//   private _setOverflowHidden(): void {
-//     if (this.PC) {
-//       this._setWidthExcludingScrollBars();
-//     }
-//     document.documentElement.style.overflow = 'hidden';
-//   }
-
-//   private _unsetOverflowHidden(): void {
-//     if (this.PC) {
-//       document.documentElement.style.width = '';
-//       this.target.style.width = '';
-//     }
-//     document.documentElement.style.overflow = '';
-//   }
-
-//   public enable(): void {
-//     if (this.status) return;
-//     this.iOS ? this._setTouchCancel() : this._setOverflowHidden();
-//     if (this.PC) {
-//       this._addResize();
-//     }
-//     this.isLock = true;
-//   }
-
-//   public disable(): void {
-//     if (!this.status) return;
-//     this.iOS ? this._unsetTouchCancel() : this._unsetOverflowHidden();
-//     if (this.PC) {
-//       this._removeResize();
-//     }
-//     this.isLock = false;
-//   }
-// }

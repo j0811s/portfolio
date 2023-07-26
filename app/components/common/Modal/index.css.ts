@@ -1,9 +1,6 @@
 import { style, globalStyle, keyframes } from "@vanilla-extract/css";
 import { vars } from "@/app/styles/common/variables.css";
 
-globalStyle('body.add-disableScroll', {
-  overflow: 'hidden'
-});
 
 const openModal = keyframes({
   '0%': {
@@ -40,17 +37,7 @@ export const modalAnimation = style({
   }
 });
 
-export const modalOverlay = style({
-  position: 'fixed',
-  top: 60,
-  left: 0,
-  width: '100%',
-  height: 'calc(100% - 60px)',
-  zIndex: 9999,
-  backgroundColor: 'rgb(238, 238, 238, .9)'
-});
-
-export const modalContainer = style({
+export const modalRoot = style({
   overflow: 'auto',
   position: 'fixed',
   top: 60,
@@ -65,12 +52,20 @@ export const modalContainer = style({
   backgroundColor: 'transparent',
 });
 
-export const modalWrapper = style({
-  margin: 'auto',
-  color: '#000',
-  backgroundColor: 'transparent',
+export const modalOverlay = style({
+  position: 'fixed',
+  top: 60,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  zIndex: '-1',
+  backgroundColor: 'rgb(238, 238, 238, .9)'
 });
 
-export const modalInner = style({
-  
+export const modalContainer = style({
+  margin: 'auto',
+  color: '#000',
+});
+
+export const modalWrapper = style({
 });

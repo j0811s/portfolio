@@ -9,8 +9,6 @@ import { usePathname } from "next/navigation";
 import DrawerMenu from "@/app/components/common/Modal";
 import { Logo } from "./Logo";
 
-import { ModalProvider } from '@/app/context/ModalContext';
-
 export const Header = () => {
   const pathname = usePathname();
 
@@ -36,7 +34,6 @@ export const Header = () => {
   }
 
   return (
-    <ModalProvider>
     <header className={container}>
       <div className={wrapper}>
         <Logo pathname={pathname} />
@@ -71,6 +68,5 @@ export const Header = () => {
         </DrawerMenu>
       </div>
     </header>
-    </ModalProvider>
   )
 }

@@ -2,7 +2,7 @@
 
 import merge from "ts-deepmerge";
 import { btn, lines, line, textContainer, text } from "./trigger.css";
-import { modalAnimation, modalContainer, modalOverlay, modalWrapper, modalInner } from "./index.css";
+import { modalRoot, modalAnimation, modalContainer, modalOverlay, modalWrapper } from "./index.css";
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
@@ -83,9 +83,9 @@ export default function GenerateModal({ options, children }: { options: Options,
 
   // 状態
   const [isReady, setIsReady] = useState(false);
-  // const { isOpen, openModal, closeModal } = useModalStatus({ initialValue: false });
-  const [isOpen, openModal, closeModal] = useModalContext();
-  const scrollLock = useScrollLock();
+  const { isOpen, openModal, closeModal } = useModalStatus({ initialValue: false });
+  // const [isOpen, openModal, closeModal] = useModalContext();
+  const scrollLock = useScrollLock(modalRef);
 
   // イベント用 関数
   const cancelEvent = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -165,7 +165,7 @@ export default function GenerateModal({ options, children }: { options: Options,
 
 
   // トリガー要素
-  const ModalTrigger = () => {
+  const ModalTrigger = useCallback(() => {
     return (
       isReady && 
       <button className={`${btn}`} type="button" onClick={toggleOpen} ref={modalTriggerRef}>
@@ -180,28 +180,26 @@ export default function GenerateModal({ options, children }: { options: Options,
         </div>
       </button>
     )
-  }
+  }, [isReady, isOpen])
     
   // コンテンツ要素
-  const ModalContent = ({ children }: { children?: JSX.Element }) => {
+  const ModalContent = useCallback(({ children }: { children?: JSX.Element }) => {
     const condition = animation ? (isReady) : (isReady && isOpen);
 
     return (
       condition && 
       <ContentPortal>
-        <div className={`${modalAnimation} ${modClassName}`} ref={modalRef} role="dialog" aria-modal>
+        <div className={`${modalRoot} ${modalAnimation} ${modClassName}`} ref={modalRef} role="dialog" aria-modal onClick={cancelEvent}>
           <div className={modalOverlay} onClick={closeModal}></div>
-          <div className={`${modalContainer}`} onClick={closeModal}>
-            <div className={modalWrapper} onClick={cancelEvent}>
-              <div className={modalInner}>
+            <div className={modalContainer}>
+              <div className={modalWrapper}>
                 {children}
               </div>
             </div>
-          </div>
         </div>
       </ContentPortal>
     )
-  }
+  }, [isReady, isOpen])
 
   return (
     <>
