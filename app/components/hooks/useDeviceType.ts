@@ -63,10 +63,8 @@ const useDeviceType = (): DeviceList => {
     }
 
     getDeviceType();
-
-    return () => {
-
-    }
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return deviceType;

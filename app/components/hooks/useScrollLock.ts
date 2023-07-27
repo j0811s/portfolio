@@ -166,6 +166,8 @@ const useScrollLock: UseScrollLock = (target) => {
     return () => {
       setIsReady(false);
     }
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

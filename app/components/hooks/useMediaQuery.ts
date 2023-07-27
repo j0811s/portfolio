@@ -1,9 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react';
 
-type UseMediaQuery = (mq: string) => boolean;
+type UseMediaQuery = (mq?: string) => boolean;
 
 const useMediaQuery: UseMediaQuery = (mq) => {
+  if (!mq) return false;
+
   const getMatches = (mq: string): boolean => {
     if (typeof window !== 'undefined') {
       return window.matchMedia(mq).matches;
@@ -13,10 +15,9 @@ const useMediaQuery: UseMediaQuery = (mq) => {
 
   const [matches, setMatches] = useState<boolean>(getMatches(mq));
 
-  const handleChange = () => setMatches(getMatches(mq));
-
   useEffect(() => {
     const matchMedia = window.matchMedia(mq);
+    const handleChange = () => setMatches(getMatches(mq));
 
     handleChange()
     matchMedia.addEventListener('change', handleChange);

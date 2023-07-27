@@ -71,7 +71,7 @@ export default function GenerateModal({ options, children }: { options: Options,
   const modClassName = classes?.modClassName;
   const animationOpenClass = 'add-openAnimation';
   const animationCloseClass = 'add-closeAnimation';
-  const isMatches = disableMediaQuery ? useMediaQuery(disableMediaQuery) : false;
+  const isMatches = useMediaQuery(disableMediaQuery);
 
   // ページ情報
   const pathname = usePathname();
@@ -112,6 +112,13 @@ export default function GenerateModal({ options, children }: { options: Options,
     e.preventDefault();
     isOpen ? closeEvent(e, isMatches) : openEvent(e, isMatches);
   }
+
+  const scrollLockEnable = () => {
+    if (disableScroll && isOpen) scrollLock.enable();
+  }
+  const scrollLockDisable = () => {
+    if (disableScroll && isOpen) scrollLock.disable();
+  }
   
   // 初期化
   useEffect(() => {
@@ -121,6 +128,7 @@ export default function GenerateModal({ options, children }: { options: Options,
     return () => {
       setIsReady(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // URL監視
@@ -138,7 +146,7 @@ export default function GenerateModal({ options, children }: { options: Options,
   // モーダルコンテンツ操作
   useEffect(() => {
     if (!isReady) return;
-    if (disableScroll && isOpen) scrollLock.enable();
+    scrollLockEnable();
 
     if (openClassName && closeClassName) {
       modalTriggerRef.current?.classList.add(isOpen ? openClassName : closeClassName);
@@ -156,7 +164,7 @@ export default function GenerateModal({ options, children }: { options: Options,
     }
     
     return () => {
-      if (disableScroll && isOpen) scrollLock.disable();
+      scrollLockDisable();
       if (animation && isOpen) {
         modalRef.current?.removeEventListener('animationend', modalAnimationEvent);
       }
