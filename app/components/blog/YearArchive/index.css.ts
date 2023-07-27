@@ -14,11 +14,6 @@ export const list = style({
 export const listItem = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
-  '@media': {
-    'screen and (min-width: 768px)': {
-      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
-    }
-  },
   selectors: {
     '&:not(:first-of-type)': {
       margin: '0.5em 0 0',

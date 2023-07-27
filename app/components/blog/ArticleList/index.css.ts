@@ -49,6 +49,7 @@ export const postListItem = style({
   overflow: 'hidden',
   backgroundColor: '#fff',
   borderRadius: 12,
+  boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
   '@media': {
     'screen and (min-width: 600px)': {
       width: 'calc(50% - 10px)',
@@ -135,6 +136,7 @@ export const postBtn = style({
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   textAlign: 'right',
   padding: '0 1em 1.25em',
+  textDecoration: 'underline',
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
