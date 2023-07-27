@@ -1,9 +1,12 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDay, faClock } from "@fortawesome/free-solid-svg-icons";
 import {
   postListWrapper,
   postListEyecatchContainer, postListEyecatch,
   postListTitle,
   postList, postListItem, postListItemLink,
-  postData, postDataTitle, postDataDesc, postDateContainer, postDate,
+  postData, postDataTitle, postDataDesc, postDateContainer,
+  postDateIcon, postDate,
   postBtn
 } from './index.css';
 import Link from "next/link";
@@ -48,17 +51,25 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
                       <dt className={postDataTitle}>{post.title}</dt>
                       <dd className={postDataDesc}>
                         <div className={postDateContainer}>
-                          <p className={postDate}>公開日：<ConvertDate date={post.publishedAt} /></p>
-                          { post.updatedAt && <p className={postDate}>更新日：<ConvertDate date={post.updatedAt} /></p> }
+                          <p className={postDate}>
+                            <FontAwesomeIcon className={postDateIcon} icon={faCalendarDay} />公開日：<ConvertDate date={post.publishedAt} />
+                          </p>
+                          {
+                            post.updatedAt &&
+                            <p className={postDate}>
+                              <FontAwesomeIcon className={postDateIcon} icon={faClock} />更新日：<ConvertDate date={post.updatedAt} />
+                            </p>
+                          }
                         </div>
                       </dd>
                     </dl>
-                    <CtaButton modClass={postBtn}>投稿を読む</CtaButton>
+                    {/* <CtaButton modClass={postBtn}>投稿を読む</CtaButton> */}
+                    <div className={postBtn}>投稿を読む</div>
                   </Link>
                 </li>
               ))}
             </ul>
-            <Pagenation pager={{totalCount, limit, currentPage}} type={type} />
+            <Pagenation pager={{ totalCount, limit, currentPage }} type={type} />
           </>
           :
           <div>

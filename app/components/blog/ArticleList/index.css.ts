@@ -28,11 +28,18 @@ export const postListTitle = style({
 
 export const postList = style({
   display: 'flex',
-  flexWrap: 'wrap',
-  gap: 10,
+  gap: 15,
   marginTop: 30,
   '@media': {
-    'screen and (min-width: 768px)': {
+    'screen and (max-width: 599px)': {
+      flexDirection: 'column',
+      gap: 15,
+    },
+    'screen and (min-width: 600px)': {
+      flexWrap: 'wrap',
+      gap: 15,
+    },
+    'screen and (min-width: 1080px)': {
       gap: 15
     }
   }
@@ -43,11 +50,21 @@ export const postListItem = style({
   backgroundColor: '#fff',
   borderRadius: 12,
   '@media': {
-    'screen and (max-width: 767px)': {
-      width: 'calc(50% - 5px)',
+    'screen and (min-width: 600px)': {
+      width: 'calc(50% - 10px)',
     },
-    'screen and (min-width: 768px)': {
+    'screen and (min-width: 1080px)': {
       width: 'calc(100% / 3 - 10px)',
+      transition: 'box-shadow .4s linear'
+    }
+  },
+  selectors: {
+    '&:hover': {
+      '@media': {
+        'screen and (min-width: 960px)': {
+          boxShadow: `6px 6px 12px ${vars.color.gray.hoverBg}`
+        }
+      }
     }
   }
 });
@@ -68,13 +85,14 @@ export const postListWrapper = style({
 
 export const postData = style({
   display: 'flex',
-  padding: '0.5em',
+  padding: '1em',
   flexDirection: 'column',
   flex: '1'
 });
 
 export const postDataTitle = style({
-  fontSize: `calc( 13 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+  fontWeight: 500,
   lineHeight: 1.4,
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
@@ -82,23 +100,25 @@ export const postDataTitle = style({
   overflow: 'hidden',
   '@media': {
     'screen and (min-width: 960px)': {
-      fontSize: `calc( 15 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   }
 });
 
 export const postDataDesc = style({
   marginTop: 'auto',
-  paddingTop: '0.5em'
+  paddingTop: '1em'
 });
 
 export const postDateContainer = style({
 });
 
 export const postDate = style({
-  fontSize: `calc( 10 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
+  fontWeight: 500,
   lineHeight: 1.4,
-  textAlign: 'left',
+  textAlign: 'right',
+  color: `${vars.color.gray.dark}`,
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
@@ -106,7 +126,18 @@ export const postDate = style({
   }
 });
 
+export const postDateIcon = style({
+  color: `${vars.color.gray.dark}`,
+  paddingRight: '0.5em'
+});
+
 export const postBtn = style({
+  fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   textAlign: 'right',
-  padding: '0 0.5em 0.75em',
+  padding: '0 1em 1.25em',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
+    }
+  }
 });

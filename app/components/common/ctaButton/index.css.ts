@@ -6,10 +6,9 @@ export const button = style({
   gap: 10,
   fontSize: `calc( 10 / ${vars.font.size} * 1rem )`,
   alignItems: 'center',
-  maxWidth: 320,
   height: 26,
   margin: '0 auto',
-  padding: '4px 10px 4px 20px',
+  padding: '0.5em 1em',
   textAlign: 'center',
   overflowWrap: 'break-word',
   color: '#000',
@@ -20,7 +19,6 @@ export const button = style({
     '(min-width: 960px)': {
       height: 36,
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-      padding: '4px 16px 4px 26px',
       transition: 'background-color .4s ease, color .4s ease',
     }
   },
