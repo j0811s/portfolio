@@ -1,4 +1,6 @@
-import { container, list, listItem, listIetmLink } from "./index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faListUl } from "@fortawesome/free-solid-svg-icons";
+import { container, list, listItem, listIetmLink, listIetmTitle, listIetmTitleText, numberBadge } from "./index.css";
 import Link from "next/link";
 import { getList } from "../../../libs/microcms";
 import { GetTotalCount } from "../totalCount";
@@ -15,11 +17,16 @@ export const Categories = async () => {
 
   return (
     <div className={container}>
-      <h2>カテゴリー</h2>
+      <h2 className={listIetmTitle}>
+        <FontAwesomeIcon icon={faListUl} size="1x" />
+        <span className={listIetmTitleText}>カテゴリー</span>
+      </h2>
       <ul className={list}>
         {
           categories.map(cat => <li className={listItem} key={cat}>{
-            <Link className={listIetmLink} href={`/blog/categories/${cat}`}>{categoriesData[cat].name} ({ categoriesData[cat].count })</Link>
+            <Link className={listIetmLink} href={`/blog/categories/${cat}`}>
+              <span>{categoriesData[cat].name}</span> <span className={numberBadge}>{categoriesData[cat].count}</span>
+            </Link>
           }</li>)
         }
       </ul>

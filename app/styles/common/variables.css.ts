@@ -7,8 +7,10 @@ export const vars = createGlobalTheme(':root', {
     tertiary: '#7D5260',
     error: '#B3261E',
     gray: {
-      normal: '#eee',
-      dark: '#79747E'
+      default: '#f6f7f9',
+      bg: '#f0f2f5',
+      dark: '#79747E',
+      hoverBg: '#d8dadd'
     },
     link: '#0969da'
   },

@@ -135,7 +135,7 @@ globalStyle(`${postContent} hr`, {
 });
 
 globalStyle(`${postContent} figure`, {
-  boxShadow: '4px 4px 12px #eee'
+  boxShadow: `4px 4px 12px ${vars.color.gray.default}`,
 });
 
 globalStyle(`${postContent} blockquote`, {

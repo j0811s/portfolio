@@ -1,4 +1,9 @@
 import './styles/globals.css';
+
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
+
 import { html, body, container, footer } from './styles/layout.css';
 import { Suspense } from 'react';
 import { Header } from '@/app/components/common/Header';

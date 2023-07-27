@@ -1,5 +1,8 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
 import { Tag } from '../../../../libs/microcms';
-import { list, listIetm, listIetmLink } from '../../Tags/index.css'
+import { list } from '../../Tags/index.css'
+import { tagItem, tagLink, tagIcon, tagName } from "./index.css";
 import Link from 'next/link';
 
 type Props = {
@@ -21,9 +24,9 @@ const TagContainer = ({ children, modClass }: {
 const TagItems = ({ tagData, modClass }: Props) => {
   return (
     tagData.map(tag => (
-      <li className={`${listIetm} ${modClass?.li}`} key={tag.id}>
-        <Link className={listIetmLink} href={`/blog/tags/${tag.id}`}>
-          #{ tag.name }
+      <li className={`${tagItem} ${modClass?.li}`} key={tag.id}>
+        <Link className={`${tagLink} mod-borderColor`} href={`/blog/tags/${tag.id}`}>
+          <FontAwesomeIcon className={tagIcon} icon={faTag} size="xs" /><span className={tagName}>{ tag.name }</span>
         </Link>
       </li>
     ))

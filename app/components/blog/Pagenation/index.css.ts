@@ -4,7 +4,7 @@ import { vars } from "@/app/styles/common/variables.css";
 export const container = style({
   margin: '40px auto 0',
   paddingTop: 20,
-  borderTop: '1px solid #eee'
+  borderTop: `1px solid ${vars.color.gray.default}`
 });
 
 export const list = style({
@@ -34,11 +34,13 @@ export const pageLink = style({
   transition: 'background-color 0.4s ease',
   selectors: {
     '&:hover': {
-      backgroundColor: '#eee',
+      color: '#fff',
+      backgroundColor: `${vars.color.gray.dark}`,
     }
   }
 });
 
 export const currentText = style({
-  backgroundColor: '#eee',
+  color: '#fff',
+  backgroundColor: `${vars.color.gray.dark}`,
 });

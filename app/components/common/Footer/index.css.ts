@@ -5,7 +5,7 @@ export const container = style({
   display: 'block',
   padding: '1em',
   backgroundColor: '#fff',
-  borderTop: '1px solid #eee',
+  borderTop: `1px solid ${vars.color.gray.default}`,
   color: '#000',
   textAlign: 'center'
 });

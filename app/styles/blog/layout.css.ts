@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { vars } from "../common/variables.css";
 
 export const container = style({
   margin: '0 auto',

@@ -5,7 +5,6 @@ import { vars } from "@/app/styles/common/variables.css";
 export const postListEyecatchContainer = style({
   overflow: 'hidden',
   backgroundColor: '#F4F5F6',
-  borderRadius: 12,
 });
 
 export const postListEyecatch = style({
@@ -42,6 +41,7 @@ export const postList = style({
 export const postListItem = style({
   overflow: 'hidden',
   backgroundColor: '#fff',
+  borderRadius: 12,
   '@media': {
     'screen and (max-width: 767px)': {
       width: 'calc(50% - 5px)',

@@ -53,7 +53,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
                         </div>
                       </dd>
                     </dl>
-                    <CtaButton modClass={postBtn}>詳細を読む</CtaButton>
+                    <CtaButton modClass={postBtn}>投稿を読む</CtaButton>
                   </Link>
                 </li>
               ))}

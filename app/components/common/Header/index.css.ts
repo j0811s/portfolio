@@ -10,7 +10,7 @@ export const container = style({
   height: 60,
   padding: '0 1em',
   backgroundColor: '#fff',
-  borderBottom: '1px solid #eee',
+  borderBottom: `1px solid ${vars.color.gray.default}`,
   color: '#000'
 });
 
