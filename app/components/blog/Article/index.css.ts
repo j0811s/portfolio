@@ -115,7 +115,7 @@ globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postCont
 globalStyle(`${postContent} p`, {
   color: `${vars.color.gray.text}`,
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-  lineHeight: 1.4,
+  lineHeight: 1.6,
   fontWeight: 400,
   '@media': {
     'screen and (min-width: 768px)': {
