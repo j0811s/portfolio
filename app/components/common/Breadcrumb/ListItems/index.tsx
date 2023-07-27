@@ -17,7 +17,7 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
       return (
         <>
           <li className={listItem}>
-            <Link className={listItemLink} href={'/about/'}>私について</Link>
+            <span className={`${listItemLink} mod-current`}>私について</span>
           </li>
         </>
       )
@@ -26,7 +26,7 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
       return (
         <>
           <li className={listItem}>
-            <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
+            <span className={`${listItemLink} mod-current`}>ブログ</span>
           </li>
         </>
       )
@@ -38,7 +38,7 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
             <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
           </li>
           <li className={listItem}>
-            <Link className={listItemLink} href={`/blog/${id}`}>{name}</Link>
+            <span className={`${listItemLink} mod-current`}>{name}</span>
           </li>
         </>
       )
@@ -52,7 +52,7 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
             <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
           </li>
           <li className={listItem}>
-            <Link className={listItemLink} href={`/blog/${slug}/${id}`}>{name}</Link>
+            <span className={`${listItemLink} mod-current`}>{name}</span>
           </li>
         </>
       )

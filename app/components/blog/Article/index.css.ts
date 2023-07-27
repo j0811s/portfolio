@@ -19,6 +19,12 @@ export const postEyecatchContainer = style({
   overflow: 'hidden',
   backgroundColor: '#F4F5F6',
   margin: '30px 0 0',
+  boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
+  '@media': {
+    'screen and (max-width: 959px)': {
+      margin: '30px calc(50% - 100vw / 2) 0',
+    }
+  }
 });
 
 export const postEyecatch = style({
@@ -47,22 +53,16 @@ export const postTitle = style({
 });
 
 export const postDateContainer = style({
+  display: 'flex',
+  justifyContent: 'flex-end',
   margin: '10px 0 0',
-  '@media': {
-    'screen and (min-width: 768px)': {
-      display: 'flex',
-      justifyContent: 'flex-end'
-    },
-    'screen and (min-width: 960px)': {
-      
-    }
-  }
 });
 
 export const postDate = style({
+  color: `${vars.color.gray.dark}`,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
-  fontWeight: 400,
+  fontWeight: 500,
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
@@ -70,13 +70,14 @@ export const postDate = style({
   },
   selectors: {
     '&:not(:first-of-type)': {
-      '@media': {
-        'screen and (min-width: 768px)': {
-          margin: '0 0 0 1em',
-        }
-      },
+      margin: '0 0 0 1em',
     }
   }
+});
+
+export const postDateIcon = style({
+  color: `${vars.color.gray.dark}`,
+  paddingRight: '0.5em'
 });
 
 export const postContent = style({
@@ -84,16 +85,18 @@ export const postContent = style({
   margin: '15px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
-      padding: '32px',
-    },
-    'screen and (min-width: 960px)': {
-      padding: '32px',
+      padding: '64px 32px',
     }
   }
 });
 
 globalStyle(`${postContent} * + *`, {
-  margin: '30px 0 0'
+  margin: '30px 0 0',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      margin: '40px 0 0',
+    }
+  }
 });
 
 globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postContent} h4, ${postContent} h5, ${postContent} h6`, {
@@ -104,11 +107,13 @@ globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postCont
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
+      margin: '80px 0 0',
     }
   }
 });
 
 globalStyle(`${postContent} p`, {
+  color: `${vars.color.gray.text}`,
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 400,
@@ -150,19 +155,19 @@ globalStyle(`${postContent} blockquote > blockquote`, {
 
 globalStyle(`${postContent} code:not(.hljs)`, {
   display: 'inline-block',
-  backgroundColor: '#F4F5F6',
+  backgroundColor: `${vars.color.gray.hoverBg}`,
   color: '#3E4B5B',
   padding: '0.25em'
 });
 
 globalStyle(`${postContent} ul`, {
   listStyleType: 'disc',
-  paddingLeft: '1em'
+  paddingLeft: '1.5em'
 });
 
 globalStyle(`${postContent} ol`, {
   listStyleType: 'number',
-  paddingLeft: '1em'
+  paddingLeft: '1.5em'
 });
 
 globalStyle(`${postContent} li`, {
@@ -198,11 +203,16 @@ globalStyle(`${postContent} tr`, {
 
 globalStyle(`${postContent} th, ${postContent} td`, {
   display: 'table-cell',
-  minWidth: 246,
+  minWidth: 120,
   wordBreak: 'break-all',
-  padding: '1em',
+  padding: '0.5em',
   backgroundColor: '#fff',
-  border: '1px solid #ccccd9'
+  border: '1px solid #ccccd9',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      minWidth: 246,
+    }
+  }
 });
 
 globalStyle(`${postContent} th`, {
@@ -210,5 +220,5 @@ globalStyle(`${postContent} th`, {
 });
 
 globalStyle(`${postContent} th > p`, {
-  fontWeight: 'bold'
+  fontWeight: 500
 });

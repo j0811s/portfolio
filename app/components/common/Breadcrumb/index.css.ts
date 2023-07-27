@@ -27,7 +27,10 @@ export const listItemLink = style({
   borderBottom: '1px solid transparent',
   transition: 'border-color .4s ease',
   selectors: {
-    '&:hover': {
+    '&.mod-current': {
+      color: `${vars.color.gray.dark}`
+    },
+    '&:not(.mod-current):hover': {
       '@media': {
         '(min-width: 960px)': {
           borderColor: '#000',

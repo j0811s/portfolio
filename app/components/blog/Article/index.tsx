@@ -1,6 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDay, faClock } from "@fortawesome/free-solid-svg-icons";
 import {
   postWrapper,
-  postHead, postEyecatchContainer, postEyecatch, postTextContainer, postTitle, postDateContainer, postDate,
+  postHead, postEyecatchContainer, postEyecatch, postTextContainer, postTitle, postDateContainer,
+  postDate, postDateIcon,
   postContent
 } from './index.css';
 import Image from 'next/image';
@@ -42,8 +45,15 @@ export const Article = async ({ post }: { post: Blog }) => {
           <h1 className={postTitle}>{post.title}</h1>
           <TagsElement tagData={tag} modClass={{ul: '', li: ''}} />
           <div className={postDateContainer}>
-            <p className={postDate}>公開日：<ConvertDate date={post.publishedAt} /></p>
-            { post.updatedAt && <p className={postDate}>更新日：<ConvertDate date={post.updatedAt} /></p> }
+            <p className={postDate}>
+              <FontAwesomeIcon className={postDateIcon} icon={faCalendarDay} />公開日：<ConvertDate date={post.publishedAt} />
+            </p>
+            {
+              post.updatedAt &&
+              <p className={postDate}>
+                <FontAwesomeIcon className={postDateIcon} icon={faClock} />更新日：<ConvertDate date={post.updatedAt} />
+              </p>
+            }
           </div>
         </div>
         <figure className={postEyecatchContainer}>

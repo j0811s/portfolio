@@ -5,7 +5,7 @@ export const asideContainer = style({
   display: 'block',
   '@media': {
     'screen and (max-width: 959px)': {
-      marginTop: 60,
+      padding: '60px 0',
     },
     'screen and (min-width: 768px)': {
       position: 'sticky',
