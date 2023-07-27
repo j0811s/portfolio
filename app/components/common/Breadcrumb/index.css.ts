@@ -3,6 +3,7 @@ import { vars } from "@/app/styles/common/variables.css";
 
 export const list = style({
   display: 'flex',
+  flexWrap: 'wrap',
   width: '100%',
   padding: '0.5em 0 ',
 });
@@ -22,7 +23,8 @@ export const listItem = style({
 });
 
 export const listItemLink = style({
-  display: 'block',
+  display: 'flex',
+  alignItems: 'stretch',
   padding: '0.25em 0',
   borderBottom: '1px solid transparent',
   transition: 'border-color .4s ease',
