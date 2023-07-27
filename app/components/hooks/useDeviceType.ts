@@ -9,34 +9,8 @@ type DeviceList = {
 };
 
 const useDeviceType = (): DeviceList => {
-  if (typeof window === 'undefined') {
-    return {}
-  }
-  
-  /** デバイス 判定処理 */
-  const UA: string = window.navigator.userAgent.toLowerCase();
-
-  const isWindows = () => UA.indexOf('windows nt') !== -1;
-  const isiPhone = () => UA.indexOf('iphone') > 0;
-  const isiPad = () => UA.indexOf('ipad') > -1 || (UA.indexOf('macintosh') > -1 && 'ontouchend' in document);
-  const isMac = () => UA.indexOf('mac os x') !== -1 && !isiPhone() && !isiPad();
-  const isAndroidSP = () => (isAndroid() && UA.indexOf('mobile') > 0);
-  const isAndroidTab = () => (isAndroid() && UA.indexOf('mobile') === -1);
-
-  const isiOS = () => isiPhone() || isiPad();
-  const isAndroid = () => UA.indexOf('android') > 0;
-
-  // @ts-ignore
-  const isIE = () => !!document.documentMode;
-
-  const isTouchPoint = () => 'ontouchend' in document;
-  const isSP = () => isiPhone() || isAndroidSP();
-  const isTab = () => isiPad() || isAndroidTab();
-  const isPC = () => !isSP() && !isTab();
-
-
   const [deviceType, setDeviceType] = useState<DeviceList>({});
-
+  
   useEffect(() => {
     const getDeviceType = () => {
       setDeviceType({
@@ -66,6 +40,31 @@ const useDeviceType = (): DeviceList => {
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (typeof window === 'undefined') {
+    return {}
+  }
+  
+  /** デバイス 判定処理 */
+  const UA: string = window.navigator.userAgent.toLowerCase();
+
+  const isWindows = () => UA.indexOf('windows nt') !== -1;
+  const isiPhone = () => UA.indexOf('iphone') > 0;
+  const isiPad = () => UA.indexOf('ipad') > -1 || (UA.indexOf('macintosh') > -1 && 'ontouchend' in document);
+  const isMac = () => UA.indexOf('mac os x') !== -1 && !isiPhone() && !isiPad();
+  const isAndroidSP = () => (isAndroid() && UA.indexOf('mobile') > 0);
+  const isAndroidTab = () => (isAndroid() && UA.indexOf('mobile') === -1);
+
+  const isiOS = () => isiPhone() || isiPad();
+  const isAndroid = () => UA.indexOf('android') > 0;
+
+  // @ts-ignore
+  const isIE = () => !!document.documentMode;
+
+  const isTouchPoint = () => 'ontouchend' in document;
+  const isSP = () => isiPhone() || isAndroidSP();
+  const isTab = () => isiPad() || isAndroidTab();
+  const isPC = () => !isSP() && !isTab();
   
   return deviceType;
 }
