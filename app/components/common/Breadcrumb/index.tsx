@@ -1,4 +1,6 @@
-import { list, listItem, listItemLink } from "./index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBreadSlice } from "@fortawesome/free-solid-svg-icons";
+import { list, listItem, listItemLink, listItemName } from "./index.css";
 import { ListItems } from "./ListItems";
 import { BreadcrumbJsonLd } from "@/app/components/common/Breadcrumb/BreadcrumbJsonLd";
 import Link from "next/link"
@@ -22,7 +24,10 @@ export const Breadcrumb = ({ type, post }: Props) => {
       <BreadcrumbJsonLd type={type} post={post} />
       <ul className={list}>
         <li className={listItem}>
-          <Link className={listItemLink} href={'/'}>トップページ</Link>
+          <Link className={listItemLink} href={'/'}>
+            <FontAwesomeIcon icon={faBreadSlice} />
+            <span className={listItemName}>トップページ</span>
+          </Link>
         </li>
         <ListItems type={type} />
       </ul>

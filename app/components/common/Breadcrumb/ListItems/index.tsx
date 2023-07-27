@@ -1,4 +1,6 @@
-import { listItem, listItemLink } from "../index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot, faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { listItem, listItemLink, listItemName } from "../index.css";
 import Link from "next/link";
 
 export type BreadcrumbParam = {
@@ -17,7 +19,10 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
       return (
         <>
           <li className={listItem}>
-            <span className={`${listItemLink} mod-current`}>私について</span>
+            <span className={`${listItemLink} mod-current`}>
+              <FontAwesomeIcon icon={faLocationDot} />
+              <span className={listItemName}>私について</span>
+            </span>
           </li>
         </>
       )
@@ -26,7 +31,10 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
       return (
         <>
           <li className={listItem}>
-            <span className={`${listItemLink} mod-current`}>ブログ</span>
+            <span className={`${listItemLink} mod-current`}>
+              <FontAwesomeIcon icon={faLocationDot} />
+              <span className={listItemName}>ブログ</span>
+            </span>
           </li>
         </>
       )
@@ -35,10 +43,16 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
       return (
         <>
           <li className={listItem}>
-            <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
+            <Link className={listItemLink} href={'/blog/'}>
+              <FontAwesomeIcon icon={faFileLines} />
+              <span className={listItemName}>ブログ</span>
+            </Link>
           </li>
           <li className={listItem}>
-            <span className={`${listItemLink} mod-current`}>{name}</span>
+            <span className={`${listItemLink} mod-current`}>
+              <FontAwesomeIcon icon={faLocationDot} />
+              <span className={listItemName}>{name}</span>
+            </span>
           </li>
         </>
       )
@@ -49,10 +63,14 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
       return (
         <>
           <li className={listItem}>
-            <Link className={listItemLink} href={'/blog/'}>ブログ</Link>
+            <Link className={listItemLink} href={'/blog/'}>
+              <FontAwesomeIcon icon={faFileLines} />
+              <span className={listItemName}>ブログ</span>
+            </Link>
           </li>
           <li className={listItem}>
-            <span className={`${listItemLink} mod-current`}>{name}</span>
+            <FontAwesomeIcon icon={faLocationDot} />
+            <span className={listItemName}>{name}</span>
           </li>
         </>
       )

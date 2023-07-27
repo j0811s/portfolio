@@ -39,3 +39,8 @@ export const listItemLink = style({
     }
   }
 });
+
+export const listItemName = style({
+  display: 'inline-block',
+  padding: '0 0 0 0.25em',
+});
