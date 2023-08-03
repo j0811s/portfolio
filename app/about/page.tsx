@@ -166,13 +166,33 @@ const other = {
   ]
 }
 
-export default function About() {
+export default async function About() {
+  const SITE_URL: string = process.env.SITE_URL || '';
+
+  const careerResponse = await fetch(`http://localhost:3004/api/career`);
+  if (!careerResponse.ok) throw new Error('Failed to fetch data');
+  const careerJson = await careerResponse.json();
+  console.log(careerJson)
+
   
   return (
     <>
-      <Breadcrumb type={{slug: 'about'}} />
+      <Breadcrumb type={{ slug: 'about' }} />
+      <h1>私について</h1>
       <section className={container}>
-        <h2 className={mainTitle}>スキルセット</h2>
+        <h2 className={mainTitle}>自己紹介</h2>
+      </section>
+      <section className={container}>
+        <h2 className={mainTitle}>経歴</h2>
+        <dl>
+          <dt>
+            <time dateTime="2016">2016年</time>
+          </dt>
+          <dd>某ホームセンターのペット部門で販売業務を担当する。</dd>
+        </dl>
+      </section>
+      <section className={container}>
+        <h2 className={mainTitle}>経験スキル</h2>
         <div className={contents}>
           <SkillSet skill={language} />
           <SkillSet skill={lib} />
