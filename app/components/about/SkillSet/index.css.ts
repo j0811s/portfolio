@@ -24,18 +24,18 @@ export const skillTitle = style({
   display: 'grid',
   gridColumn: '1 / 4',
   textAlign: 'center',
-  fontSize: `calc( 18 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
   marginBottom: 10,
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
       gridColumn: '1 / 5',
-      fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 18 / ${vars.font.size} * 1rem )`,
       marginBottom: 20,
     },
     'screen and (min-width: 960px)': {
       gridColumn: '1 / 5',
-      fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 20 / ${vars.font.size} * 1rem )`,
       marginBottom: 20,
     }
   },

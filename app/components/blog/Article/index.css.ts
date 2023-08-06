@@ -100,16 +100,52 @@ globalStyle(`${postContent} * + *`, {
 });
 
 globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postContent} h4, ${postContent} h5, ${postContent} h6`, {
-  fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 700,
+  position: 'relative',
+  padding: '0.5em',
+  color: `#000`,
+  border: `2px solid #000`,
+  backgroundColor: `${vars.color.gray.bg}`,
+  '@media': {
+    'screen and (min-width: 768px)': {
+      fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
+    }
+  }
+});
+
+globalStyle(`${postContent} h1:not(:first-of-type), ${postContent} h2:not(:first-of-type), ${postContent} h3:not(:first-of-type), ${postContent} h4:not(:first-of-type), ${postContent} h5:not(:first-of-type), ${postContent} h6:not(:first-of-type)`, {
   margin: '60px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
-      fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
       margin: '80px 0 0',
     }
   }
+});
+
+globalStyle(`${postContent} h1::before, ${postContent} h2::before, ${postContent} h3::before, ${postContent} h4::before, ${postContent} h5::before, ${postContent} h6::before`, {
+  position: 'absolute',
+  top: '100%',
+  left: '0.5em',
+  width: 0,
+  height: 0,
+  content: '',
+  borderWidth: '14px 12px 0 12px',
+  borderStyle: 'solid',
+  borderColor: `#000 transparent transparent transparent`,
+});
+
+globalStyle(`${postContent} h1::after, ${postContent} h2::after, ${postContent} h3::after, ${postContent} h4::after, ${postContent} h5::after, ${postContent} h6::after`, {
+  position: 'absolute',
+  bottom: '-11px',
+  left: '0.5em',
+  width: 0,
+  height: 0,
+  content: '',
+  borderWidth: '14px 12px 0 12px',
+  borderStyle: 'solid',
+  borderColor: `${vars.color.gray.bg} transparent transparent transparent`,
 });
 
 globalStyle(`${postContent} p`, {

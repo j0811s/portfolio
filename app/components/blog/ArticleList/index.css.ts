@@ -77,6 +77,7 @@ export const postListItemLink = style({
 });
 
 export const postListWrapper = style({
+  marginTop: 30,
   '@media': {
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'

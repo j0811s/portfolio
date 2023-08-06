@@ -2,19 +2,20 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/app/styles/common/variables.css";
 
 export const container = style({
-  padding: '30px 0 60px',
+  padding: '30px 0',
   '@media': {
     'screen and (min-width: 600px)': {
-      padding: '30px 0 90px',
+      padding: '60px 0',
     }
   }
 });
 
-export const mainTitle = style({
+export const pageTitle = style({
   fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
   textAlign: 'center',
+  marginTop: 30,
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
       fontSize: `calc( 36 / ${vars.font.size} * 1rem )`,
@@ -25,12 +26,29 @@ export const mainTitle = style({
   }
 });
 
+export const mainTitle = style({
+  fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
+  lineHeight: 1.2,
+  fontWeight: 700,
+  textAlign: 'center',
+  padding: '0.5em 0',
+  borderTop: '1px solid #000',
+  borderBottom: '1px solid #000',
+  '@media': {
+    'screen and (min-width: 600px) and (max-width: 959px)': {
+      fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,
+    },
+    'screen and (min-width: 960px)': {
+      fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
+    }
+  }
+});
+
 export const contents = style({
   '@media': {
     'screen and (min-width: 960px)': {
       display: 'flex',
       flexWrap: 'wrap',
-      // justifyContent: 'center'
     }
   }
 });

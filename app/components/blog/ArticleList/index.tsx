@@ -14,7 +14,6 @@ import Image from 'next/image';
 import { Blog } from '../../../libs/microcms';
 import ConvertDate from "../../../components/common/convertdate";
 import { Pagenation } from '../Pagenation';
-import { CtaButton } from '../../common/ctaButton';
 
 type ArticleListParam = {
   contents: Blog[];

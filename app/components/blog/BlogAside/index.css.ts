@@ -3,6 +3,7 @@ import { vars } from "@/app/styles/common/variables.css";
 
 export const asideContainer = style({
   display: 'block',
+  marginTop: 30,
   '@media': {
     'screen and (max-width: 959px)': {
       padding: '60px 0',
