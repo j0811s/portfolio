@@ -2,10 +2,8 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/app/styles/common/variables.css";
 
 export const postWrapper = style({
+  marginTop: 30,
   '@media': {
-    'screen and (min-width: 768px)': {
-      
-    },
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'
     }
@@ -115,7 +113,7 @@ globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postCont
   }
 });
 
-globalStyle(`${postContent} h1:not(:first-of-type), ${postContent} h2:not(:first-of-type), ${postContent} h3:not(:first-of-type), ${postContent} h4:not(:first-of-type), ${postContent} h5:not(:first-of-type), ${postContent} h6:not(:first-of-type)`, {
+globalStyle(`${postContent} * + h1, ${postContent} * + h2, ${postContent} * + h3, ${postContent} * + h4, ${postContent} * + h5, ${postContent} * + h6`, {
   margin: '60px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
