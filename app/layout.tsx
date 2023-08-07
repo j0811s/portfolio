@@ -13,8 +13,8 @@ import { Metadata } from 'next';
 const SITE_URL: string = process.env.SITE_URL || '';
 
 const myMeta = {
-  title: 'J.Sato Portfolio',
-  sitename: 'J.Sato Portfolio',
+  title: 'J.Sato',
+  sitename: 'J.Sato',
   description: "個人のポートフォリオサイトです。",
   siteUrl: new URL(SITE_URL)
 }

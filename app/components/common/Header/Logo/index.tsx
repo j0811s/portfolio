@@ -6,7 +6,7 @@ type Logo = ({ pathname }: { pathname: string }) => JSX.Element;
 export const Logo: Logo = ({ pathname }) => {
   return (
     pathname === '/' ?
-      <h1 className={logo}><span>J.Sato Portfolio</span></h1> :
-      <div className={logo}><Link href={`/`}>J.Sato Portfolio</Link></div>
+      <h1 className={logo}><span>J.Sato</span></h1> :
+      <div className={logo}><Link href={`/`}>J.Sato</Link></div>
   )
 }

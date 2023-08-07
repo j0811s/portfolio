@@ -21,7 +21,7 @@ export async function generateMetadata(
   
   return {
     metadataBase: new URL('https://portfolio-doe4gyax2-mormo.vercel.app'),
-    title: `${num}ページ目 | ${cat?.name} | カテゴリー | ブログ | J.Sato Portfolio`,
+    title: `${num}ページ目 | ${cat?.name} | カテゴリー | ブログ | J.Sato`,
     description: `「${cat?.name}」の${num}ページ目です。`,
     openGraph: {
       description:`「${cat?.name}」の${num}ページ目です。`
