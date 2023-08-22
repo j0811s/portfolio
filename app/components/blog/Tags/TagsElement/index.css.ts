@@ -25,7 +25,7 @@ export const tagLink = style({
   transition: 'background-color 0.2s linear, color 0.2s linear',
   selectors: {
     '&.mod-borderColor': {
-      borderColor: `${vars.color.gray.dark}`,
+      // borderColor: `${vars.color.gray.dark}`,
     },
     '&:hover': {
       '@media': {

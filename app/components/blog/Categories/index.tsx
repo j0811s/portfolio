@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
-import { container, list, listItem, listIetmLink, listIetmTitle, listIetmTitleText, numberBadge } from "./index.css";
+import { container, list, listItem, listIetmLink, listIetmTitle, listItemTitleIcon, listIetmTitleText, numberBadge } from "./index.css";
 import Link from "next/link";
 import { getList } from "../../../libs/microcms";
 import { GetTotalCount } from "../totalCount";
@@ -18,7 +18,7 @@ export const Categories = async () => {
   return (
     <div className={container}>
       <h2 className={listIetmTitle}>
-        <FontAwesomeIcon icon={faListUl} size="1x" />
+        <FontAwesomeIcon icon={faListUl} size="1x" className={listItemTitleIcon} />
         <span className={listIetmTitleText}>カテゴリー</span>
       </h2>
       <ul className={list}>

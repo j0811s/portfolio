@@ -49,21 +49,21 @@ export const postListItem = style({
   overflow: 'hidden',
   backgroundColor: '#fff',
   borderRadius: 12,
-  boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
+  boxShadow: `0 0 5px ${vars.color.gray.bg}`,
   '@media': {
     'screen and (min-width: 600px)': {
       width: 'calc(50% - 10px)',
     },
     'screen and (min-width: 1080px)': {
       width: 'calc(100% / 3 - 10px)',
-      transition: 'box-shadow .4s linear'
+      transition: 'box-shadow .2s linear'
     }
   },
   selectors: {
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          boxShadow: `6px 6px 12px ${vars.color.gray.hoverBg}`
+          boxShadow: `3px 3px 10px ${vars.color.gray.bg}`
         }
       }
     }

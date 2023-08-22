@@ -8,9 +8,9 @@ export const container = style({
   left: 0,
   zIndex: 999,
   height: 60,
-  padding: '0 1em',
   backgroundColor: '#fff',
   borderBottom: `1px solid ${vars.color.gray.default}`,
+  boxShadow: `0px 0px 10px ${vars.color.gray.default}`,
   color: '#000'
 });
 
@@ -18,7 +18,10 @@ export const wrapper = style({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  height: '100%'
+  maxWidth: 1280,
+  height: '100%',
+  margin: '0 auto',
+  padding: '0 1em',
 });
 
 export const navigation = style({
@@ -40,7 +43,7 @@ export const navigation = style({
     'screen and (min-width: 960px)': {
       display: 'block',
       marginLeft: 'auto',
-      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+      // fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   },
   selectors: {

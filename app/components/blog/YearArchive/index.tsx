@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
-import { container, list, listItem, listIetmLink, listIetmTitle, listIetmTitleText, numberBadge } from "./index.css";
+import { container, list, listItem, listIetmLink, listIetmTitle, listItemTitleIcon, listIetmTitleText, numberBadge } from "./index.css";
 import Link from "next/link";
 import { client, getList } from "../../../libs/microcms";
 
@@ -51,7 +51,7 @@ export const YearArchive = async () => {
   return (
     <div className={container}>
       <h2 className={listIetmTitle}>
-        <FontAwesomeIcon icon={faCalendarDays} size="1x" />
+        <FontAwesomeIcon icon={faCalendarDays} size="1x" className={listItemTitleIcon} />
         <span className={listIetmTitleText}>年別アーカイブ</span>
       </h2>
       <ul className={list}>

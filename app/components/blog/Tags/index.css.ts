@@ -21,6 +21,10 @@ export const listIetmTitle= style({
   }
 });
 
+export const listItemTitleIcon= style({
+  color: `${vars.color.gray.dark}`
+});
+
 export const listIetmTitleText = style({
   paddingLeft: '0.5em',
 });
