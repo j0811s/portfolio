@@ -257,7 +257,7 @@ globalStyle(`${postContent} th > p`, {
 });
 
 globalStyle(`${postContent} pre > code`, {
-  whiteSpace: 'pre-line',
+  whiteSpace: 'pre-wrap',
   overflow: 'hidden',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   lineHeight: '1.6',
