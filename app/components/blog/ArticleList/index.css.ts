@@ -9,7 +9,7 @@ export const postListEyecatchContainer = style({
 
 export const postListEyecatch = style({
   aspectRatio: '16 / 9',
-  objectFit: 'cover',
+  objectFit: 'scale-down',
 });
 
 export const postListTitle = style({
@@ -49,7 +49,7 @@ export const postListItem = style({
   overflow: 'hidden',
   backgroundColor: '#fff',
   borderRadius: 12,
-  boxShadow: `0 0 5px ${vars.color.gray.bg}`,
+  boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
   '@media': {
     'screen and (min-width: 600px)': {
       width: 'calc(50% - 10px)',
@@ -63,7 +63,7 @@ export const postListItem = style({
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          boxShadow: `3px 3px 10px ${vars.color.gray.bg}`
+          boxShadow: `4px 4px 12px ${vars.color.gray.hoverBg}`
         }
       }
     }

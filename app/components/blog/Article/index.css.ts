@@ -27,10 +27,10 @@ export const postEyecatchContainer = style({
 
 export const postEyecatch = style({
   aspectRatio: '16 / 9',
-  objectFit: 'contain',
+  objectFit: 'scale-down',
   '@media': {
     'screen and (min-width: 768px)': {
-      maxHeight: 315,
+      // maxHeight: 315,
     }
   }
 });
@@ -88,7 +88,7 @@ export const postContent = style({
   }
 });
 
-globalStyle(`${postContent} * + *`, {
+globalStyle(`${postContent} > * + *`, {
   margin: '30px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
@@ -97,7 +97,7 @@ globalStyle(`${postContent} * + *`, {
   }
 });
 
-globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postContent} h4, ${postContent} h5, ${postContent} h6`, {
+globalStyle(`${postContent} h1, ${postContent} h2`, {
   fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 700,
@@ -112,7 +112,19 @@ globalStyle(`${postContent} h1, ${postContent} h2, ${postContent} h3, ${postCont
   }
 });
 
-globalStyle(`${postContent} * + h1, ${postContent} * + h2, ${postContent} * + h3, ${postContent} * + h4, ${postContent} * + h5, ${postContent} * + h6`, {
+globalStyle(`${postContent} h3, ${postContent} h4, ${postContent} h5, ${postContent} h6`, {
+  fontSize: `calc( 18 / ${vars.font.size} * 1rem )`,
+  lineHeight: 1.2,
+  fontWeight: 700,
+  color: `#000`,
+  '@media': {
+    'screen and (min-width: 768px)': {
+      fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
+    }
+  }
+});
+
+globalStyle(`${postContent} * + h1, ${postContent} * + h2`, {
   margin: '60px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
@@ -121,7 +133,16 @@ globalStyle(`${postContent} * + h1, ${postContent} * + h2, ${postContent} * + h3
   }
 });
 
-globalStyle(`${postContent} h1::before, ${postContent} h2::before, ${postContent} h3::before, ${postContent} h4::before, ${postContent} h5::before, ${postContent} h6::before`, {
+globalStyle(`${postContent} * + h3, ${postContent} * + h4, ${postContent} * + h5, ${postContent} * + h6`, {
+  margin: '40px 0 0',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      margin: '50px 0 0',
+    }
+  }
+});
+
+globalStyle(`${postContent} h1::before, ${postContent} h2::before`, {
   position: 'absolute',
   top: '100%',
   left: '0.5em',
@@ -133,7 +154,7 @@ globalStyle(`${postContent} h1::before, ${postContent} h2::before, ${postContent
   borderColor: `${vars.color.gray.bg} transparent transparent transparent`,
 });
 
-globalStyle(`${postContent} h1::after, ${postContent} h2::after, ${postContent} h3::after, ${postContent} h4::after, ${postContent} h5::after, ${postContent} h6::after`, {
+globalStyle(`${postContent} h1::after, ${postContent} h2::after`, {
   position: 'absolute',
   bottom: '-11px',
   left: '0.5em',
