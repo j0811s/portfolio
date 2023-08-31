@@ -1,4 +1,4 @@
-import { logo } from "./index.css";
+import { logo, logoInner, logoImg, siteName } from "./index.css";
 import Link from "next/link";
 
 type Logo = ({ pathname }: { pathname: string }) => JSX.Element;
@@ -6,7 +6,17 @@ type Logo = ({ pathname }: { pathname: string }) => JSX.Element;
 export const Logo: Logo = ({ pathname }) => {
   return (
     pathname === '/' ?
-      <h1 className={logo}><span>J.Sato</span></h1> :
-      <div className={logo}><Link href={`/`}>J.Sato</Link></div>
+      <h1 className={logo}>
+        <div className={logoInner}>
+          <img className={logoImg} src="/logo/logo.png" alt="" />
+          {/* <span className={siteName}>J.Sato</span> */}
+        </div>
+      </h1> :
+      <div className={logo}>
+        <Link className={logoInner} href={`/`}>
+          <img className={logoImg} src="/logo/logo.png" alt="" />
+          {/* <span className={siteName}>J.Sato</span> */}
+        </Link>
+      </div>
   )
 }

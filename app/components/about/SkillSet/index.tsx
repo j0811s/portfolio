@@ -25,7 +25,7 @@ export const SkillSet = ({ skill }: Skill) => {
       items.map(item => (
         <dd className={skillItem} key={item.name}>
           <figure className={logoWrap}>
-            <Image className={logo} src={item.logo.path} alt="" width={64} height={64} />
+            <Image className={logo} src={item.logo.path} alt={ item.name } width={64} height={64} />
             <figcaption className={logoName}>{ item.name }</figcaption>
           </figure>
         </dd>

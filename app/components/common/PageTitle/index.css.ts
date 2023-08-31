@@ -2,17 +2,7 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/app/styles/common/variables.css";
 
 export const container = style({
-  margin: '0 auto',
-  padding: '30px 0',
-  maxWidth: 960,
-  '@media': {
-    'screen and (min-width: 600px)': {
-      padding: '60px 0',
-    }
-  }
-});
-
-export const pageTitleContainer = style({
+  marginTop: 30,
   color: '#fff',
   padding: `calc( 64 / ${vars.font.size} * 1rem ) calc( 16 / ${vars.font.size} * 1rem )`,
   backgroundColor: `${vars.color.primary}`,
@@ -27,7 +17,8 @@ export const pageTitleContainer = style({
   }
 });
 
-export const pageTitle = style({
+
+export const title = style({
   fontSize: `calc( 32 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
@@ -38,25 +29,6 @@ export const pageTitle = style({
     },
     'screen and (min-width: 960px)': {
       fontSize: `calc( 48 / ${vars.font.size} * 1rem )`,
-    }
-  }
-});
-
-export const mainTitle = style({
-  fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
-  lineHeight: 1.2,
-  fontWeight: 700,
-  textAlign: 'left',
-  // padding: '0.75em',
-  // color: '#fff',
-  // backgroundColor: `${vars.color.secondary}`,
-  // borderRadius: 10,
-  '@media': {
-    'screen and (min-width: 600px) and (max-width: 959px)': {
-      fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,
-    },
-    'screen and (min-width: 960px)': {
-      fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
     }
   }
 });

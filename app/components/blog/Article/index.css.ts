@@ -15,7 +15,7 @@ export const postHead = style({
 
 export const postEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: '#F4F5F6',
+  backgroundColor: `${vars.color.primary}`,
   margin: '30px 0 0',
   boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
   '@media': {
@@ -27,7 +27,7 @@ export const postEyecatchContainer = style({
 
 export const postEyecatch = style({
   aspectRatio: '16 / 9',
-  objectFit: 'scale-down',
+  objectFit: 'contain',
   '@media': {
     'screen and (min-width: 768px)': {
       // maxHeight: 315,

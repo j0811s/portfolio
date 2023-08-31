@@ -42,7 +42,6 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <Breadcrumb type={ {slug: 'blog'} }/>
       <ArticleList contents={contents} totalCount={totalCount} limit={limit} currentPage={Number(num)} />
     </>
   )

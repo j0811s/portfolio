@@ -18,7 +18,7 @@ export const Carrer: Carrer = ({ histories }) => {
         <dt className={mainTitle}>{history.year}</dt>
         {
           history.outline.map(outline => (
-            <dd className={readText} key={history.id}>・{outline}</dd>
+            <dd className={readText} key={outline}>・{outline}</dd>
           ))
         }
       </dl>

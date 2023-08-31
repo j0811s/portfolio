@@ -11,6 +11,8 @@ import { Logo } from "./Logo";
 
 export const Header = () => {
   const pathname = usePathname();
+  
+  const isActivePage = (pathname: string, pagename: string): boolean => pathname.startsWith(pagename);
 
   const DrawerMenuOptions = {
     // initOpen: true,
@@ -40,13 +42,13 @@ export const Header = () => {
         <nav className={navigation}>
           <ul className={navigationList}>
             <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/`}>トップページ</Link>
+              <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}>トップページ</Link>
             </li>
             <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/about/`}>私について</Link>
+              <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}>私について</Link>
             </li>
             <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/blog/`}>ブログ</Link>
+              <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}>ブログ</Link>
             </li>
           </ul>
         </nav>

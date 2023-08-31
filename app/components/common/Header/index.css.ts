@@ -9,9 +9,8 @@ export const container = style({
   zIndex: 999,
   height: 60,
   backgroundColor: '#fff',
-  borderBottom: `1px solid ${vars.color.gray.default}`,
-  boxShadow: `0px 0px 10px ${vars.color.gray.default}`,
-  color: '#000'
+  boxShadow: `0px 0px 8px ${vars.color.gray.border}`,
+  color: '#000',
 });
 
 export const wrapper = style({
@@ -43,7 +42,6 @@ export const navigation = style({
     'screen and (min-width: 960px)': {
       display: 'block',
       marginLeft: 'auto',
-      // fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   },
   selectors: {
@@ -91,16 +89,22 @@ export const navigationListItem = style({
 
 export const navigationListItemLink = style({
   display: 'block',
+  fontWeight: 500,
   padding: '0.25em 0',
-  borderBottom: '1px solid transparent',
-  transition: 'border-bottom 0.2s linear',
+  borderBottom: '2px solid transparent',
+  transition: 'border-color 0.2s linear, color 0.2s linear',
   selectors: {
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          borderColor: '#000'
+          borderColor: `${vars.color.secondary}`,
+          color: `${vars.color.secondary}`
         }
       }
+    },
+    '&[data-page-active="true"]': {
+      borderColor: `${vars.color.secondary}`,
+      color: `${vars.color.secondary}`
     }
   }
 });

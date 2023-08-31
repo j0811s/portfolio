@@ -37,8 +37,7 @@ export const metadata: Metadata = {
     title: myMeta.title,
     description: myMeta.description,
     siteName: myMeta.sitename
-  },
-  manifest: `${myMeta.siteUrl}manifest.json`,
+  }
 }
 
 function HeaderFallback() {

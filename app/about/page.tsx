@@ -1,7 +1,7 @@
-import { container, pageTitle, mainTitle, contents } from "../styles/about/index.css";
-import { Breadcrumb } from "@/app/components/common/Breadcrumb";
+import { container, pageTitleContainer, pageTitle, mainTitle } from "../styles/about/index.css";
 import { Carrer } from "@/app/components/about/Carrer";
 import { SkillSet } from "@/app/components/about/SkillSet";
+import { PageTitle } from "@/app/components/common/PageTitle";
 import { Metadata, ResolvingMetadata } from 'next';
 import axios from "axios";
 
@@ -35,23 +35,20 @@ export default async function About() {
   
   return (
     <>
-      <Breadcrumb type={{ slug: 'about' }} />
-      <h1 className={pageTitle}>私について</h1>
+      <PageTitle pageTitle="私について" type={{slug: 'about'}} />
+
+      <section className={container}>
+        <h2 className={mainTitle}>経験スキル</h2>
+        <SkillSet skill={skillsData.language} />
+        <SkillSet skill={skillsData.libs} />
+        <SkillSet skill={skillsData.templateEngine} />
+        <SkillSet skill={skillsData.cms} />
+        <SkillSet skill={skillsData.other} />
+      </section>
 
       <section className={container}>
         <h2 className={mainTitle}>経歴</h2>
         <Carrer histories={careerData} />
-      </section>
-
-      <section className={container}>
-        <h2 className={mainTitle}>経験スキル</h2>
-        <div className={contents}>
-          <SkillSet skill={skillsData.language} />
-          <SkillSet skill={skillsData.libs} />
-          <SkillSet skill={skillsData.templateEngine} />
-          <SkillSet skill={skillsData.cms} />
-          <SkillSet skill={skillsData.other} />
-        </div>
       </section>
     </>
   )

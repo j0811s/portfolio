@@ -11,7 +11,6 @@ export default async function StaticPage() {
 
   return (
     <>
-      <Breadcrumb type={ {slug: 'blog'} }/>
       <ArticleList contents={contents} totalCount={totalCount} limit={limit} />
     </>
   );

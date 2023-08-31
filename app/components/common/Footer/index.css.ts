@@ -12,7 +12,7 @@ export const pageTop = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   letterSpacing: '0.1em',
   color: '#fff',
-  backgroundColor: `${vars.color.gray.dark}`,
+  backgroundColor: `${vars.color.secondary}`,
   padding: '1em',
   '@media': {
     'screen and (min-width: 960px)': {

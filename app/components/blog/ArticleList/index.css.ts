@@ -4,7 +4,7 @@ import { vars } from "@/app/styles/common/variables.css";
 
 export const postListEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: '#F4F5F6',
+  backgroundColor: `${vars.color.primary}`,
 });
 
 export const postListEyecatch = style({
@@ -77,7 +77,7 @@ export const postListItemLink = style({
 });
 
 export const postListWrapper = style({
-  marginTop: 30,
+  // marginTop: 30,
   '@media': {
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'

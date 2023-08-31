@@ -5,7 +5,7 @@ export const list = style({
   display: 'flex',
   flexWrap: 'wrap',
   width: '100%',
-  padding: '0.5em 0 ',
+  // padding: '0.5em 0',
 });
 
 export const listItem = style({
@@ -30,12 +30,12 @@ export const listItemLink = style({
   transition: 'border-color .4s ease',
   selectors: {
     '&.mod-current': {
-      color: `${vars.color.gray.dark}`
+      color: `${vars.color.secondary}`
     },
     '&:not(.mod-current):hover': {
       '@media': {
         '(min-width: 960px)': {
-          borderColor: '#000',
+          borderColor: '#fff',
         }
       }
     }

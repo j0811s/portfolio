@@ -14,6 +14,7 @@ import Image from 'next/image';
 import { Blog } from '../../../libs/microcms';
 import ConvertDate from "../../../components/common/convertdate";
 import { Pagenation } from '../Pagenation';
+import { PageTitle } from "../../common/PageTitle";
 
 type ArticleListParam = {
   contents: Blog[];
@@ -32,7 +33,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
   
   return (
     <section className={postListWrapper}>
-      <h1 className={postListTitle}>投稿一覧{type?.name ? `: ${ type.name }` : ''}</h1>
+      <PageTitle pageTitle="投稿一覧" type={{slug: 'blog', ...type}} />
       {
         hasContents ? 
           <>
@@ -43,7 +44,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
                     <figure className={postListEyecatchContainer}>
                       {post.eyecatch ?
                         <Image className={postListEyecatch} src={post.eyecatch.url} alt="" width={post.eyecatch.width} height={post.eyecatch.height} /> :
-                        <Image className={postListEyecatch} src="/dummy.jpg" alt="" width="375" height="210" />
+                        <Image className={postListEyecatch} src="/images/blog/dummy.png" alt="" width="375" height="210" />
                       }
                     </figure>
                     <dl className={postData}>
