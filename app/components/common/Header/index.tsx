@@ -1,4 +1,6 @@
 'use client'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBreadSlice, faUser, faFileLines, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import {
   container, wrapper,
   navigation, navigationList, navigationListItem, navigationListItemLink
@@ -42,13 +44,13 @@ export const Header = () => {
         <nav className={navigation}>
           <ul className={navigationList}>
             <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}>トップページ</Link>
+              <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} /> トップページ</Link>
             </li>
             <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}>私について</Link>
+              <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} /> 私について</Link>
             </li>
             <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}>ブログ</Link>
+              <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} /> ブログ</Link>
             </li>
           </ul>
         </nav>
@@ -57,13 +59,13 @@ export const Header = () => {
           <nav>
             <ul>
               <li className={navigationListItem}>
-                <Link className={navigationListItemLink} href={`/`}>トップページ</Link>
+                <Link className={navigationListItemLink} href={`/`}><FontAwesomeIcon icon={faBreadSlice} /> トップページ</Link>
               </li>
               <li className={navigationListItem}>
-                <Link className={navigationListItemLink} href={`/about/`}>私について</Link>
+                <Link className={navigationListItemLink} href={`/about/`}><FontAwesomeIcon icon={faUser} /> 私について</Link>
               </li>
               <li className={navigationListItem}>
-                <Link className={navigationListItemLink} href={`/blog/`}>ブログ</Link>
+                <Link className={navigationListItemLink} href={`/blog/`}><FontAwesomeIcon icon={faFileLines} /> ブログ</Link>
               </li>
             </ul>
           </nav>
