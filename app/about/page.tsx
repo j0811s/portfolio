@@ -29,7 +29,7 @@ export default async function About() {
   const careerResponse = await axios.get(CAREER_API_URL);
   const careerData = await careerResponse.data;
 
-  const SKILLS_API_URL = 'https://gist.githubusercontent.com/j0811s/84ae4708a1ffb819e05757e4f675a006/raw/d094d0e6294b3c5c52290715835514118531571c/skills.json';
+  const SKILLS_API_URL = 'https://gist.githubusercontent.com/j0811s/84ae4708a1ffb819e05757e4f675a006/raw/e108d1f8e2b3fdf810503e5300b5dca8b3d13e39/skills.json';
   const skillsResponse = await axios.get(SKILLS_API_URL);
   const skillsData = await skillsResponse.data;
   
