@@ -1,5 +1,6 @@
-
-import { container, mainTitle, readText } from "./index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
+import { container, warapper, data, iconContainer, icon, mainTitle, readText } from "./index.css";
 
 type Histories = [
   {
@@ -9,19 +10,28 @@ type Histories = [
   }
 ]
 
-type Carrer = ({ histories }: { histories: Histories }) => JSX.Element[];
+type Carrer = ({ histories }: { histories: Histories }) => JSX.Element;
 
 export const Carrer: Carrer = ({ histories }) => {
   return (
-    histories.map(history => (
-      <dl className={container} key={history.id}>
-        <dt className={mainTitle}>{history.year}</dt>
-        {
-          history.outline.map(outline => (
-            <dd className={readText} key={outline}>・{outline}</dd>
-          ))
-        }
+    <div className={container}>
+      <dl className={warapper}>
+        {histories.map(history => (
+        <div className={data} key={history.id}>
+            <dt className={mainTitle}>
+              <span className={iconContainer}>
+                <FontAwesomeIcon className={icon} icon={faCalendarCheck} />
+              </span>
+              <span>{history.year}</span>
+            </dt>
+          {
+            history.outline.map(outline => (
+              <dd className={readText} key={outline}>・{outline}</dd>
+            ))
+          }
+        </div>
+        ))}
       </dl>
-    ))
+    </div>
   )
 }
