@@ -7,6 +7,7 @@ import { GenerateTags } from "./GenerateTags";
 
 export const Tags = async () => {
   const { contents } = await getList('blog', {
+    offset: 0,
     limit: 1000
   });
   

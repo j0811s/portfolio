@@ -16,7 +16,11 @@ const getBlogYears = async () => {
 
   const oldestPost = await client.get({
     endpoint: 'blog',
-    queries: { fields: 'publishedAt', orders: 'publishedAt', limit: 1 }
+    queries: {
+      fields: 'publishedAt',
+      orders: 'publishedAt',
+      limit: 1
+    }
   });
   const oldestPostYear = Number(oldestPost.contents[0].publishedAt.substr(0, 4));
 
@@ -39,6 +43,7 @@ export const YearArchive = async () => {
   
   await Promise.all(years.map(async year => {
     const { contents } = await getList('blog', {
+      offset: 0,
       limit: 1000,
       filters: `publishedAt[contains]${year}`
     })

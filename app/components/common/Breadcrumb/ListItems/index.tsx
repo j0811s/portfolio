@@ -69,8 +69,10 @@ export const ListItems = ({ type }: BreadcrumbParam) => {
             </Link>
           </li>
           <li className={listItem}>
-            <FontAwesomeIcon icon={faLocationDot} />
-            <span className={listItemName}>{name}</span>
+            <span className={`${listItemLink} mod-current`}>
+              <FontAwesomeIcon icon={faLocationDot} />
+              <span className={listItemName}>{name}</span>
+            </span>
           </li>
         </>
       )
