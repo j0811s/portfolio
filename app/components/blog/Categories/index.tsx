@@ -14,7 +14,7 @@ export const Categories = async () => {
   if (contents.length === 0) return;
 
   const categoriesData = GetTotalCount(contents, 'category');
-  const categories = Object.keys(categoriesData);
+  const categories = Object.keys(categoriesData).sort((a, b) => (a < b ? -1 : 1));
 
   return (
     <div className={container}>

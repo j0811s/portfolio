@@ -6,7 +6,7 @@ type GenerateTagsProps = {
 }
 
 export const GenerateTags = ({ tagData }: GenerateTagsProps) => {
-  const tags = Object.keys(tagData);
+  const tags = Object.keys(tagData).sort((a, b) => (a < b ? -1 : 1));
   if (tags.length === 0) return <></>;
 
   return (
