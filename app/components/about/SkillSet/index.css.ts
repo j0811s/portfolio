@@ -39,7 +39,7 @@ export const skillTitle = style({
 
 export const skillItem = style({
   display: 'block',
-  border: `1px solid ${vars.color.gray.hoverBg}`,
+  border: `1px solid ${vars.color.gray.border}`,
   borderRadius: 10,
   padding: '1em',
   minWidth: 0,
