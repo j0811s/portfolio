@@ -37,38 +37,29 @@ export const Header = () => {
     // }
   }
 
+  const NavigationListElements = () => (
+    <nav className={navigation}>
+      <ul className={navigationList}>
+        <li className={navigationListItem}>
+          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} /> トップページ</Link>
+        </li>
+        <li className={navigationListItem}>
+          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} /> 私について</Link>
+        </li>
+        <li className={navigationListItem}>
+          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} /> ブログ</Link>
+        </li>
+      </ul>
+    </nav>
+  )
+
   return (
     <header className={container}>
       <div className={wrapper}>
         <Logo pathname={pathname} />
-        <nav className={navigation}>
-          <ul className={navigationList}>
-            <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} /> トップページ</Link>
-            </li>
-            <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} /> 私について</Link>
-            </li>
-            <li className={navigationListItem}>
-              <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} /> ブログ</Link>
-            </li>
-          </ul>
-        </nav>
-        
+        <NavigationListElements />
         <DrawerMenu options={DrawerMenuOptions}>
-          <nav>
-            <ul>
-              <li className={navigationListItem}>
-                <Link className={navigationListItemLink} href={`/`}><FontAwesomeIcon icon={faBreadSlice} /> トップページ</Link>
-              </li>
-              <li className={navigationListItem}>
-                <Link className={navigationListItemLink} href={`/about/`}><FontAwesomeIcon icon={faUser} /> 私について</Link>
-              </li>
-              <li className={navigationListItem}>
-                <Link className={navigationListItemLink} href={`/blog/`}><FontAwesomeIcon icon={faFileLines} /> ブログ</Link>
-              </li>
-            </ul>
-          </nav>
+          <NavigationListElements />
         </DrawerMenu>
       </div>
     </header>

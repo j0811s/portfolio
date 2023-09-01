@@ -59,7 +59,7 @@ export const modalOverlay = style({
   width: '100%',
   height: '100%',
   zIndex: '-1',
-  backgroundColor: 'rgb(238, 238, 238, .9)'
+  backgroundColor: '#fff',
 });
 
 export const modalContainer = style({

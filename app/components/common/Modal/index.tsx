@@ -197,7 +197,7 @@ export default function GenerateModal({ options, children }: { options: Options,
     return (
       condition && 
       <ContentPortal>
-        <div className={`${modalRoot} ${modalAnimation} ${modClassName}`} ref={modalRef} role="dialog" aria-modal onClick={cancelEvent}>
+        <div className={`${modalRoot} ${modalAnimation} ${modClassName} ${isOpen ? 'add-open' : ''}`} ref={modalRef} role="dialog" aria-modal onClick={cancelEvent}>
           <div className={modalOverlay} onClick={closeModal}></div>
             <div className={modalContainer}>
               <div className={modalWrapper}>
