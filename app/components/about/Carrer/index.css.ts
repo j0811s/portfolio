@@ -12,12 +12,11 @@ export const container = style({
 export const warapper = style({
   position: 'relative',
   display: 'block',
-  maxWidth: 960,
   margin: '40px auto 0',
   padding: '40px 0',
   '@media': {
     'screen and (min-width: 960px)': {
-      margin: '60px auto 0',
+      margin: '50px auto 0',
     }
   },
   selectors: {
@@ -51,12 +50,7 @@ export const data = style({
 
 export const iconContainer = style({
   position: 'relative',
-  marginInlineEnd: '1em',
-  '@media': {
-    'screen and (min-width: 960px)': {
-      
-    }
-  },
+  marginRight: '1.5em',
   selectors: {
     '&::before': {
       content: '',
@@ -78,11 +72,6 @@ export const icon = style({
   top: '50%',
   left: '50%',
   transform: 'translate3d(-50%, -50%, 0)',
-  '@media': {
-    'screen and (min-width: 960px)': {
-      
-    }
-  }
 });
 
 export const mainTitle = style({
@@ -105,8 +94,8 @@ export const readText = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
   lineHeight: '1.6',
-  marginLeft: '3.5em',
   marginTop: '0.5em',
+  marginLeft: '5em',
   textIndent: '-1em',
   paddingLeft: '1em',
   '@media': {

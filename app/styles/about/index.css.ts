@@ -3,11 +3,11 @@ import { vars } from "@/app/styles/common/variables.css";
 
 export const container = style({
   margin: '0 auto',
-  padding: '30px 0',
-  maxWidth: 960,
+  padding: '30px 16px',
+  maxWidth: 1080,
   '@media': {
     'screen and (min-width: 600px)': {
-      padding: '60px 0',
+      padding: '60px 24px',
     }
   }
 });

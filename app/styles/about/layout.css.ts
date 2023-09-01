@@ -4,11 +4,11 @@ export const container = style({
   margin: '0 auto',
   '@media': {
     'screen and (max-width: 959px)': {
-      padding: '14px',
+      padding: '16px',
     },
     'screen and (min-width: 960px)': {
       maxWidth: 1280,
-      padding: '0 20px',
+      padding: '0 24px',
     }
   }
 });

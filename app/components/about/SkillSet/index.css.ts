@@ -5,8 +5,7 @@ export const skillContainer = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   alignContent: 'flex-start',
-  gap: '1em',
-  maxWidth: 960,
+  gap: 15,
   margin: `calc( 40 / ${vars.font.size} * 1rem ) auto 0`,
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
@@ -52,9 +51,11 @@ export const logoWrap = style({
 });
 
 export const logo = style({
+  position: 'relative !important' as 'relative',
   display: 'block',
-  width: `calc( 40 / ${vars.font.size} * 1rem )`,
-  height: `calc( 40 / ${vars.font.size} * 1rem )`,
+  width: 'auto!important',
+  maxWidth: '100%',
+  height: `calc( 40 / ${vars.font.size} * 1rem )!important`,
   margin: '0 auto',
   objectFit: 'contain',
 });
@@ -69,9 +70,4 @@ export const logoName = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  '@media': {
-    'screen and (min-width: 600px)': {
-      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-    }
-  },
 });
