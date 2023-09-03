@@ -81,6 +81,7 @@ export const navigationListItemLink = style({
   display: 'block',
   fontWeight: 500,
   padding: '0.25em 0',
+  fontFeatureSettings: "'palt'",
   '@media': {
     'screen and (min-width: 960px)': {
       borderBottom: '2px solid transparent',
@@ -104,6 +105,15 @@ export const navigationListItemLink = style({
           borderColor: `${vars.color.secondary}`,
         }
       }
+    }
+  }
+});
+
+export const navigationItemIcon = style({
+  marginRight: 10,
+  '@media': {
+    'screen and (min-width: 960px)': {
+      marginRight: 5,
     }
   }
 });

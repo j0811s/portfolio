@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBreadSlice, faUser, faFileLines, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import {
   container, wrapper,
-  navigation, navigationList, navigationListItem, navigationListItemLink
+  navigation, navigationList, navigationListItem, navigationListItemLink, navigationItemIcon
 } from "./index.css"
 
 import Link from "next/link";
@@ -41,13 +41,13 @@ export const Header = () => {
     <nav className={navigation}>
       <ul className={navigationList}>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} /> トップページ</Link>
+          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>トップページ</span></Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} /> 私について</Link>
+          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} className={navigationItemIcon} /><span>私について</span></Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} /> ブログ</Link>
+          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} className={navigationItemIcon} /><span>ブログ</span></Link>
         </li>
       </ul>
     </nav>
