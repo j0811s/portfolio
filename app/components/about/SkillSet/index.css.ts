@@ -41,8 +41,13 @@ export const skillItem = style({
   display: 'block',
   border: `1px solid ${vars.color.gray.border}`,
   borderRadius: 10,
-  padding: '1em',
+  padding: '0.75em 0.25em',
   minWidth: 0,
+  '@media': {
+    'screen and (min-width: 960px)': {
+      padding: '1em 0.5em',
+    }
+  },
 });
 
 export const logoWrap = style({
@@ -66,8 +71,13 @@ export const logoName = style({
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   fontWeight: 500,
   lineHeight: '1.2',
-  marginTop: '1.5em',
+  marginTop: '0.75em',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      marginTop: '1em',
+    }
+  },
 });
