@@ -1,5 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css";
-import { vars } from "@/app/styles/common/variables.css";
+import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
   overflow: 'hidden',
