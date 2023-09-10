@@ -37,6 +37,7 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 
 export const Article = async ({ post }: { post: Blog }) => {
   const { tag }: { tag: Tag[] } = post;
+  const eyecatchPath = `${post?.eyecatch?.url}?fit=fill&w=940&h=530`;
   
   return (
     <article id={post.id} className={postWrapper}>
@@ -58,7 +59,7 @@ export const Article = async ({ post }: { post: Blog }) => {
         </div>
         <figure className={postEyecatchContainer}>
           {post.eyecatch ?
-            <Image className={postEyecatch} src={post.eyecatch.url} alt="" width={post.eyecatch.width} height={post.eyecatch.height} /> :
+            <Image className={postEyecatch} src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} /> :
             <Image className={postEyecatch} src="/images/blog/dummy_lg.png" alt="" width="375" height="210" />
           }
         </figure>
