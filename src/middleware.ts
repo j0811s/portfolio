@@ -9,20 +9,24 @@ function middleware(req: NextRequest): NextResponse {
   const basicAuth = req.headers.get('authorization');
   const url = req.nextUrl;
 
-  if (process.env.NODE_ENV === 'production' && basicAuth) {
-    const BASIC_AUTH_USER = process.env.BASIC_AUTH_USER;
-    const BASIC_AUTH_PASSWORD = process.env.BASIC_AUTH_PASSWORD;
-    const authValue = basicAuth.split(' ')[1] ?? '';
-    const [user, pwd] = atob(authValue).split(':');
+  if (process.env.NODE_ENV === 'production') {
+    if (basicAuth) {
+      const BASIC_AUTH_USER = process.env.BASIC_AUTH_USER;
+      const BASIC_AUTH_PASSWORD = process.env.BASIC_AUTH_PASSWORD;
+      const authValue = basicAuth.split(' ')[1] ?? '';
+      const [user, pwd] = atob(authValue).split(':');
 
-    if (user === BASIC_AUTH_USER && pwd === BASIC_AUTH_PASSWORD) {
-      return NextResponse.next();
+      if (user === BASIC_AUTH_USER && pwd === BASIC_AUTH_PASSWORD) {
+        return NextResponse.next();
+      }
     }
+
+    url.pathname = '/api/basic-auth';
+
+    return NextResponse.rewrite(url);
+  } else {
+    return NextResponse.next();
   }
-
-  url.pathname = '/api/basic-auth';
-
-  return NextResponse.rewrite(url);
 }
 
 export { middleware };
