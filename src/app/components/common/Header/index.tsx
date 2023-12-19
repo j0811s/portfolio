@@ -41,13 +41,13 @@ export const Header = () => {
     <nav className={navigation}>
       <ul className={navigationList}>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>トップページ</span></Link>
+          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>TOP</span></Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} className={navigationItemIcon} /><span>私について</span></Link>
+          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} className={navigationItemIcon} /><span>ABOUT</span></Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} className={navigationItemIcon} /><span>ブログ</span></Link>
+          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} className={navigationItemIcon} /><span>BLOG</span></Link>
         </li>
       </ul>
     </nav>

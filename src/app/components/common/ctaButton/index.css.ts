@@ -4,11 +4,11 @@ import { vars } from "@/src/app/styles/common/variables.css";
 export const button = style({
   display: 'inline-flex',
   gap: 10,
-  fontSize: `calc( 10 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   alignItems: 'center',
-  height: 26,
-  margin: '0 auto',
-  padding: '0.5em 1em',
+  justifyContent: 'space-between',
+  margin: '0',
+  padding: '1em 1em',
   textAlign: 'center',
   overflowWrap: 'break-word',
   color: '#000',
@@ -17,8 +17,7 @@ export const button = style({
   borderRadius: 100,
   '@media': {
     '(min-width: 960px)': {
-      height: 36,
-      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
       transition: 'background-color .4s ease, color .4s ease',
     }
   },

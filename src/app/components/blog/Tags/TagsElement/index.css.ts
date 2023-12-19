@@ -3,16 +3,8 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const tagItem = style({
   borderRadius: 1000,
-  display: 'inline-block',
-  margin: '0 0.25em 0.35em 0',
-  '@media': {
-    'screen and (max-width: 767px)': {
-      fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
-    },
-    'screen and (min-width: 768px)': {
-      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-    }
-  }
+  width: 'fit-content',
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
 });
 
 export const tagLink = style({

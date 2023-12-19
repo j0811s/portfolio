@@ -6,6 +6,8 @@ export const html = style({
 })
 
 export const body = style({
+  display: 'grid',
+  gridTemplateRows: 'auto 1fr auto',
   minHeight: '100%'
 })
 
@@ -20,6 +22,5 @@ export const container = style({
 });
 
 export const footer = style({
-  position: 'sticky',
-  top: '100vh'
+  display: 'block'
 });

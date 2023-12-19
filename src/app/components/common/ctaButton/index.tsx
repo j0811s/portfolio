@@ -14,19 +14,23 @@ export const CtaButton = ({
   children
 }: CtaButton) => {
 
+  const buttonElement = () => {
+    return (
+      href
+      ?
+        <Link className={button} href={href}>
+          <span className={buttonText}>{children}</span>
+          <span className={buttonIcon}></span>
+        </Link>
+      :
+        <div className={button}>
+          <span className={buttonText}>{children}</span>
+          <span className={buttonIcon}></span>
+        </div>
+    )
+  }
+
   return (
-    <div className={modClass}>
-      {
-        !href ?
-          <div className={button}>
-            <span className={buttonText}>{children}</span>
-            <span className={buttonIcon}></span>
-          </div> :
-          <Link className={button} href={href}>
-            <span className={buttonText}>{children}</span>
-            <span className={buttonIcon}></span>
-          </Link>
-      }
-    </div>
+    buttonElement()
   )
 } 

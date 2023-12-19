@@ -49,7 +49,7 @@ export const numberBadge = style({
   fontWeight: 500,
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: `${vars.color.secondary}`,
+  backgroundColor: `${vars.color.gray.dark}`,
 });
 
 export const listIetmTitle= style({

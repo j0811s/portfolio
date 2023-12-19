@@ -1,4 +1,5 @@
 import { style, keyframes } from "@vanilla-extract/css";
+import { vars } from "@/src/app/styles/common/variables.css";
 
 export const loaderContainer = style({
   position: 'relative',
@@ -25,7 +26,7 @@ const load = keyframes({
 });
 
 export const loader = style({
-  color: '#000',
+  color: `${vars.color.primary}`,
   textIndent: '-9999em',
   position: 'absolute',
   inset: 0,
@@ -34,20 +35,16 @@ export const loader = style({
   fontSize: 10,
   transform: 'translateZ(0)',
   animationDelay: '-0.16s',
-  backgroundColor: '#000',
+  backgroundColor: `${vars.color.primary}`,
   animation: `${load} 1s infinite ease-in-out`,
   width: '1em',
   height: '4em',
-  '@media': {
-    'screen and (min-width: 960px)': {
-    }
-  },
   selectors: {
     '&::before, &::after': {
       position: 'absolute',
       top: 0,
       content: '',
-      backgroundColor: '#000',
+      backgroundColor: `${vars.color.primary}`,
       animation: `${load} 1s infinite ease-in-out`,
       width: '1em',
       height: '4em',

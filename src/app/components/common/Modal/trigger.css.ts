@@ -98,26 +98,3 @@ export const line = style({
     },
   }
 });
-
-export const textContainer = style({
-  // pointerEvents: 'none',
-  position: 'absolute',
-  top: '100%',
-  left: 0,
-  right: 0,
-  textAlign: 'center',
-});
-
-export const text = style({
-  selectors: {
-    '.add-openModal &:first-of-type': {
-      display: 'none'
-    },
-    ':not(.add-openModal) &:last-of-type': {
-      display: 'none'
-    },
-    '.add-openModal &:last-of-type': {
-      display: 'block'
-    }
-  }
-});

@@ -1,7 +1,10 @@
 import { style } from "@vanilla-extract/css";
 
 export const container = style({
-  textAlign: 'center'
+  display: 'grid',
+  placeContent: 'center',
+  textAlign: 'center',
+  height: '100%'
 });
 
 export const pageTitle = style({
@@ -22,16 +25,20 @@ export const pageSubTitle = style({
   '@media': {
     '(min-width: 960px)': {
       fontSize: 18,
-      marginTop: 20,
+      marginTop: 25,
     }
   }
 });
 
-export const ctaButton = style({
-  marginTop: 40,
-  selectors: {
-    ['&:not(:first-of-type)']: {
-      marginTop: 20
+export const ctaButtonContainer = style({
+  display: 'grid',
+  gap: '1em',
+  width: 'fit-content',
+  margin: '25px auto 0',
+  '@media': {
+    '(min-width: 600px)': {
+      margin: '40px auto 0',
+      gridTemplateColumns: 'repeat(2, minmax(100px, 1fr))',
     }
   }
 });

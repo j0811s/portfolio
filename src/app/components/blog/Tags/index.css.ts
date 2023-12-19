@@ -6,6 +6,9 @@ export const container = style({
 });
 
 export const list = style({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '0.5em',
   padding: '1em 0.5em 0.65em'
 });
 

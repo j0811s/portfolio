@@ -9,9 +9,8 @@ export const container = style({
   zIndex: 999,
   width: '100%',
   height: 60,
-  backgroundColor: '#fff',
-  boxShadow: `0px 8px 8px -8px ${vars.color.gray.border}`,
-  borderBottom: `1px solid ${vars.color.gray.border}`,
+  backdropFilter: 'blur(1px)',
+  backgroundColor: 'rgb(255, 255, 255, 0.85)',
   color: '#000',
 });
 
@@ -54,25 +53,27 @@ export const navigation = style({
 
 export const navigationList = style({
   '@media': {
+    'screen and (max-width: 959px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '2em 0',
+    },
     'screen and (min-width: 960px)': {
       display: 'flex',
       alignItems: 'center',
+      gap: '0 1.5em',
     }
   }
 });
 
 export const navigationListItem = style({
   display: 'block',
-  selectors: {
-    '&:not(:first-of-type)': {
-      '@media': {
-        'screen and (max-width: 959px)': {
-          marginTop: '2em',
-        },
-        'screen and (min-width: 960px)': {
-          marginLeft: '1em'
-        }
-      }
+  '@media': {
+    'screen and (max-width: 959px)': {
+      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+    },
+    'screen and (min-width: 960px)': {
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   }
 });
@@ -82,29 +83,23 @@ export const navigationListItemLink = style({
   fontWeight: 500,
   padding: '0.25em 0',
   fontFeatureSettings: "'palt'",
+  color: `${vars.color.tertiary}`,
   '@media': {
     'screen and (min-width: 960px)': {
-      borderBottom: '2px solid transparent',
-      transition: 'border-color 0.2s linear, color 0.2s linear',
+      transition: 'color 0.2s linear',
     },
   },
   selectors: {
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          borderColor: `${vars.color.secondary}`,
           color: `${vars.color.secondary}`
         }
       }
     },
     '&[data-page-active="true"]': {
       pointerEvents: 'none',
-      color: `${vars.color.secondary}`,
-      '@media': {
-        'screen and (min-width: 960px)': {
-          borderColor: `${vars.color.secondary}`,
-        }
-      }
+      color: `${vars.color.secondary}`
     }
   }
 });

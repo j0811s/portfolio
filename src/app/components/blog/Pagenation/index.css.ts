@@ -29,18 +29,17 @@ export const pageLink = style({
   placeContent: 'center',
   width: 40,
   height: 40,
-  backgroundColor: '#fff',
+  color: '#fff',
+  backgroundColor: `${vars.color.tertiary}`,
   borderRadius: 4,
   transition: 'background-color 0.4s ease',
   selectors: {
     '&:hover': {
-      color: '#fff',
       backgroundColor: `${vars.color.secondary}`,
     }
   }
 });
 
 export const currentText = style({
-  color: '#fff',
   backgroundColor: `${vars.color.secondary}`,
 });

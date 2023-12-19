@@ -8,12 +8,6 @@ export const asideContainer = style({
     'screen and (max-width: 959px)': {
       padding: '60px 0',
     },
-    'screen and (min-width: 768px)': {
-      position: 'sticky',
-      top: 80,
-      left: 0,
-      height: '100%',
-    },
     'screen and (min-width: 960px)': {
       width: 280
     }

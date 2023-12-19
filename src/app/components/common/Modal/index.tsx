@@ -1,7 +1,7 @@
 'use client';
 
 import merge from "ts-deepmerge";
-import { btn, lines, line, textContainer, text } from "./trigger.css";
+import { btn, lines, line } from "./trigger.css";
 import { modalRoot, modalAnimation, modalContainer, modalOverlay, modalWrapper } from "./index.css";
 
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -176,15 +176,11 @@ export default function GenerateModal({ options, children }: { options: Options,
   const ModalTrigger = useCallback(() => {
     return (
       isReady && 
-      <button className={`${btn}`} type="button" onClick={toggleOpen} ref={modalTriggerRef}>
+      <button className={`${btn}`} type="button" onClick={toggleOpen} ref={modalTriggerRef} aria-label="メニューを開く">
         <div className={lines}>
           <span className={line}></span>
           <span className={line}></span>
           <span className={line}></span>
-        </div>
-        <div className={textContainer}>
-          <span className={text}>開く</span>
-          <span className={text}>閉じる</span>
         </div>
       </button>
     )

@@ -209,9 +209,10 @@ globalStyle(`${postContent} blockquote > blockquote`, {
 
 globalStyle(`${postContent} code:not(.hljs)`, {
   display: 'inline-block',
-  backgroundColor: `${vars.color.gray.hoverBg}`,
+  backgroundColor: `${vars.color.gray.bg}`,
   color: '#3E4B5B',
-  padding: '0.25em'
+  padding: '0 0.3em',
+  fontSize: '0.9em'
 });
 
 globalStyle(`${postContent} ul`, {

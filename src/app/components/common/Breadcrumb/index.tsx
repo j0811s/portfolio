@@ -26,7 +26,7 @@ export const Breadcrumb = ({ type, post }: Props) => {
         <li className={listItem}>
           <Link className={listItemLink} href={'/'}>
             <FontAwesomeIcon icon={faBreadSlice} />
-            <span className={listItemName}>トップページ</span>
+            <span className={listItemName}>TOP</span>
           </Link>
         </li>
         <ListItems type={type} />
