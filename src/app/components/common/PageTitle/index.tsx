@@ -12,15 +12,16 @@ type Props = {
     id?: string;
     title?: string;
   },
-  currentPage: number
+  currentPage?: number
 }
 
-export const PageTitle = ({ pageTitle, type, post, currentPage }: Props) => {
+export const PageTitle = ({ pageTitle, type, post, currentPage = 1 }: Props) => {
+  const pageClassName = currentPage > 1 ? 'mod-page' : ''
 
   return (
-    <div className={`${container} ${currentPage > 1 ? 'mod-page' : ''}`}>
+    <div className={`${container} ${pageClassName}`}>
       <Breadcrumb type={{ ...type }} post={{...post}} />
-      <h1 className={`${title} ${currentPage > 1 ? 'mod-page' : ''}`}>{pageTitle}{type?.name ? `: ${ type.name }` : ''}</h1>
+      <h1 className={`${title} ${pageClassName}`}>{pageTitle}{type?.name ? `: ${ type.name }` : ''}</h1>
     </div>
   )
 }
