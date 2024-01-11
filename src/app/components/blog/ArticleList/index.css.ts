@@ -5,11 +5,13 @@ import { vars } from "@/src/app/styles/common/variables.css";
 export const postListEyecatchContainer = style({
   overflow: 'hidden',
   backgroundColor: `${vars.color.primary}`,
+  borderRadius: 12,
 });
 
 export const postListEyecatch = style({
   aspectRatio: '16 / 9',
   objectFit: 'scale-down',
+  transition: 'transform 0.2s ease-in-out'
 });
 
 export const postListTitle = style({
@@ -48,9 +50,6 @@ export const postList = style({
 
 export const postListItem = style({
   overflow: 'hidden',
-  backgroundColor: '#fff',
-  borderRadius: 12,
-  boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
   '@media': {
     'screen and (min-width: 600px)': {
       width: 'calc(50% - 10px)',
@@ -60,15 +59,6 @@ export const postListItem = style({
       transition: 'box-shadow .2s linear'
     }
   },
-  selectors: {
-    '&:hover': {
-      '@media': {
-        'screen and (min-width: 960px)': {
-          boxShadow: `4px 4px 12px ${vars.color.gray.hoverBg}`
-        }
-      }
-    }
-  }
 });
 
 export const postListItemLink = style({
@@ -78,7 +68,6 @@ export const postListItemLink = style({
 });
 
 export const postListWrapper = style({
-  // marginTop: 30,
   '@media': {
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'
@@ -94,7 +83,7 @@ export const postData = style({
 });
 
 export const postDataTitle = style({
-  fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 500,
   lineHeight: 1.4,
   display: '-webkit-box',
@@ -103,7 +92,7 @@ export const postDataTitle = style({
   overflow: 'hidden',
   '@media': {
     'screen and (min-width: 960px)': {
-      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
     }
   }
 });
@@ -138,10 +127,17 @@ export const postBtn = style({
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   textAlign: 'right',
   padding: '0 1em 1.25em',
-  textDecoration: 'underline',
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
     }
   }
+});
+
+globalStyle(`${postListItem}:hover ${postListEyecatch}`, {
+  transform: 'scale(1.1)'
+});
+
+globalStyle(`${postListItem}:hover ${postBtn}`, {
+  textDecoration: 'underline',
 });

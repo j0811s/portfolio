@@ -13,7 +13,7 @@ export const tagLink = style({
   border: `1px solid transparent`,
   borderRadius: 12,
   color: '#000',
-  backgroundColor: `${vars.color.gray.bg}`,
+  backgroundColor: `${vars.color.gray.default}`,
   transition: 'background-color 0.2s linear, color 0.2s linear',
   selectors: {
     '&.mod-borderColor': {
@@ -47,5 +47,5 @@ export const tagNumberBadge = style({
   fontWeight: 500,
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: `${vars.color.gray.dark}`,
+  backgroundColor: `${vars.color.secondary}`,
 });

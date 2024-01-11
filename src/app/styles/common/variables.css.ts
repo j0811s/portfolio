@@ -2,12 +2,13 @@ import { createGlobalTheme } from '@vanilla-extract/css';
 
 export const vars = createGlobalTheme(':root', {
   color: {
-    primary: '#00BFA5',
-    secondary: '#009688',
-    tertiary: '#80CBC4',
+    primary: '#000',
+    secondary: '#F5F5F5',
+    tertiary: '#9E9E9E',
+    body: '#FAFAFA',
     error: '#B3261E',
     gray: {
-      default: '#f6f7f9',
+      default: '#EEEEEE',
       dark: '#78909C',
       bg: '#f0f2f5',
       hoverBg: '#d8dadd',

@@ -2,7 +2,7 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
-  backgroundColor: '#fff',
+  // backgroundColor: '#fff',
 });
 
 export const list = style({
@@ -17,6 +17,7 @@ export const listIetmTitle= style({
   fontWeight: 500,
   backgroundColor: `${vars.color.gray.default}`,
   padding: '1em',
+  borderRadius: '4px',
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,

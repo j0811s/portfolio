@@ -28,7 +28,7 @@ export const warapper = style({
       bottom: 0,
       display: 'block',
       width: 6,
-      backgroundColor: `${vars.color.gray.bg}`,
+      backgroundColor: `${vars.color.gray.border}`,
       zIndex: '-1',
     }
   }

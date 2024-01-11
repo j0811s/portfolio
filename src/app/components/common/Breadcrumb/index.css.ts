@@ -30,7 +30,7 @@ export const listItemLink = style({
   transition: 'border-color .4s ease',
   selectors: {
     '&.mod-current': {
-      color: `${vars.color.secondary}`
+      color: `${vars.color.tertiary}`
     },
     '&:not(.mod-current):hover': {
       '@media': {

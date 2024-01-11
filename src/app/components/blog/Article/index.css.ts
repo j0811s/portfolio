@@ -104,7 +104,7 @@ globalStyle(`${postContent} h1, ${postContent} h2`, {
   position: 'relative',
   padding: '0.5em',
   color: `#000`,
-  backgroundColor: `${vars.color.gray.bg}`,
+  backgroundColor: `${vars.color.gray.default}`,
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
@@ -151,7 +151,7 @@ globalStyle(`${postContent} h1::before, ${postContent} h2::before`, {
   content: '',
   borderWidth: '14px 12px 0 12px',
   borderStyle: 'solid',
-  borderColor: `${vars.color.gray.bg} transparent transparent transparent`,
+  borderColor: `${vars.color.gray.default} transparent transparent transparent`,
 });
 
 globalStyle(`${postContent} h1::after, ${postContent} h2::after`, {
@@ -163,7 +163,7 @@ globalStyle(`${postContent} h1::after, ${postContent} h2::after`, {
   content: '',
   borderWidth: '14px 12px 0 12px',
   borderStyle: 'solid',
-  borderColor: `${vars.color.gray.bg} transparent transparent transparent`,
+  borderColor: `${vars.color.gray.default} transparent transparent transparent`,
 });
 
 globalStyle(`${postContent} p`, {

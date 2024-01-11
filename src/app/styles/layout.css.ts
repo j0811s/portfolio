@@ -8,7 +8,9 @@ export const html = style({
 export const body = style({
   display: 'grid',
   gridTemplateRows: 'auto 1fr auto',
-  minHeight: '100%'
+  minHeight: '100%',
+  color: '#000',
+  backgroundColor: `${vars.color.body}`
 })
 
 export const container = style({

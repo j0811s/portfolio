@@ -9,9 +9,8 @@ export const container = style({
   zIndex: 999,
   width: '100%',
   height: 60,
-  backdropFilter: 'blur(1px)',
-  backgroundColor: 'rgb(255, 255, 255, 0.85)',
-  color: '#000',
+  backgroundColor: '#fff',
+  // color: '#fff',
 });
 
 export const wrapper = style({
@@ -70,10 +69,10 @@ export const navigationListItem = style({
   display: 'block',
   '@media': {
     'screen and (max-width: 959px)': {
-      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 18 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 960px)': {
-      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
     }
   }
 });
@@ -83,32 +82,32 @@ export const navigationListItemLink = style({
   fontWeight: 500,
   padding: '0.25em 0',
   fontFeatureSettings: "'palt'",
-  color: `${vars.color.tertiary}`,
+  color: `${vars.color.primary}`,
   '@media': {
     'screen and (min-width: 960px)': {
-      transition: 'color 0.2s linear',
+      transition: 'opacity 0.2s linear',
     },
   },
   selectors: {
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          color: `${vars.color.secondary}`
+          opacity: '0.7'
         }
       }
     },
     '&[data-page-active="true"]': {
-      pointerEvents: 'none',
-      color: `${vars.color.secondary}`
+      // pointerEvents: 'none',
+      // color: `${vars.color.secondary}`
     }
   }
 });
 
 export const navigationItemIcon = style({
-  marginRight: 10,
+  marginRight: 16,
   '@media': {
     'screen and (min-width: 960px)': {
-      marginRight: 5,
+      marginRight: 8,
     }
   }
 });

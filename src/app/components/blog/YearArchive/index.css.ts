@@ -3,8 +3,6 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
   overflow: 'hidden',
-  backgroundColor: '#fff',
-  borderRadius: '4px'
 });
 
 export const list = style({
@@ -49,7 +47,7 @@ export const numberBadge = style({
   fontWeight: 500,
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: `${vars.color.secondary}`,
+  backgroundColor: `${vars.color.tertiary}`,
 });
 
 export const listIetmTitle= style({
@@ -57,6 +55,7 @@ export const listIetmTitle= style({
   fontWeight: 500,
   backgroundColor: `${vars.color.gray.default}`,
   padding: '1em',
+  borderRadius: '4px',
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
