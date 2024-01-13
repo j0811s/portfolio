@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
 import { html, body, container, footer } from './styles/layout.css';
+import { Suspense } from 'react';
 import { Header } from '@/src/app/components/common/Header';
 import { Footer } from '@/src/app/components/common/Footer';
 import { Metadata } from 'next';
@@ -47,7 +48,9 @@ export default function RootLayout({ children }: RootLayout ) {
   return (
     <html lang="ja" className={html}>
       <body className={body}>
-        <Header />
+        <Suspense>
+          <Header />
+        </Suspense>
         <main className={container}>{children}</main>
         <Footer modClassName={footer} />
       </body>
