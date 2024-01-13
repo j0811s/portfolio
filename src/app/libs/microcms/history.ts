@@ -17,7 +17,7 @@ export type SkillInfo = {
     height: number
     width: number
   }
-}
+}[]
 
 export type SkillContent = {
   id: string
@@ -26,7 +26,23 @@ export type SkillContent = {
   publishedAt: string
   revisedAt: string
   category: string
-  skills: SkillInfo[]
+  skills: SkillInfo
+}
+
+export type CareerInfo = {
+  fieldId: string
+  project: string
+  details: string
+}[]
+
+export type CareerContent = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
+  period: string
+  info: CareerInfo
 }
 
 if (!process.env.MICROCMS_HISTORY_SERVICE_DOMAIN) {

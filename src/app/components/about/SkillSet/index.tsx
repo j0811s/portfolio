@@ -2,16 +2,9 @@ import { skillContainer, skillTitle, skillItem, logoWrap, logo, logoName } from 
 import Image from "next/image"
 import type { SkillContent, SkillInfo } from '@/src/app/libs/microcms/history'
 
-type Contents = {
-  contents: SkillContent[]
-}
+export const SkillSet = ({ contents }: { contents: SkillContent[] }) => {
 
-type Skills = {
-  skills: SkillInfo[]
-}
-
-export const SkillSet = ({ contents }: Contents) => {
-  const SkillDdTag = ({ skills }: Skills) => {
+  const SkillDdTag = ({ skills }: { skills: SkillInfo }) => {
     return (
       skills.map(skill => (
         <dd className={skillItem} key={skill.name}>
@@ -23,7 +16,7 @@ export const SkillSet = ({ contents }: Contents) => {
       ))
     )
   }
-  
+
   return (
     contents.map(content => {
       return (
