@@ -10,15 +10,14 @@ import {
 } from './index.css';
 import Link from "next/link";
 import Image from 'next/image';
-import { Blog } from '@/src/app/libs/microcms/blog';
+import { getList, type Blog } from "@/src/app/libs/microcms/blog";
 import ConvertDate from "@/src/app/components/common/convertdate";
 
-type PickupArticlesParams = {
-  contents: Blog[];
-  totalCount: number;
-}
+export const PickupArticles = async ({ endpoint = 'blog' }: { endpoint: string }) => {
+  const { contents, totalCount } = await getList(endpoint, {
+    limit: 6
+  });
 
-export const PickupArticles = async ({ contents, totalCount }: PickupArticlesParams) => {
   const hasContents = totalCount > 0;
   
   if (!hasContents) return (
