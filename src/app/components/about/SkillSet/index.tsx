@@ -20,7 +20,7 @@ export const SkillSet = ({ contents }: { contents: SkillContent[] }) => {
   return (
     contents.map(content => {
       return (
-        <dl className={skillContainer}>
+        <dl className={skillContainer} key={content.id}>
           <dt className={skillTitle}>{content.category}</dt>
           <SkillDdTag skills={content.skills}  />
         </dl>
