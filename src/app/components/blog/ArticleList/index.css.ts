@@ -4,13 +4,13 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const postListEyecatchContainer = style({
   overflow: 'hidden',
-  backgroundColor: `${vars.color.primary}`,
+  backgroundColor: `${vars.color.secondary}`,
   borderRadius: 12,
 });
 
 export const postListEyecatch = style({
   aspectRatio: '16 / 9',
-  objectFit: 'scale-down',
+  objectFit: 'cover',
   transition: 'transform 0.2s ease-in-out'
 });
 
