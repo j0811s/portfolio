@@ -13,14 +13,15 @@ type Props = {
     title?: string;
   },
   currentPage?: number
+  isBreadcrumb?: boolean
 }
 
-export const PageTitle = ({ pageTitle, type, post, currentPage = 1 }: Props) => {
+export const PageTitle = ({ pageTitle, type, post, currentPage = 1, isBreadcrumb = true }: Props) => {
   const pageClassName = currentPage > 1 ? 'mod-page' : ''
 
   return (
     <div className={`${container} ${pageClassName}`}>
-      <Breadcrumb type={{ ...type }} post={{...post}} />
+      { isBreadcrumb && <Breadcrumb type={{ ...type }} post={{...post}} /> }
       <h1 className={`${title} ${pageClassName}`}>{pageTitle}{type?.name ? `: ${ type.name }` : ''}</h1>
     </div>
   )

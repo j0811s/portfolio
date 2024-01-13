@@ -5,11 +5,11 @@ export const container = style({
   margin: '0 auto',
   '@media': {
     'screen and (max-width: 767px)': {
-      padding: '14px',
+      padding: '16px',
     },
     'screen and (min-width: 768px)': {
       maxWidth: 1280,
-      padding: '0 20px',
+      padding: '60px 16px 80px',
     }
   }
 });

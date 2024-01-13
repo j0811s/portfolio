@@ -32,7 +32,6 @@ export const postList = style({
   display: 'flex',
   gap: 15,
   marginTop: 30,
-  padding: '0 15px',
   '@media': {
     'screen and (max-width: 599px)': {
       flexDirection: 'column',

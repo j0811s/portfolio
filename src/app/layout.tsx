@@ -5,7 +5,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
 import { html, body, container, footer } from './styles/layout.css';
-import { Suspense } from 'react';
 import { Header } from '@/src/app/components/common/Header';
 import { Footer } from '@/src/app/components/common/Footer';
 import { Metadata } from 'next';
@@ -40,10 +39,6 @@ export const metadata: Metadata = {
   }
 }
 
-function HeaderFallback() {
-  return <div>読み込み中</div>
-}
-
 type RootLayout = {
   children: React.ReactNode
 }
@@ -52,9 +47,7 @@ export default function RootLayout({ children }: RootLayout ) {
   return (
     <html lang="ja" className={html}>
       <body className={body}>
-        <Suspense fallback={HeaderFallback()}>
-          <Header />
-        </Suspense>
+        <Header />
         <main className={container}>{children}</main>
         <Footer modClassName={footer} />
       </body>

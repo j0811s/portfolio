@@ -2,7 +2,6 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
-  marginTop: 30,
   color: '#fff',
   padding: `calc( 56 / ${vars.font.size} * 1rem ) calc( 24 / ${vars.font.size} * 1rem )`,
   backgroundColor: `${vars.color.primary}`,

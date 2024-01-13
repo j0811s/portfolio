@@ -16,11 +16,6 @@ export const body = style({
 export const container = style({
   display: 'block',
   position: 'relative',
-  '@media': {
-    'screen and (min-width: 960px)': {
-      padding: '30px 0 90px',
-    }
-  }
 });
 
 export const footer = style({

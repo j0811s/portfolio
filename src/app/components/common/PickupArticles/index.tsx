@@ -13,9 +13,10 @@ import Image from 'next/image';
 import { getList, type Blog } from "@/src/app/libs/microcms/blog";
 import ConvertDate from "@/src/app/components/common/convertdate";
 
-export const PickupArticles = async ({ endpoint = 'blog' }: { endpoint: string }) => {
+export const PickupArticles = async ({ endpoint = 'blog', category = 'portfolio' }: { endpoint: string, category: string }) => {
   const { contents, totalCount } = await getList(endpoint, {
-    limit: 6
+    limit: 6,
+    filters: `category[contains]${category}` 
   });
 
   const hasContents = totalCount > 0;
