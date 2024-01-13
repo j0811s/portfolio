@@ -46,15 +46,8 @@ type StaticDetailPage = {
 export default async function StaticDetailPage({ params: { endpoint, postId } }: StaticDetailPage) {
   const post = await getDetail(endpoint, postId);
 
-  const type = {
-    slug: 'post',
-    id: post.id,
-    name: post.title
-  }
-
   return (
     <>
-      <Breadcrumb type={type} post={post} />
       <Article post={post} />
     </>
   )

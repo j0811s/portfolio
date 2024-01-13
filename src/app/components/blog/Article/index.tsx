@@ -13,6 +13,7 @@ import 'highlight.js/styles/hybrid.css';
 import { Blog, Tag } from '../../../libs/microcms/blog';
 import ConvertDate from "../../../components/common/convertdate";
 import { TagsElement } from '../Tags/TagsElement';
+import { Breadcrumb } from "../../common/Breadcrumb";
   
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -38,6 +39,11 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 export const Article = async ({ post }: { post: Blog }) => {
   const { tag }: { tag: Tag[] } = post;
   const eyecatchPath = `${post?.eyecatch?.url}?fit=fill&w=940&h=530`;
+  const type = {
+    slug: 'post',
+    id: post.id,
+    name: post.title
+  }
   
   return (
     <article id={post.id} className={postWrapper}>
@@ -65,6 +71,7 @@ export const Article = async ({ post }: { post: Blog }) => {
         </figure>
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
+      <Breadcrumb type={type} post={post} />
     </article>
   )
 }

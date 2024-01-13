@@ -20,7 +20,7 @@ type Props = {
 export const Breadcrumb = ({ type, post }: Props) => {
 
   return (
-    <>
+    <div>
       <BreadcrumbJsonLd type={type} post={post} />
       <ul className={list}>
         <li className={listItem}>
@@ -31,6 +31,6 @@ export const Breadcrumb = ({ type, post }: Props) => {
         </li>
         <ListItems type={type} />
       </ul>
-    </>
+    </div>
   )
 }

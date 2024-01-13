@@ -2,7 +2,6 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const postWrapper = style({
-  marginTop: 30,
   '@media': {
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'
@@ -81,6 +80,7 @@ export const postDateIcon = style({
 export const postContent = style({
   overflow: 'hidden',
   margin: '15px 0 0',
+  padding: '32px 0',
   '@media': {
     'screen and (min-width: 768px)': {
       padding: '64px 32px',
