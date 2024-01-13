@@ -8,13 +8,13 @@ export const Logo: Logo = ({ pathname }) => {
     pathname === '/' ?
       <h1 className={logo}>
         <div className={logoInner}>
-          <img className={logoImg} src="/logo/logo.png" alt="" />
+          <img className={logoImg} src="/logo.png" alt="" />
           {/* <span className={siteName}>J.Sato</span> */}
         </div>
       </h1> :
       <div className={logo}>
         <Link className={logoInner} href={`/`}>
-          <img className={logoImg} src="/logo/logo.png" alt="" />
+          <img className={logoImg} src="/logo.png" alt="" />
           {/* <span className={siteName}>J.Sato</span> */}
         </Link>
       </div>
