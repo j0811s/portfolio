@@ -1,4 +1,4 @@
-import { getDetail, getList } from "../../libs/microcms";
+import { getDetail, getList } from "../../libs/microcms/blog";
 import { Breadcrumb } from "@/src/app/components/common/Breadcrumb";
 import { Article } from '@/src/app/components/blog/Article';
 import { Metadata, ResolvingMetadata } from 'next';

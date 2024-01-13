@@ -11,7 +11,7 @@ import {
 } from './index.css';
 import Link from "next/link";
 import Image from 'next/image';
-import { Blog } from '../../../libs/microcms';
+import { Blog } from '../../../libs/microcms/blog';
 import ConvertDate from "../../../components/common/convertdate";
 import { Pagenation } from '../Pagenation';
 import { PageTitle } from "../../common/PageTitle";

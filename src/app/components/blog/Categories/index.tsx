@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { container, list, listItem, listIetmLink, listIetmTitle, listItemTitleIcon, listIetmTitleText, numberBadge } from "./index.css";
 import Link from "next/link";
-import { getList } from "../../../libs/microcms";
+import { getList } from "../../../libs/microcms/blog";
 import { GetTotalCount } from "../totalCount";
 
 export const Categories = async () => {

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
-import { Tag } from '../../../../libs/microcms';
+import { Tag } from '../../../../libs/microcms/blog';
 import { list } from '../../Tags/index.css'
 import { tagItem, tagLink, tagIcon, tagName } from "./index.css";
 import Link from 'next/link';

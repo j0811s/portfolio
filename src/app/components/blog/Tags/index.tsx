@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTags } from "@fortawesome/free-solid-svg-icons";
 import { container, listIetmTitle, listItemTitleIcon, listIetmTitleText } from "./index.css";
-import { getList } from "../../../libs/microcms";
+import { getList } from "../../../libs/microcms/blog";
 import { GetTotalCount } from "../totalCount";
 import { GenerateTags } from "./GenerateTags";
 

@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/server'
-import { getDetail } from '../../../libs/microcms'
+import { getDetail } from '../../../libs/microcms/blog'
  
 // Route segment config
 export const runtime = 'edge'

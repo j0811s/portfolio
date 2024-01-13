@@ -10,7 +10,7 @@ import Image from 'next/image';
 import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
-import { Blog, Tag } from '../../../libs/microcms';
+import { Blog, Tag } from '../../../libs/microcms/blog';
 import ConvertDate from "../../../components/common/convertdate";
 import { TagsElement } from '../Tags/TagsElement';
   

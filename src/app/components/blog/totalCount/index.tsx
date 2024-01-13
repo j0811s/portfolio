@@ -1,4 +1,4 @@
-import { Blog } from "../../../libs/microcms"
+import { Blog } from "../../../libs/microcms/blog"
 
 type GetTotalCountData = {
   [key: string]: {

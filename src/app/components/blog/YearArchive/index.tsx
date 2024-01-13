@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { container, list, listItem, listIetmLink, listIetmTitle, listItemTitleIcon, listIetmTitleText, numberBadge } from "./index.css";
 import Link from "next/link";
-import { client, getList } from "../../../libs/microcms";
+import { client, getList } from "../../../libs/microcms/blog";
 
 
 // ブログ公開日から年別を取得
