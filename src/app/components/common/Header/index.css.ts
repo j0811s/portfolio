@@ -9,8 +9,8 @@ export const container = style({
   zIndex: 999,
   width: '100%',
   height: 60,
-  backgroundColor: '#fff',
-  // color: '#fff',
+  backgroundColor: 'rgb(255, 255, 255, 0.85)',
+  backdropFilter: 'blur(2px)',
 });
 
 export const wrapper = style({
