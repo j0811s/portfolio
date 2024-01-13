@@ -1,42 +1,37 @@
 import { skillContainer, skillTitle, skillItem, logoWrap, logo, logoName } from "./index.css"
 import Image from "next/image"
+import type { SkillContent, SkillInfo } from '@/src/app/libs/microcms/history'
 
-type SkillItem = {
-  logo: {
-    path: string;
-    width?: number;
-    height?: number;
-  };
-  name: string
+type Contents = {
+  contents: SkillContent[]
 }
 
-type Skill = {
-  skill: {
-    title: string;
-    items: SkillItem[]
-  }
+type Skills = {
+  skills: SkillInfo[]
 }
 
-export const SkillSet = ({ skill }: Skill) => {
-  const { title, items } = skill;
-
-  const DefinitionDescription = ({ items }: { items: SkillItem[] }) => {
+export const SkillSet = ({ contents }: Contents) => {
+  const SkillDdTag = ({ skills }: Skills) => {
     return (
-      items.map(item => (
-        <dd className={skillItem} key={item.name}>
+      skills.map(skill => (
+        <dd className={skillItem} key={skill.name}>
           <figure className={logoWrap}>
-            <Image className={logo} src={item.logo.path} alt={ item.name } fill />
-            <figcaption className={logoName}>{ item.name }</figcaption>
+            <Image className={logo} src={skill.logo.url} alt={ skill.name } fill />
+            <figcaption className={logoName}>{ skill.name }</figcaption>
           </figure>
         </dd>
       ))
     )
   }
-
+  
   return (
-    <dl className={skillContainer}>
-      <dt className={skillTitle}>{title}</dt>
-      <DefinitionDescription items={items} />
-    </dl>
+    contents.map(content => {
+      return (
+        <dl className={skillContainer}>
+          <dt className={skillTitle}>{content.category}</dt>
+          <SkillDdTag skills={content.skills}  />
+        </dl>
+      )
+    })
   )
 }

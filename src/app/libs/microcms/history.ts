@@ -8,60 +8,39 @@ import type {
   CustomRequestInit,
   MicroCMSContentId
 } from "microcms-js-sdk";
-import { ReactNode } from 'react';
 
-//ブログの型定義
-export type Blog = {
-  endpoint: string,
-  id: string;
-  title: string;
-  content: string;
-  eyecatch?: MicroCMSImage;
-  category: {
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    publishedAt: string,
-    revisedAt: string,
-    name: string,
-    slug: string
-  }[],
-  tag: {
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    publishedAt: string,
-    revisedAt: string,
-    name: string
-  }[],
-  contents: any[],
-  name: string,
-  length: number
-} & MicroCMSDate & MicroCMSImage;
-
-// カテゴリの型定義
-export type Category = {
-  name: string;
-} & MicroCMSContentId & MicroCMSDate;
-
-// タグの型定義
-export type Tag = {
-  name: string;
-} & MicroCMSContentId & MicroCMSDate;
-
-
-if (!process.env.MICROCMS_SERVICE_DOMAIN) {
-  throw new Error("MICROCMS_SERVICE_DOMAIN is required");
+export type SkillInfo = {
+  fieldId: string
+  name: string
+  logo: {
+    url: string
+    height: number
+    width: number
+  }
 }
 
-if (!process.env.MICROCMS_API_KEY) {
-  throw new Error("MICROCMS_API_KEY is required");
+export type SkillContent = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
+  category: string
+  skills: SkillInfo[]
+}
+
+if (!process.env.MICROCMS_HISTORY_SERVICE_DOMAIN) {
+  throw new Error("MICROCMS_HISTORY_SERVICE_DOMAIN is required");
+}
+
+if (!process.env.MICROCMS_HISTORY_API_KEY) {
+  throw new Error("MICROCMS_HISTORY_API_KEY is required");
 }
 
 // API取得用のクライアントを作成
-export const client = createClient({
-  serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
-  apiKey: process.env.MICROCMS_API_KEY,
+export const historyClient = createClient({
+  serviceDomain: process.env.MICROCMS_HISTORY_SERVICE_DOMAIN,
+  apiKey: process.env.MICROCMS_HISTORY_API_KEY,
   retry: true,
   customFetch: (input, init) => {
     if (typeof input === 'string') {
@@ -74,14 +53,14 @@ export const client = createClient({
   },
 })
 
-// ブログ一覧を取得
-export const getList = async (
-  endpoint: string = "blog",
+// 経歴エンドポイントを取得
+export const getHistoryList = async (
+  endpoint: string = "skill",
   queries?: MicroCMSQueries,
   customRequestInit?: CustomRequestInit
 ) => {
   
-  const listData = await client.getList<Blog>({
+  const listData = await historyClient.getList({
     endpoint,
     queries,
     customRequestInit,
@@ -91,13 +70,13 @@ export const getList = async (
   return listData;
 }
 
-// ブログの詳細を取得
-export const getDetail = async (
-  endpoint: string = "blog",
+// 経歴エンドポイントの詳細を取得
+export const getHistoryDetail = async (
+  endpoint: string = "skill",
   contentId: string,
   queries?: MicroCMSQueries
 ) => {
-  const detailData = await client.getListDetail<Blog>({
+  const detailData = await historyClient.getListDetail({
     endpoint,
     contentId,
     queries
@@ -105,4 +84,18 @@ export const getDetail = async (
   .catch(notFound);
 
   return detailData;
+}
+
+// 経歴エンドポイントをすべて取得
+export const getHistoryAllContents = async (
+  endpoint: string = "skill",
+  queries?: MicroCMSQueries
+) => {
+  const detailDataAll = await historyClient.getAllContents({
+    endpoint,
+    queries
+  })
+  .catch(notFound);
+
+  return detailDataAll;
 }
