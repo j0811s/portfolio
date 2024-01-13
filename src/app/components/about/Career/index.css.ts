@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
@@ -9,7 +9,7 @@ export const container = style({
   },
 });
 
-export const warapper = style({
+export const wrapper = style({
   position: 'relative',
   display: 'block',
   margin: '40px auto 0',
@@ -94,13 +94,19 @@ export const readText = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
   lineHeight: '1.6',
-  marginTop: '0.5em',
+  marginTop: '0.25em',
   marginLeft: '5em',
-  textIndent: '-1em',
-  paddingLeft: '1em',
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   }
+});
+
+export const textBold = style({
+  fontWeight: 700,
+});
+
+globalStyle(`${readText} + ${textBold}`, {
+  marginTop: '1.25em',
 });

@@ -1,12 +1,11 @@
 import { container, pageTitleContainer, pageTitle, mainTitle } from "../styles/about/index.css";
-import { Carrer } from "@/src/app/components/about/Carrer";
+import type { SkillContent, CareerContent } from '@/src/app/libs/microcms/history'
 import { SkillSet } from "@/src/app/components/about/SkillSet";
-import type { SkillContent } from '@/src/app/libs/microcms/history'
+import { Career } from "@/src/app/components/about/Career";
 
 import { PageTitle } from "@/src/app/components/common/PageTitle";
 import { Metadata, ResolvingMetadata } from 'next';
-import { getHistoryList, getHistoryDetail, getHistoryAllContents } from '@/src/app/libs/microcms/history';
-import axios from "axios";
+import { getHistoryAllContents } from '@/src/app/libs/microcms/history';
 
 type generateMetadataProps = {
   params: { catId: string }
@@ -27,16 +26,9 @@ export async function generateMetadata(
   }
 }
 
-type SkillContentsParams = {
-  skillContents: SkillContent[]
-}
-
 export default async function About() {
-  const CAREER_API_URL = 'https://gist.githubusercontent.com/j0811s/a8975772efe762dd331a3da28634eeba/raw/843fa02b708cd141aaee6764dcd3431bcd6154af/history.json';
-  const careerResponse = await axios.get(CAREER_API_URL);
-  const careerData = await careerResponse.data;
-
   const skillContents: SkillContent[] = await getHistoryAllContents('skill');
+  const careerContents: CareerContent[] = await getHistoryAllContents('career');
   
   return (
     <>
@@ -49,7 +41,7 @@ export default async function About() {
 
       <section className={container}>
         <h2 className={mainTitle}>経歴</h2>
-        <Carrer histories={careerData} />
+        <Career contents={careerContents} />
       </section>
     </>
   )
