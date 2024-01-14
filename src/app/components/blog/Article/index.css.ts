@@ -2,6 +2,7 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const postWrapper = style({
+  overflow: 'hidden',
   '@media': {
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'
@@ -10,16 +11,17 @@ export const postWrapper = style({
 });
 
 export const postHead = style({
+  
 });
 
 export const postEyecatchContainer = style({
   overflow: 'hidden',
   backgroundColor: `${vars.color.secondary}`,
-  margin: '30px 0 0',
+  margin: '30px auto 0',
   boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
   '@media': {
-    'screen and (max-width: 959px)': {
-      margin: '30px calc(50% - 100vw / 2) 0',
+    'screen and (min-width: 768px)': {
+      height: 300,
     }
   }
 });
@@ -27,9 +29,10 @@ export const postEyecatchContainer = style({
 export const postEyecatch = style({
   aspectRatio: '16 / 9',
   objectFit: 'cover',
+  objectPosition: 'top',
   '@media': {
     'screen and (min-width: 768px)': {
-      // maxHeight: 315,
+      height: '100%',
     }
   }
 });
@@ -279,8 +282,7 @@ globalStyle(`${postContent} th > p`, {
 });
 
 globalStyle(`${postContent} pre > code`, {
-  whiteSpace: 'pre-wrap',
-  overflow: 'hidden',
+  whiteSpace: 'pre',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   lineHeight: '1.6',
   fontWeight: 400,
@@ -289,4 +291,8 @@ globalStyle(`${postContent} pre > code`, {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     }
   }
+});
+
+export const postBreadcrumb = style({
+  
 });

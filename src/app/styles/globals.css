@@ -193,6 +193,7 @@ html {
 
 body {
   overflow-y: scroll;
+  overflow-x: hidden;
   font-family: 'Noto Sans JP', -apple-system,
     BlinkMacSystemFont,
     "Helvetica Neue",

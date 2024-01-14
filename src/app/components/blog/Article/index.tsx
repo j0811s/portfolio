@@ -4,7 +4,8 @@ import {
   postWrapper,
   postHead, postEyecatchContainer, postEyecatch, postTextContainer, postTitle, postDateContainer,
   postDate, postDateIcon,
-  postContent
+  postContent,
+  postBreadcrumb
 } from './index.css';
 import Image from 'next/image';
 import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
@@ -71,7 +72,9 @@ export const Article = async ({ post }: { post: Blog }) => {
         </figure>
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
-      <Breadcrumb type={type} post={post} />
+      <div className={postBreadcrumb}>
+        <Breadcrumb type={type} post={post} />
+      </div>
     </article>
   )
 }

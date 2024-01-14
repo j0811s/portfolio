@@ -16,6 +16,7 @@ export const body = style({
 export const container = style({
   display: 'block',
   position: 'relative',
+  overflow: 'hidden',
 });
 
 export const footer = style({
