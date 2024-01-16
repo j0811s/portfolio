@@ -33,7 +33,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
   
   return (
     <section className={postListWrapper}>
-      <PageTitle pageTitle="投稿一覧" type={{slug: 'blog', ...type}} currentPage={currentPage} />
+      <PageTitle pageTitle="ブログ" type={{slug: 'blog', ...type}} currentPage={currentPage} />
       {
         hasContents ? 
           <>
@@ -66,7 +66,6 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
                           </div>
                         </dd>
                       </dl>
-                      {/* <CtaButton modClass={postBtn}>投稿を読む</CtaButton> */}
                       <div className={postBtn}>投稿を読む</div>
                     </Link>
                   </li>

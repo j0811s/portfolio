@@ -5,14 +5,14 @@ export const skillContainer = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   alignContent: 'flex-start',
-  gap: 15,
+  gap: 8,
   margin: `calc( 40 / ${vars.font.size} * 1rem ) auto 0`,
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },
     'screen and (min-width: 960px)': {
-      gridTemplateColumns: 'repeat(6, 1fr)',
+      gridTemplateColumns: 'repeat(4, 1fr)',
       margin: `calc( 50 / ${vars.font.size} * 1rem ) auto 0`,
     }
   }
@@ -31,7 +31,7 @@ export const skillTitle = style({
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 960px)': {
-      gridColumn: '1 / 7',
+      gridColumn: '1 / 5',
       fontSize: `calc( 18 / ${vars.font.size} * 1rem )`,
     }
   },
@@ -39,21 +39,24 @@ export const skillTitle = style({
 
 export const skillItem = style({
   display: 'block',
-  backgroundColor: '#fff',
-  border: `1px solid ${vars.color.gray.border}`,
-  borderRadius: 10,
-  padding: '0.75em 0.25em',
+  backgroundColor: `${vars.color.secondary}`,
+  padding: '1.5em',
   minWidth: 0,
   '@media': {
+    'screen and (min-width: 600px) and (max-width: 959px)': {
+      padding: '2em',
+    },
     'screen and (min-width: 960px)': {
-      padding: '1em 0.5em',
+      padding: '3em',
     }
   },
 });
 
 export const logoWrap = style({
   width: '100%',
-  height: '100%'
+  maxWidth: '160px',
+  height: '100%',
+  margin: 'auto'
 });
 
 export const logo = style({
@@ -61,9 +64,14 @@ export const logo = style({
   display: 'block',
   width: 'auto!important',
   maxWidth: '100%',
-  height: `calc( 40 / ${vars.font.size} * 1rem )!important`,
+  height: `calc( 32 / ${vars.font.size} * 1rem )!important`,
   margin: '0 auto',
   objectFit: 'contain',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      height: `calc( 48 / ${vars.font.size} * 1rem )!important`,
+    }
+  },
 });
 
 export const logoName = style({

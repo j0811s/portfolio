@@ -110,7 +110,7 @@ export const postDate = style({
   fontWeight: 500,
   lineHeight: 1.4,
   textAlign: 'right',
-  color: `${vars.color.gray.dark}`,
+  color: `${vars.color.tertiary}`,
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
@@ -119,7 +119,7 @@ export const postDate = style({
 });
 
 export const postDateIcon = style({
-  color: `${vars.color.gray.dark}`,
+  color: `${vars.color.tertiary}`,
   paddingRight: '0.5em'
 });
 

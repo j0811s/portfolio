@@ -5,7 +5,7 @@ export const siteTitleContainer = style({
   display: 'grid',
   placeContent: 'center',
   height: '40vh',
-  backgroundColor: `${vars.color.primary}`
+  backgroundColor: `${vars.color.secondary}`
 });
 
 export const siteTitle = style({
@@ -41,24 +41,6 @@ export const section = style({
 });
 
 export const moreButtonContainer = style({
-  textAlign: 'right',
-  marginTop: '2.6em',
-});
-
-export const moreButton = style({
-  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-  '@media': {
-    'screen and (min-width: 600px)': {
-      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
-    },
-  },
-  selectors: {
-    '&:hover': {
-      '@media': {
-        'screen and (min-width: 960px)': {
-          textDecoration: 'underline'
-        }
-      }
-    }
-  }
+  textAlign: 'center',
+  marginTop: '3em',
 });

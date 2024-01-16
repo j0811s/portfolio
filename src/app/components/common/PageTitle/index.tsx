@@ -1,4 +1,4 @@
-import { container, title } from "./index.css";
+import { container, title, pageTitleBreadcrumb } from "./index.css";
 import { Breadcrumb } from "@/src/app/components/common/Breadcrumb";
 
 type Props = {
@@ -22,7 +22,7 @@ export const PageTitle = ({ subHeadline = false, pageTitle, type, post, currentP
 
   return (
     <div className={`${container} ${pageClassName}`}>
-      { isBreadcrumb && <Breadcrumb type={{ ...type }} post={{...post}} /> }
+      { isBreadcrumb && <div className={pageTitleBreadcrumb}><Breadcrumb type={{ ...type }} post={{...post}} /></div> }
       { subHeadline ? <h2 className={`${title} ${pageClassName}`}>{pageTitle}{type?.name ? `: ${ type.name }` : ''}</h2> : <h1 className={`${title} ${pageClassName}`}>{pageTitle}{type?.name ? `: ${ type.name }` : ''}</h1>}
     </div>
   )

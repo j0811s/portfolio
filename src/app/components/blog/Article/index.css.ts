@@ -3,6 +3,9 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const postWrapper = style({
   overflow: 'hidden',
+  color: `${vars.color.text.white}`,
+  backgroundColor: `${vars.color.secondary}`,
+  borderRadius: 4,
   '@media': {
     'screen and (min-width: 960px)': {
       width: 'calc(100% - 300px)'
@@ -11,7 +14,12 @@ export const postWrapper = style({
 });
 
 export const postHead = style({
-  
+  padding: '32px 16px 0',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      padding: '64px 32px 0',
+    }
+  }
 });
 
 export const postEyecatchContainer = style({
@@ -59,7 +67,7 @@ export const postDateContainer = style({
 });
 
 export const postDate = style({
-  color: `${vars.color.gray.dark}`,
+  color: `${vars.color.tertiary}`,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 500,
@@ -76,14 +84,14 @@ export const postDate = style({
 });
 
 export const postDateIcon = style({
-  color: `${vars.color.gray.dark}`,
+  color: `${vars.color.tertiary}`,
   paddingRight: '0.5em'
 });
 
 export const postContent = style({
   overflow: 'hidden',
-  margin: '15px 0 0',
-  padding: '32px 0',
+  margin: '16px 0 0',
+  padding: '32px 16px',
   '@media': {
     'screen and (min-width: 768px)': {
       padding: '64px 32px',
@@ -170,7 +178,7 @@ globalStyle(`${postContent} h1::after, ${postContent} h2::after`, {
 });
 
 globalStyle(`${postContent} p`, {
-  color: `${vars.color.gray.text}`,
+  color: 'inherit',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.6,
   fontWeight: 400,
@@ -183,11 +191,11 @@ globalStyle(`${postContent} p`, {
 
 globalStyle(`${postContent} a`, {
   color: vars.color.link,
-  textDecoration: 'none',
+  textDecoration: 'underline',
 });
 
 globalStyle(`${postContent} a:hover`, {
-  textDecoration: 'underline',
+  textDecoration: 'none',
 });
 
 globalStyle(`${postContent} hr`, {
@@ -264,6 +272,7 @@ globalStyle(`${postContent} th, ${postContent} td`, {
   minWidth: 120,
   wordBreak: 'break-all',
   padding: '0.5em',
+  color: `${vars.color.text.black}`,
   backgroundColor: '#fff',
   border: '1px solid #ccccd9',
   '@media': {
@@ -294,5 +303,10 @@ globalStyle(`${postContent} pre > code`, {
 });
 
 export const postBreadcrumb = style({
-  
+  padding: '16px',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      padding: '32px',
+    }
+  }
 });

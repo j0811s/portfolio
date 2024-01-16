@@ -9,7 +9,7 @@ export const container = style({
   zIndex: 999,
   width: '100%',
   height: 60,
-  backgroundColor: 'rgb(255, 255, 255, 0.85)',
+  backgroundColor: 'rgb(30, 38, 38, 0.85)',
   backdropFilter: 'blur(2px)',
 });
 
@@ -82,7 +82,7 @@ export const navigationListItemLink = style({
   fontWeight: 500,
   padding: '0.25em 0',
   fontFeatureSettings: "'palt'",
-  color: `${vars.color.primary}`,
+  color: '#fff',
   '@media': {
     'screen and (min-width: 960px)': {
       transition: 'opacity 0.2s linear',

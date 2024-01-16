@@ -3,7 +3,7 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
   display: 'block',
-  color: '#000',
+  color: '#fff',
   textAlign: 'center',
   backgroundColor: `${vars.color.secondary}`,
 });

@@ -19,6 +19,28 @@ export const listItem = style({
   }
 });
 
+export const listIetmTitle= style({
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+  fontWeight: 500,
+  color: `${vars.color.text.white}`,
+  backgroundColor: `${vars.color.secondary}`,
+  padding: '1em',
+  borderRadius: '4px',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+    }
+  }
+});
+
+export const listItemTitleIcon= style({
+  color: `${vars.color.tertiary}`
+});
+
+export const listIetmTitleText= style({
+  paddingLeft: '0.5em',
+});
+
 export const listIetmLink = style({
   display: 'flex',
   alignItems: 'center',
@@ -31,7 +53,7 @@ export const listIetmLink = style({
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          backgroundColor: `${vars.color.gray.default}`
+          backgroundColor: `${vars.color.accent.dark}`
         }
       }
     }
@@ -47,26 +69,5 @@ export const numberBadge = style({
   fontWeight: 500,
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: `${vars.color.tertiary}`,
-});
-
-export const listIetmTitle= style({
-  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
-  backgroundColor: `${vars.color.gray.default}`,
-  padding: '1em',
-  borderRadius: '4px',
-  '@media': {
-    'screen and (min-width: 768px)': {
-      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
-    }
-  }
-});
-
-export const listItemTitleIcon= style({
-  color: `${vars.color.gray.dark}`
-});
-
-export const listIetmTitleText= style({
-  paddingLeft: '0.5em',
+  backgroundColor: `${vars.color.accent.dark}`,
 });

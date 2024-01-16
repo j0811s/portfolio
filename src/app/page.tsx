@@ -1,10 +1,9 @@
-import Link from "next/link";
-
-import { siteTitleContainer, siteTitle, section, moreButtonContainer, moreButton } from "./styles/top/index.css";
+import { siteTitleContainer, siteTitle, section, moreButtonContainer } from "./styles/top/index.css";
 import { getHistoryAllContents, type SkillContent } from "@/src/app/libs/microcms/history"
 import { SkillSet } from "./components/about/SkillSet";
 import { PickupArticles } from "./components/common/PickupArticles";
 import { PageTitle } from "./components/common/PageTitle";
+import { CtaButton } from "./components/common/Button";
 
 export default async function Top() {
   const skillContents: SkillContent[] = await getHistoryAllContents('skill');
@@ -18,14 +17,14 @@ export default async function Top() {
         <PageTitle pageTitle="経験スキル" isBreadcrumb={false} subHeadline={true} />
         <SkillSet contents={skillContents} />
         <div className={moreButtonContainer}>
-          <Link className={moreButton} href={`/about/`}>Aboutページへ移動</Link>
+          <CtaButton href='/about/'>もっと見る</CtaButton>
         </div>
       </section>
       <section className={section}>
         <PageTitle pageTitle="制作物" isBreadcrumb={false} subHeadline={true} />
         <PickupArticles endpoint='blog' category='portfolio' />
         <div className={moreButtonContainer}>
-          <Link className={moreButton} href={`/blog/categories/portfolio/`}>一覧ページへ移動</Link>
+          <CtaButton href='/blog/categories/portfolio/'>もっと見る</CtaButton>
         </div>
       </section>
     </>

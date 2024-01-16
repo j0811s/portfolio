@@ -47,10 +47,6 @@ export const mainTitle = style({
   lineHeight: 1.2,
   fontWeight: 700,
   textAlign: 'left',
-  // padding: '0.75em',
-  // color: '#fff',
-  // backgroundColor: `${vars.color.secondary}`,
-  // borderRadius: 10,
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
       fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,

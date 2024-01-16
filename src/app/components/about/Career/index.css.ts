@@ -28,7 +28,7 @@ export const wrapper = style({
       bottom: 0,
       display: 'block',
       width: 6,
-      backgroundColor: `${vars.color.gray.border}`,
+      backgroundColor: `${vars.color.tertiary}`,
       zIndex: '-1',
     }
   }
@@ -59,8 +59,8 @@ export const iconContainer = style({
       height: 40,
       border: `2px solid #fff`,
       borderRadius: 9999,
-      backgroundColor: `${vars.color.tertiary}`,
-      boxShadow: `0 0 4px ${vars.color.gray.border}`,
+      backgroundColor: `${vars.color.accent.dark}`,
+      boxShadow: `0 0 2px ${vars.color.accent.light}`,
     }
   }
 });

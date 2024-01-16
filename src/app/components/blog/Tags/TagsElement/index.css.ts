@@ -8,21 +8,20 @@ export const tagItem = style({
 });
 
 export const tagLink = style({
-  display: 'block',
-  padding: '0.1em 0.6em 0.2em',
-  border: `1px solid transparent`,
-  borderRadius: 12,
-  color: '#000',
-  backgroundColor: `${vars.color.gray.default}`,
-  transition: 'background-color 0.2s linear, color 0.2s linear',
+  display: 'flex',
+  alignItems: 'baseline',
+  justifyContent: 'space-between',
+  gap: '0.4em',
+  padding: '0.2em 0.6em 0.2em',
+  border: `1px solid ${vars.color.tertiary}`,
+  color: `${vars.color.text.white}`,
+  backgroundColor: `${vars.color.primary}`,
+  transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out',
   selectors: {
-    '&.mod-borderColor': {
-      // borderColor: `${vars.color.gray.dark}`,
-    },
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          backgroundColor: `${vars.color.gray.hoverBg}`,
+          backgroundColor: `${vars.color.accent.dark}`
         }
       }
     }
@@ -35,7 +34,6 @@ export const tagIcon = style({
 
 export const tagName = style({
   display: 'inline-block',
-  padding: '0 0.25em',
 });
 
 export const tagNumberBadge = style({

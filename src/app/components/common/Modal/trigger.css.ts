@@ -54,7 +54,7 @@ const lineAnim3 = keyframes({
 });
 
 export const line = style({
-  borderTop: '1px solid #000',
+  borderTop: '1px solid #fff',
   position: 'absolute',
   width: '100%',
   left: 0,
