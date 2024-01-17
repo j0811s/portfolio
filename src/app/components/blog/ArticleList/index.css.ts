@@ -15,6 +15,7 @@ export const postListEyecatch = style({
 });
 
 export const postListTitle = style({
+  color: `${vars.color.text.white}`,
   fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
@@ -83,6 +84,7 @@ export const postData = style({
 });
 
 export const postDataTitle = style({
+  color: `${vars.color.text.white}`,
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 500,
   lineHeight: 1.4,
@@ -110,7 +112,7 @@ export const postDate = style({
   fontWeight: 500,
   lineHeight: 1.4,
   textAlign: 'right',
-  color: `${vars.color.tertiary}`,
+  color: `${vars.color.gray.taupe}`,
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
@@ -119,11 +121,12 @@ export const postDate = style({
 });
 
 export const postDateIcon = style({
-  color: `${vars.color.tertiary}`,
+  color: `${vars.color.gray.taupe}`,
   paddingRight: '0.5em'
 });
 
 export const postBtn = style({
+  color: `${vars.color.text.white}`,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   textAlign: 'right',
   padding: '0 1em 1.25em',

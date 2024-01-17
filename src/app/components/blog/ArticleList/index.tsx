@@ -39,7 +39,7 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
           <>
             <ul className={postList}>
               {contents.map((post) => {
-                const eyecatchPath = `${post.eyecatch?.url}?fit=fill&w=634&h=356`;
+                const eyecatchPath = `${post.eyecatch?.url}?auto=format&w=768&ar=16:9&fit=crop&q=50`;
 
                 return (
                   <li key={post.id} className={postListItem}>

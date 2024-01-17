@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faFileLines } from "@fortawesome/free-solid-svg-icons";
-import { listItem, listItemLink, listItemName } from "../index.css";
+import { listItem, listItemLink, listItemIcon, listItemName } from "../index.css";
 import Link from "next/link";
 
 export type BreadcrumbParam = {

@@ -1,25 +1,15 @@
 'use client'
 
-import {
-  container, pageTop, copyright
-} from "./index.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { PageTopButton } from "../PageTopButton"
+import { container, copyright } from "./index.css"
 
 export const Footer = ({ modClassName }: { modClassName: string }) => {
-  
-  const scrollToPageTop = (e: React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
-  }
-
   return (
-    <footer className={`${container} ${modClassName}`}>
-      <a className={pageTop} href="#top" onClick={scrollToPageTop}>PAGETOP <FontAwesomeIcon icon={faChevronUp} /></a>
-      <small className={copyright}>&copy; 2023 J.Sato</small>
-    </footer>
+    <>
+      <PageTopButton />
+      <footer className={`${container} ${modClassName}`}>
+        <small className={copyright}>&copy; 2023 J.Sato</small>
+      </footer>
+    </>
   )
 }

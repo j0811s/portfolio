@@ -5,6 +5,7 @@ import {
   postHead, postEyecatchContainer, postEyecatch, postTextContainer, postTitle, postDateContainer,
   postDate, postDateIcon,
   postContent,
+  prevButton,
   postBreadcrumb
 } from './index.css';
 import Image from 'next/image';
@@ -15,6 +16,7 @@ import { Blog, Tag } from '../../../libs/microcms/blog';
 import ConvertDate from "../../../components/common/convertdate";
 import { TagsElement } from '../Tags/TagsElement';
 import { Breadcrumb } from "../../common/Breadcrumb";
+import { CtaButton } from "../../common/Button";
   
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -39,7 +41,7 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 
 export const Article = async ({ post }: { post: Blog }) => {
   const { tag }: { tag: Tag[] } = post;
-  const eyecatchPath = `${post?.eyecatch?.url}?fit=fill&w=940&h=530`;
+  const eyecatchPath = `${post?.eyecatch?.url}?auto=format&w=1280&ar=16:9&fit=crop&q=50`;
   const type = {
     slug: 'post',
     id: post.id,
@@ -72,6 +74,9 @@ export const Article = async ({ post }: { post: Blog }) => {
         </figure>
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
+      <div className={prevButton}>
+        <CtaButton href="/blog/" prev={true}>一覧へ戻る</CtaButton>
+      </div>
       <div className={postBreadcrumb}>
         <Breadcrumb type={type} post={post} />
       </div>

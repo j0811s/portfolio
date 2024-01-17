@@ -25,12 +25,13 @@ export const listItem = style({
 export const listItemLink = style({
   display: 'flex',
   alignItems: 'stretch',
+  gap: 6,
   padding: '0.25em 0',
   borderBottom: '1px solid transparent',
-  transition: 'border-color .4s ease',
+  transition: 'border-color .2s ease-in-out',
   selectors: {
     '&.mod-current': {
-      color: `${vars.color.tertiary}`
+      color: `${vars.color.gray.taupe}`
     },
     '&:not(.mod-current):hover': {
       '@media': {
@@ -42,7 +43,10 @@ export const listItemLink = style({
   }
 });
 
+export const listItemIcon = style({
+  color: `${vars.color.text.white}`
+});
+
 export const listItemName = style({
   display: 'inline-block',
-  padding: '0 0 0 0.25em',
 });

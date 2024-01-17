@@ -34,6 +34,11 @@ export const button = style({
       transformOrigin: 'left',
       transition: 'transform 0.2s ease-in-out'
     }, 
+    '&.mod-prev::before': {
+      left: 'auto',
+      right: 0,
+      transformOrigin: 'right',
+    },
     '&:hover': {
       '@media': {
         '(min-width: 960px)': {
@@ -69,6 +74,14 @@ globalStyle(`${button}:hover ${buttonArrowIcon}`, {
   '@media': {
     '(min-width: 960px)': {
       transform: 'translate3d(4px, 0, 0)',
+    }
+  }
+});
+
+globalStyle(`${button}:hover ${buttonArrowIcon}.mod-prev`, {
+  '@media': {
+    '(min-width: 960px)': {
+      transform: 'translate3d(-4px, 0, 0)',
     }
   }
 });

@@ -43,6 +43,7 @@ export const pageTitle = style({
 });
 
 export const mainTitle = style({
+  color: `${vars.color.text.white}`,
   fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,

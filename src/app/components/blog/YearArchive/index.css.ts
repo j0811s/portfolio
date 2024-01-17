@@ -34,7 +34,7 @@ export const listIetmTitle= style({
 });
 
 export const listItemTitleIcon= style({
-  color: `${vars.color.tertiary}`
+  color: `${vars.color.gray.taupe}`
 });
 
 export const listIetmTitleText= style({
@@ -42,6 +42,7 @@ export const listIetmTitleText= style({
 });
 
 export const listIetmLink = style({
+  color: `${vars.color.text.white}`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',

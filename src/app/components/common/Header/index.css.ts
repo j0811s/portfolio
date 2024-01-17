@@ -104,6 +104,7 @@ export const navigationListItemLink = style({
 });
 
 export const navigationItemIcon = style({
+  color: `${vars.color.text.white}`,
   marginRight: 16,
   '@media': {
     'screen and (min-width: 960px)': {

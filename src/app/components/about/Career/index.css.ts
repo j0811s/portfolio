@@ -13,10 +13,13 @@ export const wrapper = style({
   position: 'relative',
   display: 'block',
   margin: '40px auto 0',
-  padding: '40px 0',
+  padding: '20px',
+  backgroundColor: `${vars.color.secondary}`,
+  borderRadius: 8,
   '@media': {
     'screen and (min-width: 960px)': {
       margin: '50px auto 0',
+      padding: '40px',
     }
   },
   selectors: {
@@ -24,12 +27,17 @@ export const wrapper = style({
       content: '',
       position: 'absolute',
       top: 0,
-      left: '1.5em',
+      left: '2.7em',
       bottom: 0,
       display: 'block',
       width: 6,
       backgroundColor: `${vars.color.tertiary}`,
-      zIndex: '-1',
+      zIndex: 0,
+      '@media': {
+        'screen and (min-width: 960px)': {
+          left: '4em',
+        }
+      },
     }
   }
 });
@@ -94,8 +102,9 @@ export const readText = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
   lineHeight: '1.6',
-  marginTop: '0.25em',
+  marginTop: '0.5em',
   marginLeft: '5em',
+  textAlign: 'justify',
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
@@ -105,6 +114,9 @@ export const readText = style({
 
 export const textBold = style({
   fontWeight: 700,
+  borderBottom: `1px solid ${vars.color.white}`,
+  borderColor: 'inherit',
+  paddingBottom: '0.25em'
 });
 
 globalStyle(`${readText} + ${textBold}`, {

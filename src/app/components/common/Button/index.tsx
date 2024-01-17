@@ -1,31 +1,34 @@
 import { button, buttonInner, buttonArrowIcon } from "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import type { ReactNode } from 'react';
 
 type CtaButton = {
-  href?: string,
+  href?: string
+  prev?: boolean
   children: ReactNode
 }
 
-export const CtaButton = ({ href, children }: CtaButton) => {
+export const CtaButton = ({ href, prev, children }: CtaButton) => {
 
   const buttonElement = () => {
     return (
       href
       ?
-        <Link className={button} href={href}>
+        <Link className={`${button} ${prev ? 'mod-prev': ''}`} href={href}>
           <span className={buttonInner}>
+            { prev && <FontAwesomeIcon icon={faArrowLeftLong} className={`${buttonArrowIcon} mod-prev`} /> }
             <span>{children}</span>
-            <FontAwesomeIcon icon={faArrowRightLong} className={buttonArrowIcon} />
+            { !prev && <FontAwesomeIcon icon={faArrowRightLong} className={buttonArrowIcon} /> }
           </span>
         </Link>
       :
-        <button className={button} type="button">
+        <button className={`${button} ${prev ? 'mod-prev': ''}`} type="button">
           <span className={buttonInner}>
+            { prev && <FontAwesomeIcon icon={faArrowLeftLong} className={`${buttonArrowIcon} mod-prev`} /> }
             <span>{children}</span>
-            <FontAwesomeIcon icon={faArrowRightLong} className={buttonArrowIcon} />
+            { !prev && <FontAwesomeIcon icon={faArrowRightLong} className={buttonArrowIcon} /> }
           </span>
         </button>
     )

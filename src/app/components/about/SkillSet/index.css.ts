@@ -19,6 +19,7 @@ export const skillContainer = style({
 });
 
 export const skillTitle = style({
+  color: `${vars.color.text.white}`,
   display: 'grid',
   gridColumn: '1 / 4',
   textAlign: 'left',
@@ -75,6 +76,7 @@ export const logo = style({
 });
 
 export const logoName = style({
+  color: `${vars.color.text.white}`,
   display: 'block',
   textAlign: 'center',
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,

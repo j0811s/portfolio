@@ -4,14 +4,15 @@ export const vars = createGlobalTheme(':root', {
   color: {
     primary: '#1a1f1e',
     secondary: '#1e2626',
-    tertiary: '#797B84',
+    tertiary: '#323A3A',
     accent: {
-      dark: '#6e7f73',
+      dark: '#348369',
       light: '#cddbb5',
     },
     text: {
       black: '#000',
       white: '#fff',
+      gray: '#A9AAAA'
     },
     white: '#fff',
     body: '#FAFAFA',

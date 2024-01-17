@@ -3,7 +3,7 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const postWrapper = style({
   overflow: 'hidden',
-  color: `${vars.color.text.white}`,
+  // color: `${vars.color.text.white}`,
   backgroundColor: `${vars.color.secondary}`,
   borderRadius: 4,
   '@media': {
@@ -25,24 +25,20 @@ export const postHead = style({
 export const postEyecatchContainer = style({
   overflow: 'hidden',
   backgroundColor: `${vars.color.secondary}`,
+  border: `6px solid ${vars.color.accent.dark}`,
+  borderRadius: 8,
+  width: '100%',
   margin: '30px auto 0',
-  boxShadow: `0 0 4px ${vars.color.gray.hoverBg}`,
-  '@media': {
-    'screen and (min-width: 768px)': {
-      height: 300,
-    }
-  }
+  // aspectRatio: '16 / 9',
 });
 
 export const postEyecatch = style({
-  aspectRatio: '16 / 9',
-  objectFit: 'cover',
-  objectPosition: 'top',
-  '@media': {
-    'screen and (min-width: 768px)': {
-      height: '100%',
-    }
-  }
+  // objectFit: 'contain',
+  // '@media': {
+  //   'screen and (min-width: 768px)': {
+  //     height: '100%',
+  //   }
+  // }
 });
 
 export const postTextContainer = style({
@@ -50,6 +46,7 @@ export const postTextContainer = style({
 });
 
 export const postTitle = style({
+  color: `${vars.color.text.white}`,
   fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
@@ -67,7 +64,7 @@ export const postDateContainer = style({
 });
 
 export const postDate = style({
-  color: `${vars.color.tertiary}`,
+  color: `${vars.color.gray.taupe}`,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 500,
@@ -84,7 +81,7 @@ export const postDate = style({
 });
 
 export const postDateIcon = style({
-  color: `${vars.color.tertiary}`,
+  color: `${vars.color.gray.taupe}`,
   paddingRight: '0.5em'
 });
 
@@ -100,10 +97,10 @@ export const postContent = style({
 });
 
 globalStyle(`${postContent} > * + *`, {
-  margin: '30px 0 0',
+  margin: '24px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
-      margin: '40px 0 0',
+      margin: '32px 0 0',
     }
   }
 });
@@ -114,8 +111,8 @@ globalStyle(`${postContent} h1, ${postContent} h2`, {
   fontWeight: 700,
   position: 'relative',
   padding: '0.5em',
-  color: `#000`,
-  backgroundColor: `${vars.color.gray.default}`,
+  color: `${vars.color.text.white}`,
+  backgroundColor: `${vars.color.tertiary}`,
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
@@ -127,7 +124,10 @@ globalStyle(`${postContent} h3, ${postContent} h4, ${postContent} h5, ${postCont
   fontSize: `calc( 18 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
-  color: `#000`,
+  color: `inherit`,
+  paddingBottom: '0.5em',
+  borderBottom: `1px solid ${vars.color.text.gray}`,
+  borderColor: 'inherit',
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
@@ -151,30 +151,6 @@ globalStyle(`${postContent} * + h3, ${postContent} * + h4, ${postContent} * + h5
       margin: '50px 0 0',
     }
   }
-});
-
-globalStyle(`${postContent} h1::before, ${postContent} h2::before`, {
-  position: 'absolute',
-  top: '100%',
-  left: '0.5em',
-  width: 0,
-  height: 0,
-  content: '',
-  borderWidth: '14px 12px 0 12px',
-  borderStyle: 'solid',
-  borderColor: `${vars.color.gray.default} transparent transparent transparent`,
-});
-
-globalStyle(`${postContent} h1::after, ${postContent} h2::after`, {
-  position: 'absolute',
-  bottom: '-11px',
-  left: '0.5em',
-  width: 0,
-  height: 0,
-  content: '',
-  borderWidth: '14px 12px 0 12px',
-  borderStyle: 'solid',
-  borderColor: `${vars.color.gray.default} transparent transparent transparent`,
 });
 
 globalStyle(`${postContent} p`, {
@@ -220,10 +196,10 @@ globalStyle(`${postContent} blockquote > blockquote`, {
 
 globalStyle(`${postContent} code:not(.hljs)`, {
   display: 'inline-block',
-  backgroundColor: `${vars.color.gray.bg}`,
-  color: '#3E4B5B',
+  backgroundColor: `#1d1f21`,
+  color: `#81a2be`,
   padding: '0 0.3em',
-  fontSize: '0.9em'
+  fontSize: '1em'
 });
 
 globalStyle(`${postContent} ul`, {
@@ -255,7 +231,7 @@ globalStyle(`${postContent} table`, {
   borderCollapse: 'collapse',
   tableLayout: 'fixed',
   width: '100%',
-  overflow: 'hidden'
+  overflow: 'hidden',
 });
 
 globalStyle(`${postContent} tbody`, {
@@ -272,9 +248,9 @@ globalStyle(`${postContent} th, ${postContent} td`, {
   minWidth: 120,
   wordBreak: 'break-all',
   padding: '0.5em',
-  color: `${vars.color.text.black}`,
-  backgroundColor: '#fff',
-  border: '1px solid #ccccd9',
+  color: `${vars.color.text.white}`,
+  backgroundColor: `${vars.color.secondary}`,
+  border: `1px solid ${vars.color.gray.taupe}`,
   '@media': {
     'screen and (min-width: 960px)': {
       minWidth: 246,
@@ -283,7 +259,7 @@ globalStyle(`${postContent} th, ${postContent} td`, {
 });
 
 globalStyle(`${postContent} th`, {
-  backgroundColor: '#f8f9fd',
+  backgroundColor: `${vars.color.tertiary}`,
 });
 
 globalStyle(`${postContent} th > p`, {
@@ -302,7 +278,12 @@ globalStyle(`${postContent} pre > code`, {
   }
 });
 
+export const prevButton = style({
+  textAlign: 'center'
+});
+
 export const postBreadcrumb = style({
+  color: `${vars.color.text.white}`,
   padding: '16px',
   '@media': {
     'screen and (min-width: 768px)': {

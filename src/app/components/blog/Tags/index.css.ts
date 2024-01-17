@@ -13,9 +13,9 @@ export const list = style({
 });
 
 export const listIetmTitle= style({
+  color: `${vars.color.text.white}`,
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 500,
-  color: `${vars.color.text.white}`,
   backgroundColor: `${vars.color.secondary}`,
   padding: '1em',
   borderRadius: '4px',
@@ -27,7 +27,7 @@ export const listIetmTitle= style({
 });
 
 export const listItemTitleIcon= style({
-  color: `${vars.color.tertiary}`
+  color: `${vars.color.gray.taupe}`
 });
 
 export const listIetmTitleText= style({
