@@ -24,6 +24,9 @@ export const container = style({
     }
   },
   selectors: {
+    '&.add-processing': {
+      pointerEvents: 'none',
+    },
     '&.add-show': {
       opacity: 1,
       visibility: 'visible',

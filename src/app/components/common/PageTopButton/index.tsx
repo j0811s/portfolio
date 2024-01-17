@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { container } from "./index.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 export const PageTopButton = () => {
+  const isProcessing = useRef(false); 
   const [displayed, setDisplayed] = useState<boolean>(false);
 
   useEffect(() => {
@@ -23,10 +24,17 @@ export const PageTopButton = () => {
   
   const scrollToPageTop = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
+    if (isProcessing.current) return;
+    isProcessing.current = true;
+
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
-    })
+    });
+
+    setTimeout(() => {
+      isProcessing.current = false;
+    }, 800);
   }
 
   const Button = (displayed: boolean = false) => (
