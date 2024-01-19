@@ -16,12 +16,12 @@ export const tagLink = style({
   border: `1px solid ${vars.color.tertiary}`,
   color: `${vars.color.text.white}`,
   backgroundColor: `${vars.color.primary}`,
-  transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out',
+  transition: 'border-color 0.2s ease-in-out, color 0.2s ease-in-out',
   selectors: {
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          backgroundColor: `${vars.color.accent.dark}`
+          borderColor: `${vars.color.accent.light}`
         }
       }
     }

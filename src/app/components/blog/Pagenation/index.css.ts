@@ -30,16 +30,19 @@ export const pageLink = style({
   width: 40,
   height: 40,
   color: `${vars.color.text.white}`,
-  backgroundColor: `${vars.color.accent.dark}`,
+  backgroundColor: `${vars.color.secondary}`,
+  border: `1px solid ${vars.color.tertiary}`,
   borderRadius: 4,
-  transition: 'background-color 0.4s ease',
+  transition: 'border-color 0.2s ease-in-out',
   selectors: {
     '&:hover': {
-      backgroundColor: `${vars.color.secondary}`,
+      borderColor: `${vars.color.accent.light}`,
     }
   }
 });
 
 export const currentText = style({
-  backgroundColor: `${vars.color.secondary}`,
+  pointerEvents: 'none',
+  backgroundColor: `${vars.color.tertiary}`,
+  border: '1px solid transparent',
 });

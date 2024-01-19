@@ -47,14 +47,15 @@ export const listIetmLink = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0.5em',
+  border: '1px solid transparent',
   borderRadius: '4px',
   backgroundColor: 'transparent',
-  transition: 'background-color 0.2s linear',
+  transition: 'border-color 0.2s linear',
   selectors: {
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          backgroundColor: `${vars.color.accent.dark}`
+          borderColor: `${vars.color.accent.light}`
         }
       }
     }
@@ -70,5 +71,5 @@ export const numberBadge = style({
   fontWeight: 500,
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: `${vars.color.accent.dark}`,
+  backgroundColor: `${vars.color.tertiary}`,
 });
