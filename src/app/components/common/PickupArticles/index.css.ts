@@ -137,7 +137,11 @@ export const postBtn = style({
 });
 
 globalStyle(`${postListItem}:hover ${postListEyecatch}`, {
-  transform: 'scale(1.1)'
+  '@media': {
+    'screen and (min-width: 960px)': {
+      transform: 'scale(1.1)',
+    }
+  }
 });
 
 globalStyle(`${postListItem}:hover ${postBtn}`, {
