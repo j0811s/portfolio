@@ -8,7 +8,7 @@ import { GetTotalCount } from "../totalCount";
 export const Categories = async () => {
   const { contents } = await getList('blog', {
     offset: 0,
-    limit: 1000
+    limit: 100
   });
   
   if (contents.length === 0) return;

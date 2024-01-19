@@ -44,7 +44,7 @@ export const YearArchive = async () => {
   await Promise.all(years.map(async year => {
     const { contents } = await getList('blog', {
       offset: 0,
-      limit: 1000,
+      limit: 100,
       filters: `publishedAt[contains]${year}`
     })
 
