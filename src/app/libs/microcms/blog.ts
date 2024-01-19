@@ -106,3 +106,26 @@ export const getDetail = async (
 
   return detailData;
 }
+
+// エンドポイントのコンテンツをすべて取得
+export const getAllContents = async (
+  endpoint: string = "blog",
+  queries?: MicroCMSQueries
+) => {
+  const detailDataAll = await client.getAllContents({
+    endpoint,
+    queries
+  })
+  .catch(notFound);
+
+  return detailDataAll;
+}
+
+// エンドポイントのコンテンツIDをすべて取得
+export const getAllContentIds = async (endpoint: string = "blog") => {
+  const ids = await client.getAllContentIds({ endpoint })
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err));
+  
+  return ids;
+}
