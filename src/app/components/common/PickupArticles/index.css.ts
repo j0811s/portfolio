@@ -32,7 +32,7 @@ export const postListTitle = style({
 export const postList = style({
   display: 'flex',
   gap: 15,
-  marginTop: 30,
+  marginTop: 40,
   '@media': {
     'screen and (max-width: 599px)': {
       flexDirection: 'column',

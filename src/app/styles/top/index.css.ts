@@ -29,6 +29,14 @@ export const section = style({
     }
   },
   selectors: {
+    '&:first-of-type': {
+      marginTop: '30px',
+      '@media': {
+        'screen and (min-width: 600px)': {
+          marginTop: '30px',
+        }
+      },
+    },
     '&:not(:first-of-type)': {
       paddingBottom: '120px',
       '@media': {
