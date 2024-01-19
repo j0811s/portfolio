@@ -25,11 +25,15 @@ export const postHead = style({
 export const postEyecatchContainer = style({
   overflow: 'hidden',
   backgroundColor: `${vars.color.secondary}`,
-  border: `6px solid ${vars.color.accent.dark}`,
+  border: `3px solid ${vars.color.accent.dark}`,
   borderRadius: 8,
   width: '100%',
   margin: '30px auto 0',
-  // aspectRatio: '16 / 9',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      border: `6px solid ${vars.color.accent.dark}`
+    }
+  }
 });
 
 export const postEyecatch = style({
@@ -126,7 +130,7 @@ globalStyle(`${postContent} h3, ${postContent} h4, ${postContent} h5, ${postCont
   fontWeight: 700,
   color: `inherit`,
   paddingBottom: '0.5em',
-  borderBottom: `1px solid ${vars.color.text.gray}`,
+  borderBottom: `1px solid ${vars.color.text.white}`,
   borderColor: 'inherit',
   '@media': {
     'screen and (min-width: 768px)': {
