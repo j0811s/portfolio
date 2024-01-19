@@ -288,9 +288,11 @@ export const prevButton = style({
 
 export const postBreadcrumb = style({
   color: `${vars.color.text.white}`,
+  margin: '24px 0 0',
   padding: '16px',
   '@media': {
     'screen and (min-width: 768px)': {
+      margin: '32px 0 0',
       padding: '32px',
     }
   }
