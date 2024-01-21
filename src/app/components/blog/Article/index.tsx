@@ -41,7 +41,7 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 
 export const Article = async ({ post }: { post: Blog }) => {
   const { tag }: { tag: Tag[] } = post;
-  const eyecatchPath = `${post?.eyecatch?.url}?auto=format&w=1280&ar=16:9&fit=crop&q=50`;
+  const eyecatchPath = `${post?.eyecatch?.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
   const type = {
     slug: 'post',
     id: post.id,
