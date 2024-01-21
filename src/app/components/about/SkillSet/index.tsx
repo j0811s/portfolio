@@ -1,22 +1,18 @@
-import { skillContainer, skillTitle, skillItem, logoWrap, logo, logoName } from "./index.css"
-import Image from "next/image"
-import type { SkillContent, SkillInfo } from '@/src/app/libs/microcms/history'
+'use client'
+import { skillContainer, skillTitle } from "./index.css"
+import type { SkillContent } from '@/src/app/libs/microcms/history'
+import useCursorPosition from "../../hooks/useCursorPosition"
+import { SkillDdTag } from "./SkillDdTag"
+import { useEffect } from "react"
 
 export const SkillSet = ({ contents }: { contents: SkillContent[] }) => {
+  const cursorPosition = useCursorPosition();
 
-  const SkillDdTag = ({ skills }: { skills: SkillInfo }) => {
-    return (
-      skills.map(skill => (
-        <dd className={skillItem} key={skill.name}>
-          <figure className={logoWrap}>
-            <Image className={logo} src={skill.logo.url} alt={ skill.name } fill />
-            <figcaption className={logoName}>{ skill.name }</figcaption>
-          </figure>
-        </dd>
-      ))
-    )
-  }
-
+  useEffect(() => {
+    document.documentElement.style.setProperty('--x', String(cursorPosition.x));
+    document.documentElement.style.setProperty('--y', String(cursorPosition.y));
+  }, [cursorPosition])
+  
   return (
     contents.map(content => {
       return (
