@@ -12,6 +12,7 @@ import { useModalContext } from '@/src/app/context/ModalContext';
 import useModalStatus from "./hooks/useModalStatus";
 import useScrollLock from "@/src/app/components/hooks/useScrollLock";
 import useMediaQuery from "@/src/app/components/hooks/useMediaQuery";
+import { resolve } from "path";
 
 
 /** 型 */
