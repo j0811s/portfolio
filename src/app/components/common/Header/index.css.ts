@@ -102,6 +102,18 @@ export const navigationListItem = style({
     'screen and (min-width: 960px)': {
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
     }
+  },
+  selectors: {
+    '&.mod-github': {
+      '@media': {
+        'screen and (max-width: 959px)': {
+          marginTop: '1em',
+        },
+        'screen and (min-width: 960px)': {
+          marginLeft: '1em',
+        }
+      },
+    }
   }
 });
 
@@ -159,10 +171,24 @@ export const navigationListItemLink = style({
 
 export const navigationItemIcon = style({
   color: 'inherit',
-  marginRight: 16,
   '@media': {
+    'screen and (max-width: 959px)': {
+      marginRight: 16,
+    },
     'screen and (min-width: 960px)': {
       marginRight: 8,
+    }
+  }
+});
+
+export const navigationItemGithubIcon = style({
+  margin: 'auto',
+  '@media': {
+    'screen and (max-width: 959px)': {
+      width: `calc( 40 / ${vars.font.size} * 1rem )`,
+    },
+    'screen and (min-width: 960px)': {
+      width: `calc( 24 / ${vars.font.size} * 1rem )`,
     }
   }
 });

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBreadSlice, faUser, faFileLines, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import {
   container, wrapper,
-  navigation, navigationList, navigationListItem, navigationListItemLink, navigationItemIcon
+  navigation, navigationList, navigationListItem, navigationListItemLink, navigationItemIcon, navigationItemGithubIcon
 } from "./index.css"
 
 import Link from "next/link";
@@ -12,6 +12,7 @@ import DrawerMenu from "@/src/app/components/common/Modal";
 import { Logo } from "./Logo";
 import useDeviceType from "../../hooks/useDeviceType";
 import { useEffect } from "react";
+import Image from "next/image";
 
 export const Header = () => {
   const pathname = usePathname();
@@ -61,13 +62,26 @@ export const Header = () => {
     <nav className={navigation}>
       <ul className={navigationList}>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}><FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>TOP</span></Link>
+          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}>
+            <FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>TOP</span>
+          </Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}><FontAwesomeIcon icon={faUser} className={navigationItemIcon} /><span>ABOUT</span></Link>
+          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}>
+            <FontAwesomeIcon icon={faUser} className={navigationItemIcon} /><span>ABOUT</span>
+          </Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}><FontAwesomeIcon icon={faFileLines} className={navigationItemIcon} /><span>BLOG</span></Link>
+          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}>
+            <FontAwesomeIcon icon={faFileLines} className={navigationItemIcon} /><span>BLOG</span>
+          </Link>
+        </li>
+        <li className={`${navigationListItem} mod-github`}>
+          <Link className={navigationListItemLink} href='https://github.com/j0811s/portfolio' target="_blank">
+            <div className={navigationItemGithubIcon}>
+              <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
+            </div>
+          </Link>
         </li>
       </ul>
     </nav>
