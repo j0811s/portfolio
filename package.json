@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next build && next dev",
+    "dev": "next build && next dev -H $npm_config_host",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
