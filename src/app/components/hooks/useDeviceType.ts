@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 /** 型定義 */
 type DeviceList = {
@@ -8,43 +8,9 @@ type DeviceList = {
   }
 };
 
-const useDeviceType = (): DeviceList => {
-  const [deviceType, setDeviceType] = useState<DeviceList>({});
-  
-  useEffect(() => {
-    const getDeviceType = () => {
-      setDeviceType({
-        browser: {
-          ie: isIE(),
-        },
-        os: {
-          windows: isWindows(),
-          mac: isMac(),
-          ios: isiOS(),
-          android: isAndroid()
-        },
-        device: {
-          touch: isTouchPoint(),
-          iphone: isiPhone(),
-          ipad: isiPad(),
-          android_sp: isAndroidSP(),
-          android_tab: isAndroidTab(),
-          sp: isSP(),
-          tab: isTab(),
-          pc: isPC(),
-        }
-      });
-    }
+const useDeviceType = () => {
+  if (typeof window === 'undefined') return {};
 
-    getDeviceType();
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (typeof window === 'undefined') {
-    return {}
-  }
-  
   /** デバイス 判定処理 */
   const UA: string = window.navigator.userAgent.toLowerCase();
 
@@ -65,8 +31,54 @@ const useDeviceType = (): DeviceList => {
   const isSP = () => isiPhone() || isAndroidSP();
   const isTab = () => isiPad() || isAndroidTab();
   const isPC = () => !isSP() && !isTab();
+
+  const [deviceType, setDeviceType] = useState<DeviceList>({
+    browser: {
+      ie: isIE(),
+    },
+    os: {
+      windows: isWindows(),
+      mac: isMac(),
+      ios: isiOS(),
+      android: isAndroid()
+    },
+    device: {
+      touch: isTouchPoint(),
+      iphone: isiPhone(),
+      ipad: isiPad(),
+      android_sp: isAndroidSP(),
+      android_tab: isAndroidTab(),
+      sp: isSP(),
+      tab: isTab(),
+      pc: isPC(),
+    }
+  });
+
+  const resetDeviceType = () => {
+    setDeviceType({
+      browser: {
+        ie: isIE(),
+      },
+      os: {
+        windows: isWindows(),
+        mac: isMac(),
+        ios: isiOS(),
+        android: isAndroid()
+      },
+      device: {
+        touch: isTouchPoint(),
+        iphone: isiPhone(),
+        ipad: isiPad(),
+        android_sp: isAndroidSP(),
+        android_tab: isAndroidTab(),
+        sp: isSP(),
+        tab: isTab(),
+        pc: isPC(),
+      }
+    })
+  }
   
-  return deviceType;
+  return { deviceType, resetDeviceType };
 }
 
 export default useDeviceType;

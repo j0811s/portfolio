@@ -13,12 +13,11 @@ const useScrollLock: UseScrollLock = (target) => {
   const targetElem = target?.current || null;
 
   /** デバイス判定 */
-  const deviceType = useDeviceType();
-  const isPC = deviceType.device?.pc;
-  const isiOS = deviceType.os?.ios;
+  const { deviceType, resetDeviceType } = useDeviceType();
+  const isPC = deviceType?.device?.pc;
+  const isiOS = deviceType?.os?.ios;
   
   /** 状態 */
-  const [isReady, setIsReady] = useState(false);
   const [isLock, setIsLock] = useState(false);
 
   const [previousBodyPaddingRight, setPreviousBodyPaddingRight] = useState('');
