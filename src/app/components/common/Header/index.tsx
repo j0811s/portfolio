@@ -10,9 +10,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DrawerMenu from "@/src/app/components/common/Modal";
 import { Logo } from "./Logo";
+import useDeviceType from "../../hooks/useDeviceType";
+import { useEffect } from "react";
 
 export const Header = () => {
   const pathname = usePathname();
+  const { deviceType, resetDeviceType } = useDeviceType();
+  
+  useEffect(() => {
+    if (deviceType) {
+      const deviceTypeKeys = Object.keys(deviceType);
+
+      deviceTypeKeys.forEach(key => {
+        const deviceData = deviceType[key];
+        const deviceDataKeys = Object.keys(deviceData);
+        deviceDataKeys.forEach(dataDataKey => {
+          if (deviceData[dataDataKey] === true) {
+            document.body.classList.add(`is-${dataDataKey}`);
+          }
+        });
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   const isActivePage = (pathname: string, pagename: string): boolean => pathname.startsWith(pagename);
 
