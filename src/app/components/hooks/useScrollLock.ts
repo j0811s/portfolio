@@ -1,6 +1,5 @@
 'use client'
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { useModalContext } from '@/src/app/context/ModalContext';
+import { useState, useEffect } from 'react';
 import useDeviceType from "./useDeviceType";
 
 type UseScrollLock = (target?: React.RefObject<HTMLElement | null>) => {
@@ -33,23 +32,9 @@ const useScrollLock: UseScrollLock = (target) => {
     left: ''
   });
 
-  // const [isOpen, openModal, closeModal] = useModalContext();
-
   /** スクロールロックのイベント処理 */
   const enable = () => setIsLock(true);
   const disable = () => setIsLock(false);
-
- /** 副作用 */
-  useEffect(() => {
-    setIsReady(true);
-
-    return () => {
-      setIsReady(false);
-    }
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
 
   useEffect(() => {
     getScrollBarWidth();
@@ -59,7 +44,7 @@ const useScrollLock: UseScrollLock = (target) => {
     return () => {
       unsetOverflowHidden();
     }
-  }, [isReady, isLock]);
+  }, [isLock]);
 
 
   useEffect(() => {
@@ -69,7 +54,7 @@ const useScrollLock: UseScrollLock = (target) => {
       setTouchCancel();
     }
     const resetEvents = () => {
-      resetFixedBodyPotision();
+      resetFixedBodyPosition();
       unsetTouchCancel();
     }
 
@@ -78,7 +63,7 @@ const useScrollLock: UseScrollLock = (target) => {
     return () => {
       resetEvents();
     }
-  }, [isReady, touchStartY]);
+  }, [isLock]);
     
 
 
@@ -170,7 +155,7 @@ const useScrollLock: UseScrollLock = (target) => {
     }
   }
 
-  const resetFixedBodyPotision = () => {
+  const resetFixedBodyPosition = () => {
     if (isiOS && isLock) {
       const y = -parseInt(body.style.top, 10);
       const x = -parseInt(body.style.left, 10);
