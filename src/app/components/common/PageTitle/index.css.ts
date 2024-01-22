@@ -36,5 +36,12 @@ export const title = style({
 });
 
 export const pageTitleBreadcrumb = style({
-  marginBottom: `calc( 24 / ${vars.font.size} * 1rem )`,
+  '@media': {
+    'screen and (max-width: 959px)': {
+      marginBottom: `calc( 48 / ${vars.font.size} * 1rem )`,
+    },
+    'screen and (min-width: 960px)': {
+      marginBottom: `calc( 48 / ${vars.font.size} * 1rem )`,
+    }
+  },
 });
