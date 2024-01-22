@@ -25,15 +25,15 @@ export const Header = () => {
     // },
     // disableScroll: false,
     // on: {
-    //   afterOpen: (e: Event) => {
-    //     console.log('afterOpen', e)
-    //   },
-    //   matches: (isMatches: isMatches, isOpen: boolean) => {
-    //     if (isMatches) {
-    //       console.log('IS MATCHES')
-    //       if (isOpen) { console.log('IS OPEN') };
-    //     }
-    //   }
+      // afterOpen: (e: Event) => {
+      //   console.log('afterOpen', e)
+      // },
+      // matches: (isMatches: isMatches, isOpen: boolean) => {
+      //   if (isMatches) {
+      //     console.log('IS MATCHES')
+      //     if (isOpen) { console.log('IS OPEN') };
+      //   }
+      // }
     // }
   }
 

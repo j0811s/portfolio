@@ -135,6 +135,11 @@ export default function GenerateModal({ options, children }: { options: Options,
   useEffect(() => {
     if (!isReady) return;
     closeModal();
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+      });
+    }, 100)
   }, [pathname, searchParams, isMatches]);
 
   // matchMedia
