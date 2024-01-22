@@ -3,7 +3,7 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
   margin: '0 auto',
-  padding: '30px 16px',
+  padding: '50px 0',
   maxWidth: 1080,
   '@media': {
     'screen and (min-width: 600px)': {

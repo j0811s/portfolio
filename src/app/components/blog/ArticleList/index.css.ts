@@ -33,7 +33,6 @@ export const postList = style({
   display: 'flex',
   gap: 15,
   marginTop: 40,
-  padding: '0 15px',
   '@media': {
     'screen and (max-width: 599px)': {
       flexDirection: 'column',
@@ -44,7 +43,7 @@ export const postList = style({
       gap: 15,
     },
     'screen and (min-width: 1080px)': {
-      gap: 15
+      gap: 15,
     }
   }
 });
