@@ -46,8 +46,8 @@ export const ArticleList = async ({ contents, type, totalCount, limit, currentPa
                     <Link className={postListItemLink} href={`/blog/${post.id}`} scroll={true}>
                       <figure className={postListEyecatchContainer}>
                         {post.eyecatch ?
-                          <Image className={postListEyecatch} src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} /> :
-                          <Image className={postListEyecatch} src="/images/blog/dummy.png" alt="" width="375" height="210" />
+                          <Image className={postListEyecatch} src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} priority={true} /> :
+                          <Image className={postListEyecatch} src="/images/blog/dummy.png" alt="" width="375" height="210" priority={true} />
                         }
                       </figure>
                       <dl className={postData}>

@@ -30,7 +30,7 @@ export const PickupArticles = async ({ endpoint = 'blog', category = 'portfolio'
   return (
     <ul className={postList}>
       {contents.map((post) => {
-        const eyecatchPath = `${post.eyecatch?.url}?fit=fill&w=634&h=356`;
+        const eyecatchPath = `${post.eyecatch?.url}?fit=fill?auto=format&w=768&ar=16:9&fit=crop&q=50`;
         return (
           <li key={post.id} className={postListItem}>
             <Link className={postListItemLink} href={`/blog/${post.id}`} scroll={true}>

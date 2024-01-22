@@ -7,7 +7,7 @@ export const SkillDdTag = ({ skills }: { skills: SkillInfo }) => {
     skills.map(skill => (
       <dd className={skillItem} key={skill.name}>
         <figure className={logoWrap}>
-          <Image className={logo} src={skill.logo.url} alt={ skill.name } fill />
+          <Image className={logo} src={skill.logo.url} width={skill.logo.width} height={skill.logo.height} alt={ skill.name } />
           <figcaption className={logoName}>{ skill.name }</figcaption>
         </figure>
       </dd>
