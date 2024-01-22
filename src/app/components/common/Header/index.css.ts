@@ -106,15 +106,17 @@ export const navigationListItem = style({
 });
 
 export const navigationListItemLink = style({
-  visibility: 'hidden',
-  opacity: 0,
-  transform: 'translate3d(0, 100%, 0)',
   display: 'block',
   fontWeight: 500,
   padding: '0.5em',
   fontFeatureSettings: "'palt'",
   color: '#fff',
   '@media': {
+    'screen and (max-width: 959px)': {
+      visibility: 'hidden',
+      opacity: 0,
+      transform: 'translate3d(0, 100%, 0)',
+    },
     'screen and (min-width: 960px)': {
       padding: '0.25em 0',
       transition: 'opacity 0.2s linear',
@@ -133,16 +135,24 @@ export const navigationListItemLink = style({
       color: `${vars.color.accent.dark}`
     },
     ".add-openAnimation &": {
-      visibility: 'hidden',
-      opacity: 0,
-      transform: 'translate3d(0, 100%, 0)',
-      animation: `${openModal} 0.4s 0.45s forwards ease`,
+      '@media': {
+        'screen and (max-width: 959px)': {
+          visibility: 'hidden',
+          opacity: 0,
+          transform: 'translate3d(0, 100%, 0)',
+          animation: `${openModal} 0.4s 0.45s forwards ease`,
+        },
+      },
     },
     ".add-closeAnimation &": {
-      visibility: 'visible',
-      opacity: 1,
-      transform: 'translate3d(0, 0, 0)',
-      animation: `${closeModal} 0.4s forwards ease`,
+      '@media': {
+        'screen and (max-width: 959px)': {
+          visibility: 'visible',
+          opacity: 1,
+          transform: 'translate3d(0, 0, 0)',
+          animation: `${closeModal} 0.4s forwards ease`,
+        },
+      },
     }
   }
 });
