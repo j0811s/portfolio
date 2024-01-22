@@ -13,7 +13,7 @@ const useScrollLock: UseScrollLock = (target) => {
   const targetElem = target?.current || null;
 
   /** デバイス判定 */
-  const { deviceType, resetDeviceType } = useDeviceType();
+  const deviceType = useDeviceType();
   const isPC = deviceType?.device?.pc;
   const isiOS = deviceType?.os?.ios;
   

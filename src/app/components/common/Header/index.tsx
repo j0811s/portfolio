@@ -15,7 +15,7 @@ import { useEffect } from "react";
 
 export const Header = () => {
   const pathname = usePathname();
-  const { deviceType, resetDeviceType } = useDeviceType();
+  const deviceType = useDeviceType();
   
   useEffect(() => {
     if (deviceType) {
@@ -32,7 +32,7 @@ export const Header = () => {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [deviceType]);
   
   const isActivePage = (pathname: string, pagename: string): boolean => pathname.startsWith(pagename);
 
