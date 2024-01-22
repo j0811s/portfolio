@@ -1,9 +1,9 @@
 'use client'
-import { skillContainer, skillTitle } from "./index.css"
-import type { SkillContent } from '@/src/app/libs/microcms/history'
-import useCursorPosition from "../../hooks/useCursorPosition"
-import { SkillDdTag } from "./SkillDdTag"
-import { useEffect } from "react"
+import { skillContainer, skillTitle } from "./index.css";
+import type { SkillContent } from '@/src/app/libs/microcms/history';
+import useCursorPosition from "../../hooks/useCursorPosition";
+import { SkillDdTag } from "./SkillDdTag";
+import { useEffect } from "react";
 
 export const SkillSet = ({ contents }: { contents: SkillContent[] }) => {
   const cursorPosition = useCursorPosition();

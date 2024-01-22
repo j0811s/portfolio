@@ -1,7 +1,6 @@
-import { skillItem, logoWrap, logo, logoName } from "../index.css"
-import type { SkillInfo } from '@/src/app/libs/microcms/history'
-import Image from "next/image"
-import { memo } from "react"
+import { skillItem, logoWrap, logo, logoName } from "../index.css";
+import type { SkillInfo } from '@/src/app/libs/microcms/history';
+import Image from "next/image";
 
 export const SkillDdTag = ({ skills }: { skills: SkillInfo }) => {
   return (
