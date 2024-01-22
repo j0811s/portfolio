@@ -1,5 +1,5 @@
 import { container, pageTitle, pageSubTitle, ctaButtonContainer } from "./styles/not-found/index.css";
-import { CtaButton } from "./components/common/ctaButton";
+import { CtaButton } from "./components/common/Button";
 
 export default function NotFound() {
   return (

@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { style, globalStyle } from "@vanilla-extract/css";
 
 export const container = style({
   display: 'grid',
@@ -42,3 +42,7 @@ export const ctaButtonContainer = style({
     }
   }
 });
+
+globalStyle(`${ctaButtonContainer} > a`, {
+  width: '100%'
+})
