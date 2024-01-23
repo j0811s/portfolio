@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBreadSlice, faUser, faFileLines, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import {
   container, wrapper,
-  navigation, navigationList, navigationListItem, navigationListItemLink, navigationItemIcon, navigationItemGithubIcon
+  navigation, navigationList, navigationListItem, navigationListItemLink, navigationListItemLinkHover, navigationItemIcon, navigationItemGithubIcon
 } from "./index.css"
 
 import Link from "next/link";
@@ -13,11 +13,12 @@ import { Logo } from "./Logo";
 import useDeviceType from "../../hooks/useDeviceType";
 import { useEffect } from "react";
 import Image from "next/image";
+import { StickyNavigation } from "./StickyNavigation";
 
 export const Header = () => {
   const pathname = usePathname();
   const deviceType = useDeviceType();
-  
+
   useEffect(() => {
     if (deviceType) {
       const deviceTypeKeys = Object.keys(deviceType);
@@ -62,21 +63,21 @@ export const Header = () => {
     <nav className={navigation}>
       <ul className={navigationList}>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/`} data-page-active={pathname === '/'}>
+          <Link className={`${navigationListItemLink} ${navigationListItemLinkHover}`} href={`/`} data-page-active={pathname === '/'}>
             <FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>TOP</span>
           </Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}>
+          <Link className={`${navigationListItemLink} ${navigationListItemLinkHover}`} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}>
             <FontAwesomeIcon icon={faUser} className={navigationItemIcon} /><span>ABOUT</span>
           </Link>
         </li>
         <li className={navigationListItem}>
-          <Link className={navigationListItemLink} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}>
+          <Link className={`${navigationListItemLink} ${navigationListItemLinkHover}`} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}>
             <FontAwesomeIcon icon={faFileLines} className={navigationItemIcon} /><span>BLOG</span>
           </Link>
         </li>
-        <li className={`${navigationListItem} mod-github`}>
+        <li className={`${navigationListItem} mod-github util-sp`}>
           <Link className={navigationListItemLink} href='https://github.com/j0811s/portfolio' target="_blank">
             <div className={navigationItemGithubIcon}>
               <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
@@ -88,14 +89,25 @@ export const Header = () => {
   )
 
   return (
-    <header className={container}>
-      <div className={wrapper}>
-        <Logo pathname={pathname} />
+    <>
+      <header className={container}>
+        <div className={wrapper}>
+          <Logo pathname={pathname} />
+          <DrawerMenu options={DrawerMenuOptions}>
+            <NavigationListElements />
+          </DrawerMenu>
+          <div className={`${navigationListItem} mod-github util-pc`}>
+            <Link className={`${navigationListItemLink} ${navigationListItemLinkHover} mod-icon`} href='https://github.com/j0811s/portfolio' target="_blank">
+              <div className={navigationItemGithubIcon}>
+                <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
+              </div>
+            </Link>
+          </div>
+        </div>
+      </header>
+      <StickyNavigation>
         <NavigationListElements />
-        <DrawerMenu options={DrawerMenuOptions}>
-          <NavigationListElements />
-        </DrawerMenu>
-      </div>
-    </header>
+      </StickyNavigation>
+    </>
   )
 }

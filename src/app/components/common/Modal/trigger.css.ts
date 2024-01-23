@@ -4,8 +4,6 @@ export const btn = style({
   position: 'relative',
   cursor: 'pointer',
   fontSize: 10,
-  marginTop: '-1em',
-  marginLeft: 'auto',
   padding: '0.5em 0',
   '@media': {
     'screen and (max-width: 959px)': {
