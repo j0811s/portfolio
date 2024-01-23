@@ -29,37 +29,68 @@ const closeModal = keyframes({
 
 export const container = style({
   display: 'block',
-  position: 'sticky',
-  top: 0,
-  left: 0,
+  position: 'relative',
   zIndex: 9999,
   width: '100%',
-  height: 60,
-  backgroundColor: 'rgb(30, 38, 38, 0.95)',
-  backdropFilter: 'blur(2px)',
-  boxShadow: `0 0 1px ${vars.color.white}`,
+  '@media': {
+    'screen and (max-width: 959px)': {
+      position: 'sticky',
+      top: 0,
+      left: 0,
+      boxShadow: `0 0 1px ${vars.color.white}`,
+      backgroundColor: 'rgb(30, 38, 38, 0.95)',
+      backdropFilter: 'blur(2px)',
+    },
+    'screen and (min-width: 960px)': {
+      backgroundColor: 'transparent',
+    }
+  },
 });
 
 export const wrapper = style({
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
   width: '100%',
   maxWidth: 1280,
-  height: '100%',
   margin: '0 auto',
-  padding: '0 1em',
+  '@media': {
+    'screen and (max-width: 959px)': {
+      padding: '1em',
+    },
+    'screen and (min-width: 960px)': {
+      padding: '2em 1em',
+    }
+  },
 });
 
 export const navigation = style({
+  position: 'relative',
   fontSize: `calc( 20 / ${vars.font.size} * 1rem )`,
+  backgroundColor: 'rgb(30, 38, 38, 0.95)',
+  padding: '1em 1.5em',
   '@media': {
     'screen and (min-width: 960px)': {
       display: 'block',
-      marginLeft: 'auto',
+      backdropFilter: 'blur(2px)',
+      borderRadius: 9999,
+      boxShadow: `0 0 1px ${vars.color.white}`,
+      margin: '0 auto',
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
     }
   },
   selectors: {
+    'body.is-pc &::before': {
+      content: '',
+      position: 'absolute',
+      display: 'block',
+      inset: 0,
+      zIndex: -1,
+      borderRadius: 9999,
+      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), rgb(205, 219, 181, 1), transparent 15vmin), transparent`,
+      backgroundAttachment: 'fixed',
+      mask: `linear-gradient(white, white) 50% 100% / 100% 1px no-repeat`,
+    },
     ':not(.add-open) &': {
       '@media': {
         'screen and (max-width: 959px)': {
@@ -113,6 +144,20 @@ export const navigationListItem = style({
           marginLeft: '1em',
         }
       },
+    },
+    '&.util-sp': {
+      '@media': {
+        'screen and (min-width: 960px)': {
+          display: 'none'
+        }
+      },
+    },
+    '&.util-pc': {
+      '@media': {
+        'screen and (max-width: 959px)': {
+          display: 'none'
+        },
+      },
     }
   }
 });
@@ -120,9 +165,10 @@ export const navigationListItem = style({
 export const navigationListItemLink = style({
   display: 'block',
   fontWeight: 500,
-  padding: '0.5em',
+  padding: '0.5em 1em',
+  borderRadius: 9999,
   fontFeatureSettings: "'palt'",
-  color: '#fff',
+  color: `${vars.color.text.white}`,
   '@media': {
     'screen and (max-width: 959px)': {
       visibility: 'hidden',
@@ -130,21 +176,14 @@ export const navigationListItemLink = style({
       transform: 'translate3d(0, 100%, 0)',
     },
     'screen and (min-width: 960px)': {
-      padding: '0.25em 0',
-      transition: 'opacity 0.2s linear',
+      padding: '0.5em 1em',
     },
   },
   selectors: {
-    '&:hover': {
-      '@media': {
-        'screen and (min-width: 960px)': {
-          opacity: '0.7'
-        }
-      }
-    },
     '&[data-page-active="true"]': {
-      pointerEvents: 'none',
-      color: `${vars.color.accent.dark}`
+      cursor: 'no-drop',
+      backgroundColor: `${vars.color.white}`,
+      color: `${vars.color.text.black}`,
     },
     ".add-openAnimation &": {
       '@media': {
@@ -169,6 +208,28 @@ export const navigationListItemLink = style({
   }
 });
 
+export const navigationListItemLinkHover = style({
+  selectors: {
+    '&:not(.mod-icon):hover': {
+      '@media': {
+        'screen and (min-width: 960px)': {
+          backgroundColor: `${vars.color.white}`,
+          color: `${vars.color.text.black}`,
+          transition: 'color 0.2s linear, background-color 0.2s linear',
+        }
+      }
+    },
+    '&.mod-icon:hover': {
+      '@media': {
+        'screen and (min-width: 960px)': {
+          opacity: 0.7,
+          transition: 'opacity 0.2s linear',
+        }
+      }
+    },
+  }
+});
+
 export const navigationItemIcon = style({
   color: 'inherit',
   '@media': {
@@ -188,7 +249,16 @@ export const navigationItemGithubIcon = style({
       width: `calc( 40 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 960px)': {
-      width: `calc( 24 / ${vars.font.size} * 1rem )`,
+      width: `calc( 30 / ${vars.font.size} * 1rem )`,
+    }
+  }
+});
+
+globalStyle(`${navigationList}:hover [data-page-active="true"]`, {
+  '@media': {
+    'screen and (min-width: 960px)': {
+      backgroundColor: `transparent`,
+      color: `${vars.color.text.white}`,
     }
   }
 });
