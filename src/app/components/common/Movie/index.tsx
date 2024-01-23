@@ -24,7 +24,7 @@ export const Movie = ({ src, autoplay = false }: { src: string, autoplay: boolea
     videoRef.current?.pause();
   }
 
-  const controlMovie = () => {
+  const onControlMovie = () => {
     isPlaying ? onPause() : onPlay();
   }
 
@@ -40,7 +40,7 @@ export const Movie = ({ src, autoplay = false }: { src: string, autoplay: boolea
     <div className={movieContainer}>
       <video className={movie} playsInline muted loop src={src} ref={videoRef}></video>
       <div className={controlButtons}>
-        <button className={controlButton} type="button" onClick={controlMovie}>
+        <button className={controlButton} type="button" onClick={onControlMovie}>
           <ControlButtonIcon />
         </button>
       </div>
