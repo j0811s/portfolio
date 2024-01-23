@@ -30,8 +30,8 @@ export const movie = style({
 
 export const controlButtons = style({
   position: 'absolute',
-  bottom: 20,
-  left: 20,
+  bottom: 16,
+  left: 16,
   zIndex: 1,
   display: 'flex',
   alignItems: 'center',
@@ -61,6 +61,5 @@ export const controlButton = style({
 });
 
 export const controlButtonIcon = style({
-  border: `1px solid ${vars.color.tertiary}`,
-  borderRadius: 9999,
+  
 });
