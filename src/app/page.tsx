@@ -1,18 +1,17 @@
-import { siteTitleContainer, siteTitle, section, moreButtonContainer } from "./styles/top/index.css";
+import { section, moreButtonContainer } from "./styles/top/index.css";
 import { getHistoryAllContents, type SkillContent } from "@/src/app/libs/microcms/history"
 import { SkillSet } from "./components/about/SkillSet";
 import { PickupArticles } from "./components/common/PickupArticles";
 import { PageTitle } from "./components/common/PageTitle";
 import { CtaButton } from "./components/common/Button";
+import { FirstView } from "./components/top/FirstView";
 
 export default async function Top() {
   const skillContents: SkillContent[] = await getHistoryAllContents('skill');
 
   return (
     <>
-      <div className={siteTitleContainer}>
-        <h1 className={siteTitle}>J.Sato - Portfolio Site</h1>
-      </div>
+      <FirstView />
       <section className={section}>
         <PageTitle pageTitle="経験スキル" isBreadcrumb={false} subHeadline={true} />
         <SkillSet contents={skillContents} />

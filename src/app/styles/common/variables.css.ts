@@ -27,6 +27,10 @@ export const vars = createGlobalTheme(':root', {
       border: '#E0E0E0',
     },
     link: '#6997E4',
+    code: {
+      tag: '#81a2be',
+      text: '#f0c674',
+    }
   },
   font: {
     size: '16' // fontSize: `calc( 32 / ${vars.font.size} * 1rem )`,
