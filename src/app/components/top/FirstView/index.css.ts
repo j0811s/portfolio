@@ -16,7 +16,15 @@ export const srOnly = style({
 export const firstViewContainer = style({
   position: 'relative',
   backgroundColor: `${vars.color.primary}`,
-  height: '50vh',
+  height: 'auto',
+  '@media': {
+    'screen and (min-width: 600px) and (max-width: 959px)': {
+      height: '30vh',
+    },
+    'screen and (min-width: 960px)': {
+      height: '50vh',
+    }
+  }
 });
 
 export const siteTitle = style({
