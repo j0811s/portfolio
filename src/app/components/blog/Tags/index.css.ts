@@ -14,6 +14,12 @@ export const list = style({
     'screen and (min-width: 960px)': {
       padding: '1em',
     }
+  },
+  selectors: {
+    '&.mod-gapNoneX': {
+      paddingLeft: 0,
+      paddingRight: 0,
+    }
   }
 });
 

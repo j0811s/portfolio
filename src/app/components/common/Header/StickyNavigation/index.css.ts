@@ -10,10 +10,10 @@ export const navigationWrapper = style({
   '@media': {
     'screen and (min-width: 960px)': {
       position: 'sticky',
-      top: '1.5em',
+      top: '2rem',
       left: 0,
       zIndex: 9999,
-      margin: '0 auto 2em',
+      margin: '2rem auto',
     }
   },
 });

@@ -1,10 +1,21 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
+export const container = style({
+  '@media': {
+    'screen and (min-width: 600px) and (max-width: 959px)': {
+      padding: '0 0 60px',
+    },
+    'screen and (min-width: 960px)': {
+      padding: '60px 0',
+    }
+  }
+});
+
 export const section = style({
   margin: '0 auto',
-  padding: '30px 16px',
-  maxWidth: 1080,
+  padding: '40px 16px',
+  maxWidth: 1280,
   '@media': {
     'screen and (min-width: 600px)': {
       padding: '60px 24px',
@@ -19,11 +30,10 @@ export const section = style({
         }
       },
     },
-    '&:not(:first-of-type)': {
-      paddingBottom: '120px',
+    '&:last-of-type': {
       '@media': {
-        'screen and (min-width: 600px)': {
-          paddingBottom: '120px',
+        'screen and (max-width: 599px)': {
+          paddingBottom: '90px',
         }
       },
     }

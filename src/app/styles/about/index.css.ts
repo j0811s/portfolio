@@ -4,10 +4,10 @@ import { vars } from "@/src/app/styles/common/variables.css";
 export const container = style({
   margin: '0 auto',
   padding: '50px 0',
-  maxWidth: 1080,
+  maxWidth: 1280,
   '@media': {
     'screen and (min-width: 600px)': {
-      padding: '60px 24px',
+      padding: '60px 0',
     }
   }
 });

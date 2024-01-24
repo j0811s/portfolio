@@ -35,8 +35,8 @@ export const siteTitle = style({
   zIndex: 1,
   textAlign: 'center',
   color: `${vars.color.text.white}`,
-  backdropFilter: 'blur(4px)',
   backgroundColor: 'rgb(30, 38, 38, 0.3)',
+  backdropFilter: 'blur(2px)',
   fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
   '@media': {
@@ -45,6 +45,7 @@ export const siteTitle = style({
     },
     'screen and (min-width: 960px)': {
       fontSize: `calc( 56 / ${vars.font.size} * 1rem )`,
+      backdropFilter: 'blur(4px)',
     }
   }
 });
