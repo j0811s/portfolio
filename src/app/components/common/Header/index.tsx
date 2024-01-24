@@ -36,7 +36,7 @@ export const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deviceType]);
   
-  const isActivePage = (pathname: string, pagename: string): boolean => pathname.startsWith(pagename);
+  const isActivePage = (pathname: string, currentPage: string): boolean => pathname.startsWith(currentPage);
 
   const DrawerMenuOptions = {
     // initOpen: true,

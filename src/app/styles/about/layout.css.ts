@@ -8,7 +8,7 @@ export const container = style({
     },
     'screen and (min-width: 960px)': {
       maxWidth: 1280,
-      padding: '60px 16px 24px',
+      padding: '60px 16px 80px',
     }
   }
 });

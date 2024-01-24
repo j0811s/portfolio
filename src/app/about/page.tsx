@@ -33,15 +33,13 @@ export default async function About() {
   return (
     <>
       <PageTitle pageTitle="私について" type={{slug: 'about'}} />
-
-      <section className={container}>
-        <h2 className={mainTitle}>経験スキル</h2>
-        <SkillSet contents={skillContents} />
-      </section>
-
       <section className={container}>
         <h2 className={mainTitle}>経歴</h2>
         <Career contents={careerContents} />
+      </section>
+      <section className={container}>
+        <h2 className={mainTitle}>経験スキル</h2>
+        <SkillSet contents={skillContents} />
       </section>
     </>
   )
