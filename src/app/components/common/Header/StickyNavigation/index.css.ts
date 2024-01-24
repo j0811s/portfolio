@@ -8,6 +8,9 @@ export const navigationWrapper = style({
   maxWidth: 1280,
   margin: '0 auto',
   '@media': {
+    'screen and (max-width: 959px)': {
+      display: 'none'
+    },
     'screen and (min-width: 960px)': {
       position: 'sticky',
       top: '2rem',
