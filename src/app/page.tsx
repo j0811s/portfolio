@@ -1,4 +1,4 @@
-import { section, moreButtonContainer } from "./styles/top/index.css";
+import { container, section, moreButtonContainer } from "./styles/top/index.css";
 import { getHistoryAllContents, type SkillContent } from "@/src/app/libs/microcms/history"
 import { SkillSet } from "./components/about/SkillSet";
 import { PickupArticles } from "./components/common/PickupArticles";
@@ -10,7 +10,7 @@ export default async function Top() {
   const skillContents: SkillContent[] = await getHistoryAllContents('skill');
 
   return (
-    <>
+    <div className={container}>
       <FirstView />
       <section className={section}>
         <PageTitle pageTitle="経験スキル" isBreadcrumb={false} subHeadline={true} />
@@ -26,6 +26,6 @@ export default async function Top() {
           <CtaButton href='/blog/categories/portfolio/'>もっと見る</CtaButton>
         </div>
       </section>
-    </>
+    </div>
   )
 }

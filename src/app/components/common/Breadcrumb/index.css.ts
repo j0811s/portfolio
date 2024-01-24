@@ -5,7 +5,6 @@ export const list = style({
   display: 'flex',
   flexWrap: 'wrap',
   width: '100%',
-  // padding: '0.5em 0',
 });
 
 export const listItem = style({
@@ -16,7 +15,6 @@ export const listItem = style({
     '&:not(:last-of-type)::after': {
       content: '>',
       display: 'inline-block',
-      padding: '0.25em 0 0.5em',
       margin: '0 0.5em',
     }
   }
@@ -27,19 +25,10 @@ export const listItemLink = style({
   alignItems: 'stretch',
   gap: 6,
   padding: '0.25em 0',
-  borderBottom: '1px solid transparent',
-  transition: 'border-color .2s ease-in-out',
   selectors: {
     '&.mod-current': {
       color: `${vars.color.gray.taupe}`
     },
-    '&:not(.mod-current):hover': {
-      '@media': {
-        '(min-width: 960px)': {
-          borderColor: '#fff',
-        }
-      }
-    }
   }
 });
 

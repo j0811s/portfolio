@@ -6,7 +6,6 @@ import {
   postDate, postDateIcon,
   postContent,
   prevButton,
-  postBreadcrumb
 } from './index.css';
 import Image from 'next/image';
 import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
@@ -51,9 +50,10 @@ export const Article = async ({ post }: { post: Blog }) => {
   return (
     <article id={post.id} className={postWrapper}>
       <div className={postHead}>
+        <Breadcrumb type={type} post={post} />
         <div className={postTextContainer}>
           <h1 className={postTitle}>{post.title}</h1>
-          <TagsElement tagData={tag} modClass={{ul: '', li: ''}} />
+          <TagsElement tagData={tag} modClass={{ul: 'mod-gapNoneX', li: ''}} />
           <div className={postDateContainer}>
             <p className={postDate}>
               <FontAwesomeIcon className={postDateIcon} icon={faCalendarDay} />公開日：<ConvertDate date={post.publishedAt} />
@@ -76,9 +76,6 @@ export const Article = async ({ post }: { post: Blog }) => {
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
       <div className={prevButton}>
         <CtaButton href="/blog/" prev={true}>一覧へ戻る</CtaButton>
-      </div>
-      <div className={postBreadcrumb}>
-        <Breadcrumb type={type} post={post} />
       </div>
     </article>
   )

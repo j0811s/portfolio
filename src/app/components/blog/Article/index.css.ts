@@ -37,26 +37,26 @@ export const postEyecatchContainer = style({
 });
 
 export const postEyecatch = style({
-  // objectFit: 'contain',
-  // '@media': {
-  //   'screen and (min-width: 768px)': {
-  //     height: '100%',
-  //   }
-  // }
+  
 });
 
 export const postTextContainer = style({
-  
+  marginTop: 16,
+  '@media': {
+    'screen and (min-width: 768px)': {
+      marginTop: 24,
+    }
+  }
 });
 
 export const postTitle = style({
   color: `${vars.color.text.white}`,
-  fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
-  lineHeight: 1.2,
+  fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
+  lineHeight: 1.3,
   fontWeight: 700,
   '@media': {
-    'screen and (min-width: 960px)': {
-      fontSize: `calc( 40 / ${vars.font.size} * 1rem )`,
+    'screen and (min-width: 768px)': {
+      fontSize: `calc( 36 / ${vars.font.size} * 1rem )`,
     }
   }
 });
@@ -64,7 +64,17 @@ export const postTitle = style({
 export const postDateContainer = style({
   display: 'flex',
   justifyContent: 'flex-end',
-  margin: '10px 0 0',
+  '@media': {
+    'screen and (max-width: 599px)': {
+      alignItems: 'flex-end',
+      flexDirection: 'column',
+      gap: '0.25em 0',
+    },
+    'screen and (min-width: 600px)': {
+      gap: '1em',
+      margin: '10px 0 0',
+    }
+  }
 });
 
 export const postDate = style({
@@ -75,11 +85,6 @@ export const postDate = style({
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-    }
-  },
-  selectors: {
-    '&:not(:first-of-type)': {
-      margin: '0 0 0 1em',
     }
   }
 });
@@ -110,7 +115,7 @@ globalStyle(`${postContent} > * + *`, {
 });
 
 globalStyle(`${postContent} h1, ${postContent} h2`, {
-  fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 20 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
   fontWeight: 700,
   position: 'relative',
@@ -218,7 +223,7 @@ globalStyle(`${postContent} ol`, {
 
 globalStyle(`${postContent} li`, {
   listStyleType: 'inherit',
-  margin: '0.5em 0 0'
+  margin: '1em 0 0'
 });
 
 globalStyle(`${postContent} > ul > li:first-of-type, ${postContent} > ol > li:first-of-type`, {
@@ -283,17 +288,11 @@ globalStyle(`${postContent} pre > code`, {
 });
 
 export const prevButton = style({
-  textAlign: 'center'
-});
-
-export const postBreadcrumb = style({
-  color: `${vars.color.text.white}`,
-  margin: '24px 0 0',
-  padding: '16px',
+  textAlign: 'center',
+  padding: '32px 16px',
   '@media': {
     'screen and (min-width: 768px)': {
-      margin: '32px 0 0',
-      padding: '32px',
+      padding: '64px 32px',
     }
   }
 });
