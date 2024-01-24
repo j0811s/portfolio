@@ -9,7 +9,12 @@ export const list = style({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '0.5em',
-  padding: '1em 0.5em 0.65em'
+  padding: '1em 1.5em',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      padding: '1em',
+    }
+  }
 });
 
 export const listIetmTitle= style({

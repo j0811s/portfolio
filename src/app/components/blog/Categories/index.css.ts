@@ -47,10 +47,13 @@ export const listIetmLink = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0.5em',
-  border: '1px solid transparent',
-  borderRadius: '4px',
   backgroundColor: 'transparent',
   transition: 'border-color 0.2s linear',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      borderLeft: '2px solid transparent',
+    }
+  },
   selectors: {
     '&:hover': {
       '@media': {

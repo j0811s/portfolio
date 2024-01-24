@@ -12,7 +12,7 @@ export const tagLink = style({
   alignItems: 'baseline',
   justifyContent: 'space-between',
   gap: '0.4em',
-  padding: '0.2em 0.6em 0.2em',
+  padding: '0.4em 0.6em',
   border: `1px solid ${vars.color.tertiary}`,
   color: `${vars.color.text.white}`,
   backgroundColor: `${vars.color.primary}`,

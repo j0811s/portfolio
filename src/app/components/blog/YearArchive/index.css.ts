@@ -25,7 +25,6 @@ export const listIetmTitle= style({
   color: `${vars.color.text.white}`,
   backgroundColor: `${vars.color.secondary}`,
   padding: '1em',
-  borderRadius: '4px',
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
@@ -47,10 +46,13 @@ export const listIetmLink = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0.5em',
-  border: '1px solid transparent',
-  borderRadius: '4px',
   backgroundColor: 'transparent',
   transition: 'border-color 0.2s linear',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      borderLeft: '2px solid transparent',
+    }
+  },
   selectors: {
     '&:hover': {
       '@media': {
