@@ -181,7 +181,6 @@ export const navigationListItemLink = style({
   },
   selectors: {
     '&[data-page-active="true"]': {
-      cursor: 'no-drop',
       backgroundColor: `${vars.color.white}`,
       color: `${vars.color.text.black}`,
     },
