@@ -7,7 +7,7 @@ export const container = style({
       padding: '0 0 60px',
     },
     'screen and (min-width: 960px)': {
-      padding: '60px 0',
+      padding: '0 0 90px',
     }
   }
 });

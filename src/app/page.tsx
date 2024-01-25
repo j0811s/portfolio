@@ -3,7 +3,6 @@ import { getHistoryAllContents, type SkillContent } from "@/src/app/libs/microcm
 import { SkillSet } from "./components/about/SkillSet";
 import { PageTitle } from "./components/common/PageTitle";
 import { CtaButton } from "./components/common/Button";
-import { FirstView } from "./components/top/FirstView";
 import { PickupArticles } from "./components/blog/PickupArticles";
 
 export default async function Top() {
@@ -11,7 +10,6 @@ export default async function Top() {
 
   return (
     <div className={container}>
-      <FirstView />
       <section className={section}>
         <PageTitle pageTitle="経験スキル" isBreadcrumb={false} subHeadline={true} />
         <SkillSet contents={skillContents} />
