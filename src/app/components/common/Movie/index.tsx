@@ -16,12 +16,8 @@ export const Movie = ({ src, autoplay = false }: { src: string, autoplay: boolea
   }, false);
 
   useEffect(() => {
-    setIsPlaying(isInView);
+    isInView ? onPlay() : onPause();
   }, [isInView]);
-
-  useEffect(() => {
-    isPlaying ? videoRef.current?.play() : videoRef.current?.pause();
-  }, [isPlaying]);
 
   const onPlay = () => {
     setIsPlaying(() => true);
