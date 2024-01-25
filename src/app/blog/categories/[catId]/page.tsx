@@ -1,6 +1,6 @@
 import { getList, getDetail } from "../../../libs/microcms/blog";
 import { Breadcrumb } from "@/src/app/components/common/Breadcrumb";
-import { ArticleList } from "../../../components/blog/ArticleList";
+import { ArticleListContents } from "../../../components/blog/ArticleListContents";
 import { Metadata, ResolvingMetadata } from 'next';
 
 type generateMetadataProps = {
@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <ArticleList contents={contents} type={type} totalCount={totalCount} limit={limit} />
+      <ArticleListContents contents={contents} type={type} totalCount={totalCount} limit={limit} />
     </>
   )
 }

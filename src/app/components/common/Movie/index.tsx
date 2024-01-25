@@ -2,17 +2,26 @@
 
 import { srOnly, movie, movieContainer, controlButtons, controlButton, controlButtonIcon } from "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faL, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
+import useInView from "../../hooks/useInView";
 
 export const Movie = ({ src, autoplay = false }: { src: string, autoplay: boolean }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(autoplay);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0
+  }, false);
+
+  useEffect(() => {
+    setIsPlaying(isInView);
+  }, [isInView]);
 
   useEffect(() => {
     isPlaying ? videoRef.current?.play() : videoRef.current?.pause();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isPlaying]);
 
   const onPlay = () => {
     setIsPlaying(() => true);
@@ -38,7 +47,7 @@ export const Movie = ({ src, autoplay = false }: { src: string, autoplay: boolea
 
   return (
     <div className={movieContainer}>
-      <video className={movie} playsInline muted loop src={src} ref={videoRef}></video>
+      <video className={movie} playsInline muted loop src={src} ref={videoRef} data-in-view={isInView}></video>
       <div className={controlButtons}>
         <button className={controlButton} type="button" onClick={onControlMovie}>
           <ControlButtonIcon />

@@ -1,18 +1,5 @@
-import { style, globalStyle } from "@vanilla-extract/css";
+import { style, globalStyle, keyframes } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
-
-
-export const postListEyecatchContainer = style({
-  overflow: 'hidden',
-  backgroundColor: `${vars.color.secondary}`,
-  borderRadius: 12,
-});
-
-export const postListEyecatch = style({
-  aspectRatio: '16 / 9',
-  objectFit: 'cover',
-  transition: 'transform 0.2s ease-in-out'
-});
 
 export const postListTitle = style({
   color: `${vars.color.text.white}`,
@@ -43,7 +30,7 @@ export const postList = style({
       gap: 15,
     },
     'screen and (min-width: 1080px)': {
-      gap: 15,
+      gap: 15
     }
   }
 });
@@ -132,14 +119,6 @@ export const postBtn = style({
   '@media': {
     'screen and (min-width: 960px)': {
       fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
-    }
-  }
-});
-
-globalStyle(`${postListItem}:hover ${postListEyecatch}`, {
-  '@media': {
-    'screen and (min-width: 960px)': {
-      transform: 'scale(1.1)',
     }
   }
 });

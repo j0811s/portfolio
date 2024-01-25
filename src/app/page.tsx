@@ -1,10 +1,10 @@
 import { container, section, moreButtonContainer } from "./styles/top/index.css";
 import { getHistoryAllContents, type SkillContent } from "@/src/app/libs/microcms/history"
 import { SkillSet } from "./components/about/SkillSet";
-import { PickupArticles } from "./components/common/PickupArticles";
 import { PageTitle } from "./components/common/PageTitle";
 import { CtaButton } from "./components/common/Button";
 import { FirstView } from "./components/top/FirstView";
+import { PickupArticles } from "./components/blog/PickupArticles";
 
 export default async function Top() {
   const skillContents: SkillContent[] = await getHistoryAllContents('skill');
