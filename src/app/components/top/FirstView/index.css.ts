@@ -16,13 +16,13 @@ export const srOnly = style({
 export const firstViewContainer = style({
   position: 'relative',
   backgroundColor: `${vars.color.primary}`,
-  height: 'auto',
+  height: '40vh',
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
-      height: '30vh',
+      height: '50vh',
     },
     'screen and (min-width: 960px)': {
-      height: '50vh',
+      height: '60vh',
     }
   }
 });
@@ -35,7 +35,7 @@ export const siteTitle = style({
   zIndex: 1,
   textAlign: 'center',
   color: `${vars.color.text.white}`,
-  backgroundColor: 'rgb(30, 38, 38, 0.3)',
+  background: `linear-gradient(10deg, rgb(0, 0, 0) 5%, rgb(30, 38, 38, 0.3) 70%) no-repeat top`,
   backdropFilter: 'blur(2px)',
   fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
@@ -45,7 +45,7 @@ export const siteTitle = style({
     },
     'screen and (min-width: 960px)': {
       fontSize: `calc( 56 / ${vars.font.size} * 1rem )`,
-      backdropFilter: 'blur(4px)',
+      backdropFilter: 'blur(3px)',
     }
   }
 });

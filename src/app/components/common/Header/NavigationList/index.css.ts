@@ -27,37 +27,6 @@ const closeModal = keyframes({
   }
 });
 
-export const container = style({
-  display: 'block',
-  position: 'relative',
-  zIndex: 9999,
-  width: '100%',
-  backgroundColor: 'rgb(30, 38, 38, 0.95)',
-  backdropFilter: 'blur(2px)',
-  boxShadow: `0 0 1px ${vars.color.white}`,
-  '@media': {
-    'screen and (max-width: 959px)': {
-      position: 'sticky',
-      top: 0,
-      left: 0,
-    }
-  },
-  selectors: {
-    'body.is-pc &::before': {
-      content: '',
-      position: 'absolute',
-      display: 'block',
-      inset: 0,
-      zIndex: -1,
-      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), rgb(205, 219, 181, 1), transparent 15vmin), transparent`,
-      backgroundAttachment: 'fixed',
-      mask: `
-        linear-gradient(white, white) 50% 100% / 100% 1px no-repeat
-      `,
-    },
-  }
-});
-
 export const wrapper = style({
   display: 'flex',
   alignItems: 'center',
@@ -68,18 +37,57 @@ export const wrapper = style({
   padding: '1rem',
 });
 
+export const navigation = style({
+  position: 'relative',
+  fontSize: `calc( 20 / ${vars.font.size} * 1rem )`,
+  backgroundColor: 'rgb(30, 38, 38, 0.95)',
+  padding: '1rem 1.5rem',
+  selectors: {
+    'body.is-pc &::before': {
+      content: '',
+      position: 'absolute',
+      display: 'block',
+      inset: 0,
+      zIndex: -1,
+      borderRadius: 9999,
+      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), rgb(205, 219, 181, 1), transparent 15vmin), transparent`,
+      backgroundAttachment: 'fixed',
+      mask: `linear-gradient(white, white) 50% 100% / 100% 1px no-repeat`,
+    },
+    '&[data-drawer-mode="false"]': {
+      display: 'block',
+      backdropFilter: 'blur(2px)',
+      borderRadius: 9999,
+      boxShadow: `0 0 1px ${vars.color.white}`,
+      margin: '0 auto',
+      fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+    }
+  }
+});
+
+export const navigationList = style({
+  display: 'flex',
+  selectors: {
+    '[data-drawer-mode="true"] &': {
+      flexDirection: 'column',
+      gap: '1em 0',
+    },
+    '[data-drawer-mode="false"] &': {
+      alignItems: 'center',
+    }
+  }
+});
+
 export const navigationListItem = style({
   overflow: 'hidden',
   display: 'block',
-  '@media': {
-    'screen and (max-width: 959px)': {
+  selectors: {
+    '[data-drawer-mode="true"] &': {
       fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,
     },
-    'screen and (min-width: 960px)': {
+    '[data-drawer-mode="false"] &': {
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-    }
-  },
-  selectors: {
+    },
     '&.mod-github': {
       '@media': {
         'screen and (max-width: 959px)': {
@@ -88,20 +96,6 @@ export const navigationListItem = style({
         'screen and (min-width: 960px)': {
           marginLeft: '1em',
         }
-      },
-    },
-    '&.util-sp': {
-      '@media': {
-        'screen and (min-width: 960px)': {
-          display: 'none'
-        }
-      },
-    },
-    '&.util-pc': {
-      '@media': {
-        'screen and (max-width: 959px)': {
-          display: 'none'
-        },
       },
     }
   }
@@ -114,22 +108,24 @@ export const navigationListItemLink = style({
   borderRadius: 9999,
   fontFeatureSettings: "'palt'",
   color: `${vars.color.text.white}`,
-  '@media': {
-    'screen and (max-width: 959px)': {
-      visibility: 'hidden',
-      opacity: 0,
-      transform: 'translate3d(0, 100%, 0)',
+  selectors: {
+    '[data-drawer-mode="true"] &': {
+      '@media': {
+        'screen and (max-width: 959px)': {
+          visibility: 'hidden',
+          opacity: 0,
+          transform: 'translate3d(0, 100%, 0)',
+        }
+      },
     },
-    'screen and (min-width: 960px)': {
+    '[data-drawer-mode="false"] &': {
       padding: '0.5em 1em',
     },
-  },
-  selectors: {
     '&[data-page-active="true"]': {
       backgroundColor: `${vars.color.white}`,
       color: `${vars.color.text.black}`,
     },
-    ".add-openAnimation &": {
+    '.add-openAnimation [data-drawer-mode="true"] &': {
       '@media': {
         'screen and (max-width: 959px)': {
           visibility: 'hidden',
@@ -139,7 +135,7 @@ export const navigationListItemLink = style({
         },
       },
     },
-    ".add-closeAnimation &": {
+    '.add-closeAnimation [data-drawer-mode="true"] &': {
       '@media': {
         'screen and (max-width: 959px)': {
           visibility: 'visible',
@@ -186,14 +182,35 @@ export const navigationListItemLinkHover = style({
   }
 });
 
+export const navigationItemIcon = style({
+  color: 'inherit',
+  selectors: {
+    '[data-drawer-mode="true"] &': {
+      marginRight: 16,
+    },
+    '[data-drawer-mode="false"] &': {
+      marginRight: 8,
+    },
+  }
+});
+
 export const navigationItemGithubIcon = style({
   margin: 'auto',
-  '@media': {
-    'screen and (max-width: 959px)': {
+  selectors: {
+    '[data-drawer-mode="true"] &': {
       width: `calc( 40 / ${vars.font.size} * 1rem )`,
     },
-    'screen and (min-width: 960px)': {
+    '[data-drawer-mode="false"] &': {
       width: `calc( 30 / ${vars.font.size} * 1rem )`,
+    },
+  }
+});
+
+globalStyle(`${navigationList}:hover a`, {
+  '@media': {
+    'screen and (min-width: 960px)': {
+      backgroundColor: `transparent`,
+      color: `${vars.color.text.white}`,
     }
   }
 });

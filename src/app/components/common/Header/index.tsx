@@ -1,23 +1,23 @@
 'use client'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBreadSlice, faUser, faFileLines, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import {
-  container, wrapper,
-  navigation, navigationList, navigationListItem, navigationListItemLink, navigationListItemLinkHover, navigationItemIcon, navigationItemGithubIcon
-} from "./index.css"
+
+import { container, wrapper, navigationListItem, navigationListItemLink, navigationListItemLinkHover, navigationItemGithubIcon } from "./index.css"
 
 import Link from "next/link";
+import Image from "next/image";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import useDeviceType from "../../hooks/useDeviceType";
+import useMediaQuery from "../../hooks/useMediaQuery";
 import DrawerMenu from "@/src/app/components/common/Modal";
 import { Logo } from "./Logo";
-import useDeviceType from "../../hooks/useDeviceType";
-import { useEffect } from "react";
-import Image from "next/image";
+import { FirstView } from "../../top/FirstView";
 import { StickyNavigation } from "./StickyNavigation";
+import { NavigationList } from "./NavigationList";
 
 export const Header = () => {
   const pathname = usePathname();
   const deviceType = useDeviceType();
+  const isDesktopRange = useMediaQuery('screen and (min-width: 960px)');
 
   useEffect(() => {
     if (deviceType) {
@@ -35,58 +35,10 @@ export const Header = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deviceType]);
-  
-  const isActivePage = (pathname: string, currentPage: string): boolean => pathname.startsWith(currentPage);
 
   const DrawerMenuOptions = {
-    // initOpen: true,
-    // animation: false,
     disableMediaQuery: 'screen and (min-width: 960px)',
-    // classes: {
-    //   modClassName: 'mod-humb',
-    // },
-    // disableScroll: false,
-    // on: {
-      // afterOpen: (e: Event) => {
-      //   console.log('afterOpen', e)
-      // },
-      // matches: (isMatches: isMatches, isOpen: boolean) => {
-      //   if (isMatches) {
-      //     console.log('IS MATCHES')
-      //     if (isOpen) { console.log('IS OPEN') };
-      //   }
-      // }
-    // }
   }
-
-  const NavigationListElements = () => (
-    <nav className={navigation}>
-      <ul className={navigationList}>
-        <li className={navigationListItem}>
-          <Link className={`${navigationListItemLink} ${navigationListItemLinkHover}`} href={`/`} data-page-active={pathname === '/'}>
-            <FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>TOP</span>
-          </Link>
-        </li>
-        <li className={navigationListItem}>
-          <Link className={`${navigationListItemLink} ${navigationListItemLinkHover}`} href={`/about/`} data-page-active={isActivePage(pathname, '/about/')}>
-            <FontAwesomeIcon icon={faUser} className={navigationItemIcon} /><span>ABOUT</span>
-          </Link>
-        </li>
-        <li className={navigationListItem}>
-          <Link className={`${navigationListItemLink} ${navigationListItemLinkHover}`} href={`/blog/`} data-page-active={isActivePage(pathname, '/blog/')}>
-            <FontAwesomeIcon icon={faFileLines} className={navigationItemIcon} /><span>BLOG</span>
-          </Link>
-        </li>
-        <li className={`${navigationListItem} mod-github util-sp`}>
-          <Link className={navigationListItemLink} href='https://github.com/j0811s/portfolio' target="_blank">
-            <div className={navigationItemGithubIcon}>
-              <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
-            </div>
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  )
 
   return (
     <>
@@ -94,7 +46,7 @@ export const Header = () => {
         <div className={wrapper}>
           <Logo pathname={pathname} />
           <DrawerMenu options={DrawerMenuOptions}>
-            <NavigationListElements />
+            <NavigationList pathname={pathname} drawerMode={true} />
           </DrawerMenu>
           <div className={`${navigationListItem} mod-github util-pc`}>
             <Link className={`${navigationListItemLink} ${navigationListItemLinkHover} mod-icon`} href='https://github.com/j0811s/portfolio' target="_blank">
@@ -105,9 +57,13 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      <StickyNavigation>
-        <NavigationListElements />
-      </StickyNavigation>
+      { pathname === '/' && <FirstView /> }
+      {
+        isDesktopRange &&
+        <StickyNavigation>
+          <NavigationList pathname={pathname} drawerMode={false} />
+        </StickyNavigation>
+      }
     </>
   )
 }
