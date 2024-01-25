@@ -15,6 +15,7 @@ const useCursorPosition = () => {
     return () => {
       document.documentElement.removeEventListener('pointermove', updatePosition);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return cursorPosition;

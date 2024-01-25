@@ -13,6 +13,7 @@ const useDeviceType = () => {
 
   useEffect(() => {
     resetDeviceType()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const resetDeviceType = () => {

@@ -14,6 +14,7 @@ export const PageTopButton = () => {
     return () => {
       window.removeEventListener("scroll", toggleDisplayed);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleDisplayed = () => {
