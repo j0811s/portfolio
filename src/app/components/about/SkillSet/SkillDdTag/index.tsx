@@ -1,15 +1,12 @@
-import { skillItem, logoWrap, logo, logoName } from "../index.css";
+import { skillItem } from "../index.css";
 import type { SkillInfo } from '@/src/app/libs/microcms/history';
-import Image from "next/image";
+import { SkillLogo } from "../SkillLogo";
 
 export const SkillDdTag = ({ skills }: { skills: SkillInfo }) => {
   return (
     skills.map(skill => (
       <dd className={skillItem} key={skill.name}>
-        <figure className={logoWrap}>
-          <Image className={logo} src={skill.logo.url} width={skill.logo.width} height={skill.logo.height} alt={ skill.name } />
-          <figcaption className={logoName}>{ skill.name }</figcaption>
-        </figure>
+        <SkillLogo url={skill.logo.url} width={skill.logo.width} height={skill.logo.height} name={skill.name} />
       </dd>
     ))
   )

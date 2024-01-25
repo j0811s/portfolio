@@ -67,9 +67,10 @@ export const Article = async ({ post }: { post: Blog }) => {
           </div>
         </div>
         <figure className={postEyecatchContainer}>
-          {post.eyecatch ?
-            <Image className={postEyecatch} src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} priority={true} /> :
-            <Image className={postEyecatch} src="/images/blog/dummy_lg.png" alt="" width="375" height="210" priority={true} />
+          {
+            post.eyecatch 
+              ? <Image className={postEyecatch} src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} priority={true} />
+              : <Image className={postEyecatch} src="/images/blog/dummy_lg.png" alt="" width="375" height="210" priority={true} />
           }
         </figure>
       </div>

@@ -1,17 +1,9 @@
-import { getList, getDetail } from "../libs/microcms/blog";
-import { Breadcrumb } from '../components/common/Breadcrumb';
-import { ArticleList } from "../components/blog/ArticleList";
+import { getList } from "../libs/microcms/blog";
+import { ArticleListContents } from "../components/blog/ArticleListContents";
 
 export default async function StaticPage() {
   const limit = 12;
+  const { contents, totalCount } = await getList('blog', { limit });
 
-  const { contents, totalCount } = await getList('blog', {
-    limit
-  });
-
-  return (
-    <>
-      <ArticleList contents={contents} totalCount={totalCount} limit={limit} />
-    </>
-  );
+  return <ArticleListContents contents={contents} totalCount={totalCount} limit={limit} />;
 }
