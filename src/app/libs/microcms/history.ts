@@ -17,6 +17,7 @@ export type SkillInfo = {
     height: number
     width: number
   }
+  hidden: boolean
 }[]
 
 export type SkillContent = {
