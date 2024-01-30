@@ -81,7 +81,7 @@ export const postDate = style({
   color: `${vars.color.gray.taupe}`,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.4,
-  fontWeight: 500,
+  fontWeight: 400,
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
@@ -272,7 +272,7 @@ globalStyle(`${postContent} th`, {
 });
 
 globalStyle(`${postContent} th > p`, {
-  fontWeight: 500
+  fontWeight: 400
 });
 
 globalStyle(`${postContent} pre > code`, {

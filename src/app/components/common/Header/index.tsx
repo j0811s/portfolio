@@ -17,7 +17,7 @@ import { NavigationList } from "./NavigationList";
 export const Header = () => {
   const pathname = usePathname();
   const deviceType = useDeviceType();
-  const isDesktopRange = useMediaQuery('screen and (min-width: 960px)');
+  // const isDesktopRange = useMediaQuery('screen and (min-width: 960px)');
 
   useEffect(() => {
     if (deviceType) {
@@ -57,13 +57,10 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      { pathname === '/' && <FirstView /> }
-      {
-        isDesktopRange &&
-        <StickyNavigation>
-          <NavigationList pathname={pathname} drawerMode={false} />
-        </StickyNavigation>
-      }
+      {pathname === '/' && <FirstView />}
+      <StickyNavigation>
+        <NavigationList pathname={pathname} drawerMode={false} />
+      </StickyNavigation>
     </>
   )
 }

@@ -10,7 +10,7 @@ export const Thumbnail = ({ isDummy, src, width, height }: { isDummy: boolean, s
   const isInView = useInView(thumbnailRef, {
     root: null,
     rootMargin: '0px',
-    threshold: 0.3
+    threshold: 0
   }, true);
   
   return (

@@ -21,7 +21,7 @@ export const listItem = style({
 
 export const listIetmTitle= style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   color: `${vars.color.text.white}`,
   backgroundColor: `${vars.color.secondary}`,
   padding: '1em',
@@ -70,7 +70,7 @@ export const numberBadge = style({
   borderRadius: '9999px',
   minWidth: 24,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   textAlign: 'center',
   color: '#fff',
   backgroundColor: `${vars.color.tertiary}`,

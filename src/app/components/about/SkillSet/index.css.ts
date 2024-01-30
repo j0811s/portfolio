@@ -24,7 +24,7 @@ export const skillTitle = style({
   gridColumn: '1 / 4',
   textAlign: 'left',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   marginBottom: '0.5em',
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {

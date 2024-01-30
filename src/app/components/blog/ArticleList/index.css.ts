@@ -72,7 +72,7 @@ export const postData = style({
 export const postDataTitle = style({
   color: `${vars.color.text.white}`,
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   lineHeight: 1.4,
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
@@ -95,7 +95,7 @@ export const postDateContainer = style({
 
 export const postDate = style({
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   lineHeight: 1.4,
   textAlign: 'right',
   color: `${vars.color.gray.taupe}`,

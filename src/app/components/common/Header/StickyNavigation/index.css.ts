@@ -10,7 +10,7 @@ globalStyle(`${navigationWrapper}:has([data-drawer-mode="true"])`, {
   alignItems: 'center',
   width: '100%',
   maxWidth: 1280,
-  margin: '0 auto',
+  margin: '0 auto'
 });
 
 globalStyle(`${navigationWrapper}:has([data-drawer-mode="false"])`, {
@@ -18,5 +18,10 @@ globalStyle(`${navigationWrapper}:has([data-drawer-mode="false"])`, {
   top: '2rem',
   left: 0,
   zIndex: 9998,
-  margin: '2rem auto',
+  margin: '2rem auto 0',
+  '@media': {
+    'screen and (max-width: 959px)': {
+      display: 'none',
+    }
+  }
 });

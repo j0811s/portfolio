@@ -5,11 +5,10 @@ export const FirstView = () => {
   return (
     <div className={firstViewContainer}>
       <div className={siteTitle}>
-        <span className={siteTitleInner}>
-          <span className={titleTag}>&lt;J.Sato&gt;</span>
-          <span className={titleCode}>Portfolio Site</span>
-          <span className={titleTag}>&lt;/J.Sato&gt;</span>
-        </span>
+        <div className={siteTitleInner}>
+          <div className={titleTag}>J.Sato</div>
+          <div className={titleCode}>Portfolio Site</div>
+        </div>
       </div>
       <Movie src="/movies/top/fv.mp4" autoplay={true} />
     </div>

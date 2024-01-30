@@ -19,10 +19,10 @@ export const firstViewContainer = style({
   height: '40vh',
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
-      height: '50vh',
+      height: '60vh',
     },
     'screen and (min-width: 960px)': {
-      height: '60vh',
+      height: '70vh',
     }
   }
 });
@@ -37,22 +37,22 @@ export const siteTitle = style({
   color: `${vars.color.text.white}`,
   background: `linear-gradient(10deg, rgb(0, 0, 0) 5%, rgb(30, 38, 38, 0.3) 70%) no-repeat top`,
   backdropFilter: 'blur(2px)',
-  fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 40 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
+  lineHeight: 1.1,
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
-      fontSize: `calc( 36 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 72 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 960px)': {
-      fontSize: `calc( 56 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 80 / ${vars.font.size} * 1rem )`,
       backdropFilter: 'blur(3px)',
     }
   }
 });
 
 export const siteTitleInner = style({
-  display: 'flex',
-  alignItems: 'center',
+  display: 'block',
 });
 
 export const titleTag = style({
@@ -60,5 +60,6 @@ export const titleTag = style({
 });
 
 export const titleCode = style({
-  color: `${vars.color.code.text}`,
+  color: `${vars.color.accent.dark}`,
+  fontSize: '1.4em',
 });

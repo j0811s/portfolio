@@ -3,7 +3,7 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const logo = style({
   fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   lineHeight: 1,
   '@media': {
     'screen and (min-width: 960px)': {

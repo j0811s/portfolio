@@ -49,7 +49,7 @@ export const logoName = style({
   display: 'block',
   textAlign: 'center',
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   lineHeight: '1.2',
   marginTop: '0.75em',
   overflow: 'hidden',

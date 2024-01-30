@@ -42,7 +42,7 @@ export const tagNumberBadge = style({
   borderRadius: '9999px',
   minWidth: 24,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
-  fontWeight: 500,
+  fontWeight: 400,
   textAlign: 'center',
   color: '#fff',
   backgroundColor: `${vars.color.secondary}`,

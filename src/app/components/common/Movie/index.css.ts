@@ -16,14 +16,14 @@ export const srOnly = style({
 export const movieContainer = style({
   position: 'relative',
   overflow: 'hidden',
+  width: '100%',
   height: '100%',
 });
 
 export const movie = style({
   display: 'block',
-  width: '100vw',
+  width: '100%',
   height: '100%',
-  aspectRatio: '16/9',
   objectFit: 'cover',
   transform: 'rotate(-8deg) scale(1.5)',
 });

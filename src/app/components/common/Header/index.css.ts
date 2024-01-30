@@ -109,7 +109,7 @@ export const navigationListItem = style({
 
 export const navigationListItemLink = style({
   display: 'block',
-  fontWeight: 500,
+  fontWeight: 400,
   padding: '0.5em 1em',
   borderRadius: 9999,
   fontFeatureSettings: "'palt'",

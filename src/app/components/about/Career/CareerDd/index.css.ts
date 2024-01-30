@@ -18,7 +18,7 @@ export const readText = style({
 });
 
 export const textBold = style({
-  fontWeight: 700,
+  fontWeight: 400,
   borderBottom: `1px solid ${vars.color.white}`,
   borderColor: 'inherit',
   paddingBottom: '0.25em'
