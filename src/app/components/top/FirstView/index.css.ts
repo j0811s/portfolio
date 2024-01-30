@@ -1,5 +1,18 @@
-import { style, globalStyle } from "@vanilla-extract/css";
+import { style, globalStyle, keyframes } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
+
+const fadeUp = keyframes({
+  '0%': {
+    visibility: 'hidden',
+    opacity: 0.0001,
+    transform: 'translate3d(0, 33%, 0)',
+  },
+  '100%': {
+    visibility: 'visible',
+    opacity: 1,
+    transform: 'translate3d(0, 0.0001%, 0)',
+  }
+});
 
 export const srOnly = style({
   position: 'absolute',
@@ -53,6 +66,24 @@ export const siteTitle = style({
 
 export const siteTitleInner = style({
   display: 'block',
+});
+
+export const siteTitleParts = style({
+  overflow: 'hidden'
+});
+
+export const siteTitlePartsText = style({
+  visibility: 'hidden',
+  opacity: 0.0001,
+  transform: 'translate3d(0, 33%, 0)',
+  selectors: {
+    "body &": {
+      animation: `${fadeUp} 0.5s 0.4s forwards ease-in-out`,
+    },
+    "&[data-index='1']": {
+      animationDelay: '0.7s'
+    }
+  }
 });
 
 export const titleTag = style({
