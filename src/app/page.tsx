@@ -12,7 +12,7 @@ export default async function Top() {
     <div className={container}>
       <section className={section}>
         <PageTitle pageTitle="経験スキル" isBreadcrumb={false} subHeadline={true} />
-        <SkillSet contents={skillContents} />
+        <SkillSet contents={skillContents.filter((_, i) => i <= 3)} />
         <div className={moreButtonContainer}>
           <CtaButton href='/about/'>もっと見る</CtaButton>
         </div>
