@@ -2,8 +2,10 @@ import { style, keyframes } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const loaderContainer = style({
-  position: 'relative',
-  height: 'calc(100vh - 90px)'
+  position: 'fixed',
+  inset: 0,
+  zIndex: 'calc(infinity)',
+  backgroundColor: `${vars.color.primary}`,
 });
 
 const load = keyframes({
@@ -26,7 +28,7 @@ const load = keyframes({
 });
 
 export const loader = style({
-  color: `${vars.color.primary}`,
+  color: `${vars.color.white}`,
   textIndent: '-9999em',
   position: 'absolute',
   inset: 0,
@@ -35,7 +37,7 @@ export const loader = style({
   fontSize: 10,
   transform: 'translateZ(0)',
   animationDelay: '-0.16s',
-  backgroundColor: `${vars.color.primary}`,
+  backgroundColor: `${vars.color.white}`,
   animation: `${load} 1s infinite ease-in-out`,
   width: '1em',
   height: '4em',
@@ -44,7 +46,7 @@ export const loader = style({
       position: 'absolute',
       top: 0,
       content: '',
-      backgroundColor: `${vars.color.primary}`,
+      backgroundColor: `${vars.color.white}`,
       animation: `${load} 1s infinite ease-in-out`,
       width: '1em',
       height: '4em',
