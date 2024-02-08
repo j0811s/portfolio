@@ -25,14 +25,15 @@ export const movie = style({
   width: '100%',
   height: '100%',
   objectFit: 'cover',
-  transform: 'rotate(-8deg) scale(1.5)',
+  transform: 'rotate(-6deg) scale(1.2)',
+  backgroundColor: `${vars.color.primary}`
 });
 
 export const controlButtons = style({
   position: 'absolute',
   bottom: 16,
-  left: 16,
-  zIndex: 1,
+  right: 16,
+  zIndex: 2,
   display: 'flex',
   alignItems: 'center',
   gap: '0.5em',

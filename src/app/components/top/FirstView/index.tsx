@@ -1,5 +1,5 @@
 import { Movie } from "../../common/Movie"
-import { siteTitle, firstViewContainer, titleTag, titleCode, srOnly, siteTitleInner, siteTitleParts, siteTitlePartsText } from "./index.css"
+import { siteTitle, firstViewContainer, titleTag, titleCode, srOnly, siteTitleInner, siteTitleParts, siteTitlePartsText, movie } from "./index.css"
 
 export const FirstView = () => {
   return (
@@ -14,7 +14,9 @@ export const FirstView = () => {
           </div>
         </div>
       </div>
-      <Movie src="/movies/top/fv.mp4" autoplay={true} />
+      <div className={movie}>
+        <Movie src="/movies/top/fv.mp4" autoplay={true} />
+      </div>
     </div>
   )
 }
