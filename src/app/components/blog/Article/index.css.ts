@@ -223,7 +223,16 @@ globalStyle(`${postContent} ol`, {
 
 globalStyle(`${postContent} li`, {
   listStyleType: 'inherit',
-  margin: '1em 0 0'
+  color: 'inherit',
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+  lineHeight: 1.6,
+  fontWeight: 400,
+  margin: '1em 0 0',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+    }
+  }
 });
 
 globalStyle(`${postContent} > ul > li:first-of-type, ${postContent} > ol > li:first-of-type`, {
