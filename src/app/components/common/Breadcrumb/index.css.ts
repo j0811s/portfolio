@@ -37,5 +37,9 @@ export const listItemIcon = style({
 });
 
 export const listItemName = style({
-  display: 'inline-block',
+  overflow: 'hidden',
+  display: '-webkit-box',
+  textOverflow: 'ellipsis',
+  WebkitBoxOrient: 'vertical',
+  WebkitLineClamp: 1
 });
