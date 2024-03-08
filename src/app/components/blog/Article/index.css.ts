@@ -134,9 +134,8 @@ globalStyle(`${postContent} h3, ${postContent} h4, ${postContent} h5, ${postCont
   lineHeight: 1.2,
   fontWeight: 700,
   color: `inherit`,
-  paddingBottom: '0.5em',
-  borderBottom: `1px solid ${vars.color.text.white}`,
-  borderColor: 'inherit',
+  padding: '0.5em',
+  backgroundColor: `${vars.color.tertiary}`,
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
