@@ -24,7 +24,7 @@ export const list = style({
 });
 
 export const listIetmTitle= style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
   backgroundColor: `${vars.color.secondary}`,

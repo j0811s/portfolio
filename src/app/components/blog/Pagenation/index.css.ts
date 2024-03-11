@@ -29,14 +29,14 @@ export const pageLink = style({
   placeContent: 'center',
   width: 40,
   height: 40,
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.secondary}`,
   border: `1px solid ${vars.color.tertiary}`,
   borderRadius: 4,
   transition: 'border-color 0.2s ease-in-out',
   selectors: {
     '&:hover': {
-      borderColor: `${vars.color.accent.light}`,
+      borderColor: `${vars.color.accent.sub}`,
     }
   }
 });

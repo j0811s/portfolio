@@ -2,7 +2,7 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
-  color: '#fff',
+  color: `${vars.color.text.secondary}`,
   textAlign: 'center',
   maxWidth: 1280
 });

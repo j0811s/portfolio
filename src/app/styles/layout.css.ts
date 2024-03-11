@@ -9,7 +9,7 @@ export const body = style({
   display: 'grid',
   gridTemplateRows: 'auto 1fr auto',
   minHeight: '100%',
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.primary}`
 })
 

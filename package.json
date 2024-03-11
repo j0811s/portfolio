@@ -20,6 +20,7 @@
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "@vanilla-extract/css": "^1.12.0",
+    "@vanilla-extract/dynamic": "^2.1.0",
     "@vanilla-extract/sprinkles": "^1.6.1",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
@@ -31,6 +32,7 @@
     "json-server": "^0.17.3",
     "microcms-js-sdk": "^2.7.0",
     "next": "13.4.9",
+    "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "schema-dts": "^1.1.2",
@@ -55,12 +57,19 @@
   "wireit": {
     "dev": {
       "command": "next dev -H $npm_config_host",
-      "dependencies": ["build"]
+      "dependencies": [
+        "build"
+      ]
     },
     "build": {
       "command": "next build",
-      "files": ["src/**/*", "src/*"],
-      "output": [".next"]
+      "files": [
+        "src/**/*",
+        "src/*"
+      ],
+      "output": [
+        ".next"
+      ]
     }
   }
 }

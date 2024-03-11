@@ -32,8 +32,8 @@ export const iconContainer = style({
       height: 40,
       border: `2px solid #fff`,
       borderRadius: 9999,
-      backgroundColor: `${vars.color.accent.dark}`,
-      boxShadow: `0 0 2px ${vars.color.accent.light}`,
+      backgroundColor: `${vars.color.accent.main}`,
+      boxShadow: `0 0 2px ${vars.color.accent.sub}`,
     }
   }
 });

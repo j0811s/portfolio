@@ -46,7 +46,7 @@ export const wrapper = style({
     '&::after': {
       bottom: '100%',
       zIndex: 1,
-      backgroundColor: `${vars.color.accent.light}`,
+      backgroundColor: `${vars.color.accent.sub}`,
     },
     '&[data-in-view="true"]::after': {
       animation: `${progress} 0.8s forwards ease-in-out`,

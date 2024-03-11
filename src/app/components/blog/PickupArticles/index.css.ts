@@ -2,7 +2,7 @@ import { style, globalStyle, keyframes } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const postListTitle = style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   fontSize: `calc( 30 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.2,
   fontWeight: 700,
@@ -70,7 +70,7 @@ export const postData = style({
 });
 
 export const postDataTitle = style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
   lineHeight: 1.4,
@@ -112,7 +112,7 @@ export const postDateIcon = style({
 });
 
 export const postBtn = style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
   textAlign: 'right',
   padding: '0 1em 1.25em',

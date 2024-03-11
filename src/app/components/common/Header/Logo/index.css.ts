@@ -22,9 +22,10 @@ export const logoImg = style({
   border: '1px solid #000',
   borderRadius: 3,
   width: 30,
-  marginRight: 10,
+  margin: '0px 10px',
   '@media': {
     'screen and (min-width: 960px)': {
+      margin: '0px 1em',
     }
   }
 });

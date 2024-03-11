@@ -3,7 +3,7 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const postWrapper = style({
   overflow: 'hidden',
-  // color: `${vars.color.text.white}`,
+  // color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.secondary}`,
   borderRadius: 4,
   '@media': {
@@ -25,13 +25,13 @@ export const postHead = style({
 export const postEyecatchContainer = style({
   overflow: 'hidden',
   backgroundColor: `${vars.color.secondary}`,
-  border: `3px solid ${vars.color.accent.dark}`,
+  border: `3px solid ${vars.color.accent.main}`,
   borderRadius: 8,
   width: '100%',
   margin: '30px auto 0',
   '@media': {
     'screen and (min-width: 768px)': {
-      border: `6px solid ${vars.color.accent.dark}`
+      border: `6px solid ${vars.color.accent.main}`
     }
   }
 });
@@ -50,7 +50,7 @@ export const postTextContainer = style({
 });
 
 export const postTitle = style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.3,
   fontWeight: 700,
@@ -120,7 +120,7 @@ globalStyle(`${postContent} h1, ${postContent} h2`, {
   fontWeight: 700,
   position: 'relative',
   padding: '0.5em',
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.tertiary}`,
   '@media': {
     'screen and (min-width: 768px)': {
@@ -265,7 +265,7 @@ globalStyle(`${postContent} th, ${postContent} td`, {
   minWidth: 120,
   wordBreak: 'break-all',
   padding: '0.5em',
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.secondary}`,
   border: `1px solid ${vars.color.gray.taupe}`,
   '@media': {

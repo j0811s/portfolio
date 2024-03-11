@@ -23,7 +23,7 @@ export const postListEyecatchContainer = style({
       position: 'absolute',
       inset: 0,
       zIndex: 1,
-      backgroundColor: `${vars.color.accent.dark}`,
+      backgroundColor: `${vars.color.accent.main}`,
       transform: 'scaleX(1)',
       transformOrigin: 'right',
       backfaceVisibility: 'hidden',

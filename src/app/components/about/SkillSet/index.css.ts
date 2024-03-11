@@ -19,12 +19,12 @@ export const skillContainer = style({
 });
 
 export const skillTitle = style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   display: 'grid',
   gridColumn: '1 / 4',
   textAlign: 'left',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
-  fontWeight: 400,
+  fontWeight: 700,
   marginBottom: '0.5em',
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {

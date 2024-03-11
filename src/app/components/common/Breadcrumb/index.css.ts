@@ -33,7 +33,7 @@ export const listItemLink = style({
 });
 
 export const listItemIcon = style({
-  color: `${vars.color.text.white}`
+  color: `${vars.color.text.secondary}`
 });
 
 export const listItemName = style({

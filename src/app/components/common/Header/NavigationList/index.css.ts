@@ -40,7 +40,7 @@ export const wrapper = style({
 export const navigation = style({
   position: 'relative',
   fontSize: `calc( 20 / ${vars.font.size} * 1rem )`,
-  backgroundColor: 'rgb(30, 38, 38, 0.95)',
+  backgroundColor: 'transparent',
   padding: '1rem 1.5rem',
   selectors: {
     'body.is-pc &::before': {
@@ -58,7 +58,7 @@ export const navigation = style({
       display: 'block',
       backdropFilter: 'blur(2px)',
       borderRadius: 9999,
-      boxShadow: `0 0 1px ${vars.color.white}`,
+      boxShadow: `0 0 1px ${vars.color.border.main}`,
       margin: '0 auto',
       fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
     }
@@ -107,7 +107,7 @@ export const navigationListItemLink = style({
   padding: '0.5em 1em',
   borderRadius: 9999,
   fontFeatureSettings: "'palt'",
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   selectors: {
     '[data-drawer-mode="true"] &': {
       '@media': {
@@ -122,8 +122,8 @@ export const navigationListItemLink = style({
       padding: '0.5em 1em',
     },
     '&[data-page-active="true"]': {
-      backgroundColor: `${vars.color.white}`,
-      color: `${vars.color.text.black}`,
+      backgroundColor: `${vars.color.background.secondary}`,
+      color: `${vars.color.text.primary}`,
     },
     '.add-openAnimation [data-drawer-mode="true"] &': {
       '@media': {
@@ -160,8 +160,8 @@ export const navigationListItemLinkHover = style({
     '&:not(.mod-icon):hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          backgroundColor: `${vars.color.white}`,
-          color: `${vars.color.text.black}`,
+          backgroundColor: `${vars.color.background.secondary}`,
+          color: `${vars.color.text.primary}`,
         }
       }
     },
@@ -210,7 +210,7 @@ globalStyle(`${navigationList}:hover a`, {
   '@media': {
     'screen and (min-width: 960px)': {
       backgroundColor: `transparent`,
-      color: `${vars.color.text.white}`,
+      color: `${vars.color.text.secondary}`,
     }
   }
 });

@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import useDeviceType from "../../hooks/useDeviceType";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { ThemeSwitch } from "@/src/app/components/common/ThemeSwitch";
+import { Suspense } from 'react';
 import DrawerMenu from "@/src/app/components/common/Modal";
 import { Logo } from "./Logo";
 import { FirstView } from "../../top/FirstView";
@@ -41,19 +43,23 @@ export const Header = () => {
   }
 
   return (
-    <>
+    <Suspense>
       <header className={container}>
         <div className={wrapper}>
-          <Logo pathname={pathname} />
           <DrawerMenu options={DrawerMenuOptions}>
             <NavigationList pathname={pathname} drawerMode={true} />
           </DrawerMenu>
+          <Logo pathname={pathname} />
+          <div className='util-sp'>
+            <ThemeSwitch />
+          </div>
           <div className={`${navigationListItem} mod-github util-pc`}>
             <Link className={`${navigationListItemLink} ${navigationListItemLinkHover} mod-icon`} href='https://github.com/j0811s/portfolio' target="_blank">
               <div className={navigationItemGithubIcon}>
                 <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
               </div>
             </Link>
+            <ThemeSwitch />
           </div>
         </div>
       </header>
@@ -61,6 +67,6 @@ export const Header = () => {
       <StickyNavigation>
         <NavigationList pathname={pathname} drawerMode={false} />
       </StickyNavigation>
-    </>
+    </Suspense>
   )
 }

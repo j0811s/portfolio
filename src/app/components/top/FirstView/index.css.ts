@@ -72,7 +72,7 @@ export const siteTitle = style({
   left: '10%',
   transform: 'translateY(-50%)',
   zIndex: 1,
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   fontSize: `calc( 32 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
   lineHeight: 1.1,
@@ -116,7 +116,7 @@ export const titleTag = style({
 
 export const titleCode = style({
   textTransform: 'uppercase',
-  color: `${vars.color.accent.dark}`,
+  color: `${vars.color.accent.main}`,
 });
 
 export const movie = style({
@@ -140,7 +140,7 @@ export const movie = style({
       position: 'absolute',
       inset: 0,
       zIndex: 0,
-      background: `linear-gradient(10deg, rgb(0, 0, 0) 5%, rgb(30, 38, 38, 0.3) 70%) no-repeat top`,
+      background: `linear-gradient(10deg, ${vars.color.first_view.main} 5%, ${vars.color.first_view.sub} 70%) no-repeat top`,
       backdropFilter: 'blur(2px)',
     },
     "body &": {

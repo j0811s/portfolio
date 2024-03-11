@@ -26,7 +26,7 @@ export const movie = style({
   height: '100%',
   objectFit: 'cover',
   transform: 'rotate(-6deg) scale(1.2)',
-  backgroundColor: `${vars.color.primary}`
+  backgroundColor: `${vars.color.background.primary}`,
 });
 
 export const controlButtons = style({
@@ -43,9 +43,9 @@ export const controlButton = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: '#fff',
+  color: `${vars.color.background.secondary}`,
   border: `1px solid ${vars.color.tertiary}`,
-  backgroundColor: `${vars.color.secondary}`,
+  backgroundColor: `${vars.color.background.primary}`,
   borderRadius: 9999,
   width: 50,
   height: 50,
@@ -54,7 +54,7 @@ export const controlButton = style({
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          borderColor: `${vars.color.accent.light}`
+          borderColor: `${vars.color.accent.sub}`
         }
       }
     }

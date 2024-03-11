@@ -3,9 +3,9 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
   display: 'block',
-  color: '#fff',
+  color: `${vars.color.text.secondary}`,
   textAlign: 'center',
-  backgroundColor: `${vars.color.secondary}`,
+  backgroundColor: `${vars.color.background.primary}`,
 });
 
 export const copyright = style({

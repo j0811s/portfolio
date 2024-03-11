@@ -1,11 +1,11 @@
 import './styles/globals.css';
-
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
+import { ThemeProvider } from "@/src/app/components/ThemeProvider";
+import { lightTheme, darkTheme } from "@/src/app/styles/common/variables.css";
 import { html, body, container, footer } from './styles/layout.css';
-import { Suspense } from 'react';
 import { Header } from '@/src/app/components/common/Header';
 import { Footer } from '@/src/app/components/common/Footer';
 import { Metadata } from 'next';
@@ -46,13 +46,25 @@ type RootLayout = {
 
 export default function RootLayout({ children }: RootLayout ) {
   return (
-    <html lang="ja" className={html}>
+    <html lang="ja" className={html} suppressHydrationWarning>
       <body className={body}>
-        <Suspense>
+        <ThemeProvider
+          defaultTheme="system"
+          attribute="class"
+          enableSystem={true}
+          disableTransitionOnChange={true}
+          storageKey="jsato-theme"
+          value={{
+            light: lightTheme,
+            dark: darkTheme,
+          }}
+        >
           <Header />
-        </Suspense>
-        <main className={container}>{children}</main>
-        <Footer modClassName={footer} />
+          <main className={container}>
+            { children }
+          </main>
+          <Footer modClassName={footer} />
+        </ThemeProvider>
       </body>
     </html>
   )

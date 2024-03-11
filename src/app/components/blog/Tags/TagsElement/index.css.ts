@@ -14,14 +14,14 @@ export const tagLink = style({
   gap: '0.4em',
   padding: '0.4em 0.6em',
   border: `1px solid ${vars.color.tertiary}`,
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.primary}`,
   transition: 'border-color 0.2s ease-in-out, color 0.2s ease-in-out',
   selectors: {
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          borderColor: `${vars.color.accent.light}`
+          borderColor: `${vars.color.accent.sub}`
         }
       }
     }

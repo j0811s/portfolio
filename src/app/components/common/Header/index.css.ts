@@ -32,9 +32,9 @@ export const container = style({
   position: 'relative',
   zIndex: 9999,
   width: '100%',
-  backgroundColor: 'rgb(30, 38, 38, 0.95)',
+  backgroundColor: `${vars.color.background.primary}`,
   backdropFilter: 'blur(2px)',
-  boxShadow: `0 0 1px ${vars.color.white}`,
+  boxShadow: `0 0 1px ${vars.color.border.main}`,
   '@media': {
     'screen and (max-width: 959px)': {
       position: 'sticky',
@@ -65,12 +65,21 @@ export const wrapper = style({
   width: '100%',
   maxWidth: 1280,
   margin: '0 auto',
-  padding: '1rem',
+  '@media': {
+    'screen and (max-width: 959px)': {
+      padding: '1rem',
+    },
+    'screen and (min-width: 960px)': {
+      padding: '0.5rem',
+    },
+  },
 });
 
 export const navigationListItem = style({
   overflow: 'hidden',
-  display: 'block',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5em',
   '@media': {
     'screen and (max-width: 959px)': {
       fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,
@@ -86,7 +95,7 @@ export const navigationListItem = style({
           marginTop: '1em',
         },
         'screen and (min-width: 960px)': {
-          marginLeft: '1em',
+          margin: '0 1em',
         }
       },
     },
@@ -113,7 +122,7 @@ export const navigationListItemLink = style({
   padding: '0.5em 1em',
   borderRadius: 9999,
   fontFeatureSettings: "'palt'",
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   '@media': {
     'screen and (max-width: 959px)': {
       visibility: 'hidden',
@@ -126,8 +135,8 @@ export const navigationListItemLink = style({
   },
   selectors: {
     '&[data-page-active="true"]': {
-      backgroundColor: `${vars.color.white}`,
-      color: `${vars.color.text.black}`,
+      backgroundColor: `${vars.color.background.secondary}`,
+      color: `${vars.color.text.primary}`,
     },
     ".add-openAnimation &": {
       '@media': {
@@ -164,8 +173,8 @@ export const navigationListItemLinkHover = style({
     '&:not(.mod-icon):hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          backgroundColor: `${vars.color.white}`,
-          color: `${vars.color.text.black}`,
+          backgroundColor: `${vars.color.background.secondary}`,
+          color: `${vars.color.text.primary}`,
         }
       }
     },

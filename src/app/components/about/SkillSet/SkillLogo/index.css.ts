@@ -45,7 +45,7 @@ export const logo = style({
 });
 
 export const logoName = style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   display: 'block',
   textAlign: 'center',
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,

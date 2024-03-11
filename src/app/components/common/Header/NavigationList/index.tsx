@@ -5,6 +5,7 @@ import { faBreadSlice, faUser, faFileLines } from "@fortawesome/free-solid-svg-i
 import { navigation, navigationList, navigationListItem, navigationListItemLink, navigationListItemLinkHover, navigationItemIcon, navigationItemGithubIcon } from "./index.css";
 import Link from "next/link";
 import Image from "next/image";
+import { ThemeSwitch } from "../../ThemeSwitch";
 
 export const NavigationList = ({ pathname, drawerMode }: { pathname: string, drawerMode: boolean }) => {
   const GITHUB_URL = 'https://github.com/j0811s/portfolio';
@@ -30,13 +31,13 @@ export const NavigationList = ({ pathname, drawerMode }: { pathname: string, dra
         </li>
         {
           drawerMode && 
-          <li className={`${navigationListItem} mod-github`}>
-            <Link className={navigationListItemLink} href={GITHUB_URL} target="_blank">
-              <div className={navigationItemGithubIcon}>
-                <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
-              </div>
-            </Link>
-          </li>
+            <li className={`${navigationListItem} mod-github`}>
+              <Link className={navigationListItemLink} href={GITHUB_URL} target="_blank">
+                <div className={navigationItemGithubIcon}>
+                  <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
+                </div>
+              </Link>
+            </li>
         }
       </ul>
     </nav>

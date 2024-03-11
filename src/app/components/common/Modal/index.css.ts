@@ -70,7 +70,7 @@ export const modalOverlay = style({
   height: '100%',
   zIndex: '-1',
   backdropFilter: 'blur(2px)',
-  backgroundColor: 'rgb(30, 38, 38, 1)',
+  backgroundColor: `${vars.color.background.primary}`,
 });
 
 export const modalContainer = style({

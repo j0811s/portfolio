@@ -11,8 +11,8 @@ export const button = style({
   padding: '1em 1.6em',
   textAlign: 'center',
   overflowWrap: 'break-word',
-  color: `${vars.color.text.white}`,
-  backgroundColor: `${vars.color.accent.dark}`,
+  color: `${vars.color.text.btn}`,
+  backgroundColor: `${vars.color.accent.main}`,
   borderRadius: '8px',
   '@media': {
     '(min-width: 960px)': {

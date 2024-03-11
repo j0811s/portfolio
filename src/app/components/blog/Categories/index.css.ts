@@ -22,7 +22,7 @@ export const listItem = style({
 export const listIetmTitle= style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.secondary}`,
   padding: '1em',
   borderRadius: '4px',
@@ -42,7 +42,7 @@ export const listIetmTitleText= style({
 });
 
 export const listIetmLink = style({
-  color: `${vars.color.text.white}`,
+  color: `${vars.color.text.secondary}`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -58,7 +58,7 @@ export const listIetmLink = style({
     '&:hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          borderColor: `${vars.color.accent.light}`
+          borderColor: `${vars.color.accent.sub}`
         }
       }
     }

@@ -1,4 +1,5 @@
 import { style, globalStyle, keyframes } from "@vanilla-extract/css";
+import { vars } from "@/src/app/styles/common/variables.css";
 
 export const btn = style({
   position: 'relative',
@@ -52,7 +53,7 @@ const lineAnim3 = keyframes({
 });
 
 export const line = style({
-  borderTop: '1px solid #fff',
+  borderTop: `1px solid ${vars.color.text.secondary}`,
   position: 'absolute',
   width: '100%',
   left: 0,
