@@ -94,8 +94,8 @@ export const lightTheme = createTheme(themeColor, {
       btn: '#fff',
     },
     border: {
-      main: '#fff',
-      sub: '#000',
+      main: '#000',
+      sub: '#fff',
     },
     body: '#FAFAFA',
     error: '#B3261E',

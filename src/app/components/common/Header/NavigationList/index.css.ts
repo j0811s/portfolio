@@ -42,6 +42,11 @@ export const navigation = style({
   fontSize: `calc( 20 / ${vars.font.size} * 1rem )`,
   backgroundColor: 'transparent',
   padding: '1rem 1.5rem',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      backgroundColor: `${vars.color.background.primary}`,
+    }
+  },
   selectors: {
     'body.is-pc &::before': {
       content: '',
