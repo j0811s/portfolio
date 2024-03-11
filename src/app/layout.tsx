@@ -49,7 +49,7 @@ export default function RootLayout({ children }: RootLayout ) {
     <html lang="ja" className={html} suppressHydrationWarning>
       <body className={body}>
         <ThemeProvider
-          defaultTheme="system"
+          defaultTheme="light"
           attribute="class"
           enableSystem={true}
           disableTransitionOnChange={true}
