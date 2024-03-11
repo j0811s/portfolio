@@ -59,12 +59,12 @@ export const skillItem = style({
       position: 'absolute',
       display: 'block',
       inset: 0,
-      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), rgb(205, 219, 181, 1), transparent 15vmin), transparent`,
+      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), ${vars.color.border.accent}, transparent 15vmin), transparent`,
       backgroundAttachment: 'fixed',
-      mask: `linear-gradient(white, white) 50% 0 / 100% 1px no-repeat,
-        linear-gradient(white, white) 50% 100% / 100% 1px no-repeat,
-        linear-gradient(white, white) 0 50% / 1px 100% no-repeat,
-        linear-gradient(white, white) 100% 50% / 1px 100% no-repeat`,
+      mask: `linear-gradient(white, white) 50% 0 / 100% 2px no-repeat,
+        linear-gradient(white, white) 50% 100% / 100% 2px no-repeat,
+        linear-gradient(white, white) 0 50% / 2px 100% no-repeat,
+        linear-gradient(white, white) 100% 50% / 2px 100% no-repeat`,
     }
   }
 });

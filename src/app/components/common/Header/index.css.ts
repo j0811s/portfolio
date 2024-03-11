@@ -49,7 +49,7 @@ export const container = style({
       display: 'block',
       inset: 0,
       zIndex: -1,
-      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), rgb(205, 219, 181, 1), transparent 15vmin), transparent`,
+      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), ${vars.color.border.accent}, transparent 15vmin), transparent`,
       backgroundAttachment: 'fixed',
       mask: `
         linear-gradient(white, white) 50% 100% / 100% 1px no-repeat

@@ -30,6 +30,7 @@ const themeColor = createThemeContract({
       primary: null,
       secondary: null,
       white: null,
+      black: null,
       light: null,
       dark: null,
     },
@@ -44,6 +45,7 @@ const themeColor = createThemeContract({
       btn: null,
     },
     border: {
+      accent: null,
       main: null,
       sub: null,
     },
@@ -80,12 +82,13 @@ export const lightTheme = createTheme(themeColor, {
       primary: 'rgb(255, 255, 255, 0.97)',
       secondary: 'rgb(30, 38, 38, 0.97)',
       white: '#fff',
+      black: '#000',
       light: '#ff7e0f',
       dark: '#348369',
     },
     accent: {
-      main: '#348369',
-      sub: '#cddbb5',
+      main: '#ff7e0f',
+      sub: '#ffc270',
     },
     text: {
       primary: '#fff',
@@ -94,6 +97,7 @@ export const lightTheme = createTheme(themeColor, {
       btn: '#fff',
     },
     border: {
+      accent: 'rgb(255, 126, 15, 1)',
       main: '#000',
       sub: '#fff',
     },
@@ -129,6 +133,7 @@ export const darkTheme = createTheme(themeColor, {
       primary: 'rgb(30, 38, 38, 0.97)',
       secondary: 'rgb(255, 255, 255, 0.97)',
       white: '#fff',
+      black: '#000',
       light: '#ff7e0f',
       dark: '#348369',
     },
@@ -143,6 +148,7 @@ export const darkTheme = createTheme(themeColor, {
       btn: '#fff',
     },
     border: {
+      accent: 'rgb(205, 219, 181, 1)',
       main: '#fff',
       sub: '#000',
     },
@@ -159,7 +165,7 @@ export const darkTheme = createTheme(themeColor, {
     },
     link: '#6997E4',
     code: {
-      tag: '#ff7e0f',
+      tag: '#348369',
       text: '#f0c674',
     },
     first_view: {

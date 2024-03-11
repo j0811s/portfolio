@@ -55,7 +55,7 @@ export const navigation = style({
       inset: 0,
       zIndex: -1,
       borderRadius: 9999,
-      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), rgb(205, 219, 181, 1), transparent 15vmin), transparent`,
+      background: `radial-gradient(circle at calc(var(--x) * 1px) calc(var(--y) * 1px), ${vars.color.border.accent}, transparent 15vmin), transparent`,
       backgroundAttachment: 'fixed',
       mask: `linear-gradient(white, white) 50% 100% / 100% 1px no-repeat`,
     },
@@ -127,8 +127,8 @@ export const navigationListItemLink = style({
       padding: '0.5em 1em',
     },
     '&[data-page-active="true"]': {
-      backgroundColor: `${vars.color.background.secondary}`,
-      color: `${vars.color.text.primary}`,
+      backgroundColor: `${vars.color.accent.main}`,
+      color: `${vars.color.text.btn}`,
     },
     '.add-openAnimation [data-drawer-mode="true"] &': {
       '@media': {
@@ -165,8 +165,8 @@ export const navigationListItemLinkHover = style({
     '&:not(.mod-icon):hover': {
       '@media': {
         'screen and (min-width: 960px)': {
-          backgroundColor: `${vars.color.background.secondary}`,
-          color: `${vars.color.text.primary}`,
+          backgroundColor: `${vars.color.accent.main}`,
+          color: `${vars.color.text.btn}`,
         }
       }
     },
