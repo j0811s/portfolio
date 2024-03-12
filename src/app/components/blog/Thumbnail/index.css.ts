@@ -28,7 +28,7 @@ export const postListEyecatchContainer = style({
       transformOrigin: 'right',
       backfaceVisibility: 'hidden',
     },
-    '&[data-in-view="true"]::after': {
+    '&[data-in-view="true"].loaded::after': {
       animation: `${mask} 0.3s forwards ease-in-out`,
     }
   }

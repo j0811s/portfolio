@@ -12,13 +12,17 @@ export const Thumbnail = ({ isDummy, src, width, height }: { isDummy: boolean, s
     rootMargin: '0px',
     threshold: 0
   }, true);
+
+  const addImageLoadedClass: React.ReactEventHandler<HTMLImageElement> = e => {
+    thumbnailRef.current?.classList.add('loaded');
+  }
   
   return (
     <figure className={postListEyecatchContainer} ref={thumbnailRef} data-in-view={isInView}>
       {
         isDummy
-          ? <Image className={postListEyecatch} src="/images/blog/dummy.png" alt="" width="375" height="210" />
-          : <Image className={postListEyecatch} src={src} alt="" width={width} height={height} />
+          ? <Image className={postListEyecatch} src="/images/blog/dummy.png" alt="" width="375" height="210" onLoad={addImageLoadedClass} />
+          : <Image className={postListEyecatch} src={src} alt="" width={width} height={height} onLoad={addImageLoadedClass} />
       }
     </figure>
   )
