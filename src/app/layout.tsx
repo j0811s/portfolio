@@ -61,7 +61,7 @@ export default function RootLayout({ children }: RootLayout ) {
         >
           <Header />
           <main className={container}>
-            { children }
+            {children}
           </main>
           <Footer />
         </ThemeProvider>
