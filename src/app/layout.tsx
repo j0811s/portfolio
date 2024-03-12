@@ -5,7 +5,7 @@ config.autoAddCss = false
 
 import { ThemeProvider } from "@/src/app/components/ThemeProvider";
 import { lightTheme, darkTheme } from "@/src/app/styles/common/variables.css";
-import { html, body, container, footer } from './styles/layout.css';
+import { html, body, container } from './styles/layout.css';
 import { Header } from '@/src/app/components/common/Header';
 import { Footer } from '@/src/app/components/common/Footer';
 import { Metadata } from 'next';

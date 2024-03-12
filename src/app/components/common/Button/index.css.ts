@@ -2,7 +2,6 @@ import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const button = style({
-  overflow: 'hidden',
   position: 'relative',
   display: 'inline-block',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,

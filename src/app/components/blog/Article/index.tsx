@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDay, faClock } from "@fortawesome/free-solid-svg-icons";
 import {
   postWrapper,
-  postHead, postEyecatchContainer, postEyecatch, postTextContainer, postTitle, postDateContainer,
+  postHead, postEyecatchContainer, postTextContainer, postTitle, postDateContainer,
   postDate, postDateIcon,
   postContent,
   prevButton,
@@ -69,8 +69,8 @@ export const Article = async ({ post }: { post: Blog }) => {
         <figure className={postEyecatchContainer}>
           {
             post.eyecatch 
-              ? <Image className={postEyecatch} src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} priority={true} />
-              : <Image className={postEyecatch} src="/images/blog/dummy_lg.png" alt="" width="375" height="210" priority={true} />
+              ? <Image src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} priority={true} />
+              : <Image src="/images/blog/dummy_lg.png" alt="" width="375" height="210" priority={true} />
           }
         </figure>
       </div>
