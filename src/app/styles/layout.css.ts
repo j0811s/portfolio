@@ -10,7 +10,12 @@ export const body = style({
   gridTemplateRows: 'auto 1fr auto',
   minHeight: '100%',
   color: `${vars.color.text.secondary}`,
-  backgroundColor: `${vars.color.primary}`
+  backgroundColor: `${vars.color.primary}`,
+  '@media': {
+    'screen and (min-width: 960px)': {
+      gridTemplateRows: 'auto auto 1fr auto',
+    }
+  }
 })
 
 export const container = style({
