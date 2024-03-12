@@ -56,7 +56,8 @@ export const Header = () => {
           <div className={`${navigationListItem} mod-github util-pc`}>
             <Link className={`${navigationListItemLink} ${navigationListItemLinkHover} mod-icon`} href='https://github.com/j0811s/portfolio' target="_blank">
               <div className={navigationItemGithubIcon}>
-                <Image src={`/images/logo/github-mark-white.svg`} width={98} height={96} alt="GitHubリポジトリの外部リンク" />
+                <span className="sr-only">GitHubリポジトリの外部リンク</span>
+                <svg className="util-svg" viewBox="0 0 98 96"><use xlinkHref="#svg-github" /></svg>
               </div>
             </Link>
             <ThemeSwitch />

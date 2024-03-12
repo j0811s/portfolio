@@ -6,6 +6,20 @@ export const root = createGlobalTheme(':root', {
   }
 });
 
+globalStyle('.sr-only', {
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  borderWidth: 0,
+});
+globalStyle('.util-hidden', {
+  display: 'none'
+});
 globalStyle('.util-sp', {
   '@media': {
     'screen and (min-width: 960px)': {
@@ -19,6 +33,12 @@ globalStyle('.util-pc', {
       display: 'none'
     }
   }
+});
+globalStyle('.util-svg', {
+  display: 'block',
+  overflow: 'visible',
+  width: '100%',
+  height: '100%',
 });
 
 const themeColor = createThemeContract({
