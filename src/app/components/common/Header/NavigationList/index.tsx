@@ -5,7 +5,6 @@ import { faBreadSlice, faUser, faFileLines } from "@fortawesome/free-solid-svg-i
 import { navigation, navigationList, navigationListItem, navigationListItemLink, navigationListItemLinkHover, navigationItemIcon, navigationItemGithubIcon } from "./index.css";
 import Link from "next/link";
 import Image from "next/image";
-import { ThemeSwitch } from "../../ThemeSwitch";
 
 export const NavigationList = ({ pathname, drawerMode }: { pathname: string, drawerMode: boolean }) => {
   const GITHUB_URL = 'https://github.com/j0811s/portfolio';
