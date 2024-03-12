@@ -10,7 +10,7 @@ export const disabled = style({
 });
 
 export const container = style({
-  width: 'fit-content',
+  width: 'auto',
   margin: 'auto',
   color: `${vars.color.background.dark}`,
   backgroundColor: `${vars.color.background.dark}`,
@@ -30,7 +30,7 @@ export const button = style({
   justifyContent: 'space-between',
   gap: '0.5em',
   fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
-  width: 'fit-content',
+  width: `calc( 56 / ${vars.font.size} * 1rem )`,
   margin: '0',
   padding: '0.5em',
   borderRadius: '9999px',
