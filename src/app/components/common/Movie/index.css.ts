@@ -14,7 +14,6 @@ export const srOnly = style({
 });
 
 export const movieContainer = style({
-  position: 'relative',
   overflow: 'hidden',
   width: '100%',
   height: '100%',
