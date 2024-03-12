@@ -64,6 +64,8 @@ const themeColor = createThemeContract({
     code: {
       tag: null,
       text: null,
+      back: null,
+      front: null,
     },
     first_view: {
       main: null,
@@ -116,6 +118,8 @@ export const lightTheme = createTheme(themeColor, {
     code: {
       tag: '#ff7e0f',
       text: '#f0c674',
+      back: 'rgb(175, 184, 193, .2)',
+      front: '#c5c8c6',
     },
     first_view: {
       main: 'rgb(61, 61, 61, 1)',
@@ -167,6 +171,8 @@ export const darkTheme = createTheme(themeColor, {
     code: {
       tag: '#348369',
       text: '#f0c674',
+      back: 'rgb(175, 184, 193, .2)',
+      front: '#c5c8c6',
     },
     first_view: {
       main: 'rgb(0, 0, 0)',
