@@ -5,7 +5,14 @@ import Image from 'next/image';
 import useInView from "@/src/app/components/hooks/useInView";
 import { useRef } from "react";
 
-export const Thumbnail = ({ isDummy, src, width, height }: { isDummy: boolean, src: string, width?: number, height?: number }) => {
+interface Props extends React.ComponentPropsWithoutRef<'figure'> {
+  isDummy: boolean,
+  src: string,
+  width?: number,
+  height?: number
+}
+
+export const Thumbnail = ({ isDummy, src, width, height, className }: Props) => {
   const thumbnailRef = useRef<HTMLElement>(null);
   const isInView = useInView(thumbnailRef, {
     root: null,
@@ -18,7 +25,7 @@ export const Thumbnail = ({ isDummy, src, width, height }: { isDummy: boolean, s
   }
   
   return (
-    <figure className={postListEyecatchContainer} ref={thumbnailRef} data-in-view={isInView}>
+    <figure className={`${postListEyecatchContainer} ${className}`} ref={thumbnailRef} data-in-view={isInView}>
       {
         isDummy
           ? <Image className={postListEyecatch} src="/images/blog/dummy.png" alt="" width="375" height="210" onLoad={addImageLoadedClass} />

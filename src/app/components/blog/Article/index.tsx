@@ -7,7 +7,6 @@ import {
   postContent,
   prevButton,
 } from './index.css';
-import Image from 'next/image';
 import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
@@ -16,6 +15,7 @@ import ConvertDate from "../../../components/common/convertdate";
 import { TagsElement } from '../Tags/TagsElement';
 import { Breadcrumb } from "../../common/Breadcrumb";
 import { CtaButton } from "../../common/Button";
+import { Thumbnail } from "../Thumbnail";
   
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -40,12 +40,12 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 
 export const Article = async ({ post }: { post: Blog }) => {
   const { tag }: { tag: Tag[] } = post;
-  const eyecatchPath = `${post?.eyecatch?.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
   const type = {
     slug: 'post',
     id: post.id,
     name: post.title
   }
+  const eyecatchPath = `${post.eyecatch?.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
   
   return (
     <article id={post.id} className={postWrapper}>
@@ -66,13 +66,7 @@ export const Article = async ({ post }: { post: Blog }) => {
             }
           </div>
         </div>
-        <figure className={postEyecatchContainer}>
-          {
-            post.eyecatch 
-              ? <Image src={eyecatchPath} alt="" width={post.eyecatch.width} height={post.eyecatch.height} priority={true} />
-              : <Image src="/images/blog/dummy_lg.png" alt="" width="375" height="210" priority={true} />
-          }
-        </figure>
+        <Thumbnail className={postEyecatchContainer} src={eyecatchPath} width={post.eyecatch?.width} height={post.eyecatch?.height} isDummy={typeof post.eyecatch?.url === 'undefined'} />
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
       <div className={prevButton}>

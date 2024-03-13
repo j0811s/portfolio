@@ -1,5 +1,14 @@
-import { style, globalStyle } from "@vanilla-extract/css";
+import { style, globalStyle, keyframes } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
+
+const mask = keyframes({
+  '0%': {
+    transform: 'scaleX(1)',
+  },
+  '100%': {
+    transform: 'scaleX(0)',
+  },
+});
 
 export const postWrapper = style({
   overflow: 'hidden',
@@ -21,13 +30,32 @@ export const postHead = style({
 
 export const postEyecatchContainer = style({
   overflow: 'hidden',
+  position: 'relative',
   backgroundColor: `${vars.color.secondary}`,
   border: `3px solid ${vars.color.accent.main}`,
+  borderRadius: 0,
   width: '100%',
   margin: '30px auto 0',
   '@media': {
     'screen and (min-width: 768px)': {
-      border: `6px solid ${vars.color.accent.main}`
+      border: `6px solid ${vars.color.accent.main}`,
+      borderRadius: 0,
+    }
+  },
+  selectors: {
+    '&::after': {
+      content: '',
+      display: 'block',
+      position: 'absolute',
+      inset: 0,
+      zIndex: 1,
+      backgroundColor: `${vars.color.accent.main}`,
+      transform: 'scaleX(1)',
+      transformOrigin: 'right',
+      backfaceVisibility: 'hidden',
+    },
+    '&.loaded::after': {
+      animation: `${mask} 0.3s forwards ease-in-out`,
     }
   }
 });
