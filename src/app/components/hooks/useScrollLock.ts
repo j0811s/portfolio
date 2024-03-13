@@ -15,6 +15,7 @@ const useScrollLock: UseScrollLock = (target) => {
   /** デバイス判定 */
   const deviceType = useDeviceType();
   const isPC = deviceType?.device?.pc;
+  const isAndroid = deviceType?.os?.android;
   const isiOS = deviceType?.os?.ios;
   
   /** 状態 */
@@ -80,14 +81,14 @@ const useScrollLock: UseScrollLock = (target) => {
 
   /** スクロールバーを考慮したウィンドウ幅のイベント処理 */
   const getScrollBarWidth = () => {
-    if (isPC) {
+    if (isPC || isAndroid) {
       const bars = window.innerWidth - html.clientWidth;
       setScrollBarWidth(bars);
     }
   }
 
   const getBodyPaddingRight = () => {
-    if (!isPC) return;
+    if (!isPC || isAndroid) return;
     if (!previousBodyPaddingRight) {
       const previousPaddingRight = body.style.paddingRight;
       setPreviousBodyPaddingRight(previousPaddingRight);
@@ -109,7 +110,7 @@ const useScrollLock: UseScrollLock = (target) => {
 
   // iOS以外
   const setOverflowHidden = () => {
-    if (isPC && isLock) {
+    if ((isPC || isAndroid) && isLock) {
       setWidthExcludingScrollBars();
       body.style.overflow = 'hidden';
       body.style.paddingRight = `${currentBodyPaddingRight + scrollBarWidth}px`;
@@ -117,7 +118,7 @@ const useScrollLock: UseScrollLock = (target) => {
   }
 
   const unsetOverflowHidden = () => {
-    if (isPC && isLock) {
+    if ((isPC || isAndroid) && isLock) {
       unsetWidthExcludingScrollBars();
       body.style.paddingRight = '';
       body.style.overflow = '';
