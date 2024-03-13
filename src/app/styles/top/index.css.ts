@@ -41,6 +41,8 @@ export const section = style({
 });
 
 export const moreButtonContainer = style({
+  display: 'grid',
+  placeContent: 'center',
   textAlign: 'center',
   marginTop: '3em',
 });

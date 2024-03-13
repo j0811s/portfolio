@@ -14,14 +14,14 @@ export default async function Top() {
         <PageTitle pageTitle="経験スキル" isBreadcrumb={false} subHeadline={true} />
         <SkillSet contents={skillContents.filter((_, i) => i <= 3)} />
         <div className={moreButtonContainer}>
-          <CtaButton href='/about/'>もっと見る</CtaButton>
+          <CtaButton href='/about/'>詳細を見る</CtaButton>
         </div>
       </section>
       <section className={section}>
         <PageTitle pageTitle="制作物" isBreadcrumb={false} subHeadline={true} />
         <PickupArticles endpoint='blog' category='portfolio' />
         <div className={moreButtonContainer}>
-          <CtaButton href='/blog/categories/portfolio/'>もっと見る</CtaButton>
+          <CtaButton href='/blog/'>投稿一覧を見る</CtaButton>
         </div>
       </section>
     </div>

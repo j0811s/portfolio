@@ -1,16 +1,15 @@
-import { button, buttonInner, buttonArrowIcon } from "./index.css";
+import { container, button, buttonInner, buttonArrowIcon } from "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import type { ReactNode } from 'react';
 
-type CtaButton = {
+interface Props extends React.ComponentPropsWithoutRef<'button'> { 
   href?: string
   prev?: boolean
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const CtaButton = ({ href, prev, children }: CtaButton) => {
+export const CtaButton = ({ href, prev, children }: Props) => {
 
   const buttonElement = () => {
     return (
@@ -35,6 +34,8 @@ export const CtaButton = ({ href, prev, children }: CtaButton) => {
   }
 
   return (
-    buttonElement()
+    <div className={container}>
+      {buttonElement()}
+    </div>
   )
 } 

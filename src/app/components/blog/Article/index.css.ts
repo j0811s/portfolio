@@ -322,6 +322,8 @@ globalStyle(`${postContent} pre > code`, {
 });
 
 export const prevButton = style({
+  display: 'grid',
+  placeContent: 'center',
   textAlign: 'center',
   padding: '32px 16px',
   '@media': {

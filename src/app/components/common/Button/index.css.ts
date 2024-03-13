@@ -1,18 +1,24 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
-export const button = style({
-  position: 'relative',
-  display: 'inline-block',
-  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+export const container = style({
   width: 'fit-content',
-  margin: '0',
+});
+
+export const button = style({
+  overflow: 'hidden',
+  position: 'relative',
+  display: 'block',
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+  width: '100%',
+  margin: '0 auto',
   padding: '1em 1.6em',
   textAlign: 'center',
   overflowWrap: 'break-word',
   color: `${vars.color.text.btn}`,
   backgroundColor: `${vars.color.accent.main}`,
-  borderRadius: '8px',
+  border: `1px solid ${vars.color.accent.main}`,
+  borderRadius: '6px',
   '@media': {
     '(min-width: 960px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
@@ -41,7 +47,7 @@ export const button = style({
     '&:hover': {
       '@media': {
         '(min-width: 960px)': {
-          color: '#fff',
+          color: `${vars.color.accent.main}`,
         }
       }
     },
