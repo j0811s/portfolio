@@ -6,7 +6,12 @@ export const container = style({
 });
 
 export const list = style({
-  padding: '1em'
+  padding: '1em 1.5em',
+  '@media': {
+    'screen and (min-width: 960px)': {
+      padding: '1em',
+    }
+  }
 });
 
 export const listItem = style({

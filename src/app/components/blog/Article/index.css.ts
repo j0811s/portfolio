@@ -20,7 +20,7 @@ export const postWrapper = style({
 });
 
 export const postHead = style({
-  padding: '32px 16px 0',
+  padding: '32px 0 0',
   '@media': {
     'screen and (min-width: 768px)': {
       padding: '0 32px',
@@ -117,7 +117,7 @@ export const postDateIcon = style({
 export const postContent = style({
   overflow: 'hidden',
   margin: '16px 0 0',
-  padding: '32px 16px',
+  padding: '32px 0',
   '@media': {
     'screen and (min-width: 768px)': {
       padding: '64px 32px',
