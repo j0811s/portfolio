@@ -22,7 +22,9 @@ export const TableOfContents = ({ mode }: Props) => {
     mobile: 'screen and (max-width: 959px)',
     desktop: 'screen and (min-width: 960px)',
   }
-  const isMatches = mode ? useMediaQuery(modeOptions[mode]) : true;
+  const mediaQuery = mode && modeOptions[mode];
+  const isMatches = useMediaQuery(mediaQuery);
+  const isDisplayed = mode ? isMatches : true;
   const [isPostPage, setIsPostPage] = useState<boolean>(false);
   const [heading, setHeading] = useState<HeadingProps>([]);
 
@@ -52,7 +54,6 @@ export const TableOfContents = ({ mode }: Props) => {
   }, [isPostPage]);
 
   useEffect(() => {
-    // スムーススクロール
     const smoothScroll = (e: Event) => {
       e.preventDefault();
       const eventTarget = e.currentTarget;
@@ -82,7 +83,7 @@ export const TableOfContents = ({ mode }: Props) => {
   }, [tocRef.current, isMatches]);
   
   return (
-    isPostPage && isMatches &&
+    isPostPage && isDisplayed &&
     <div className={container}>
       <h2 className={title}>
         <FontAwesomeIcon icon={faListUl} size="1x" className={titleIcon} />
