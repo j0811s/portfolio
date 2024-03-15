@@ -94,7 +94,7 @@ export const TableOfContents = ({ mode }: Props) => {
           heading.map(head => {
             return (
               <li className={listItem} data-level={head.level} data-index={head.index} key={head.id}>
-                <a className={listIetmLink} href={`#${(head.id as string)}`}>・{ head.text }</a>
+                <a className={listIetmLink} href={`#${(head.id as string)}`}>{ head.text }</a>
               </li>
             )
           })
