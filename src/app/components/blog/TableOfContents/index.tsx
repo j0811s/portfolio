@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { container, title, titleIcon, titleLabel, list, listItem, listIetmLink } from "./index.css";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
@@ -16,6 +16,7 @@ type HeadingProps = {
 
 export const TableOfContents = ({ mode }: Props) => {
   const pathname = usePathname();
+  const tocRef = useRef<HTMLOListElement>(null);
   const postPagePattern = /^\/blog\/.*\/$/;
   const modeOptions = {
     mobile: 'screen and (max-width: 959px)',
@@ -49,6 +50,36 @@ export const TableOfContents = ({ mode }: Props) => {
 
     setHeading(headData);
   }, [isPostPage]);
+
+  useEffect(() => {
+    // スムーススクロール
+    const smoothScroll = (e: Event) => {
+      e.preventDefault();
+      const eventTarget = e.currentTarget;
+      if (eventTarget instanceof HTMLAnchorElement) {
+        const targetId = eventTarget.getAttribute('href')?.replace(/^#/, "");
+        if (!targetId) return;
+
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        const headerHeight = mode === 'mobile' ? (+document.documentElement.style.getPropertyValue('--headerHeight')) : 0;
+        window.scrollTo({
+          top: target.offsetTop + headerHeight,
+          behavior: "smooth",
+        });
+      }
+    }
+    
+    tocRef?.current?.querySelectorAll('a').forEach(aTag => {
+      aTag.addEventListener('click', smoothScroll);
+    });
+
+    return () => {
+      tocRef?.current?.querySelectorAll('a').forEach(aTag => {
+        aTag.removeEventListener('click', smoothScroll);
+      });
+    }
+  }, [tocRef.current, isMatches]);
   
   return (
     isPostPage && isMatches &&
@@ -57,7 +88,7 @@ export const TableOfContents = ({ mode }: Props) => {
         <FontAwesomeIcon icon={faListUl} size="1x" className={titleIcon} />
         <span className={titleLabel}>目次</span>
       </h2>
-      <ol className={list}>
+      <ol className={list} ref={tocRef}>
         {
           heading.map(head => {
             return (

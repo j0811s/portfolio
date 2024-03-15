@@ -4,7 +4,7 @@ import { container, wrapper, navigationListItem, navigationListItemLink, navigat
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import useDeviceType from "../../hooks/useDeviceType";
 import useMediaQuery from "../../hooks/useMediaQuery";
@@ -19,8 +19,10 @@ import { NavigationList } from "./NavigationList";
 export const Header = () => {
   const pathname = usePathname();
   const deviceType = useDeviceType();
-  // const isDesktopRange = useMediaQuery('screen and (min-width: 960px)');
-
+  const headerRef = useRef<HTMLElement>(null);
+  const isMobile = useMediaQuery('screen and (max-width: 959px)');
+  const isDesktop = useMediaQuery('screen and (min-width: 960px)');
+  
   useEffect(() => {
     if (deviceType) {
       const deviceTypeKeys = Object.keys(deviceType);
@@ -38,13 +40,21 @@ export const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deviceType]);
 
+  useEffect(() => {
+    if (headerRef?.current) {
+      const header = headerRef.current;
+      const headerHeight = (header instanceof HTMLElement) ? header.getBoundingClientRect().height : 0;
+      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    }
+  }, [isMobile, isDesktop]);
+
   const DrawerMenuOptions = {
     disableMediaQuery: 'screen and (min-width: 960px)',
   }
 
   return (
     <Suspense>
-      <header className={container}>
+      <header className={container} ref={headerRef}>
         <div className={wrapper}>
           <DrawerMenu options={DrawerMenuOptions}>
             <NavigationList pathname={pathname} drawerMode={true} />
@@ -56,8 +66,8 @@ export const Header = () => {
           <div className={`${navigationListItem} mod-github util-pc`}>
             <Link className={`${navigationListItemLink} ${navigationListItemLinkHover} mod-icon`} href='https://github.com/j0811s/portfolio' target="_blank">
               <div className={navigationItemGithubIcon}>
-                <span className="sr-only">GitHubリポジトリの外部リンク</span>
-                <svg className="util-svg" viewBox="0 0 98 96"><use xlinkHref="#svg-github" /></svg>
+                <span className="sr-only">GitHubリポジトリのリンク</span>
+                <svg className="util-svg" viewBox="0 0 98 96" aria-hidden="true"><use xlinkHref="#svg-github" /></svg>
               </div>
             </Link>
             <ThemeSwitch />
