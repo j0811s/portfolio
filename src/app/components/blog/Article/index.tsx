@@ -35,7 +35,7 @@ const parseOptions: HTMLReactParserOptions = {
 }
 
 const PostContentElement = ({content = '', parseOptions}: {content: string, parseOptions: HTMLReactParserOptions}): JSX.Element => {
-  return content !== '' ? <div className={postContent}>{parse(content, parseOptions)}</div> : <></>;
+  return content !== '' ? <div id="js-postContents" className={postContent}>{parse(content, parseOptions)}</div> : <></>;
 }
 
 export const Article = async ({ post }: { post: Blog }) => {
