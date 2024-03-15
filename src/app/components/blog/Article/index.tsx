@@ -16,6 +16,7 @@ import { TagsElement } from '../Tags/TagsElement';
 import { Breadcrumb } from "../../common/Breadcrumb";
 import { CtaButton } from "../../common/Button";
 import { Thumbnail } from "../Thumbnail";
+import { TableOfContents } from "../TableOfContents";
   
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -67,6 +68,7 @@ export const Article = async ({ post }: { post: Blog }) => {
           </div>
         </div>
         <Thumbnail className={postEyecatchContainer} src={eyecatchPath} width={post.eyecatch?.width} height={post.eyecatch?.height} isDummy={typeof post.eyecatch?.url === 'undefined'} />
+        <TableOfContents mode="mobile" />
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
       <div className={prevButton}>

@@ -2,19 +2,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { container, title, titleIcon, titleLabel, list, listItem, listIetmLink } from "./index.css";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
-type Props = {
+interface Props extends React.ComponentPropsWithoutRef<'div'> {
+  mode?: 'desktop' | 'mobile',
+}
+
+type HeadingProps = {
   [key: string]: string | number | null
 }[]
 
-export const TableOfContents = () => {
+export const TableOfContents = ({ mode }: Props) => {
   const pathname = usePathname();
   const postPagePattern = /^\/blog\/.*\/$/;
+  const modeOptions = {
+    mobile: 'screen and (max-width: 959px)',
+    desktop: 'screen and (min-width: 960px)',
+  }
+  const isMatches = mode ? useMediaQuery(modeOptions[mode]) : true;
   const [isPostPage, setIsPostPage] = useState<boolean>(false);
-  const [heading, setHeading] = useState<Props>([]);
+  const [heading, setHeading] = useState<HeadingProps>([]);
+
 
   useEffect(() => {
     setIsPostPage(postPagePattern.test(pathname));
@@ -39,10 +49,9 @@ export const TableOfContents = () => {
 
     setHeading(headData);
   }, [isPostPage]);
-
   
   return (
-    isPostPage &&
+    isPostPage && isMatches &&
     <div className={container}>
       <h2 className={title}>
         <FontAwesomeIcon icon={faListUl} size="1x" className={titleIcon} />
@@ -53,7 +62,7 @@ export const TableOfContents = () => {
           heading.map(head => {
             return (
               <li className={listItem} data-level={head.level} data-index={head.index} key={head.id}>
-                <Link className={listIetmLink} href={`#${(head.id as string)}`}>・{ head.text }</Link>
+                <a className={listIetmLink} href={`#${(head.id as string)}`}>・{ head.text }</a>
               </li>
             )
           })

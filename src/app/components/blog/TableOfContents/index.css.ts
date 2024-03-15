@@ -3,6 +3,11 @@ import { vars } from "@/src/app/styles/common/variables.css";
 
 export const container = style({
   overflow: 'hidden',
+  '@media': {
+    'screen and (max-width: 959px)': {
+      margin: '30px auto 0'
+    }
+  }
 });
 
 export const title= style({
@@ -56,7 +61,7 @@ export const listItem = style({
 
 export const listIetmLink = style({
   color: `${vars.color.text.secondary}`,
-  display: 'flex',
+  display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0.5em 0.5em 0.5em 1em',
@@ -66,6 +71,7 @@ export const listIetmLink = style({
   transition: 'border-color 0.2s linear',
   '@media': {
     'screen and (min-width: 960px)': {
+      display: 'flex',
       borderLeft: '2px solid transparent',
     }
   },
