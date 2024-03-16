@@ -1,22 +1,29 @@
+import React from "react";
+import { data, section, inner } from "./index.css";
 import type { CareerContent } from '@/src/app/libs/microcms/history';
-import { CareerDd } from "../CareerDd";
-import { CareerDt } from "../CareerDt";
-import { data } from "./index.css";
+import { CareerItem } from "../CareerItem";
+import { CareerYear } from '../CareerYear';
 
 export const CareerContents = ({ contents }: { contents: CareerContent[] }) => {
   return (
-    contents.map(content => (
-      <div className={data} key={content.id}>
-        <CareerDt period={content.period} />
-        {
-          content.info.map(info => (
-            <>
-              <CareerDd body={info.project} headline={true} key={info.project} />
-              <CareerDd body={info.details} headline={false} key={info.details} />
-            </>
-          ))
-        }
-      </div>
-    ))
+    <div className={data}>
+      {
+        contents.map((content, i) => (
+          <section className={section} key={content.id}>
+            <CareerYear period={content.period} />
+            <dl>
+              {
+                content.info.map((info, i) => (
+                  <div className={inner} key={`${content.id}-info-${i}`}>
+                    <CareerItem body={info.project} headline={true} key={info.project} />
+                    <CareerItem body={info.details} headline={false} key={info.details} />
+                  </div>
+                ))
+              }
+            </dl>
+          </section>
+        ))
+      }
+    </div>
   )
 }

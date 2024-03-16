@@ -5,12 +5,12 @@ import { useRef } from "react";
 import useInView from "../../../hooks/useInView";
 
 export const CareerList = ({ children }: { children: React.ReactNode }) => {
-  const dlRef = useRef<HTMLDListElement>(null);
-  const isInView = useInView(dlRef, {
+  const divRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(divRef, {
     root: null,
     rootMargin: '0px',
     threshold: 0.5
   }, true);
 
-  return <dl className={wrapper} ref={dlRef} data-in-view={isInView}>{children}</dl>;
+  return <div className={wrapper} ref={divRef} data-in-view={isInView}>{children}</div>;
 }

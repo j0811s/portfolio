@@ -9,21 +9,18 @@ export const readText = style({
   marginTop: '0.5em',
   marginLeft: `calc( 78 / ${vars.font.size} * 1rem )`,
   textAlign: 'justify',
+  whiteSpace: 'pre-line',
   '@media': {
     'screen and (min-width: 600px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
-      marginLeft: `calc( 84 / ${vars.font.size} * 1rem )`,
+      marginLeft: `calc( 80 / ${vars.font.size} * 1rem )`,
     },
   }
 });
 
 export const textBold = style({
-  fontWeight: 400,
+  fontWeight: 700,
   borderBottom: `1px solid ${vars.color.border.main}`,
   borderColor: 'inherit',
   paddingBottom: '0.25em'
-});
-
-globalStyle(`${readText} + ${textBold}`, {
-  marginTop: '1.25em',
 });

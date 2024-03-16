@@ -21,7 +21,7 @@ export const iconContainer = style({
   marginRight: `calc( 20 / ${vars.font.size} * 1rem )`,
   '@media': {
     'screen and (min-width: 600px)': {
-      marginRight: `calc( 24 / ${vars.font.size} * 1rem )`,
+      marginRight: `calc( 20 / ${vars.font.size} * 1rem )`,
     },
   },
   selectors: {

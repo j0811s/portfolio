@@ -15,13 +15,12 @@ export const wrapper = style({
   position: 'relative',
   display: 'block',
   margin: '40px auto 0',
-  padding: '20px',
-  // backgroundColor: `${vars.color.secondary}`,
+  padding: '48px 0',
   borderRadius: 8,
   '@media': {
     'screen and (min-width: 960px)': {
       margin: '50px auto 0',
-      padding: '40px',
+      padding: '50px 0',
     }
   },
   selectors: {
@@ -29,12 +28,12 @@ export const wrapper = style({
       content: '',
       position: 'absolute',
       top: 0,
-      left: '2.7em',
+      left: 23,
       display: 'block',
       width: 6,
       '@media': {
         'screen and (min-width: 960px)': {
-          left: '4em',
+          left: 23,
         }
       },
     },
