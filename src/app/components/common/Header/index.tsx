@@ -55,9 +55,11 @@ export const Header = () => {
     <>
       <header className={container} ref={headerRef}>
         <div className={wrapper}>
-          <DrawerMenu options={DrawerMenuOptions}>
-            <NavigationList pathname={pathname} drawerMode={true} />
-          </DrawerMenu>
+          <Suspense>
+            <DrawerMenu options={DrawerMenuOptions}>
+              <NavigationList pathname={pathname} drawerMode={true} />
+            </DrawerMenu>
+          </Suspense>
           <Logo pathname={pathname} />
           <div className='util-sp'>
             <ThemeSwitch />
@@ -73,7 +75,7 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      { pathname === '/' && <FirstView /> }
+      {pathname === '/' && <FirstView />}
       <StickyNavigation>
         <NavigationList pathname={pathname} drawerMode={false} />
       </StickyNavigation>
