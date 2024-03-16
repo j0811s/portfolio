@@ -9,12 +9,12 @@ export const Logo: Logo = ({ pathname }) => {
     pathname === '/' ?
       <h1 className={logo}>
         <span className={logoInner}>
-          <Image className={logoImg} src={`/logo.png`} width={30} height={30} alt="J.Sato ポートフォリオサイト" />
+          <Image className={logoImg} src={`/logo.png`} width={30} height={30} alt="J.Sato ポートフォリオサイト" priority />
         </span>
       </h1> :
       <div className={logo}>
         <Link className={logoInner} href={`/`}>
-          <Image className={logoImg} src={`/logo.png`} width={30} height={30} alt="J.Sato ポートフォリオサイト" />
+          <Image className={logoImg} src={`/logo.png`} width={30} height={30} alt="J.Sato ポートフォリオサイト" priority />
         </Link>
       </div>
   )

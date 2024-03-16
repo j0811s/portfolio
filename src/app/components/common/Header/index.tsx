@@ -3,7 +3,6 @@
 import { container, wrapper, navigationListItem, navigationListItemLink, navigationListItemLinkHover, navigationItemGithubIcon } from "./index.css"
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import useDeviceType from "../../hooks/useDeviceType";
@@ -53,7 +52,7 @@ export const Header = () => {
   }
 
   return (
-    <Suspense>
+    <>
       <header className={container} ref={headerRef}>
         <div className={wrapper}>
           <DrawerMenu options={DrawerMenuOptions}>
@@ -74,10 +73,10 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      {pathname === '/' && <FirstView />}
+      { pathname === '/' && <FirstView /> }
       <StickyNavigation>
         <NavigationList pathname={pathname} drawerMode={false} />
       </StickyNavigation>
-    </Suspense>
+    </>
   )
 }
