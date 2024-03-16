@@ -18,7 +18,7 @@ type HeadingProps = {
 export const TableOfContents = ({ mode, accordion }: Props) => {
   const pathname = usePathname();
   const tocRef = useRef<HTMLOListElement>(null);
-  const postPagePattern = /^\/blog\/.*\/$/;
+  const postPagePattern = /^\/blog\/[^/]*\/$/;
   const modeOptions = {
     mobile: 'screen and (max-width: 959px)',
     desktop: 'screen and (min-width: 960px)',
