@@ -31,10 +31,6 @@ export const TableOfContents = ({ mode, accordion }: Props) => {
   const [isTocOpen, setIsTocOpen] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsTocOpen(mode !== 'mobile');
-  }, []);
-
-  useEffect(() => {
     setIsPostPage(postPagePattern.test(pathname));
   }, [pathname]);
 
