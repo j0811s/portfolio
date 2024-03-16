@@ -7,7 +7,7 @@ import {
   postContent,
   prevButton,
 } from './index.css';
-import parse, { HTMLReactParserOptions, Element, Text } from "html-react-parser";
+import parse, { HTMLReactParserOptions, Element, Text, DOMNode } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
 import { Blog, Tag } from '../../../libs/microcms/blog';
@@ -22,17 +22,35 @@ const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
     if (!(domNode instanceof Element && domNode?.attribs)) return undefined
 
-    if (domNode.name === 'pre') {
-      const code: string = ((domNode.children[0] as Element).children[0] as Text).data // https://github.com/remarkablemark/html-react-parser/issues/591
-      const highlightCode: AutoHighlightResult = hljs.highlightAuto(code)
-      
-      return (
-        <pre>
-          <code className="hljs">{parse(highlightCode.value)}</code>
-        </pre>
-      )
+    switch (domNode.name) {
+      case 'h1':
+      case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'h5':
+      case 'h6': {
+        domNode.attribs.id = Math.random().toString(36).substring(2, 12);
+        break;
+      }
+      case 'pre': {
+        const fileName: string = (domNode.parent as Element)?.attribs['data-filename'] !== '' ? (domNode.parent as Element)?.attribs['data-filename'] : '';
+        const code: string = ((domNode.children[0] as Element).children[0] as Text).data; // https://github.com/remarkablemark/html-react-parser/issues/591
+        const highlightCode: AutoHighlightResult = hljs.highlightAuto(code);
+
+        return (
+          <div className="codeBlock">
+            { fileName && <div className="fileName hljs">{fileName}</div> }
+            <pre className="codeBlock_pre">
+              <code className="codeBlock_code hljs">{parse(highlightCode.value)}</code>
+            </pre>
+          </div>
+        )
+      }
+      default: {
+        break;
+      }
     }
-  },
+  }
 }
 
 const PostContentElement = ({content = '', parseOptions}: {content: string, parseOptions: HTMLReactParserOptions}): JSX.Element => {

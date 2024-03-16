@@ -307,13 +307,37 @@ globalStyle(`${postContent} th > p`, {
   fontWeight: 400
 });
 
-globalStyle(`${postContent} pre > code`, {
+globalStyle(`${postContent} .codeBlock`, {
+  overflow: 'hidden',
+  border: `1px solid rgb(255, 255, 255, 0.1)`,
+  borderRadius: 4,
+});
+
+globalStyle(`${postContent} .fileName`, {
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+  lineHeight: '1.6',
+  fontWeight: 400,
+  padding: '0.5em 1em',
+  borderBottom: `1px solid rgb(255, 255, 255, 0.1)`,
+  '@media': {
+    'screen and (min-width: 768px)': {
+      fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
+    }
+  }
+});
+
+globalStyle(`${postContent} .fileName > a`, {
+  pointerEvents: 'none',
+  color: 'inherit',
+  textDecoration: 'none'
+});
+
+globalStyle(`${postContent} .codeBlock_pre > .codeBlock_code`, {
   whiteSpace: 'pre',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   lineHeight: '1.6',
   fontWeight: 400,
-  border: `1px solid rgb(255, 255, 255, 0.1)`,
-  borderRadius: 4,
+  padding: '1em',
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 16 / ${vars.font.size} * 1rem )`,
