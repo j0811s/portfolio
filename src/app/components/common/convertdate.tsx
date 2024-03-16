@@ -5,7 +5,7 @@ type ConvertDateOptions = {
   format?: string
 }
 
-export default function ConvertDate({ date = '', format = 'YYYY年MM月DD日' }: ConvertDateOptions) {
+export default function ConvertDate({ date = '', format = 'YYYY/MM/DD' }: ConvertDateOptions) {
   if (!date) return
   
   const formatedDate = dayjs(date).format(format);

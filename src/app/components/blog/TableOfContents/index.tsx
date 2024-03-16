@@ -1,20 +1,21 @@
 'use client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faListUl } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { container, title, titleIcon, titleLabel, list, listItem, listIetmLink } from "./index.css";
+import { container, titleHead, title, titleIcon, titleLabel, accordionTrigger, accordionTriggerIcon, listContainer, list, listItem, listIetmLink } from "./index.css";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 interface Props extends React.ComponentPropsWithoutRef<'div'> {
   mode?: 'desktop' | 'mobile',
+  accordion?: boolean
 }
 
 type HeadingProps = {
-  [key: string]: string | number | null
+  [key: string]: string | number | null;
 }[]
 
-export const TableOfContents = ({ mode }: Props) => {
+export const TableOfContents = ({ mode, accordion }: Props) => {
   const pathname = usePathname();
   const tocRef = useRef<HTMLOListElement>(null);
   const postPagePattern = /^\/blog\/.*\/$/;
@@ -27,7 +28,11 @@ export const TableOfContents = ({ mode }: Props) => {
   const isDisplayed = mode ? isMatches : true;
   const [isPostPage, setIsPostPage] = useState<boolean>(false);
   const [heading, setHeading] = useState<HeadingProps>([]);
+  const [isTocOpen, setIsTocOpen] = useState<boolean>(true);
 
+  useEffect(() => {
+    setIsTocOpen(mode !== 'mobile');
+  }, []);
 
   useEffect(() => {
     setIsPostPage(postPagePattern.test(pathname));
@@ -83,25 +88,36 @@ export const TableOfContents = ({ mode }: Props) => {
   }, [tocRef.current, isMatches]);
   
   return (
-    isPostPage && isDisplayed &&
-    <div className={container}>
-      <h2 className={title}>
-        <FontAwesomeIcon icon={faListUl} size="1x" className={titleIcon} />
-        <span className={titleLabel}>目次</span>
-      </h2>
-      <ol className={list} ref={tocRef}>
-        {
-          heading.map(head => {
-            return (
-              <li className={listItem} data-level={head.level} data-index={head.index} key={head.id}>
-                <a className={listIetmLink} href={`#${(head.id as string)}`} data-level={head.level} data-index={head.index}>
-                  <span>{ head.level && +head.level >= 3 ? '・' : ''}{head.text}</span>
-                </a>
-              </li>
-            )
-          })
-        }
-      </ol>
-    </div>
+    isPostPage &&
+    isDisplayed &&
+      <div className={container}>
+        <div className={titleHead}>
+          <h2 className={title}>
+            <FontAwesomeIcon icon={faListUl} size="1x" className={titleIcon} />
+            <span className={titleLabel}>目次</span>
+          </h2>
+          {
+            accordion &&
+            <button className={accordionTrigger} type="button" onClick={() => setIsTocOpen(prev => !prev)}>
+              <FontAwesomeIcon className={accordionTriggerIcon} icon={faChevronUp} size="1x" data-open={isTocOpen} />
+            </button>
+          }
+        </div>
+        <div className={listContainer} data-open={isTocOpen}>
+          <ol className={list} ref={tocRef}>
+            {
+              heading.map(head => {
+                return (
+                  <li className={listItem} data-level={head.level} data-index={head.index} key={head.id}>
+                    <a className={listIetmLink} href={`#${(head.id as string)}`} data-level={head.level} data-index={head.index}>
+                      <span>{ head.level && +head.level >= 3 ? '・' : ''}{head.text}</span>
+                    </a>
+                  </li>
+                )
+              })
+            }
+          </ol>
+        </div>
+      </div>
   )
 }

@@ -87,10 +87,11 @@ export const postDataTitle = style({
 
 export const postDataDesc = style({
   marginTop: 'auto',
-  paddingTop: '1em'
+  paddingTop: '0.5em'
 });
 
 export const postDateContainer = style({
+  
 });
 
 export const postDate = style({

@@ -10,6 +10,10 @@ export const container = style({
   }
 });
 
+export const titleHead = style({
+  position: 'relative'
+});
+
 export const title= style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
@@ -24,16 +28,48 @@ export const title= style({
   }
 });
 
-export const titleIcon= style({
+export const titleIcon = style({
   color: `${vars.color.gray.taupe}`
 });
 
-export const titleLabel= style({
+export const titleLabel = style({
   paddingLeft: '0.5em',
 });
 
+export const accordionTrigger = style({
+  position: 'absolute',
+  inset: 0,
+  padding: '1em',
+  zIndex: 1,
+  textAlign: 'right',
+});
+
+export const accordionTriggerIcon = style({
+  transition: 'transform 0.4s',
+  selectors: {
+    '&[data-open="false"]': {
+      transform: 'rotateX(0.5turn)'
+    }
+  }
+});
+
+export const listContainer = style({
+  display: 'grid',
+  gridTemplateRows: '1fr',
+  padding: '1em',
+  transition: 'grid-template-rows 0.4s',
+  selectors: {
+    '&[data-open="false"]': {
+      gridTemplateRows: '0fr',
+    },
+    '&[data-open="true"]': {
+      gridTemplateRows: '1fr',
+    }
+  }
+});
+
 export const list = style({
-  padding: '1em'
+  overflow: 'hidden',
 });
 
 export const listItem = style({

@@ -68,7 +68,7 @@ export const Article = async ({ post }: { post: Blog }) => {
           </div>
         </div>
         <Thumbnail className={postEyecatchContainer} src={eyecatchPath} width={post.eyecatch?.width} height={post.eyecatch?.height} isDummy={typeof post.eyecatch?.url === 'undefined'} />
-        <TableOfContents mode="mobile" />
+        <TableOfContents mode="mobile" accordion={true} />
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
       <div className={prevButton}>

@@ -33,18 +33,18 @@ export const ArticleList = ({ contents, totalCount }: { contents: any[], totalCo
                   <dd className={postDataDesc}>
                     <div className={postDateContainer}>
                       <p className={postDate}>
-                        <FontAwesomeIcon className={postDateIcon} icon={faCalendarDay} />公開日：<ConvertDate date={post.publishedAt} />
+                        <FontAwesomeIcon className={postDateIcon} icon={faCalendarDay} aria-hidden="true" />公開日：<ConvertDate date={post.publishedAt} />
                       </p>
                       {
                         post.updatedAt &&
                         <p className={postDate}>
-                          <FontAwesomeIcon className={postDateIcon} icon={faClock} />更新日：<ConvertDate date={post.updatedAt} />
+                          <FontAwesomeIcon className={postDateIcon} icon={faClock} aria-hidden="true" />更新日：<ConvertDate date={post.updatedAt} />
                         </p>
                       }
                     </div>
                   </dd>
                 </dl>
-                <div className={postBtn}>投稿を読む</div>
+                <p className={`sr-only`}>この投稿ページに進む</p>
               </Link>
             </li>
           )
