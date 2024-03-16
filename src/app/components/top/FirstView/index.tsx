@@ -15,7 +15,7 @@ export const FirstView = () => {
         </div>
       </div>
       <div className={movie}>
-        <Movie src="/movies/top/fv.mp4" autoplay={true} />
+        <Movie src="/movies/top/fv.mp4" autoplay={true} width={2160} height={1350} />
       </div>
     </div>
   )

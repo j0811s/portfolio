@@ -6,7 +6,11 @@ import { faL, faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import useInView from "../../hooks/useInView";
 
-export const Movie = ({ src, autoplay = false }: { src: string, autoplay: boolean }) => {
+interface Props extends React.ComponentPropsWithoutRef<'video'> {
+  autoplay?: boolean
+}
+
+export const Movie = ({ src, autoplay = false, width, height }: Props) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(autoplay);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isInView = useInView(videoRef, {
@@ -43,7 +47,17 @@ export const Movie = ({ src, autoplay = false }: { src: string, autoplay: boolea
 
   return (
     <div className={movieContainer}>
-      <video className={movie} playsInline muted loop src={src} ref={videoRef} data-in-view={isInView}></video>
+      <video
+        className={movie}
+        width={width}
+        height={height}
+        playsInline
+        muted
+        loop
+        src={src}
+        ref={videoRef}
+        data-in-view={isInView}
+      ></video>
       <div className={controlButtons}>
         <button className={controlButton} type="button" onClick={onControlMovie}>
           <ControlButtonIcon />
