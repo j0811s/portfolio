@@ -16,7 +16,7 @@ export const wrapper = style({
   display: 'block',
   margin: '40px auto 0',
   padding: '20px',
-  backgroundColor: `${vars.color.secondary}`,
+  // backgroundColor: `${vars.color.secondary}`,
   borderRadius: 8,
   '@media': {
     'screen and (min-width: 960px)': {
