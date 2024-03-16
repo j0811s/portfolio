@@ -37,11 +37,15 @@ export const titleLabel = style({
 });
 
 export const accordionTrigger = style({
+  display: 'grid',
+  placeContent: 'center',
+  justifyContent: 'flex-end',
   position: 'absolute',
   inset: 0,
   padding: '1em',
   zIndex: 1,
   textAlign: 'right',
+  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
 });
 
 export const accordionTriggerIcon = style({
