@@ -1,7 +1,9 @@
+'use client';
+
 import { container, button, icon, enabled, disabled } from './index.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useTheme } from 'next-themes'
 
 
@@ -14,7 +16,14 @@ export const ThemeSwitch = () => {
   }, []);
 
   if (!mounted) {
-    return null;
+    return (
+      <div className={`${container} ${enabled}`}>
+        <div className={`${button} ${enabled}`}>
+          <FontAwesomeIcon className={`${icon} ${enabled}`} icon={faSun} />
+          <FontAwesomeIcon className={`${icon} ${disabled}`} icon={faMoon} />
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -24,6 +33,5 @@ export const ThemeSwitch = () => {
         <FontAwesomeIcon className={`${icon} ${theme === 'dark' ? enabled : disabled}`} icon={faMoon} />
       </button>
     </div>
-    
   )
 }
