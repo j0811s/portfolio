@@ -8,7 +8,7 @@ import { lightTheme, darkTheme } from "@/src/app/styles/common/variables.css";
 import { html, body, container } from './styles/layout.css';
 import { Header } from '@/src/app/components/common/Header';
 import { Footer } from '@/src/app/components/common/Footer';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 
 const SITE_URL: string = process.env.SITE_URL || '';
 
@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     template: `%s | ${myMeta.title}`
   },
   description: myMeta.description,
-  viewport: "width=device-width, initial-scale=1",
   alternates: {
     canonical: myMeta.siteUrl
   },
@@ -38,6 +37,11 @@ export const metadata: Metadata = {
     description: myMeta.description,
     siteName: myMeta.sitename
   }
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 type RootLayout = {

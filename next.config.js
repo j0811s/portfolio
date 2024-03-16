@@ -8,7 +8,16 @@ const nextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
   images: {
-    domains: ['images.microcms-assets.io', 'placehold.jp']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.microcms-assets.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.jp',
+      },
+    ],
     // unoptimized: true
   }
 };

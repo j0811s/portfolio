@@ -1,4 +1,4 @@
-import { ImageResponse } from 'next/server'
+import { ImageResponse } from 'next/og'
 import { getDetail } from "../../libs/microcms/blog";
  
 // Route segment config
