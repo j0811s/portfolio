@@ -37,6 +37,7 @@ export const titleLabel = style({
 });
 
 export const accordionTrigger = style({
+  cursor: 'pointer',
   display: 'grid',
   placeContent: 'center',
   justifyContent: 'flex-end',
@@ -44,6 +45,7 @@ export const accordionTrigger = style({
   inset: 0,
   padding: '1em',
   zIndex: 1,
+  width: '100%',
   textAlign: 'right',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
 });
