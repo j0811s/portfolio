@@ -5,8 +5,8 @@ export const container = style({
   opacity: 0,
   visibility: 'hidden',
   position: 'fixed',
-  right: '20px',
-  bottom: '20px',
+  right: '1em',
+  bottom: '1em',
   zIndex: 10,
   display: 'flex',
   alignItems: 'center',
@@ -19,8 +19,8 @@ export const container = style({
   transition: 'border-color 0.2s ease-in-out, opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
   '@media': {
     'screen and (min-width: 960px)': {
-      right: '40px',
-      bottom: '40px',
+      right: '1em',
+      bottom: '1em',
     }
   },
   selectors: {

@@ -6,6 +6,7 @@ export const container = style({
   color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.background.primary}`,
   textAlign: 'center',
+  padding: '1em'
 });
 
 
@@ -13,7 +14,6 @@ export const container = style({
 export const navigation = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   backgroundColor: 'transparent',
-  margin: '1em 0 0',
   '@media': {
     'screen and (min-width: 960px)': {
       backgroundColor: `${vars.color.background.primary}`,
@@ -24,6 +24,7 @@ export const navigation = style({
 export const navigationList = style({
   display: 'flex',
   justifyContent: 'center',
+  gap: '0.5em'
 });
 
 export const navigationListItem = style({
@@ -104,5 +105,5 @@ globalStyle(`${navigationList}:hover a`, {
 export const copyright = style({
   display: 'block',
   fontSize: `calc( 12 / ${vars.font.size} * 1rem )`,
-  padding: '1em'
+  marginTop: '1em',
 });
