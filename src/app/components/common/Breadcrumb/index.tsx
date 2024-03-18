@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBreadSlice } from "@fortawesome/free-solid-svg-icons";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { list, listItem, listItemLink, listItemIcon, listItemName } from "./index.css";
 import { ListItems } from "./ListItems";
 import { BreadcrumbJsonLd } from "@/src/app/components/common/Breadcrumb/BreadcrumbJsonLd";
@@ -25,7 +25,7 @@ export const Breadcrumb = ({ type, post }: Props) => {
       <ul className={list}>
         <li className={listItem}>
           <Link className={listItemLink} href={'/'}>
-            <FontAwesomeIcon icon={faBreadSlice} className={listItemIcon} />
+            <FontAwesomeIcon icon={faHouse} className={listItemIcon} />
             <span className={listItemName}>TOP</span>
           </Link>
         </li>

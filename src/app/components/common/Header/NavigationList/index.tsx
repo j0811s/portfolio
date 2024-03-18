@@ -1,7 +1,7 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBreadSlice, faUser, faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faUser, faFileLines } from "@fortawesome/free-solid-svg-icons";
 import { navigation, navigationList, navigationListItem, navigationListItemLink, navigationListItemLinkHover, navigationItemIcon, navigationItemGithubIcon } from "./index.css";
 import Link from "next/link";
 
@@ -14,7 +14,7 @@ export const NavigationList = ({ pathname, drawerMode }: { pathname: string, dra
       <ul className={navigationList}>
         <li className={navigationListItem}>
           <Link className={`${navigationListItemLink} ${navigationListItemLinkHover}`} href={`/`} data-page-active={pathname === '/'}>
-            <FontAwesomeIcon icon={faBreadSlice} className={navigationItemIcon} /><span>TOP</span>
+            <FontAwesomeIcon icon={faHouse} className={navigationItemIcon} /><span>TOP</span>
           </Link>
         </li>
         <li className={navigationListItem}>
