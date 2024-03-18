@@ -2,7 +2,6 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const tagItem = style({
-  borderRadius: 1000,
   width: 'fit-content',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
 });
@@ -14,6 +13,7 @@ export const tagLink = style({
   gap: '0.4em',
   padding: '0.4em 0.6em',
   border: `1px solid ${vars.color.tertiary}`,
+  borderRadius: 9999,
   color: `${vars.color.text.secondary}`,
   backgroundColor: `${vars.color.primary}`,
   transition: 'border-color 0.2s ease-in-out, color 0.2s ease-in-out',
