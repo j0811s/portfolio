@@ -17,7 +17,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   return {
-    metadataBase: new URL('https://portfolio-doe4gyax2-mormo.vercel.app'),
+    metadataBase: new URL('https://www.jsato1993.com/'),
     title: `私について`,
     description: `自身の紹介ページです。`,
     openGraph: {

@@ -15,7 +15,7 @@ export async function generateMetadata(
   const tag = await getDetail('tags', params.tagId);
   
   return {
-    metadataBase: new URL('https://portfolio-doe4gyax2-mormo.vercel.app'),
+    metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${tag?.name} | タグ | ブログ | J.Sato`,
     description: `「${tag?.name}」の一覧ページです。`,
     openGraph: {
