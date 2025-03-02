@@ -4,37 +4,35 @@ import { ArticleListContents } from "../../../components/blog/ArticleListContent
 import { Metadata, ResolvingMetadata } from 'next';
 
 type generateMetadataProps = {
-  params: { num: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ num: string }>
 }
 
-export async function generateMetadata(
-  { params, searchParams }: generateMetadataProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
+  const params = await props.params;
   const { num } = params;
-  
+
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${num}ページ | ブログ | J.Sato`,
     description: `「${num}」ページ目`,
     openGraph: {
-      description:`「${num}」ページ目`
+      description: `「${num}」ページ目`
     }
   }
 }
 
 
 type Props = {
-  params: {
+  params: Promise<{
     num: string;
-  }
+  }>
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const { num } = params;
   const limit = 12;
-  
+
   const { contents, totalCount } = await getList('blog', {
     limit,
     offset: limit * (Number(params.num) - 1)

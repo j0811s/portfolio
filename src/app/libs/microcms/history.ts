@@ -59,15 +59,6 @@ export const historyClient = createClient({
   serviceDomain: process.env.MICROCMS_HISTORY_SERVICE_DOMAIN,
   apiKey: process.env.MICROCMS_HISTORY_API_KEY,
   retry: true,
-  customFetch: (input, init) => {
-    if (typeof input === 'string') {
-      const newInput = new URL(input)
-      const time = new Date()
-      newInput.searchParams.set('cacheclearparam', `${time.getMinutes()}`)
-      return fetch(newInput.href, init)
-    }
-    return fetch(input, init)
-  },
 })
 
 // 経歴エンドポイントを取得
@@ -76,13 +67,13 @@ export const getHistoryList = async (
   queries?: MicroCMSQueries,
   customRequestInit?: CustomRequestInit
 ) => {
-  
+
   const listData = await historyClient.getList({
     endpoint,
     queries,
     customRequestInit,
   })
-  .catch(notFound);
+    .catch(notFound);
 
   return listData;
 }
@@ -98,7 +89,7 @@ export const getHistoryDetail = async (
     contentId,
     queries
   })
-  .catch(notFound);
+    .catch(notFound);
 
   return detailData;
 }
@@ -112,7 +103,7 @@ export const getHistoryAllContents = async (
     endpoint,
     queries
   })
-  .catch(notFound);
+    .catch(notFound);
 
   return detailDataAll;
 }

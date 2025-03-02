@@ -2,6 +2,8 @@ import { logo, logoInner, logoImg, siteName } from "./index.css";
 import Link from "next/link";
 import Image from "next/image";
 
+import type { JSX } from "react";
+
 type Logo = ({ pathname }: { pathname: string }) => JSX.Element;
 
 export const Logo: Logo = ({ pathname }) => {

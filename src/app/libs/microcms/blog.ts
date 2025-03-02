@@ -62,16 +62,7 @@ if (!process.env.MICROCMS_API_KEY) {
 export const client = createClient({
   serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
   apiKey: process.env.MICROCMS_API_KEY,
-  retry: true,
-  customFetch: (input, init) => {
-    if (typeof input === 'string') {
-      const newInput = new URL(input)
-      const time = new Date()
-      newInput.searchParams.set('cacheclearparam', `${time.getMinutes()}`)
-      return fetch(newInput.href, init)
-    }
-    return fetch(input, init)
-  },
+  retry: true
 })
 
 // ブログ一覧を取得
@@ -80,13 +71,13 @@ export const getList = async (
   queries?: MicroCMSQueries,
   customRequestInit?: CustomRequestInit
 ) => {
-  
+
   const listData = await client.getList<Blog>({
     endpoint,
     queries,
     customRequestInit,
   })
-  .catch(notFound);
+    .catch(notFound);
 
   return listData;
 }
@@ -102,7 +93,7 @@ export const getDetail = async (
     contentId,
     queries
   })
-  .catch(notFound);
+    .catch(notFound);
 
   return detailData;
 }
@@ -116,7 +107,7 @@ export const getAllContents = async (
     endpoint,
     queries
   })
-  .catch(notFound);
+    .catch(notFound);
 
   return detailDataAll;
 }
@@ -126,6 +117,6 @@ export const getAllContentIds = async (endpoint: string = "blog") => {
   const ids = await client.getAllContentIds({ endpoint })
     .then((res) => console.log(res))
     .catch((err) => console.error(err));
-  
+
   return ids;
 }

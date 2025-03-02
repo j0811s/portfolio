@@ -4,36 +4,34 @@ import { ArticleListContents } from "@/src/app/components/blog/ArticleListConten
 import { Metadata, ResolvingMetadata } from 'next';
 
 type generateMetadataProps = {
-  params: { year: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ year: string }>
 }
 
-export async function generateMetadata(
-  { params, searchParams }: generateMetadataProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
+  const params = await props.params;
   const year = params.year;
-  
+
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${year}年 | 年別アーカイブ | ブログ | J.Sato`,
     description: `「${year}年」の一覧ページです。`,
     openGraph: {
-      description:`「${year}年」の一覧ページです。`
+      description: `「${year}年」の一覧ページです。`
     }
   }
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     year: string;
-  };
+  }>;
 };
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const { year } = params;
   const limit = 12;
-  
+
   const { contents, totalCount } = await getList('blog', {
     filters: `publishedAt[contains]${year}`,
     limit

@@ -1,25 +1,21 @@
 import { getDetail, getList } from "../../libs/microcms/blog";
-import { Breadcrumb } from "@/src/app/components/common/Breadcrumb";
 import { Article } from '@/src/app/components/blog/Article';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 
 type generateMetadataProps = {
-  params: { postId: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ postId: string }>
 }
 
-export async function generateMetadata(
-  { params, searchParams }: generateMetadataProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
+  const params = await props.params;
   const post = await getDetail('blog', params.postId);
-  
+
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${post?.title} | ブログ | J.Sato`,
     description: `「${post?.title}」の詳細ページです。`,
     openGraph: {
-      description:`「${post?.title}」の詳細ページです。`
+      description: `「${post?.title}」の詳細ページです。`
     }
   }
 }
@@ -37,13 +33,20 @@ export async function generateStaticParams() {
 }
 
 type StaticDetailPage = {
-  params: {
+  params: Promise<{
     endpoint: string;
     postId: string;
-  }
+  }>
 }
 
-export default async function StaticDetailPage({ params: { endpoint, postId } }: StaticDetailPage) {
+export default async function StaticDetailPage(props: StaticDetailPage) {
+  const params = await props.params;
+
+  const {
+    endpoint,
+    postId
+  } = params;
+
   const post = await getDetail(endpoint, postId);
 
   return (

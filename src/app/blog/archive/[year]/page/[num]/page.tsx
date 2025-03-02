@@ -5,19 +5,16 @@ import { Metadata, ResolvingMetadata } from 'next';
 
 
 type generateMetadataProps = {
-  params: {
+  params: Promise<{
     year: string;
     num: string;
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
+  }>
 }
 
-export async function generateMetadata(
-  { params, searchParams }: generateMetadataProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
+  const params = await props.params;
   const { year, num } = params;
-  
+
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${num}ページ目 | ${year}年 | 年別アーカイブ | ブログ | J.Sato`,
@@ -29,16 +26,17 @@ export async function generateMetadata(
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     year: string;
     num: string;
-  }
+  }>
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const { year, num } = params;
   const limit = 12;
-  
+
   const { contents, totalCount } = await getList('blog', {
     filters: `publishedAt[contains]${year}`,
     limit,

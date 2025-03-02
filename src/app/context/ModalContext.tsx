@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, type JSX } from 'react';
 
 const ModalContext = createContext<[boolean, () => void, () => void]>([
   false, () => {}, () => {}

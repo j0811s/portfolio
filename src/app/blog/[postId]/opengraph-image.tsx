@@ -1,32 +1,33 @@
 import { ImageResponse } from 'next/og'
+import Image from 'next/image'
 import { getDetail } from "../../libs/microcms/blog";
- 
+
 // Route segment config
 export const runtime = 'edge'
- 
+
 // Image metadata
 export const alt = 'アイキャッチ画像'
 export const size = {
   width: 1200,
   height: 630,
 }
- 
+
 export const contentType = 'image/png'
- 
+
 // Image generation
 type Props = {
   params: { postId: string };
 };
-export default async function Image({ params: { postId } }: Props) {
- 
+export default async function OgImage({ params: { postId } }: Props) {
+
   // const notoSansBold = await fetch(
   //   new URL('../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
   // ).then((res) => res.arrayBuffer())
-    
+
   const post = await getDetail('blog', postId);
 
   if (post.eyecatch?.url) {
-    return (new ImageResponse(<img src={post.eyecatch?.url} alt={alt} />))
+    return (new ImageResponse(<Image src={post.eyecatch?.url} alt={alt} width="1200" height="630" />))
   }
 
   return new ImageResponse(

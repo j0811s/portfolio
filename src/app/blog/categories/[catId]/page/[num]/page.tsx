@@ -5,43 +5,41 @@ import { Metadata, ResolvingMetadata } from 'next';
 
 
 type generateMetadataProps = {
-  params: {
+  params: Promise<{
     catId: string;
     num: string;
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
+  }>
 }
 
-export async function generateMetadata(
-  { params, searchParams }: generateMetadataProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
+  const params = await props.params;
   const { catId, num } = params;
   const cat = await getDetail('categories', catId);
-  
+
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${num}ページ目 | ${cat?.name} | カテゴリー | ブログ | J.Sato`,
     description: `「${cat?.name}」の${num}ページ目です。`,
     openGraph: {
-      description:`「${cat?.name}」の${num}ページ目です。`
+      description: `「${cat?.name}」の${num}ページ目です。`
     }
   }
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     catId: string;
     num: string;
-  }
+  }>
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const { catId, num } = params;
   const typeName = 'categories';
   const category = await getDetail(typeName, catId);
   const limit = 12;
-  
+
   const { contents, totalCount } = await getList('blog', {
     filters: `category[contains]${category.id}`,
     limit,

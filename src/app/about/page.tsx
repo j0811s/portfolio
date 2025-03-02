@@ -7,21 +7,13 @@ import { PageTitle } from "@/src/app/components/common/PageTitle";
 import { Metadata, ResolvingMetadata } from 'next';
 import { getHistoryAllContents } from '@/src/app/libs/microcms/history';
 
-type generateMetadataProps = {
-  params: { catId: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export async function generateMetadata(
-  { params, searchParams }: generateMetadataProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
     title: `私について`,
     description: `自身の紹介ページです。`,
     openGraph: {
-      description:`自身の紹介ページです。`
+      description: `自身の紹介ページです。`
     }
   }
 }
@@ -29,10 +21,10 @@ export async function generateMetadata(
 export default async function About() {
   const skillContents: SkillContent[] = await getHistoryAllContents('skill');
   const careerContents: CareerContent[] = await getHistoryAllContents('career');
-  
+
   return (
     <>
-      <PageTitle pageTitle="私について" type={{slug: 'about'}} />
+      <PageTitle pageTitle="私について" type={{ slug: 'about' }} />
       <section className={container}>
         <h2 className={mainTitle}>経歴</h2>
         <Career contents={careerContents} />

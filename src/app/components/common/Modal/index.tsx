@@ -5,7 +5,7 @@ import { btn, lines, line } from "./trigger.css";
 import { modalRoot, modalAnimation, modalContainer, modalOverlay, modalWrapper } from "./index.css";
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback, type JSX } from "react";
 import { ContentPortal } from "./ContentPortal";
 import { useModalContext } from '@/src/app/context/ModalContext';
 

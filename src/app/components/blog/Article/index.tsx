@@ -17,7 +17,9 @@ import { Breadcrumb } from "../../common/Breadcrumb";
 import { CtaButton } from "../../common/Button";
 import { Thumbnail } from "../Thumbnail";
 import { TableOfContents } from "../TableOfContents";
-  
+
+import type { JSX } from "react";
+
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
     if (!(domNode instanceof Element && domNode?.attribs)) return undefined

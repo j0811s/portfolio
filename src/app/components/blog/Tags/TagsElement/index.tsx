@@ -5,6 +5,8 @@ import { list } from '../../Tags/index.css'
 import { tagItem, tagLink, tagIcon, tagName } from "./index.css";
 import Link from 'next/link';
 
+import type { JSX } from "react";
+
 type Props = {
   tagData: Tag[];
   modClass?: {

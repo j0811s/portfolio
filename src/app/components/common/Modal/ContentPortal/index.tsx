@@ -1,5 +1,7 @@
 import { createPortal } from "react-dom";
 
+import type { JSX } from "react";
+
 type Props = {
   children: JSX.Element,
   insertElement?: HTMLElement

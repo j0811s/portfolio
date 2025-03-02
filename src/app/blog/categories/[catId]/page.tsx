@@ -4,38 +4,36 @@ import { ArticleListContents } from "../../../components/blog/ArticleListContent
 import { Metadata, ResolvingMetadata } from 'next';
 
 type generateMetadataProps = {
-  params: { catId: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ catId: string }>
 }
 
-export async function generateMetadata(
-  { params, searchParams }: generateMetadataProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
+  const params = await props.params;
   const cat = await getDetail('categories', params.catId);
-  
+
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${cat?.name} | カテゴリー | ブログ | J.Sato`,
     description: `「${cat?.name}」の一覧ページです。`,
     openGraph: {
-      description:`「${cat?.name}」の一覧ページです。`
+      description: `「${cat?.name}」の一覧ページです。`
     }
   }
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     catId: string;
-  };
+  }>;
 };
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const { catId } = params;
   const typeName = 'categories';
   const category = await getDetail(typeName, catId);
   const limit = 12;
-  
+
   const { contents, totalCount } = await getList('blog', {
     filters: `category[contains]${category.id}`,
     limit
