@@ -7,10 +7,10 @@ export const FirstView = () => {
       <div className={siteTitle}>
         <div className={siteTitleInner}>
           <div className={siteTitleParts}>
-            <div className={`${siteTitlePartsText} ${titleTag}`} data-index="0">J.Sato</div>
+            <div className={`${siteTitlePartsText} ${titleCode}`} data-index="0">Portfolio Site</div>
           </div>
           <div className={siteTitleParts}>
-            <div className={`${siteTitlePartsText} ${titleCode}`} data-index="1">Portfolio Site</div>
+            <div className={`${siteTitlePartsText} ${titleTag}`} data-index="1">@j-sato</div>
           </div>
         </div>
       </div>

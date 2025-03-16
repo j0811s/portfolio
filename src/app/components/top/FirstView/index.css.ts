@@ -73,16 +73,16 @@ export const siteTitle = style({
   transform: 'translateY(-50%)',
   zIndex: 1,
   color: `${vars.color.text.secondary}`,
-  fontSize: `calc( 32 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 40 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
   lineHeight: 1.1,
   letterSpacing: '0.08em',
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
-      fontSize: `calc( 56 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 64 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 960px)': {
-      fontSize: `calc( 64 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 72 / ${vars.font.size} * 1rem )`,
     }
   }
 });

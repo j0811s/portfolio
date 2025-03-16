@@ -13,9 +13,9 @@ import { Metadata, Viewport } from 'next';
 const SITE_URL: string = process.env.SITE_URL || '';
 
 const myMeta = {
-  title: 'J.Sato - Portfolio Site',
-  sitename: 'J.Sato - Portfolio Site',
-  description: "個人のポートフォリオサイトです。",
+  title: 'Portfolio Site @j-sato',
+  sitename: 'Portfolio Site @j-sato',
+  description: "ポートフォリオサイト",
   siteUrl: new URL(SITE_URL)
 }
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
   metadataBase: myMeta.siteUrl,
   title: {
-    default: `${myMeta.title}`, 
+    default: `${myMeta.title}`,
     template: `%s | ${myMeta.title}`
   },
   description: myMeta.description,
@@ -48,7 +48,7 @@ type RootLayout = {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayout ) {
+export default function RootLayout({ children }: RootLayout) {
   return (
     <html lang="ja" className={html} suppressHydrationWarning>
       <body className={body}>
