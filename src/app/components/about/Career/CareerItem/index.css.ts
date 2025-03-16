@@ -1,4 +1,4 @@
-import { style, globalStyle, keyframes } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const readText = style({
@@ -18,9 +18,15 @@ export const readText = style({
   }
 });
 
-export const textBold = style({
+export const headline = style({
   fontWeight: 700,
-  borderBottom: `1px solid ${vars.color.border.main}`,
+  borderLeft: `4px solid ${vars.color.border.main}`,
+  paddingLeft: '1em',
   borderColor: 'inherit',
-  paddingBottom: '0.25em'
+});
+
+export const textUrl = style({
+  display: 'block',
+  color: 'revert',
+  textDecoration: 'underline',
 });

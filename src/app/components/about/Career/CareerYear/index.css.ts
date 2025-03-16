@@ -2,16 +2,17 @@ import { style, globalStyle, keyframes } from "@vanilla-extract/css";
 import { vars } from "@/src/app/styles/common/variables.css";
 
 export const mainTitle = style({
+  color: `${vars.color.accent.main}`,
   display: 'flex',
   alignItems: 'center',
-  fontSize: `calc( 20 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 22 / ${vars.font.size} * 1rem )`,
   fontWeight: 700,
   '@media': {
     'screen and (min-width: 600px) and (max-width: 959px)': {
-      fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 28 / ${vars.font.size} * 1rem )`,
     },
     'screen and (min-width: 960px)': {
-      fontSize: `calc( 24 / ${vars.font.size} * 1rem )`,
+      fontSize: `calc( 28 / ${vars.font.size} * 1rem )`,
     }
   }
 });

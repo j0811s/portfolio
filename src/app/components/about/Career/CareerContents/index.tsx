@@ -15,8 +15,9 @@ export const CareerContents = ({ contents }: { contents: CareerContent[] }) => {
               {
                 content.info.map((info, i) => (
                   <div className={inner} key={`${content.id}-info-${i}`}>
-                    <CareerItem body={info.project} headline={true} key={info.project} />
-                    <CareerItem body={info.details} headline={false} key={info.details} />
+                    <CareerItem body={info.project} type='project' key={info.project} />
+                    <CareerItem body={info.details} type='details' key={info.details} />
+                    <CareerItem body={info.url} type='url' key={info.url} />
                   </div>
                 ))
               }

@@ -31,9 +31,7 @@ export type SkillContent = {
 }
 
 export type CareerInfo = {
-  fieldId: string
-  project: string
-  details: string
+  [key: string]: string
 }[]
 
 export type CareerContent = {
