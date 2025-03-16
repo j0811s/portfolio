@@ -53,23 +53,14 @@ export const firstViewContainer = style({
   alignItems: 'center',
   justifyContent: 'flex-end',
   position: 'relative',
-  backgroundColor: `${vars.color.primary}`,
-  '@media': {
-    'screen and (min-width: 600px) and (max-width: 959px)': {
-      height: '60vh',
-    },
-    'screen and (min-width: 960px)': {
-      height: '70vh',
-    }
-  }
+  backgroundColor: `${vars.color.primary}`
 });
 
 export const siteTitle = style({
-  display: 'grid',
-  placeContent: 'center',
   position: 'absolute',
   top: '50%',
   left: '10%',
+  right: '10%',
   transform: 'translateY(-50%)',
   zIndex: 1,
   color: `${vars.color.text.secondary}`,
@@ -130,7 +121,7 @@ export const movie = style({
       visibility: 'hidden',
       transform: 'translate3d(3%, 0, 0)',
       width: '60%',
-      maxHeight: '80%',
+      maxHeight: '1080px'
     }
   },
   selectors: {
