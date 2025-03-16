@@ -28,7 +28,7 @@ export const Footer = () => {
             </li>
           </ul>
         </div>
-        <small className={copyright}>&copy; 2023 J.Sato</small>
+        <small className={copyright}>&copy; j-sato</small>
       </footer>
     </>
   )
