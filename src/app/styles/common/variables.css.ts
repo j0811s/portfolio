@@ -63,6 +63,8 @@ const themeColor = createThemeContract({
       secondary: null,
       tertiary: null,
       btn: null,
+      white: '#fff',
+      black: '#000',
     },
     border: {
       accent: null,
@@ -117,9 +119,11 @@ export const lightTheme = createTheme(themeColor, {
       secondary: '#000',
       tertiary: '#A9AAAA',
       btn: '#fff',
+      white: '#fff',
+      black: '#000',
     },
     border: {
-      accent: 'rgb(255, 126, 15, 1)',
+      accent: 'rgb(255, 194, 112, 1)',
       main: '#000',
       sub: '#fff',
     },
@@ -170,6 +174,8 @@ export const darkTheme = createTheme(themeColor, {
       secondary: '#fff',
       tertiary: '#A9AAAA',
       btn: '#fff',
+      white: '#fff',
+      black: '#000',
     },
     border: {
       accent: 'rgb(205, 219, 181, 1)',

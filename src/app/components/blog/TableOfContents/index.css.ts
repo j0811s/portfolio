@@ -14,11 +14,11 @@ export const titleHead = style({
   position: 'relative'
 });
 
-export const title= style({
+export const title = style({
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
   fontWeight: 400,
-  color: `${vars.color.text.secondary}`,
-  backgroundColor: `${vars.color.secondary}`,
+  color: '#fff',
+  backgroundColor: `${vars.color.accent.main}`,
   padding: '1em',
   borderRadius: '4px',
   '@media': {
@@ -29,7 +29,7 @@ export const title= style({
 });
 
 export const titleIcon = style({
-  color: `${vars.color.gray.taupe}`
+  color: '#fff',
 });
 
 export const titleLabel = style({
@@ -48,6 +48,7 @@ export const accordionTrigger = style({
   width: '100%',
   textAlign: 'right',
   fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+  color: '#fff',
 });
 
 export const accordionTriggerIcon = style({

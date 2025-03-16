@@ -144,8 +144,8 @@ globalStyle(`${postContent} h1, ${postContent} h2`, {
   fontWeight: 700,
   position: 'relative',
   padding: '1rem',
-  color: `${vars.color.text.secondary}`,
-  backgroundColor: `${vars.color.secondary}`,
+  color: '#fff',
+  backgroundColor: `${vars.color.accent.main}`,
   '@media': {
     'screen and (min-width: 768px)': {
       fontSize: `calc( 26 / ${vars.font.size} * 1rem )`,
@@ -186,7 +186,7 @@ globalStyle(`${postContent} * + h3, ${postContent} * + h4, ${postContent} * + h5
 
 globalStyle(`${postContent} p`, {
   color: 'inherit',
-  fontSize: `calc( 14 / ${vars.font.size} * 1rem )`,
+  fontSize: `calc( 15 / ${vars.font.size} * 1rem )`,
   lineHeight: 1.6,
   fontWeight: 400,
   '@media': {
@@ -289,9 +289,9 @@ globalStyle(`${postContent} th, ${postContent} td`, {
   minWidth: 120,
   wordBreak: 'break-all',
   padding: '0.5em',
-  color: `${vars.color.text.secondary}`,
-  backgroundColor: `${vars.color.secondary}`,
-  border: `1px solid ${vars.color.gray.taupe}`,
+  color: '#fff',
+  backgroundColor: `${vars.color.background.white}`,
+  border: `1px solid ${vars.color.border.accent}`,
   '@media': {
     'screen and (min-width: 960px)': {
       minWidth: 246,
@@ -300,11 +300,15 @@ globalStyle(`${postContent} th, ${postContent} td`, {
 });
 
 globalStyle(`${postContent} th`, {
-  backgroundColor: `${vars.color.tertiary}`,
+  backgroundColor: `${vars.color.accent.main}`,
 });
 
 globalStyle(`${postContent} th > p`, {
   fontWeight: 400
+});
+
+globalStyle(`${postContent} td > p`, {
+  color: `${vars.color.text.black}`,
 });
 
 globalStyle(`${postContent} .codeBlock`, {
