@@ -1,6 +1,6 @@
 'use client';
 
-import merge from "ts-deepmerge";
+import { merge } from "ts-deepmerge";
 import { btn, lines, line } from "./trigger.css";
 import { modalRoot, modalAnimation, modalContainer, modalOverlay, modalWrapper } from "./index.css";
 
