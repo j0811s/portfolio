@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faListUl } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { container, titleHead, title, titleIcon, titleLabel, accordionTrigger, accordionTriggerIcon, listContainer, list, listItem, listIetmLink } from "./index.css";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
@@ -18,7 +18,7 @@ type HeadingProps = {
 export const TableOfContents = ({ mode, accordion }: Props) => {
   const pathname = usePathname();
   const tocRef = useRef<HTMLOListElement>(null);
-  const postPagePattern = /^\/blog\/[^/]*\/$/;
+  const postPagePattern = useMemo(() => /^\/blog\/[^/]*\/$/, []);
   const modeOptions = {
     mobile: 'screen and (max-width: 959px)',
     desktop: 'screen and (min-width: 960px)',
@@ -32,29 +32,43 @@ export const TableOfContents = ({ mode, accordion }: Props) => {
 
   useEffect(() => {
     setIsPostPage(postPagePattern.test(pathname));
-  }, [pathname]);
+  }, [pathname, postPagePattern]);
 
   useEffect(() => {
     if (!isPostPage) return;
 
-    const postContents = document.getElementById('js-postContents');
-    const headings = postContents?.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    if (!headings?.length) return;
-    
-    const headData = [...headings].map((heading, i) => {
-      const level = heading.tagName.match(/\d/);
-      return {
-        id: String(heading.id),
-        index: i,
-        level: level ? level[0] : '',
-        text: heading.textContent ? heading.textContent : ''
-      }
-    });
+    /**
+     * @todo
+     * せめて親からRefを渡して使いたい
+     */
+    const intervalId = setInterval(() => {
+      const postContents = document.getElementById('js-postContents');
+      const headings = postContents?.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
-    setHeading(headData);
+      if (!headings?.length) return;
+
+      const headData = [...headings].map((heading, i) => {
+        const level = heading.tagName.match(/\d/);
+        return {
+          id: String(heading.id),
+          index: i,
+          level: level ? level[0] : '',
+          text: heading.textContent ? heading.textContent : ''
+        }
+      });
+
+      setHeading(headData);
+    }, 100);
+
+    return () => {
+      clearInterval(intervalId);
+    }
   }, [isPostPage]);
 
   useEffect(() => {
+    const tocElement = tocRef.current;
+    if (!tocElement) return;
+
     const smoothScroll = (e: Event) => {
       e.preventDefault();
       const eventTarget = e.currentTarget;
@@ -72,16 +86,16 @@ export const TableOfContents = ({ mode, accordion }: Props) => {
       }
     }
     
-    tocRef?.current?.querySelectorAll('a').forEach(aTag => {
+    tocElement.querySelectorAll('a').forEach(aTag => {
       aTag.addEventListener('click', smoothScroll);
     });
 
     return () => {
-      tocRef?.current?.querySelectorAll('a').forEach(aTag => {
+      tocElement.querySelectorAll('a').forEach(aTag => {
         aTag.removeEventListener('click', smoothScroll);
       });
     }
-  }, [tocRef.current, isMatches]);
+  }, [mode, heading]);
   
   return (
     isPostPage &&
