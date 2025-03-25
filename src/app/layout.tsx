@@ -1,3 +1,5 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 import './styles/globals.css';
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -49,6 +51,8 @@ type RootLayout = {
 }
 
 export default function RootLayout({ children }: RootLayout) {
+  const gaId: string = process.env.GA_ID || '';
+
   return (
     <html lang="ja" className={html} suppressHydrationWarning>
       <body className={body}>
@@ -75,6 +79,7 @@ export default function RootLayout({ children }: RootLayout) {
           <Footer />
         </ThemeProvider>
       </body>
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   )
 }
