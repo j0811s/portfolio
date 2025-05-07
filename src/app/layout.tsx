@@ -1,4 +1,5 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleTagManager } from '@next/third-parties/google'
 
 import './styles/globals.css';
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -52,9 +53,11 @@ type RootLayout = {
 
 export default function RootLayout({ children }: RootLayout) {
   const gaId: string = process.env.GA_ID || '';
+  const gtmId: string = process.env.GTM_ID || '';
 
   return (
     <html lang="ja" className={html} suppressHydrationWarning>
+      {gtmId && <GoogleTagManager gtmId={gtmId} />}
       <body className={body}>
         <svg className='util-hidden' xmlns="http://www.w3.org/2000/svg">
           <symbol id="svg-github" width="98" height="96" viewBox="0 0 98 96">
