@@ -1,0 +1,71 @@
+.drawer {
+  opacity: 0;
+}
+
+.drawer[data-open='true'] {
+  opacity: 1;
+}
+
+.drawer::backdrop {
+  opacity: 0;
+}
+
+.drawer[data-open='true']::backdrop {
+  opacity: 1;
+}
+
+.buttonContainer {
+  text-align: center;
+}
+
+.openButton,
+.closeButton {
+  appearance: none;
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.openButton {
+  color: var(--text-primary);
+  font-size: 30px;
+}
+
+.closeButton {
+  font-size: 16px;
+  margin: 50px auto 0;
+}
+
+.nav {
+  display: grid;
+  place-content: center;
+  padding: 15px;
+}
+
+.navList {
+  display: grid;
+  align-items: center;
+  place-content: flex-start;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(3, max-content);
+  gap: 50px;
+  padding: 0;
+  margin: 0;
+  color: var(--white);
+}
+
+.navList a {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.navList svg {
+  display: block;
+  min-width: 30px;
+  font-size: 1.5rem;
+}

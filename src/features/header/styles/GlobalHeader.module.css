@@ -1,0 +1,21 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: transparent;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px var(--shadow);
+  backdrop-filter: blur(2px);
+}
+
+.headerInner {
+  display: grid;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  grid-template-columns: repeat(3, auto);
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+}

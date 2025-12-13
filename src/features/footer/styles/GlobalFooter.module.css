@@ -1,0 +1,39 @@
+.container {
+  display: block;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 1em;
+  background-color: transparent;
+  box-shadow: 0 -2px 4px var(--shadow);
+  backdrop-filter: blur(2px);
+}
+
+.navigation {
+  font-size: calc(16 / var(--font-size) * 1rem);
+  background-color: transparent;
+}
+
+.navigationList {
+  display: flex;
+  justify-content: center;
+}
+
+.navigationListItem {
+  overflow: hidden;
+  display: block;
+}
+
+.navigationListItemLink {
+  display: block;
+  font-weight: 400;
+  padding: 0.5em 1em;
+  border-radius: 9999px;
+  font-feature-settings: 'palt';
+  color: var(--text-primary);
+}
+
+.copyright {
+  display: block;
+  font-size: calc(14 / var(--font-size) * 1rem);
+  margin-top: 1em;
+}

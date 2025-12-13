@@ -1,0 +1,43 @@
+.container {
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.inner {
+}
+
+.name {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 2em;
+}
+
+.description {
+  font-size: 1rem;
+  margin-top: 2em;
+}
+
+.list {
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+}
+
+.item {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  gap: 0.5em;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.icon {
+  display: block;
+  width: 100%;
+  max-width: 50px;
+  height: auto;
+  aspect-ratio: 1;
+}
