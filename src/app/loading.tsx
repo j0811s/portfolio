@@ -1,9 +1,7 @@
-import { loaderContainer, loader } from './styles/loading.css'
+import { LoadingSpinner } from '@/src/components/';
 
 export default function Loading() {
   return (
-    <div className={loaderContainer}>
-      <div className={loader}></div>
-    </div>
+    <LoadingSpinner />
   )
 }
