@@ -22,7 +22,7 @@ export default function ThemeProvider() {
     return () => {
       root.dataset.theme = '';
     }
-  }, [theme]);
+  }, [theme, setTheme]);
 
   return <></>;
 }
