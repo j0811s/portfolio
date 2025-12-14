@@ -9,6 +9,7 @@ export default function CtaLinkButton({
   prevIcon = false,
   nextIcon = false,
   crossIcon = false,
+  asLink = true,
   children,
   ...linkProps
 }: ButtonLinkProps) {
@@ -18,14 +19,21 @@ export default function CtaLinkButton({
   const CrossIcon = () => (<FontAwesomeIcon icon={faXmark} className={styles.icon} />);
 
   return (
-    <Link
-      {...linkProps}
-      className={clsx(styles.button, linkProps.className)}
-    >
-      {crossIcon && <CrossIcon />}
-      {prevIcon && !nextIcon && <PrevIcon />}
-      {children}
-      {!prevIcon && nextIcon && <NextIcon />}
-    </Link>
+    asLink ?
+      <Link
+        {...linkProps}
+        className={clsx(styles.button, linkProps.className)}
+      >
+        {crossIcon && <CrossIcon />}
+        {prevIcon && !nextIcon && <PrevIcon />}
+        {children}
+        {!prevIcon && nextIcon && <NextIcon />}
+      </Link> :
+      <div className={clsx(styles.button, linkProps.className)}>
+        {crossIcon && <CrossIcon />}
+        {prevIcon && !nextIcon && <PrevIcon />}
+        {children}
+        {!prevIcon && nextIcon && <NextIcon />}
+      </div>
   )
 }

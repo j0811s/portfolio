@@ -67,7 +67,7 @@ export const fetchBlogDetail = async (
 }
 
 // コンテンツをすべて取得
-export const fetchBlogAll = async (
+export const fetchBlogListAll = async (
   endpoint: string = "blog",
   queries?: MicroCMSQueries
 ) => {

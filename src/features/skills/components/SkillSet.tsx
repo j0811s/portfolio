@@ -10,7 +10,7 @@ export default function SkillSet({ data }: { data: SkillSet[] }) {
           <dd className={styles.description}>
             <ul className={styles.list}>
               {skillSet.skills.map((skill, i) => (
-                <li className={styles.item} key={`${skill.fieldId}-${i}`}>
+                <li className={`${styles.item} u-neumorphism`} key={`${skill.fieldId}-${i}`}>
                   <Image
                     className={styles.icon}
                     src={skill.logo.url} 
@@ -18,7 +18,7 @@ export default function SkillSet({ data }: { data: SkillSet[] }) {
                     width={skill.logo.width} 
                     height={skill.logo.height}
                   />
-                  {skill.name}
+                  <span className="u-ellipsis">{skill.name}</span>
                 </li>
               ))}
             </ul>

@@ -47,6 +47,31 @@ declare global {
     name: string;
   } & MicroCMSContentId & MicroCMSDate;
 
+  // ブログ記事の型定義
+  export type BlogPost = {
+    id: string;
+    title: string;
+    content: string;
+    eyecatch?: MicroCMSImage;
+    category: {
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      publishedAt: string,
+      revisedAt: string,
+      name: string,
+      slug: string
+    }[],
+    tag: {
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      publishedAt: string,
+      revisedAt: string,
+      name: string
+    }[],
+  } & MicroCMSDate & MicroCMSImage;
+
   export type SkillInfo = {
     fieldId: string
     name: string

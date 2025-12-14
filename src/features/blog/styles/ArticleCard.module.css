@@ -1,0 +1,55 @@
+.link {
+  overflow: hidden;
+  position: relative;
+  display: block;
+  border-radius: 15px;
+  box-shadow: var(--neumorphism-card);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--neumorphism-card-hover);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.post {
+  position: relative;
+  z-index: 0;
+}
+
+.postInner {
+  padding: 1em;
+}
+
+.title {
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.thmubnail {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16/9;
+}
+
+@media (any-hover: hover) {
+  .link:hover {
+    opacity: 1;
+    box-shadow: none;
+  }
+  .link:hover::after {
+    opacity: 1;
+  }
+}

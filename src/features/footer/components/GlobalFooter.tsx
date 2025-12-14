@@ -21,7 +21,7 @@ export default function GlobalFooter() {
             </li>
           </ul>
         </div>
-        <small className={styles.copyright}>&copy; j-sato</small>
+        <small className={styles.copyright} translate="no">&copy; j-sato</small>
       </footer>
     </>
   )
