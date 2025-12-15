@@ -1,8 +1,11 @@
+import clsx from "clsx";
 import styles from "@/src/features/blog/styles/ArticleDetail.module.css";
 import parse, { HTMLReactParserOptions, Element, Text, DOMNode } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
 import { PublishDate } from "@/src/features/blog";
+import type { JSX } from "react";
+import { CtaLinkButton } from "@/src/components";
 
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -24,10 +27,10 @@ const parseOptions: HTMLReactParserOptions = {
         const highlightCode: AutoHighlightResult = hljs.highlightAuto(code);
 
         return (
-          <div className="codeBlock">
-            { fileName && <div className="fileName hljs">{fileName}</div> }
-            <pre className="codeBlock_pre">
-              <code className="codeBlock_code hljs">{parse(highlightCode.value)}</code>
+          <div className={styles.codeBlock}>
+            { fileName && <div className={clsx(styles.fileName, 'hljs')}>{fileName}</div> }
+            <pre className={styles['codeBlock_pre']}>
+              <code className={clsx(styles['codeBlock_code'], 'hljs')}>{parse(highlightCode.value)}</code>
             </pre>
           </div>
         )
@@ -59,7 +62,7 @@ function ArticleDetail({ post }: { post: Blog }) {
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
       <div className={styles.prevButton}>
-        {/* <CtaButton href="/blog/" prev={true}>一覧へ戻る</CtaButton> */}
+        <CtaLinkButton href="/blog/" prevIcon={true}>一覧へ戻る</CtaLinkButton>
       </div>
     </article>
   )
