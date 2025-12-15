@@ -2,14 +2,15 @@ import styles from "@/src/features/blog/styles/PublishDate.module.css";
 import { faCalendarDay, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateTime } from "@/src/features/blog";
+import clsx from "clsx";
 
-function PublishDate({ publishedAt, updatedAt }: { publishedAt?: string; updatedAt?: string; }) {
+function PublishDate({ publishedAt, updatedAt, className }: { publishedAt?: string; updatedAt?: string; className?: string; }) {
   if (!publishedAt || !updatedAt) {
     return <></>
   }
 
   return (
-    <div className={styles.postDateContainer}>
+    <div className={clsx(styles.postDateContainer, className ?? '')}>
       {
         updatedAt ?
           <p className={styles.postDate}>

@@ -1,0 +1,59 @@
+@layer feature {
+  .title {
+    font-size: var(--font-size-l);
+  }
+
+  .postContent {
+    margin-top: 3rem;
+  }
+
+  .postContent * + * {
+    margin-top: 1rem;
+  }
+
+  .postContent * + h2,
+  .postContent * + h3,
+  .postContent * + h4,
+  .postContent * + h5,
+  .postContent * + h6 {
+    margin-top: 3rem;
+  }
+
+  .postContent h2 {
+    font-size: clamp(1.25rem, 1.146rem + 0.44vw, 1.5rem);
+  }
+
+  .postContent h3,
+  .postContent h4,
+  .postContent h5,
+  .postContent h6 {
+    font-size: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
+  }
+
+  .postContent p {
+    font-size: var(--font-size-m);
+    line-height: 1.6;
+  }
+
+  .postContent a {
+    color: var(--text-link-color);
+  }
+
+  .postContent code:not(.hljs) {
+    font-size: 85%;
+    white-space: break-spaces;
+    border-radius: 6px;
+    color: var(--white);
+    background-color: var(--theme-primary);
+    margin: 0 0.4em;
+    padding: 0.2em 0.4em;
+  }
+}
+
+@layer overwrite {
+  .date {
+    margin-top: 1rem;
+    font-size: var(--font-size-m);
+    font-weight: 500;
+  }
+}

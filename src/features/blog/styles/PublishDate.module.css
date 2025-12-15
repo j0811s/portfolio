@@ -1,6 +1,7 @@
 @layer feature {
   .postDateContainer {
     margin-top: auto;
+    font-size: var(--font-size-s);
   }
 
   .postDate {
@@ -9,7 +10,6 @@
     grid-template-columns: repeat(2, max-content);
     justify-content: flex-end;
     gap: 0.25em;
-    font-size: var(--font-size-s);
   }
 
   .postDateIcon {

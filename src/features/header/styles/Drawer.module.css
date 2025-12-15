@@ -20,6 +20,7 @@
   }
 
   .openButton {
+    text-align: left;
     appearance: none;
     display: block;
     background: none;

@@ -11,7 +11,6 @@ type BlogAside = {
 export const BlogAside = ({ modClassName = "" }: BlogAside) => {
   return (
     <aside className={`${asideContainer} ${modClassName}`}>
-      <TableOfContents mode="desktop" />
       <Categories />
       <Tags />
       <YearArchive />

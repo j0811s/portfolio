@@ -22,6 +22,7 @@
     --text-primary: #333;
     --bg-primary: #fff;
     --theme-primary: #ff7e0f;
+    --text-link-color: #0000ee;
   }
   
   :root[data-theme="light"] {
@@ -33,6 +34,7 @@
     --text-primary: #333;
     --bg-primary: #fff;
     --theme-primary: #ff7e0f;
+    --text-link-color: #0000ee;
   }
   
   :root[data-theme="dark"] {
@@ -44,6 +46,7 @@
     --text-primary: #fff;
     --bg-primary: #1E2022;
     --theme-primary: #224F6D;
+    --text-link-color: #6aa8ff;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -56,6 +59,7 @@
       --text-primary: #fff;
       --bg-primary: #1E2022;
       --theme-primary: #224F6D;
+      --text-link-color: #6aa8ff;
     }
   }
 }
@@ -109,6 +113,10 @@
     cursor: pointer;
     appearance: none;
     padding: 0;
+  }
+
+  code {
+    font-family: var(--font-roboto);
   }
 
   ul {

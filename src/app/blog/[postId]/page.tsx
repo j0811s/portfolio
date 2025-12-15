@@ -1,5 +1,5 @@
 import { getDetail, getList } from "../../libs/microcms/blog";
-import { Article } from '@/src/app/components/blog/Article';
+import { ArticleDetail } from "@/src/features/blog";
 import { Metadata } from 'next';
 
 type generateMetadataProps = {
@@ -49,9 +49,5 @@ export default async function StaticDetailPage(props: StaticDetailPage) {
 
   const post = await getDetail(endpoint, postId);
 
-  return (
-    <>
-      <Article post={post} />
-    </>
-  )
+  return <ArticleDetail post={post} />
 }
