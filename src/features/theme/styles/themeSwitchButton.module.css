@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  font-size: calc(16 / var(--font-size) * 1rem);
+  font-size: clamp(0.9375rem, 0.9116rem + 0.1105vw, 1rem);
   width: calc(56 / var(--font-size) * 1rem);
   margin: 0;
   padding: 0.5em;
@@ -36,12 +36,6 @@
 
 .button.dark {
   justify-content: flex-end;
-}
-
-@media (min-width: 960px) {
-  .button {
-    font-size: calc(16 / var(--font-size) * 1rem);
-  }
 }
 
 .button::before {
@@ -74,4 +68,10 @@
   padding: 0;
   aspect-ratio: 1;
   z-index: 1;
+}
+
+@media (any-hover: hover) {
+  .button:hover {
+    opacity: 1;
+  }
 }

@@ -1,4 +1,4 @@
-import { container, section, moreButtonContainer } from "./styles/top/index.css";
+import styles from "@/src/styles/pages/top.module.css";
 import { fetchSkillAll } from "@/src/libs/microcms/skill";
 import { fetchBlogList } from "@/src/libs/microcms/blog";
 import { SkillSet } from "@/src/features/skills";
@@ -14,18 +14,18 @@ export default async function Top() {
   );
 
   return (
-    <div className={container}>
-      <section className={section}>
+    <>
+      <section className={styles.section}>
         <SectionTitle title="投稿" />
         <ArticleCardList contents={portfolioArticles} />
-        <div className={moreButtonContainer}>
+        <div className={styles.moreButtonContainer}>
           <CtaLinkButton href='/blog/'>投稿を見る</CtaLinkButton>
         </div>
       </section>
-      <section className={section}>
+      <section className={styles.section}>
         <SectionTitle title="経験" />
         <SkillSet data={skills} />
       </section>
-    </div>
+    </>
   )
 }

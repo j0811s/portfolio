@@ -9,6 +9,9 @@
     --font-roboto: 'Roboto', sans-serif;
     --font-mplus: "M PLUS 1p", sans-serif;
     --font-size: 16;
+    --font-size-s: clamp(0.75rem, 0.7241rem + 0.1105vw, 0.8125rem);
+    --font-size-m: clamp(0.875rem, 0.8232rem + 0.221vw, 1rem);
+    --font-size-l: clamp(1.5rem, 1.2928rem + 0.884vw, 2rem);
     --white: #fff;
     --black: #333;
     --shadow: rgba(0, 0, 0, 0.1);
@@ -63,8 +66,9 @@
 
   main {
     width: 100%;
-    max-width: var(--page-width);
+    max-width: calc(var(--page-width) + 40px);
     margin: 0 auto;
+    padding: clamp(1.25rem, 0.732rem + 2.21vw, 2.5rem);
   }
 
   h1,
@@ -105,6 +109,11 @@
 
   dd {
     margin: 0;
+  }
+
+  figure {
+    margin: 0;
+    padding: 0;
   }
 
   dialog {
