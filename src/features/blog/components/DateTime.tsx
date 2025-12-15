@@ -5,15 +5,18 @@ type ConvertDateOptions = {
   format?: string
 }
 
-export default function ConvertDate({ date, format = 'YYYY/MM/DD' }: ConvertDateOptions) {
+function DateTime({ date, format = 'YYYY/MM/DD' }: ConvertDateOptions) {
   if (!date) {
     return <></>;
   }
   
   const formatedDate = dayjs(date).format(format);
+  
   return (
     <time dateTime={date}>
       {formatedDate}
     </time>
   );
 }
+
+export default DateTime;

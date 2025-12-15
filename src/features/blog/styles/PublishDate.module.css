@@ -1,0 +1,18 @@
+@layer feature {
+  .postDateContainer {
+    margin-top: auto;
+  }
+
+  .postDate {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: flex-end;
+    gap: 0.25em;
+    font-size: var(--font-size-s);
+  }
+
+  .postDateIcon {
+    color: #7986cb;
+  }
+}

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import styles from "@/src/features/blog/styles/ArticleCard.module.css";
 import Link from "next/link";
 import Image from "next/image";
-// import { CtaLinkButton } from "@/src/components";
+import { PublishDate } from "@/src/features/blog";
 
 interface Props extends BlogPost {
   className?: string;
@@ -24,7 +24,7 @@ export default function ArticleCard(props: Props) {
         }
         <div className={styles.postInner}>
           <h3 className={clsx(styles.title, 'u-ellipsis')}>{props.title}</h3>
-          {/* <CtaLinkButton href={`/blog/${props.id}/`} asLink={false}></CtaLinkButton> */}
+          <PublishDate publishedAt={props.publishedAt} updatedAt={props.updatedAt} />
         </div>
       </article>
     </Link>

@@ -25,10 +25,15 @@
   .post {
     position: relative;
     z-index: 0;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    height: 100%;
     padding: 1em;
   }
 
   .postInner {
+    display: grid;
+    gap: 0.25em;
     margin-top: 1em;
   }
 
