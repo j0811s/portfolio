@@ -1,21 +1,23 @@
-.header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  box-shadow: 0 2px 4px var(--shadow);
-  backdrop-filter: blur(3px);
-  background-color: transparent;
-}
+@layer feature {
+  .header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 4px var(--shadow);
+    backdrop-filter: blur(3px);
+    background-color: transparent;
+  }
 
-.headerInner {
-  display: grid;
-  gap: 30px;
-  align-items: center;
-  justify-content: space-between;
-  grid-template-columns: repeat(3, auto);
-  width: 100%;
-  max-width: calc(var(--page-width) + 40px);
-  margin: 0 auto;
-  padding: 0.625rem clamp(1.25rem, 0.732rem + 2.21vw, 2.5rem);
+  .headerInner {
+    display: grid;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: repeat(3, auto);
+    width: 100%;
+    max-width: calc(var(--page-width) + 40px);
+    margin: 0 auto;
+    padding: 0.625rem clamp(1.25rem, 0.732rem + 2.21vw, 2.5rem);
+  }
 }

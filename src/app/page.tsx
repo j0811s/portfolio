@@ -18,8 +18,8 @@ export default async function Top() {
       <section className={styles.section}>
         <SectionTitle title="投稿" />
         <ArticleCardList contents={portfolioArticles} />
-        <div className={styles.moreButtonContainer}>
-          <CtaLinkButton href='/blog/'>投稿を見る</CtaLinkButton>
+        <div className={styles.moreLinkWrapper}>
+          <CtaLinkButton className={styles.moreLink} href='/blog/' nextIcon={true}>投稿を見る</CtaLinkButton>
         </div>
       </section>
       <section className={styles.section}>

@@ -1,3 +1,11 @@
-.section + .section {
-  margin-top: 2rem;
+@layer page {
+  .section + .section {
+    margin-top: 2rem;
+  }
+
+  .moreLinkWrapper {
+    display: grid;
+    place-content: center;
+    margin-top: 2rem;
+  }
 }

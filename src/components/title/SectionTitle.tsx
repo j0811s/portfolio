@@ -1,4 +1,4 @@
-import styles from "@/src/styles/title/SectionTitle.module.css";
+import styles from "@/src/styles/components/title/SectionTitle.module.css";
 
 type Props = {
   title: string;

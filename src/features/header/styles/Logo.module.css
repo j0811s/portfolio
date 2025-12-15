@@ -1,11 +1,13 @@
-.link {
-  display: block;
-}
+@layer feature {
+  .link {
+    display: block;
+  }
 
-.img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--black);
-  border-radius: 10px;
+  .img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--black);
+    border-radius: 10px;
+  }
 }
