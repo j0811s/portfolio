@@ -76,6 +76,7 @@ async function ArticleDetail({ post }: { post: Blog }) {
             height={post.eyecatch?.height}
             isDummy={typeof post.eyecatch?.url === 'undefined'}
           />
+          <PublishDate className={styles.date} publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
           {
             <ul className={styles.tags}>
               {
@@ -87,7 +88,6 @@ async function ArticleDetail({ post }: { post: Blog }) {
               }
             </ul>
           }
-          <PublishDate className={styles.date} publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
         </div>
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
