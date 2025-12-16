@@ -1,5 +1,6 @@
-export { default as CtaActionButton } from './button/CtaActionButton';
-export { default as CtaLinkButton } from './button/CtaLinkButton';
-export { default as SectionTitle } from './title/SectionTitle';
-export { default as LoadingSpinner } from './ux/LoadingSpinner';
+export { default as CtaActionButton } from '@/src/components/button/CtaActionButton';
+export { default as CtaLinkButton } from '@/src/components/button/CtaLinkButton';
+export { default as SectionTitle } from '@/src/components/title/SectionTitle';
+export { default as LoadingSpinner } from '@/src/components/ui/LoadingSpinner';
+export { default as Breadcrumb } from "@/src/components/ui/Breadcrumb";
 export { default as Icons } from "@/src/components/icon/Icons";

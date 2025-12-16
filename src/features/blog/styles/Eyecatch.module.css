@@ -1,0 +1,15 @@
+@layer feature {
+  .postListEyecatchContainer {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .postListEyecatch {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 300px;
+  }
+}

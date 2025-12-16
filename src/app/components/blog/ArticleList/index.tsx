@@ -8,7 +8,7 @@ import {
 } from './index.css';
 import Link from "next/link";
 import ConvertDate from "@/src/app/components/common/convertdate";
-import { Thumbnail } from "@/src/app/components/blog/Thumbnail";
+// import { Thumbnail } from "@/src/app/components/blog/Thumbnail";
 
 export const ArticleList = ({ contents, totalCount }: { contents: any[], totalCount: number }) => {
   const hasContents = totalCount > 0;
@@ -27,7 +27,7 @@ export const ArticleList = ({ contents, totalCount }: { contents: any[], totalCo
           return (
             <li key={post.id} className={postListItem}>
               <Link className={postListItemLink} href={`/blog/${post.id}`} scroll={true}>
-                <Thumbnail isDummy={typeof post.eyecatch?.url === 'undefined'} src={eyecatchPath} width={post.eyecatch?.width} height={post.eyecatch?.height} />
+                {/* <Thumbnail isDummy={typeof post.eyecatch?.url === 'undefined'} src={eyecatchPath} width={post.eyecatch?.width} height={post.eyecatch?.height} /> */}
                 <dl className={postData}>
                   <dt className={postDataTitle}>{post.title}</dt>
                   <dd className={postDataDesc}>

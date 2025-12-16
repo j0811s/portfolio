@@ -1,0 +1,53 @@
+.container {
+  overflow: hidden;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
+  padding: 0 1em;
+}
+
+.listItem {
+  font-size: var(--font-size-m);
+}
+
+.listIetmTitle {
+  font-size: var(--font-size-m);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  padding: 1em;
+}
+
+.listItemTitleIcon {
+  color: var(--theme-primary);
+}
+
+.listIetmTitleText {
+  padding: 0.5em;
+}
+
+.listIetmLink {
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: transparent;
+  /* border-left: 2px solid transparent; */
+  transition: all 0.3s ease;
+}
+
+.numberBadge {
+  display: block;
+  padding: 0.25em;
+  border-radius: 9999px;
+  min-width: 24px;
+  font-size: var(--font-size-s);
+  text-align: center;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}

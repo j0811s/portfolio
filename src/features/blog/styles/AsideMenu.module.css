@@ -1,0 +1,39 @@
+.aside {
+  display: block;
+}
+
+.aside > * + * {
+  margin: 30px 0 0;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
+  padding: 0 1em;
+}
+
+.listItem {
+  font-size: var(--font-size-m);
+}
+
+.listIetmTitle {
+  font-size: var(--font-size-m);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  padding: 1em;
+  border-radius: 4px;
+}
+
+.listItemTitleIcon {
+  color: var(--theme-primary);
+}
+
+.listIetmTitleText {
+  padding-left: 0.5em;
+}

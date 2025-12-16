@@ -1,6 +1,5 @@
-import { container, wrapper } from '../styles/blog/layout.css'
-import { BlogAside } from "../components/blog/BlogAside";
 import { Metadata } from 'next';
+import { AsideMenu } from '@/src/features/blog';
 
 export const metadata: Metadata = {
   title: 'ブログ',
@@ -13,11 +12,9 @@ type BlogLayout = {
 export default function BlogLayout({ children }: BlogLayout) {
   
   return (
-    <div className={container}>
-      <div className={wrapper}>
-        {children}
-        <BlogAside />
-      </div>
+    <div>
+      {children}
+      <AsideMenu />
     </div>
   )
 }

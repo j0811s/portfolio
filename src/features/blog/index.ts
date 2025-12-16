@@ -6,4 +6,6 @@ export { default as Category } from "@/src/features/blog/components/Category";
 export { default as Tag } from "@/src/features/blog/components/Tag";
 export { default as PublishDate } from "@/src/features/blog/components/PublishDate";
 export { default as DateTime } from "@/src/features/blog/components/DateTime";
-
+export { default as Eyecatch } from "@/src/features/blog/components/Eyecatch";
+export { default as YearArchive } from "@/src/features/blog/components/YearArchive";
+export { default as AsideMenu } from "@/src/features/blog/components/AsideMenu";

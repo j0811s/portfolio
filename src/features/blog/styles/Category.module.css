@@ -1,3 +1,33 @@
 @layer feature {
+  .link {
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    padding: 0.5em;
+    background-color: transparent;
+  }
 
+  .icon {
+    color: var(--theme-primary);
+  }
+
+  .name {
+    font-size: var(--font-size-m);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+  }
+
+  .badge {
+    display: block;
+    padding: 0.25em;
+    border-radius: 9999px;
+    min-width: 24px;
+    font-size: var(--font-size-s);
+    text-align: center;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+  }
 }

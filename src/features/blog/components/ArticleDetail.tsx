@@ -1,11 +1,13 @@
+import type { JSX } from "react";
 import clsx from "clsx";
 import styles from "@/src/features/blog/styles/ArticleDetail.module.css";
 import parse, { HTMLReactParserOptions, Element, Text, DOMNode } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
-import { PublishDate } from "@/src/features/blog";
-import type { JSX } from "react";
-import { CtaLinkButton } from "@/src/components";
+import { Breadcrumb, CtaLinkButton } from "@/src/components";
+import { Eyecatch, PublishDate, Tag } from "@/src/features/blog";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -28,9 +30,16 @@ const parseOptions: HTMLReactParserOptions = {
 
         return (
           <div className={styles.codeBlock}>
-            { fileName && <div className={clsx(styles.fileName, 'hljs')}>{fileName}</div> }
+            {
+              fileName &&
+              <div className={clsx(styles.fileName, 'hljs')}>
+                <FontAwesomeIcon icon={faCode} /> {fileName}
+              </div>
+            }
             <pre className={styles['codeBlock_pre']}>
-              <code className={clsx(styles['codeBlock_code'], 'hljs')}>{parse(highlightCode.value)}</code>
+              <code className={clsx(styles['codeBlock_code'], 'hljs')}>
+                {parse(highlightCode.value)}
+              </code>
             </pre>
           </div>
         )
@@ -48,20 +57,50 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 
 function ArticleDetail({ post }: { post: Blog }) {
   const eyecatchPath = `${post.eyecatch?.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
+  const tags: Tag[] = [
+    {
+      id: "1",
+      name: "テスト",
+      createdAt: "string;",
+      updatedAt: "string;",
+    },
+    {
+      id: "2",
+      name: "テスト2",
+      createdAt: "string;",
+      updatedAt: "string;",
+    }
+  ];
 
   return (
     <article id={post.id} className={styles.postWrapper}>
       <div className={styles.postHead}>
-        {/* <Breadcrumb type={type} post={post} /> */}
         <div className={styles.postTextContainer}>
           <h1 className={styles.postTitle}>{post.title}</h1>
-          {/* <TagsElement tagData={tag} modClass={{ul: 'mod-gapNoneX', li: ''}} /> */}
+          <Eyecatch
+            className={styles.postEyecatchContainer}
+            src={eyecatchPath}
+            width={post.eyecatch?.width}
+            height={post.eyecatch?.height}
+            isDummy={typeof post.eyecatch?.url === 'undefined'}
+          />
           <PublishDate className={styles.date} publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
-        {/* <Thumbnail className={styles.postEyecatchContainer} src={eyecatchPath} width={post.eyecatch?.width} height={post.eyecatch?.height} isDummy={typeof post.eyecatch?.url === 'undefined'} /> */}
+          {
+            <ul className={styles.tags}>
+              {
+                tags.map(tag => (
+                  <li key={tag.name}>
+                    <Tag data={tag} totalCount={0} />
+                  </li>
+                ))
+              }
+            </ul>
+          }
         </div>
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
-      <div className={styles.prevButton}>
+      <Breadcrumb />
+      <div className={styles.backToLink}>
         <CtaLinkButton href="/blog/" prevIcon={true}>一覧へ戻る</CtaLinkButton>
       </div>
     </article>
