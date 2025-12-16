@@ -2,13 +2,14 @@ import styles from "@/src/features/blog/styles/AsideMenu.module.css";
 import { Category, Tag, YearArchive } from "@/src/features/blog";
 import { faListUl, faTags } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { PostData, ResultPostData } from "@/src/libs/blog/getTotalCount";
 import { getTotalCount } from "@/src/libs/blog/getTotalCount";
 import { fetchBlogListAll } from "@/src/libs/microcms/blog";
 
 async function AsideMenu() {
   const contents = await fetchBlogListAll('blog');
-  const categories: any = getTotalCount(contents, 'category');
-  const tags: any = getTotalCount(contents, 'tag');
+  const categories: ResultPostData = getTotalCount(contents, 'category');
+  const tags: ResultPostData = getTotalCount(contents, 'tag');
 
   return (
     <aside className={styles.aside}>

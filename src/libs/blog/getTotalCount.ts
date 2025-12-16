@@ -1,14 +1,17 @@
-type TotalCountData = {
-  [key: string]: {
-    name?: string,
-    count: number,
-    slug?: string,
-    id?: string,
-  }
+export type PostData = {
+  name?: string;
+  count: number;
+  slug?: string;
+  id?: string;
 }
 
-export const getTotalCount = (contents: Blog[], type: string): TotalCountData => {
-  const data: TotalCountData = {}
+
+export type ResultPostData = {
+  [key: string]: PostData;
+}
+
+export const getTotalCount = (contents: Blog[], type: string): ResultPostData => {
+  const data: ResultPostData = {}
 
   contents.forEach((post: {
     [type: string]: any
