@@ -3,6 +3,7 @@ type TotalCountData = {
     name?: string,
     count: number,
     slug?: string,
+    id?: string,
   }
 }
 
@@ -21,7 +22,8 @@ export const getTotalCount = (contents: Blog[], type: string): TotalCountData =>
         data[type.id] = {
           name: type.name,
           count: 1,
-          slug: type.slug
+          slug: type.slug,
+          id: type.id
         }
       }
     });
