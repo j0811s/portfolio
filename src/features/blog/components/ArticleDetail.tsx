@@ -8,6 +8,9 @@ import { Breadcrumb, CtaLinkButton } from "@/src/components";
 import { Eyecatch, PublishDate, Tag } from "@/src/features/blog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
+import { fetchBlogDetail } from "@/src/libs/microcms/blog";
+import type { ResultPostData } from "@/src/libs/blog/getTotalCount";
+import { getTotalCount } from "@/src/libs/blog/getTotalCount";
 
 const parseOptions: HTMLReactParserOptions = {
   replace: (domNode) => {
@@ -55,22 +58,10 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
   return content !== '' ? <div id="js-postContents" className={styles.postContent}>{parse(content, parseOptions)}</div> : <></>;
 }
 
-function ArticleDetail({ post }: { post: Blog }) {
+async function ArticleDetail({ post }: { post: Blog }) {
+  const contents = await fetchBlogDetail('blog', post.id);
+  const tags: ResultPostData = getTotalCount([contents], 'tag');
   const eyecatchPath = `${post.eyecatch?.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
-  const tags: Tag[] = [
-    {
-      id: "1",
-      name: "テスト",
-      createdAt: "string;",
-      updatedAt: "string;",
-    },
-    {
-      id: "2",
-      name: "テスト2",
-      createdAt: "string;",
-      updatedAt: "string;",
-    }
-  ];
 
   return (
     <article id={post.id} className={styles.postWrapper}>
@@ -85,18 +76,18 @@ function ArticleDetail({ post }: { post: Blog }) {
             height={post.eyecatch?.height}
             isDummy={typeof post.eyecatch?.url === 'undefined'}
           />
-          <PublishDate className={styles.date} publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
           {
             <ul className={styles.tags}>
               {
-                tags.map(tag => (
-                  <li key={tag.name}>
-                    <Tag data={tag} totalCount={0} />
+                Object.keys(tags).map(tag => (
+                  <li key={tags[tag].name}>
+                    <Tag data={tags[tag]} totalCount={tags[tag].count} />
                   </li>
                 ))
               }
             </ul>
           }
+          <PublishDate className={styles.date} publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
         </div>
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />

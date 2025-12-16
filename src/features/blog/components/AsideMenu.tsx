@@ -2,7 +2,7 @@ import styles from "@/src/features/blog/styles/AsideMenu.module.css";
 import { Category, Tag, YearArchive } from "@/src/features/blog";
 import { faListUl, faTags } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import type { PostData, ResultPostData } from "@/src/libs/blog/getTotalCount";
+import type { ResultPostData } from "@/src/libs/blog/getTotalCount";
 import { getTotalCount } from "@/src/libs/blog/getTotalCount";
 import { fetchBlogListAll } from "@/src/libs/microcms/blog";
 
