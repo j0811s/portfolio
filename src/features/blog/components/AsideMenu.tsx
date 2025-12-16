@@ -2,37 +2,13 @@ import styles from "@/src/features/blog/styles/AsideMenu.module.css";
 import { Category, Tag, YearArchive } from "@/src/features/blog";
 import { faListUl, faTags } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getTotalCount } from "@/src/libs/blog/getTotalCount";
+import { fetchBlogListAll } from "@/src/libs/microcms/blog";
 
-function AsideMenu() {
-  const categories: Category[] = [
-    {
-      id: "1",
-      name: "テスト",
-      createdAt: "string;",
-      updatedAt: "string;",
-    },
-    {
-      id: "2",
-      name: "テスト2",
-      createdAt: "string;",
-      updatedAt: "string;",
-    }
-  ];
-  
-  const tags: Tag[] = [
-    {
-      id: "1",
-      name: "テスト",
-      createdAt: "string;",
-      updatedAt: "string;",
-    },
-    {
-      id: "2",
-      name: "テスト2",
-      createdAt: "string;",
-      updatedAt: "string;",
-    }
-  ];
+async function AsideMenu() {
+  const contents = await fetchBlogListAll('blog');
+  const categories: any = getTotalCount(contents, 'category');
+  const tags: any = getTotalCount(contents, 'tag');
 
   return (
     <aside className={styles.aside}>
@@ -43,9 +19,9 @@ function AsideMenu() {
         </h2>
         <ul className={styles.list}>
           {
-            categories.map(cat => (
-              <li key={cat.name}>
-                <Category data={cat} totalCount={2} />
+            Object.keys(categories).map(cat => (
+              <li key={categories[cat].name}>
+                <Category data={categories[cat]} totalCount={categories[cat].count} />
               </li>
             ))
           }
@@ -58,9 +34,9 @@ function AsideMenu() {
         </h2>
         <ul className={styles.list}>
           {
-            tags.map(tag => (
-              <li key={tag.name}>
-                <Tag data={tag} totalCount={1} />
+            Object.keys(tags).map(tag => (
+              <li key={tags[tag].name}>
+                <Tag data={tags[tag]} totalCount={tags[tag].count} />
               </li>
             ))
           }
