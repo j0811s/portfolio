@@ -124,7 +124,8 @@
     padding: 0;
   }
 
-  ul {
+  ul,
+  ol {
     margin: 0;
     padding: 0;
   }
@@ -208,6 +209,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
+  }
+
+  .u-ellipsis.u-ellipsis--short {
+    -webkit-line-clamp: 1;
   }
 
   .u-neumorphism {

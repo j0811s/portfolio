@@ -75,6 +75,7 @@ function ArticleDetail({ post }: { post: Blog }) {
   return (
     <article id={post.id} className={styles.postWrapper}>
       <div className={styles.postHead}>
+        <Breadcrumb currentPage={post.title} />
         <div className={styles.postTextContainer}>
           <h1 className={styles.postTitle}>{post.title}</h1>
           <Eyecatch
@@ -99,7 +100,6 @@ function ArticleDetail({ post }: { post: Blog }) {
         </div>
       </div>
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
-      <Breadcrumb />
       <div className={styles.backToLink}>
         <CtaLinkButton href="/blog/" prevIcon={true}>一覧へ戻る</CtaLinkButton>
       </div>

@@ -1,0 +1,33 @@
+@layer components {
+  .container {
+    padding: 1em 0;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5em;
+    font-size: var(--font-size-s);
+    color: var(--text-primary);
+  }
+
+  .listItem {
+    flex-shrink: 0;
+  }
+
+  .listItem:not(:last-of-type)::after {
+    content: '>';
+    display: inline-block;
+    margin-left: 0.5em;
+  }
+
+  .currentPage {
+    opacity: 0.6;
+    flex-shrink: 1;
+  }
+
+  .link {
+    color: inherit;
+  }
+}

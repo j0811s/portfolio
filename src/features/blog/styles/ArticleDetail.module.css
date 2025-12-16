@@ -151,7 +151,7 @@
   .backToLink {
     display: block;
     place-items: center;
-    margin-top: 5rem;
+    margin-top: clamp(1.25rem, 0.991rem + 1.105vw, 1.875rem);;
   }
 }
 
