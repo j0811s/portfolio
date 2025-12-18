@@ -111,6 +111,10 @@
     padding: 0;
   }
 
+  a {
+    text-underline-offset: 0.25em;
+  }
+
   button {
     color: inherit;
     border: none;
