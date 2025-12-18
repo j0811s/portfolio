@@ -20,7 +20,8 @@
     --neumorphism-shadow-s: 2px 2px 4px #d9d9d9, -2px -2px 4px #fff;
     --neumorphism-shadow-s-hover: inset 2px 2px 4px #d9d9d9, inset -2px -2px 4px #fff;
     --text-primary: #333;
-    --bg-primary: #fff;
+    --bg-primary: #F7F7F8;
+    --bg-secondary: #EFEFF1;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
   }
@@ -32,7 +33,8 @@
     --neumorphism-shadow-s: 2px 2px 4px #d9d9d9, -2px -2px 4px #fff;
     --neumorphism-shadow-s-hover: inset 2px 2px 4px #d9d9d9, inset -2px -2px 4px #fff;
     --text-primary: #333;
-    --bg-primary: #fff;
+    --bg-primary: #F7F7F8;
+    --bg-secondary: #EFEFF1;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
   }
@@ -43,8 +45,9 @@
     --neumorphism-shadow-hover: inset 10px 10px 20px #141517, inset -10px -10px 20px #2A2C2F;
     --neumorphism-shadow-s: 2px 2px 4px #141517, -2px -2px 4px #2A2C2F;
     --neumorphism-shadow-s-hover: inset 2px 2px 4px #141517, inset -2px -2px 4px #2A2C2F;
-    --text-primary: #fff;
+    --text-primary: #E6E6E6;
     --bg-primary: #1E2022;
+    --bg-secondary: #2A2D31;
     --theme-primary: #224F6D;
     --text-link-color: #6aa8ff;
   }
@@ -56,8 +59,9 @@
       --neumorphism-shadow-hover: inset 10px 10px 20px #141517, inset -10px -10px 20px #2A2C2F;
       --neumorphism-shadow-s: 2px 2px 4px #141517, -2px -2px 4px #2A2C2F;
       --neumorphism-shadow-s-hover: inset 2px 2px 4px #141517, inset -2px -2px 4px #2A2C2F;
-      --text-primary: #fff;
+      --text-primary: #E6E6E6;
       --bg-primary: #1E2022;
+      --bg-secondary: #2A2D31;
       --theme-primary: #224F6D;
       --text-link-color: #6aa8ff;
     }
@@ -71,6 +75,7 @@
   
   body {
     font-family: var(--font-mplus);
+    font-weight: 400;
     color: var(--text-primary);
     background-color: var(--bg-primary);
     margin: 0;
@@ -172,6 +177,22 @@
     transition: all 0.3s ease;
   }
 
+  details::details-content {
+    overflow: clip;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  details[open]::details-content {
+    opacity: 1;
+  }
+
+  summary {
+    cursor: pointer;
+    display: block;
+    font-weight: 500;
+  }
+
   @media (any-hover: hover) {
     a,
     button {
@@ -218,7 +239,6 @@
   .u-neumorphism {
     overflow: hidden;
     position: relative;
-    display: block;
     border-radius: 10px;
     box-shadow: var(--neumorphism-shadow);
     color: var(--text-primary);

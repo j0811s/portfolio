@@ -2,7 +2,8 @@ import styles from "@/src/features/blog/styles/YearArchive.module.css";
 import { client, fetchBlogList } from "@/src/libs/microcms/blog";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import clsx from "clsx";
 
 type YearsData = {
   [key: string]: {
@@ -54,11 +55,14 @@ async function YearArchive() {
   }));
   
   return (
-    <div className={styles.container}>
-      <h2 className={styles.listIetmTitle}>
-        <FontAwesomeIcon icon={faCalendarDays} size="1x" className={styles.listItemTitleIcon} />
-        <span className={styles.listIetmTitleText}>年別アーカイブ</span>
-      </h2>
+    <details className={styles.container} open>
+      <summary className={styles.listIetmTitle}>
+        <div>
+          <FontAwesomeIcon icon={faCalendarDays} size="1x" className={styles.listItemTitleIcon} />
+          <span className={styles.listIetmTitleText}>年別アーカイブ</span>
+        </div>
+        <FontAwesomeIcon icon={faChevronDown} size="1x" className={clsx(styles.listItemTitleIcon, styles.arrowIcon)} />
+      </summary>
       <ul className={styles.list}>
         {years.map(year => (
           <li className={styles.listItem} key={year}>
@@ -68,7 +72,7 @@ async function YearArchive() {
           </li>
         ))}
       </ul>
-    </div>
+    </details>
   )
 }
 

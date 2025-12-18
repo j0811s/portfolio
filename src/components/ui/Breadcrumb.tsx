@@ -2,26 +2,36 @@ import styles from "@/src/styles/components/ui/Breadcrumb.module.css";
 import clsx from "clsx";
 import Link from "next/link";
 
-interface Props {
-  currentPage: string;
+interface DataProps {
+  name: string;
+  url: string;
 }
 
-function Breadcrumb({ currentPage }: Props) {
+function Breadcrumb({ data }: { data: DataProps[] }) {
+  if (!Array.isArray(data)) {
+    return <></>;
+  }
+
+  const dataCount = data.length;
+
   return (
-    <div className={clsx(styles.container)}>
+    <nav className={clsx(styles.container)}>
       <ol className={clsx(styles.list)}>
-        <li className={styles.listItem}>
-          <Link className={styles.link} href={'/'}>トップページ</Link>
-        </li>
-        <li className={styles.listItem}>
-          {/* 現状は投稿ページしかないので固定 */}
-          <Link className={styles.link} href={'/blog/'}>投稿</Link>
-        </li>
-        <li className={clsx(styles.listItem, styles.currentPage, 'u-ellipsis u-ellipsis--short')}>
-          {currentPage}
-        </li>
+        {
+          data.map((item, i) => {
+            return (
+              dataCount === ++i ?
+                <li className={clsx(styles.listItem, styles.currentPage, 'u-ellipsis u-ellipsis--short')} key={item.name}>
+                  {item.name}
+                </li> :
+                <li className={styles.listItem} key={item.name}>
+                  <Link className={styles.link} href={item.url}>{item.name}</Link>
+                </li>
+            )
+          })
+        }
       </ol>
-    </div>
+    </nav>
   )
 }
 

@@ -15,11 +15,11 @@ export default function ArticleCard(props: Props) {
         {
           props.eyecatch?.url ?
             <figure className={styles.eyecatch}>
-              <Image className={styles.thmubnail} src={props.eyecatch.url} width={props.eyecatch?.width} height={props.eyecatch?.height} alt="" />
+              <Image className={styles.thmubnail} src={props.eyecatch.url} width={props.eyecatch?.width} height={props.eyecatch?.height} alt="" priority />
             </figure>
             :
             <figure className={styles.eyecatch}>
-              <Image className={styles.thmubnail} src="/images/blog/dummy.png" alt="" width="375" height="210" onLoad={() => {}} />
+              <Image className={styles.thmubnail} src="/images/blog/dummy.png" alt="" width="375" height="210" priority />
             </figure>
         }
         <div className={styles.postInner}>

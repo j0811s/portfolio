@@ -3,6 +3,10 @@
     overflow: hidden;
   }
 
+  .container[open] .arrowIcon {
+    transform: rotateX(0.5turn);
+  }
+
   .list {
     display: flex;
     flex-wrap: wrap;
@@ -12,22 +16,31 @@
   }
 
   .listItem {
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-s);
   }
 
   .listIetmTitle {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr max-content;
     font-size: var(--font-size-m);
     color: var(--text-primary);
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
+    margin-bottom: 0.5em;
     padding: 1em;
+    border-radius: 4px;
   }
 
   .listItemTitleIcon {
-    color: var(--theme-primary);
+    color: inherit;
   }
 
   .listIetmTitleText {
     padding: 0.5em;
+  }
+
+  .arrowIcon {
+    transition: transform 0.3s ease;
   }
 
   .listIetmLink {

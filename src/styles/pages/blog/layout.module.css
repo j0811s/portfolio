@@ -1,0 +1,13 @@
+@layer page {
+  .container {
+  }
+  
+  @media screen and (width >=960px) {
+    .container {
+      display: grid;
+      grid-template-columns: 1fr max-content;
+      align-items: flex-start;
+      gap: clamp(0.938rem, 0.808rem + 0.55vw, 1.25rem);
+    }
+  }
+}

@@ -7,6 +7,23 @@ import type {
 } from "microcms-js-sdk";
 
 declare global {
+  // Page Props
+  export type PageProps = {
+    params: Promise<Record<string, string>>;
+  }
+
+  // パンクバンドのJSON LD
+  export type BreadcrumbJsonLd = {
+    taxonomies?: {
+      slug?: string;
+      id?: string;
+      name?: string;
+    }
+    post?: {
+      id?: string;
+      title?: string;
+    }
+  }
 
   //ブログの型定義
   export type Blog = {
