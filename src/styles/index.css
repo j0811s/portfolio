@@ -15,10 +15,10 @@
     --white: #fff;
     --black: #333;
     --shadow: rgba(0, 0, 0, 0.1);
-    --neumorphism-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #fff;
-    --neumorphism-shadow-hover: inset 10px 10px 20px #d9d9d9, inset -10px -10px 20px #fff;
-    --neumorphism-shadow-s: 2px 2px 4px #d9d9d9, -2px -2px 4px #fff;
-    --neumorphism-shadow-s-hover: inset 2px 2px 4px #d9d9d9, inset -2px -2px 4px #fff;
+    --neumorphism-shadow: 4px 4px 8px #c5c5c5, -4px -4px 8px #fff;
+    --neumorphism-shadow-hover: inset 4px 4px 8px #c5c5c5, inset -4px -4px 8px #fff;
+    --neumorphism-btn:  4px 4px 8px #c5c5c5, -4px -4px 8px #fff;
+    --neumorphism-btn-hover: inset 4px 4px 8px #c5c5c5, inset -4px -4px 8px #fff;
     --text-primary: #333;
     --bg-primary: #F7F7F8;
     --bg-secondary: #EFEFF1;
@@ -28,10 +28,10 @@
   
   :root[data-theme="light"] {
     --shadow: rgba(0, 0, 0, 0.1);
-    --neumorphism-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #fff;
-    --neumorphism-shadow-hover: inset 10px 10px 20px #d9d9d9, inset -10px -10px 20px #fff;
-    --neumorphism-shadow-s: 2px 2px 4px #d9d9d9, -2px -2px 4px #fff;
-    --neumorphism-shadow-s-hover: inset 2px 2px 4px #d9d9d9, inset -2px -2px 4px #fff;
+    --neumorphism-shadow: 4px 4px 8px #c5c5c5, -4px -4px 8px #fff;
+    --neumorphism-shadow-hover: inset 4px 4px 8px #c5c5c5, inset -4px -4px 8px #fff;
+    --neumorphism-btn:  4px 4px 8px #c5c5c5, -4px -4px 8px #fff;
+    --neumorphism-btn-hover: inset 4px 4px 8px #c5c5c5, inset -4px -4px 8px #fff;
     --text-primary: #333;
     --bg-primary: #F7F7F8;
     --bg-secondary: #EFEFF1;
@@ -43,8 +43,8 @@
     --shadow: rgba(255, 255, 255, 0.1);
     --neumorphism-shadow: 10px 10px 20px #141517, -10px -10px 20px #2A2C2F;
     --neumorphism-shadow-hover: inset 10px 10px 20px #141517, inset -10px -10px 20px #2A2C2F;
-    --neumorphism-shadow-s: 2px 2px 4px #141517, -2px -2px 4px #2A2C2F;
-    --neumorphism-shadow-s-hover: inset 2px 2px 4px #141517, inset -2px -2px 4px #2A2C2F;
+    --neumorphism-btn: 2px 2px 4px #141517, -2px -2px 4px #2A2C2F;
+    --neumorphism-btn-hover: inset 2px 2px 4px #141517, inset -2px -2px 4px #2A2C2F;
     --text-primary: #E6E6E6;
     --bg-primary: #1E2022;
     --bg-secondary: #2A2D31;
@@ -57,8 +57,8 @@
       --shadow: rgba(255, 255, 255, 0.1);
       --neumorphism-shadow: 10px 10px 20px #141517, -10px -10px 20px #2A2C2F;
       --neumorphism-shadow-hover: inset 10px 10px 20px #141517, inset -10px -10px 20px #2A2C2F;
-      --neumorphism-shadow-s: 2px 2px 4px #141517, -2px -2px 4px #2A2C2F;
-      --neumorphism-shadow-s-hover: inset 2px 2px 4px #141517, inset -2px -2px 4px #2A2C2F;
+      --neumorphism-btn: 2px 2px 4px #141517, -2px -2px 4px #2A2C2F;
+      --neumorphism-btn-hover: inset 2px 2px 4px #141517, inset -2px -2px 4px #2A2C2F;
       --text-primary: #E6E6E6;
       --bg-primary: #1E2022;
       --bg-secondary: #2A2D31;

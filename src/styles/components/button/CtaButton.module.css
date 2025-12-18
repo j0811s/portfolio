@@ -7,15 +7,14 @@
     gap: 0.6em;
     width: fit-content;
     min-width: 100px;
-    padding: 0.6em;
+    padding: 0.8em 1.6em;
     font-size: var(--font-size-m);
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    border: 1px solid var(--text-primary);
     border-radius: 6px;
     backdrop-filter: blur(2px);
     text-decoration: none;
-    box-shadow: var(--neumorphism-shadow-s);
+    box-shadow: var(--neumorphism-btn);
     transition: all 0.3s ease;
   }
 
@@ -24,7 +23,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    box-shadow: var(--neumorphism-shadow-s-hover);
+    box-shadow: var(--neumorphism-btn-hover);
     opacity: 0;
     transition: all 0.3s ease;
     pointer-events: none;
