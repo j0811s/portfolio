@@ -45,7 +45,7 @@ export default async function OgImage({ params: { postId } }: Props) {
           justifyContent: 'center',
         }}
       >
-        {/* {post.title} */}{post.id} | ブログ
+        {/* {post.title} */}{post.id} | 投稿
       </div>
     ),
     // ImageResponse options

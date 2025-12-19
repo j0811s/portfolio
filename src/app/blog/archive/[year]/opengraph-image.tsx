@@ -38,7 +38,7 @@ export default async function Image({ params: { year } }: Props) {
           justifyContent: 'center',
         }}
       >
-        {year} | ブログ{/* {category.name} */}
+        {year} | 投稿{/* {category.name} */}
       </div>
     ),
     // ImageResponse options

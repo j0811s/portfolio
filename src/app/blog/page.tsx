@@ -1,26 +1,27 @@
+import styles from "@/src/styles/pages/blog/layout.module.css";
 import { SITE_URL } from "@/src/constants/site";
-import { Breadcrumb, JsonLd, SectionTitle } from "@/src/components";
+import { LIMIT } from "@/src/constants/blog";
+import { Breadcrumb, SectionTitle } from "@/src/components";
 import { fetchBlogList } from "@/src/libs/microcms/blog";
-import { createBreadcrumbJsonLd } from "@/src/libs/seo/jsonLd";
-import { ArticleCardList } from "@/src/features/blog";
+import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
 
 export default async function Page({ params }: PageProps) {
-  const { contents, totalCount } = await fetchBlogList('blog', { limit: 12 });
+  const { contents, totalCount } = await fetchBlogList('blog', { limit: LIMIT });
 
   return (
-    <section>
-      <JsonLd
-        data={createBreadcrumbJsonLd([
-          { name: 'トップページ', url: SITE_URL },
-          { name: '投稿', url: `${SITE_URL}/blog/` }
-        ])}
-      />
+    <>
       <Breadcrumb data={[
         { name: 'トップページ', url: SITE_URL },
         { name: '投稿', url: `${SITE_URL}/blog/` }
       ]} />
-      <SectionTitle title="投稿" />
-      <ArticleCardList contents={contents} />
-    </section>
+      <div className={styles.container}>
+        <section>
+          <SectionTitle title="投稿" />
+          <ArticleCardList contents={contents} />
+          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} />
+        </section>
+        <AsideMenu />
+      </div>
+    </>
   )
 }

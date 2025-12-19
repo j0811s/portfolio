@@ -5,6 +5,6 @@ export const postTitleAtom = atom('');
 export const postIdAtom = atom('');
 
 // Taxonomy
-export const TaxonomySlugAtom = atom('');
-export const TaxonomyIdAtom = atom('');
-export const TaxonomyNameAtom = atom('');
+export const taxonomySlugAtom = atom('');
+export const taxonomyIdAtom = atom('');
+export const taxonomyNameAtom = atom('');

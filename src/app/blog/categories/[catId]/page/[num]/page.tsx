@@ -1,7 +1,10 @@
-import { getList, getDetail } from "../../../../../libs/microcms/blog";
-import { Breadcrumb } from '../../../../../components/common/Breadcrumb';
-import { ArticleListContents } from "../../../../../components/blog/ArticleListContents";
-import { Metadata, ResolvingMetadata } from 'next';
+import styles from "@/src/styles/pages/blog/layout.module.css";
+import { LIMIT } from '@/src/constants/blog';
+import { SITE_URL } from '@/src/constants/site';
+import { fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
+import { Metadata } from 'next';
+import { Breadcrumb, SectionTitle } from "@/src/components";
+import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
 
 
 type generateMetadataProps = {
@@ -14,11 +17,11 @@ type generateMetadataProps = {
 export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
   const params = await props.params;
   const { catId, num } = params;
-  const cat = await getDetail('categories', catId);
+  const cat = await fetchBlogDetail('categories', catId);
 
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
-    title: `${num}ページ目 | ${cat?.name} | カテゴリー | ブログ | J.Sato`,
+    title: `${num}ページ目 | ${cat?.name} | カテゴリー | 投稿 | J.Sato`,
     description: `「${cat?.name}」の${num}ページ目です。`,
     openGraph: {
       description: `「${cat?.name}」の${num}ページ目です。`
@@ -33,28 +36,36 @@ type Props = {
   }>
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { catId, num } = params;
-  const typeName = 'categories';
-  const category = await getDetail(typeName, catId);
-  const limit = 12;
-
-  const { contents, totalCount } = await getList('blog', {
-    filters: `category[contains]${category.id}`,
-    limit,
-    offset: limit * (Number(num) - 1)
+export default async function Page({ params }: Props) {
+  const { catId, num } = await params;
+  const { contents, totalCount } = await fetchBlogList('blog', {
+    limit: LIMIT,
+    filters: `category[contains]${catId}`,
+    offset: LIMIT * (Number(num) - 1)
   });
 
+  const breadcrumb = [
+    { name: 'トップページ', url: SITE_URL },
+    { name: '投稿', url: `${SITE_URL}/blog/` },
+    { name: `カテゴリー | ${num}ページ`, url: `${SITE_URL}/blog/categories/page/${num}/` }
+  ];
+
   const type = {
-    slug: typeName,
-    id: category.id,
-    name: category.name
+    slug: 'categories',
+    id: catId
   }
 
   return (
     <>
-      <ArticleListContents contents={contents} type={type} totalCount={totalCount} limit={limit} currentPage={Number(num)} />
+      <Breadcrumb data={breadcrumb} />
+      <div className={styles.container}>
+        <section>
+          <SectionTitle title="カテゴリー | 投稿" />
+          <ArticleCardList contents={contents} />
+          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} type={type} />
+        </section>
+        <AsideMenu />
+      </div>
     </>
   )
 }

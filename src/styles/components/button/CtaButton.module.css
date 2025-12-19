@@ -14,8 +14,7 @@
     border-radius: 6px;
     backdrop-filter: blur(2px);
     text-decoration: none;
-    box-shadow: var(--neumorphism-btn);
-    transition: all 0.3s ease;
+    box-shadow: var(--neumorphism-shadow);
   }
 
   .button::after {
@@ -23,7 +22,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    box-shadow: var(--neumorphism-btn-hover);
+    box-shadow: var(--neumorphism-shadow-hover);
     opacity: 0;
     transition: all 0.3s ease;
     pointer-events: none;

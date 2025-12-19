@@ -54,7 +54,7 @@
     transition: transform 0.3s ease;
   }
 
-  @media screen and (width >=960px) {
+  @media screen and (width >= 1080px) {
     .aside {
       width: 300px;
     }

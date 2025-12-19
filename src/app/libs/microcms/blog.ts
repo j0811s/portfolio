@@ -10,7 +10,7 @@ import type {
 } from "microcms-js-sdk";
 import { ReactNode } from 'react';
 
-//ブログの型定義
+//投稿の型定義
 export type Blog = {
   endpoint: string,
   id: string;
@@ -65,7 +65,7 @@ export const client = createClient({
   retry: true
 })
 
-// ブログ一覧を取得
+// 投稿一覧を取得
 export const getList = async (
   endpoint: string = "blog",
   queries?: MicroCMSQueries,
@@ -82,7 +82,7 @@ export const getList = async (
   return listData;
 }
 
-// ブログの詳細を取得
+// 投稿の詳細を取得
 export const getDetail = async (
   endpoint: string = "blog",
   contentId: string,

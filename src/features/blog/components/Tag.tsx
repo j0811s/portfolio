@@ -7,7 +7,7 @@ import type { PostData } from "@/src/libs/blog/getTotalCount";
 function Tag({ data, totalCount }: { data: PostData, totalCount?: string | number }) {
   return (
     <Link className={styles.link} href={`/blog/tags/${data.id}`}>
-      <FontAwesomeIcon className={styles.icon} icon={faTag} size="xs" />
+      {/* <FontAwesomeIcon className={styles.icon} icon={faTag} size="xs" /> */}
       <span className={styles.name}>{data.name}</span> {totalCount ? <span className={styles.badge}>({totalCount})</span> : '' }
     </Link>
   )

@@ -40,7 +40,7 @@ export default async function Image({ params: { tagId } }: Props) {
           justifyContent: 'center',
         }}
       >
-       {tag.id} | ブログ {/* {tag.name} */}
+       {tag.id} | 投稿 {/* {tag.name} */}
       </div>
     ),
     // ImageResponse options

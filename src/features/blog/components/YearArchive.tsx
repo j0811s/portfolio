@@ -11,7 +11,7 @@ type YearsData = {
   }
 }
 
-// ブログ公開日から年別を取得
+// 投稿公開日から年別を取得
 const createYearsArray = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i);
 
 const getBlogYears = async () => {

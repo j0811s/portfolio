@@ -3,7 +3,7 @@
     display: grid;
     gap: clamp(0.938rem, 0.808rem + 0.55vw, 1.25rem);
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    margin-top: clamp(0.625rem, 0.366rem + 1.1vw, 1.25rem);
+    margin-top: 2rem;
   }
 
   .item {

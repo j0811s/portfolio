@@ -1,7 +1,11 @@
-import { getList, getDetail } from "../../../libs/microcms/blog";
-import { Breadcrumb } from "@/src/app/components/common/Breadcrumb";
-import { ArticleListContents } from "../../../components/blog/ArticleListContents";
-import { Metadata, ResolvingMetadata } from 'next';
+import styles from "@/src/styles/pages/blog/layout.module.css";
+import { Metadata } from 'next';
+import { SITE_URL } from "@/src/constants/site";
+import { Breadcrumb, SectionTitle } from "@/src/components";
+import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
+import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
+import { LIMIT } from "@/src/constants/blog";
+
 
 type generateMetadataProps = {
   params: Promise<{ tagId: string }>
@@ -9,11 +13,11 @@ type generateMetadataProps = {
 
 export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
   const params = await props.params;
-  const tag = await getDetail('tags', params.tagId);
+  const tag = await fetchBlogDetail('tags', params.tagId);
 
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
-    title: `${tag?.name} | タグ | ブログ | J.Sato`,
+    title: `${tag?.name} | タグ | 投稿 | J.Sato`,
     description: `「${tag?.name}」の一覧ページです。`,
     openGraph: {
       description: `「${tag?.name}」の一覧ページです。`
@@ -27,27 +31,34 @@ type Props = {
   }>;
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { tagId } = params;
-  const typeName = 'tags';
-  const tag = await getDetail(typeName, tagId);
-  const limit = 12;
-
-  const { contents, totalCount } = await getList('blog', {
-    filters: `tag[contains]${tag.id}`,
-    limit
+export default async function Page({ params }: Props) {
+  const { tagId } = await params;
+  const { contents, totalCount } = await fetchBlogList('blog', {
+    limit: LIMIT,
+    filters: `tag[contains]${tagId}`
   });
 
+  const breadcrumb = [
+    { name: 'トップページ', url: SITE_URL },
+    { name: 'タグ | 投稿', url: `${SITE_URL}/blog/` }
+  ];
+
   const type = {
-    slug: typeName,
-    id: tag.id,
-    name: tag.name
+    slug: 'tags',
+    id: tagId
   }
 
   return (
     <>
-      <ArticleListContents contents={contents} type={type} totalCount={totalCount} limit={limit} />
+      <Breadcrumb data={breadcrumb} />
+      <div className={styles.container}>
+        <section>
+          <SectionTitle title="タグ | 投稿" />
+          <ArticleCardList contents={contents} />
+          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
+        </section>
+        <AsideMenu />
+      </div>
     </>
   )
 }

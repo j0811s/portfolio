@@ -1,6 +1,7 @@
 @layer feature {
   .postWrapper {
     overflow: hidden;
+    padding-bottom: 1rem;
   }
 
   .postTitle {

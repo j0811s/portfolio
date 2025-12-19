@@ -3,7 +3,7 @@
     display: block;
     text-decoration: none;
     color: var(--text-primary);
-    font-size: 1.125rem;
+    font-size: clamp(1rem, 0.9482rem + 0.221vw, 1.125rem);
   }
 
   .img {

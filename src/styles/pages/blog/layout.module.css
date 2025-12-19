@@ -1,13 +1,23 @@
 @layer page {
-  .container {
-  }
   
-  @media screen and (width >=960px) {
+  @media screen and (width >= 1080px) {
     .container {
       display: grid;
       grid-template-columns: 1fr max-content;
       align-items: flex-start;
-      gap: clamp(0.938rem, 0.808rem + 0.55vw, 1.25rem);
+      gap: clamp(1.875rem, 1.616rem + 1.105vw, 2.5rem);
+    }
+  }
+}
+
+@layer overwrite {
+  .aside {
+    margin-top: 3rem;
+  }
+
+  @media screen and (width >=1080px) {
+    .aside {
+      width: 100%;
     }
   }
 }

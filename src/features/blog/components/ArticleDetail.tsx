@@ -1,11 +1,10 @@
+import styles from "@/src/features/blog/styles/ArticleDetail.module.css";
 import type { JSX } from "react";
 import clsx from "clsx";
-import styles from "@/src/features/blog/styles/ArticleDetail.module.css";
-import { SITE_URL } from "@/src/constants/site";
 import parse, { HTMLReactParserOptions, Element, Text, DOMNode } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
-import { Breadcrumb, CtaLinkButton } from "@/src/components";
+import { CtaLinkButton } from "@/src/components";
 import { Eyecatch, PublishDate, Tag } from "@/src/features/blog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
@@ -67,11 +66,6 @@ async function ArticleDetail({ post }: { post: Blog }) {
   return (
     <article id={post.id} className={styles.postWrapper}>
       <div className={styles.postHead}>
-        <Breadcrumb data={[
-          { name: 'トップページ', url: SITE_URL },
-          { name: '投稿', url: `${SITE_URL}/blog/` },
-          { name: post.title, url: `${SITE_URL}/blog/${post.id}/` },
-        ]} />
         <div className={styles.postTextContainer}>
           <h1 className={styles.postTitle}>{post.title}</h1>
           <Eyecatch

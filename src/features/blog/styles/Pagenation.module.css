@@ -1,0 +1,49 @@
+@layer feature {
+  .container {
+    margin: 3rem auto;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+  }
+
+  .listItem {
+    font-size: var(--font-size-m);
+    text-align: center;
+  }
+
+  .pageLink {
+    text-decoration: none;
+    display: grid;
+    place-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border-radius: 4px;
+    box-shadow: var(--neumorphism-shadow);
+  }
+
+  .omit {
+    pointer-events: none;
+    box-shadow: none;
+  }
+
+  .currentText {
+    pointer-events: none;
+    box-shadow: var(--neumorphism-shadow-hover);
+  }
+
+  @media (any-hover: hover) {
+    .pageLink {
+      transition: box-shadow 0.3s ease;
+    }
+
+    .pageLink:hover {
+      box-shadow: var(--neumorphism-shadow-hover);
+    }
+  }
+}

@@ -25,7 +25,7 @@ declare global {
     }
   }
 
-  //ブログの型定義
+  //投稿の型定義
   export type Blog = {
     endpoint: string,
     id: string;
@@ -64,7 +64,7 @@ declare global {
     name: string;
   } & MicroCMSContentId & MicroCMSDate;
 
-  // ブログ記事の型定義
+  // 投稿記事の型定義
   export type BlogPost = {
     id: string;
     title: string;

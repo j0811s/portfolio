@@ -24,7 +24,7 @@ export const client = createClient({
   retry: true
 })
 
-// ブログ一覧を取得
+// 投稿一覧を取得
 export const fetchBlogList = async (
   endpoint: string = "blog",
   queries?: MicroCMSQueries,
@@ -45,7 +45,7 @@ export const fetchBlogList = async (
   return response;
 }
 
-// ブログの詳細を取得
+// 投稿の詳細を取得
 export const fetchBlogDetail = async (
   endpoint: string = "blog",
   contentId: string,

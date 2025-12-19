@@ -1,19 +1,28 @@
-import { getList, getDetail } from "../../../libs/microcms/blog";
-import { Breadcrumb } from "@/src/app/components/common/Breadcrumb";
-import { ArticleListContents } from "../../../components/blog/ArticleListContents";
-import { Metadata, ResolvingMetadata } from 'next';
+import styles from "@/src/styles/pages/blog/layout.module.css";
+import { Metadata } from 'next';
+import { SITE_URL } from "@/src/constants/site";
+import { Breadcrumb, SectionTitle } from "@/src/components";
+import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
+import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
+import { LIMIT } from "@/src/constants/blog";
 
 type generateMetadataProps = {
   params: Promise<{ catId: string }>
 }
 
+type Props = {
+  params: Promise<{
+    catId: string;
+  }>;
+}
+
 export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
   const params = await props.params;
-  const cat = await getDetail('categories', params.catId);
+  const cat = await fetchBlogDetail('categories', params.catId);
 
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
-    title: `${cat?.name} | カテゴリー | ブログ | J.Sato`,
+    title: `${cat?.name} | カテゴリー | 投稿 | J.Sato`,
     description: `「${cat?.name}」の一覧ページです。`,
     openGraph: {
       description: `「${cat?.name}」の一覧ページです。`
@@ -21,33 +30,34 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
   }
 }
 
-type Props = {
-  params: Promise<{
-    catId: string;
-  }>;
-};
-
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { catId } = params;
-  const typeName = 'categories';
-  const category = await getDetail(typeName, catId);
-  const limit = 12;
-
-  const { contents, totalCount } = await getList('blog', {
-    filters: `category[contains]${category.id}`,
-    limit
+export default async function Page({ params }: Props) {
+  const { catId } = await params;
+  const { contents, totalCount } = await fetchBlogList('blog', {
+    limit: LIMIT,
+    filters: `category[contains]${catId}`
   });
 
+  const breadcrumb = [
+    { name: 'トップページ', url: SITE_URL },
+    { name: 'カテゴリー | 投稿', url: `${SITE_URL}/blog/` }
+  ];
+
   const type = {
-    slug: typeName,
-    id: category.id,
-    name: category.name
+    slug: 'categories',
+    id: catId
   }
 
   return (
     <>
-      <ArticleListContents contents={contents} type={type} totalCount={totalCount} limit={limit} />
+      <Breadcrumb data={breadcrumb} />
+      <div className={styles.container}>
+        <section>
+          <SectionTitle title="カテゴリー | 投稿" />
+          <ArticleCardList contents={contents} />
+          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
+        </section>
+        <AsideMenu />
+      </div>
     </>
   )
 }

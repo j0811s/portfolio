@@ -1,7 +1,10 @@
-import { getList } from "../../../libs/microcms/blog";
-import { Breadcrumb } from "@/src/app/components/common/Breadcrumb";
-import { ArticleListContents } from "@/src/app/components/blog/ArticleListContents";
-import { Metadata, ResolvingMetadata } from 'next';
+import styles from "@/src/styles/pages/blog/layout.module.css";
+import { Metadata } from 'next';
+import { SITE_URL } from "@/src/constants/site";
+import { Breadcrumb, SectionTitle } from "@/src/components";
+import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
+import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
+import { LIMIT } from "@/src/constants/blog";
 
 type generateMetadataProps = {
   params: Promise<{ year: string }>
@@ -13,7 +16,7 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
 
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
-    title: `${year}年 | 年別アーカイブ | ブログ | J.Sato`,
+    title: `${year}年 | 年別アーカイブ | 投稿 | J.Sato`,
     description: `「${year}年」の一覧ページです。`,
     openGraph: {
       description: `「${year}年」の一覧ページです。`
@@ -27,15 +30,17 @@ type Props = {
   }>;
 };
 
-export default async function Page(props: Props) {
-  const params = await props.params;
-  const { year } = params;
-  const limit = 12;
-
-  const { contents, totalCount } = await getList('blog', {
-    filters: `publishedAt[contains]${year}`,
-    limit
+export default async function Page({ params }: Props) {
+  const { year } = await params;
+  const { contents, totalCount } = await fetchBlogList('blog', {
+    limit: LIMIT,
+    filters: `publishedAt[contains]${year}`
   });
+
+  const breadcrumb = [
+    { name: 'トップページ', url: SITE_URL },
+    { name: '年別アーカイブ | 投稿', url: `${SITE_URL}/blog/` }
+  ];
 
   const type = {
     slug: 'archive',
@@ -45,7 +50,15 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      <ArticleListContents contents={contents} type={type} totalCount={totalCount} limit={limit} />
+      <Breadcrumb data={breadcrumb} />
+      <div className={styles.container}>
+        <section>
+          <SectionTitle title="年別アーカイブ | 投稿" />
+          <ArticleCardList contents={contents} />
+          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
+        </section>
+        <AsideMenu />
+      </div>
     </>
   )
 }
