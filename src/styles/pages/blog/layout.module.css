@@ -5,7 +5,7 @@
       display: grid;
       grid-template-columns: 1fr max-content;
       align-items: flex-start;
-      gap: clamp(1.875rem, 1.616rem + 1.105vw, 2.5rem);
+      gap: clamp(2.5rem, 1.982rem + 2.2099vw, 3.75rem);
     }
   }
 }
@@ -15,7 +15,7 @@
     margin-top: 3rem;
   }
 
-  @media screen and (width >=1080px) {
+  @media screen and (width >= 1080px) {
     .aside {
       width: 100%;
     }

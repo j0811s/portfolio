@@ -9,3 +9,4 @@ export { default as DateTime } from "@/src/features/blog/components/DateTime";
 export { default as Eyecatch } from "@/src/features/blog/components/Eyecatch";
 export { default as YearArchive } from "@/src/features/blog/components/YearArchive";
 export { default as AsideMenu } from "@/src/features/blog/components/AsideMenu";
+export { default as TableOfContents } from "@/src/features/blog/components/TableOfContents";
