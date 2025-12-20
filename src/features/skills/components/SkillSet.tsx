@@ -10,6 +10,7 @@ export default function SkillSet({ data }: { data: SkillSet[] }) {
           <dd className={styles.description}>
             <ul className={styles.list}>
               {skillSet.skills.map((skill, i) => (
+                !skill.hidden && 
                 <li className={`${styles.item} u-neumorphism`} key={`${skill.fieldId}-${i}`}>
                   <Image
                     className={styles.icon}
