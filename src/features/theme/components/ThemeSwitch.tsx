@@ -1,13 +1,13 @@
 'use client';
 
 import type { Theme } from "@/src/features/theme";
-import styles from "@/src/features/theme/styles/ThemeSwitchButton.module.css";
+import styles from "@/src/features/theme/styles/ThemeSwitch.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useAtom } from "jotai";
 import { themeAtom } from "@/src/features/theme/stores/atoms";
 
-export default function ThemeSwitchButton() {
+export default function ThemeSwitch() {
   const [theme, setTheme] = useAtom<Theme>(themeAtom);
 
   return (

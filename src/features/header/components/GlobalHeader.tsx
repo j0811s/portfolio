@@ -1,6 +1,6 @@
 import styles from "@/src/features/header/styles/GlobalHeader.module.css";
 import { Logo, DrawerOpenButton, DrawerCloseButton, DrawerMenu } from "@/src/features/header";
-import { ThemeProvider, ThemeSwitchButton } from '@/src/features/theme';
+import { ThemeProvider, ThemeSwitch } from '@/src/features/theme';
 
 export default function GlobalHeader() { 
   return (
@@ -11,7 +11,7 @@ export default function GlobalHeader() {
         <DrawerMenu>
           <DrawerCloseButton />
         </DrawerMenu>
-        <ThemeSwitchButton />
+        <ThemeSwitch />
         <ThemeProvider />
       </div>
     </header>
