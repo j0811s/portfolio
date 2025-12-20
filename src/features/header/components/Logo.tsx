@@ -1,15 +1,18 @@
 import styles from "@/src/features/header/styles/Logo.module.css";
 import Link from "next/link";
-import Image from "next/image";
 
-export default function Logo() {
+type Props = {
+  as?: 'h1' | 'div';
+}
+
+export default function Logo({ as = 'div' }: Props) {
+  const Tag = as;
 
   return (
-    <h1 className={styles.container}>
+    <Tag className={styles.title}>
       <Link className={styles.link} href={`/`}>
-        ポートフォリオサイト
-        {/* <Image className={styles.img} src={`/logo.png`} width={30} height={30} alt="ポートフォリオサイト" priority /> */}
+        Portfolio Site
       </Link>
-    </h1>
+    </Tag>
   )
 }

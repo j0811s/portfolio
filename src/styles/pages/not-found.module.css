@@ -1,0 +1,31 @@
+@layer page {
+  .container {
+    display: grid;
+    align-content: center;
+    place-content: center;
+    grid-template-columns: 1fr;
+    height: 100%;
+    color: var(--text-primary);
+    text-align: center;
+  }
+
+  .pageSubTitle {
+    color: inherit;
+    font-size: var(--font-size-m);
+    margin-top: 2em;
+  }
+
+  .btn {
+    display: grid;
+    place-items: center;
+    place-content: center;
+    gap: 2rem;
+    margin-top: 3em;
+  }
+
+  @media screen and (width >= 768px) {
+    .btn {
+      grid-template-columns: repeat(2, max-content);
+    }
+  }
+}

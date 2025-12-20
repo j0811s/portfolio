@@ -5,7 +5,7 @@ import parse, { HTMLReactParserOptions, Element, Text, DOMNode } from "html-reac
 import hljs, { AutoHighlightResult } from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
 import { CtaLinkButton } from "@/src/components";
-import { Eyecatch, PublishDate, Tag } from "@/src/features/blog";
+import { Eyecatch, PublishDate, TableOfContents, Tag } from "@/src/features/blog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
 import { fetchBlogDetail } from "@/src/libs/microcms/blog";
@@ -17,15 +17,6 @@ const parseOptions: HTMLReactParserOptions = {
     if (!(domNode instanceof Element && domNode?.attribs)) return undefined
 
     switch (domNode.name) {
-      case 'h1':
-      case 'h2':
-      case 'h3':
-      case 'h4':
-      case 'h5':
-      case 'h6': {
-        domNode.attribs.id = Math.random().toString(36).substring(2, 12);
-        break;
-      }
       case 'pre': {
         const fileName: string = (domNode.parent as Element)?.attribs['data-filename'] !== '' ? (domNode.parent as Element)?.attribs['data-filename'] : '';
         const code: string = ((domNode.children[0] as Element).children[0] as Text).data; // https://github.com/remarkablemark/html-react-parser/issues/591
@@ -67,7 +58,6 @@ async function ArticleDetail({ post }: { post: Blog }) {
     <article id={post.id} className={styles.postWrapper}>
       <div className={styles.postHead}>
         <div className={styles.postTextContainer}>
-          <h1 className={styles.postTitle}>{post.title}</h1>
           <Eyecatch
             className={styles.postEyecatchContainer}
             src={eyecatchPath}
@@ -75,6 +65,7 @@ async function ArticleDetail({ post }: { post: Blog }) {
             height={post.eyecatch?.height}
             isDummy={typeof post.eyecatch?.url === 'undefined'}
           />
+          <h1 className={styles.postTitle}>{post.title}</h1>
           <PublishDate className={styles.date} publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
           {
             <ul className={styles.tags}>
@@ -89,6 +80,7 @@ async function ArticleDetail({ post }: { post: Blog }) {
           }
         </div>
       </div>
+      <TableOfContents content={post?.content} />
       <PostContentElement content={post?.content} parseOptions={parseOptions} />
       <div className={styles.backToLink}>
         <CtaLinkButton href="/blog/" prevIcon={true}>一覧へ戻る</CtaLinkButton>

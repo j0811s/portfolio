@@ -66,6 +66,14 @@
   }
   
   body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: max-content 1fr max-content;
+    grid-template-areas: 
+      "header"
+      "main"
+      "footer";
+    min-height: 100svh;
     font-family: var(--font-mplus);
     font-weight: 400;
     color: var(--text-primary);
@@ -73,7 +81,16 @@
     margin: 0;
   }
 
+  header {
+    grid-area: header;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+
   main {
+    grid-area: main;
     width: 100%;
     max-width: calc(var(--page-width) + 40px);
     margin: 0 auto;
@@ -104,6 +121,7 @@
   }
 
   a {
+    word-break: break-all;
     text-underline-offset: 0.25em;
   }
 

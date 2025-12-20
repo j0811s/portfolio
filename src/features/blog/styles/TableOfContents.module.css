@@ -1,0 +1,52 @@
+.toc {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  margin: 1em 0;
+  border-radius: 4px;
+}
+
+.details[open] .arrowIcon {
+  transform: rotateX(0.5turn);
+}
+
+.title {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  justify-content: space-between;
+  color: inherit;
+  font-size: var(--font-size-m);
+  font-weight: 500;
+  padding: 1em;
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(1fr);
+  gap: 0.5em;
+  padding: 0 1em 1em 1em;
+}
+
+.list li {
+  list-style-type: none;
+  font-size: var(--font-size-m);
+  font-weight: 400;
+}
+
+.list a {
+  text-decoration: none;
+  display: inline-block;
+  color: inherit;
+}
+
+.list li.level2 {
+  font-weight: 500;
+  margin-inline: 1rem;
+}
+
+.list li.level3 {
+  margin-inline: 2rem;
+}

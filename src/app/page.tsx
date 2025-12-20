@@ -12,7 +12,7 @@ export default async function Top() {
   const skills = await fetchSkillAll();
   const { contents: portfolioArticles } = await fetchBlogList('blog', {
       limit: 8,
-      // filters: 'category[contains]portfolio'
+      filters: 'category[contains]portfolio'
     }
   );
 
@@ -21,14 +21,14 @@ export default async function Top() {
       <JsonLd data={createWebsiteJsonLd()} />
       <JsonLd data={createBreadcrumbJsonLd([{ name: 'トップページ', url: SITE_URL }])} />
       <section className={styles.section}>
-        <SectionTitle title="投稿" />
+        <SectionTitle title="投稿" level={2} />
         <ArticleCardList contents={portfolioArticles} />
         <div className={styles.moreLinkWrapper}>
           <CtaLinkButton className={styles.moreLink} href='/blog/' nextIcon={true}>投稿を見る</CtaLinkButton>
         </div>
       </section>
       <section className={styles.section}>
-        <SectionTitle title="経験" />
+        <SectionTitle title="経験" level={2} />
         <SkillSet data={skills} />
       </section>
     </>

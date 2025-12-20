@@ -1,4 +1,11 @@
 @layer feature {
+  .title {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: var(--font-size-l);
+    font-weight: bold;
+  }
+
   .link {
     display: block;
     text-decoration: none;
