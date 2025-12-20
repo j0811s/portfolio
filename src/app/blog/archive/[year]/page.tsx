@@ -37,15 +37,18 @@ export default async function Page({ params }: Props) {
     filters: `publishedAt[contains]${year}`
   });
 
+  const yearLabel = `${year}年`;
+
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: '年別アーカイブ | 投稿', url: `${SITE_URL}/blog/` }
+    { name: '年別アーカイブ | 投稿', url: `${SITE_URL}/blog/` },
+    { name: `${yearLabel}`, url: `${SITE_URL}/blog/tags/page/${year}/` }
   ];
 
   const type = {
     slug: 'archive',
     id: year,
-    name: `${year}年`
+    name: yearLabel
   }
 
   return (
@@ -53,7 +56,7 @@ export default async function Page({ params }: Props) {
       <Breadcrumb data={breadcrumb} />
       <div className={styles.container}>
         <section>
-          <SectionTitle title="年別アーカイブ | 投稿" />
+          <SectionTitle title={yearLabel} />
           <ArticleCardList contents={contents} />
           <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
         </section>

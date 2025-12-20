@@ -43,16 +43,19 @@ export default async function Page({ params }: Props) {
     filters: `tag[contains]${tagId}`,
     offset: LIMIT * (Number(num) - 1)
   });
+  
+  const tagName = contents[0].tag.filter(tag => tag.id === tagId)[0].name;
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: '投稿', url: `${SITE_URL}/blog/` },
-    { name: `タグ | ${num}ページ`, url: `${SITE_URL}/blog/tags/page/${num}/` }
+    { name: 'タグ | 投稿', url: `${SITE_URL}/blog/` },
+    { name: `${tagName} | ${num}ページ`, url: `${SITE_URL}/blog/tags/page/${num}/` }
   ];
 
   const type = {
     slug: 'tags',
-    id: tagId
+    id: tagId,
+    name: tagName
   }
 
   return (
@@ -60,7 +63,7 @@ export default async function Page({ params }: Props) {
       <Breadcrumb data={breadcrumb} />
       <div className={styles.container}>
         <section>
-          <SectionTitle title="タグ | 投稿" />
+          <SectionTitle title={`${tagName} | ${num}ページ`} />
           <ArticleCardList contents={contents} />
           <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} type={type} />
         </section>

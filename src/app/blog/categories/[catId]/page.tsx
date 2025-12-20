@@ -36,15 +36,19 @@ export default async function Page({ params }: Props) {
     limit: LIMIT,
     filters: `category[contains]${catId}`
   });
+  
+  const catName = contents[0].category.filter(cat => cat.id === catId)[0].name;
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: 'カテゴリー | 投稿', url: `${SITE_URL}/blog/` }
+    { name: 'カテゴリー | 投稿', url: `${SITE_URL}/blog/` },
+    { name: catName, url: `${SITE_URL}/blog/tags/page/${catId}/` }
   ];
 
   const type = {
     slug: 'categories',
-    id: catId
+    id: catId,
+    name: catName
   }
 
   return (
@@ -52,7 +56,7 @@ export default async function Page({ params }: Props) {
       <Breadcrumb data={breadcrumb} />
       <div className={styles.container}>
         <section>
-          <SectionTitle title="カテゴリー | 投稿" />
+          <SectionTitle title={catName} />
           <ArticleCardList contents={contents} />
           <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
         </section>

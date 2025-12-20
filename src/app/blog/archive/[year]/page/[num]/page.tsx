@@ -42,16 +42,18 @@ export default async function Page({ params }: Props) {
     offset: LIMIT * (Number(num) - 1)
   });
 
+  const yearLabel = `${year}年`;
+
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: '投稿', url: `${SITE_URL}/blog/` },
-    { name: `年別アーカイブ | ${num}ページ`, url: `${SITE_URL}/blog/archive/page/${num}/` }
+    { name: '年別アーカイブ | 投稿', url: `${SITE_URL}/blog/` },
+    { name: `${yearLabel} | ${num}ページ`, url: `${SITE_URL}/blog/archive/page/${num}/` }
   ];
 
   const type = {
     slug: 'archive',
     id: year,
-    name: `${year}年`
+    name: yearLabel
   }
 
   return (
@@ -59,7 +61,7 @@ export default async function Page({ params }: Props) {
       <Breadcrumb data={breadcrumb} />
       <div className={styles.container}>
         <section>
-          <SectionTitle title="年別アーカイブ | 投稿" />
+          <SectionTitle title={`${yearLabel} | ${num}ページ`} />
           <ArticleCardList contents={contents} />
           <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} type={type} />
         </section>

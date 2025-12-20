@@ -9,7 +9,7 @@ interface DataProps {
   url: string;
 }
 
-function Breadcrumb({ data }: { data: DataProps[] }) {
+function Breadcrumb({ data, className }: { data: DataProps[]; className?: string; }) {
   if (!Array.isArray(data)) {
     return <></>;
   }
@@ -19,7 +19,7 @@ function Breadcrumb({ data }: { data: DataProps[] }) {
   return (
     <>
       <JsonLd data={createBreadcrumbJsonLd(data)} />
-      <nav className={clsx(styles.container)}>
+      <nav className={clsx(styles.container, className)}>
         <ol className={clsx(styles.list)}>
           {
             data.map((item, i) => {

@@ -17,10 +17,10 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
 
   return {
     metadataBase: new URL('https://www.jsato1993.com/'),
-    title: `${tag?.name} | タグ | 投稿 | J.Sato`,
-    description: `「${tag?.name}」の一覧ページです。`,
+    title: `${tag?.name ?? ''} | タグ | 投稿 | J.Sato`,
+    description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`,
     openGraph: {
-      description: `「${tag?.name}」の一覧ページです。`
+      description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`
     }
   }
 }
@@ -37,15 +37,19 @@ export default async function Page({ params }: Props) {
     limit: LIMIT,
     filters: `tag[contains]${tagId}`
   });
+  
+  const tagName = contents[0].tag.filter(tag => tag.id === tagId)[0].name;
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: 'タグ | 投稿', url: `${SITE_URL}/blog/` }
+    { name: 'タグ | 投稿', url: `${SITE_URL}/blog/` },
+    { name: tagName, url: `${SITE_URL}/blog/tags/page/${tagId}/` }
   ];
 
   const type = {
     slug: 'tags',
-    id: tagId
+    id: tagId,
+    name: tagName
   }
 
   return (
@@ -53,7 +57,7 @@ export default async function Page({ params }: Props) {
       <Breadcrumb data={breadcrumb} />
       <div className={styles.container}>
         <section>
-          <SectionTitle title="タグ | 投稿" />
+          <SectionTitle title={tagName} />
           <ArticleCardList contents={contents} />
           <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
         </section>

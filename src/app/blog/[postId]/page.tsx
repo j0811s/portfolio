@@ -55,9 +55,11 @@ export default async function Page({ params }: PageProps) {
         image: post?.eyecatch?.url ?? `${SITE_URL}/images/blog/dummy.png`,
         url: `${SITE_URL}/blog/${post.id}/`,
       })} />
-      <Breadcrumb data={breadcrumb} />
-      <ArticleDetail post={post} />
-      <AsideMenu className={styles.aside} />
+      <div className={styles.contents}>
+        <Breadcrumb data={breadcrumb} />
+        <ArticleDetail post={post} />
+        <AsideMenu className={styles.aside} />
+      </div>
     </>
   )
 }
