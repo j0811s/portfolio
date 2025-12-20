@@ -63,7 +63,7 @@
     position: relative;
     box-sizing: border-box !important;
     display: block !important;
-    width: calc(50% - 0.25em);;
+    width: calc(50% - 0.25em) !important;
     margin: 0;
     padding: 0;
     aspect-ratio: 1;

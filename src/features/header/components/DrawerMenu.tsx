@@ -18,32 +18,38 @@ const waitModalAnimation = (modal: HTMLDialogElement): Promise<PromiseSettledRes
   return Promise.allSettled([...animation].map((animation) => animation.finished))
 }
 
+const MenuList = ({ 
+  children,
+  dialogRef
+ }: {
+  children: React.ReactNode;
+  dialogRef: React.RefObject<HTMLDialogElement | null>;
+}) => createPortal((
+  <dialog className={styles.drawer} ref={dialogRef}>
+    <nav className={styles.nav} aria-label="サイトナビゲーションメニュー">
+      <ul className={styles.navList}>
+        <li>
+          <Link href={`/`}>
+            <FontAwesomeIcon icon={faHouse} /><span>トップページ</span>
+          </Link>
+        </li>
+        <li>
+          <Link href={`/blog/`}>
+            <FontAwesomeIcon icon={faFileLines} /><span>投稿</span>
+          </Link>
+        </li>
+        <li>
+          <GithubLink />
+        </li>
+      </ul>
+      { children }
+    </nav>
+  </dialog>
+), document.body);
+
 export default function Drawer({ children }: { children: React.ReactNode }) {
   const [isDrawerOpen, setIsDrawerOpen] = useAtom(isDrawerOpenAtom);
   const dialogRef = useRef<HTMLDialogElement>(null);
-
-  const MenuList = () => createPortal((
-    <dialog className={styles.drawer} ref={dialogRef}>
-      <nav className={styles.nav} aria-label="サイトナビゲーションメニュー">
-        <ul className={styles.navList}>
-          <li>
-            <Link href={`/`}>
-              <FontAwesomeIcon icon={faHouse} /><span>トップページ</span>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/blog/`}>
-              <FontAwesomeIcon icon={faFileLines} /><span>投稿</span>
-            </Link>
-          </li>
-          <li>
-            <GithubLink />
-          </li>
-        </ul>
-        { children }
-      </nav>
-    </dialog>
-  ), document.body);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -90,5 +96,5 @@ export default function Drawer({ children }: { children: React.ReactNode }) {
     }
   }, [isDrawerOpen, setIsDrawerOpen]);
 
-  return isDrawerOpen && <MenuList />;
+  return isDrawerOpen && <MenuList dialogRef={dialogRef}>{children}</MenuList>;
 }

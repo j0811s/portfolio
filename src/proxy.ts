@@ -5,7 +5,7 @@ export const config = {
   matcher: '/((?!api|_next/static|_next/image|favicon.ico).*)',
 }
 
-function middleware(req: NextRequest): NextResponse {
+function proxy(req: NextRequest): NextResponse {
   const basicAuth = req.headers.get('authorization');
   const url = req.nextUrl;
 
@@ -29,4 +29,4 @@ function middleware(req: NextRequest): NextResponse {
   }
 }
 
-export { middleware };
+export default proxy;

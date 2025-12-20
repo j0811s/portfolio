@@ -1,6 +1,10 @@
-import styles from "@/src/features/footer/styles/GlobalFooter.module.css"
-import { PageTop } from "@/src/features/footer";
+'use client';
+
+import styles from "@/src/features/footer/styles/GlobalFooter.module.css";
 import Link from "next/link";
+import dynamic from 'next/dynamic';
+
+const PageTop = dynamic(() => import('./PageTop'), { ssr: false });
 
 export default function GlobalFooter() {
   return (

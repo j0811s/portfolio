@@ -4,6 +4,10 @@ import styles from '@/src/styles/components/button/CtaButton.module.css';
 import { faArrowLeftLong, faArrowRightLong, faXmark } from '@fortawesome/free-solid-svg-icons';
 import type { ButtonActionProps } from '@/src/components/types/CtaButton.types';
 
+const PrevIcon = () => (<FontAwesomeIcon icon={faArrowLeftLong} className={styles.icon} />);
+const NextIcon = () => (<FontAwesomeIcon icon={faArrowRightLong} className={styles.icon} />);
+const CrossIcon = () => (<FontAwesomeIcon icon={faXmark} className={styles.icon} />);
+
 export default function CtaActionButton({
   prevIcon = false,
   nextIcon = false,
@@ -11,10 +15,6 @@ export default function CtaActionButton({
   children,
   ...buttonProps
 }: ButtonActionProps) {
-
-  const PrevIcon = () => (<FontAwesomeIcon icon={faArrowLeftLong} className={styles.icon} />);
-  const NextIcon = () => (<FontAwesomeIcon icon={faArrowRightLong} className={styles.icon} />);
-  const CrossIcon = () => (<FontAwesomeIcon icon={faXmark} className={styles.icon} />);
 
   return (
     <button
