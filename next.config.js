@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-import { createVanillaExtractPlugin }from '@vanilla-extract/next-plugin';
-const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig = {
   // output: 'export',
@@ -10,16 +8,16 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.microcms-assets.io',
+        protocol: "https",
+        hostname: "images.microcms-assets.io",
       },
       {
-        protocol: 'https',
-        hostname: 'placehold.jp',
+        protocol: "https",
+        hostname: "placehold.jp",
       },
     ],
     // unoptimized: true
-  }
+  },
 };
 
-export default withVanillaExtract(nextConfig);
+export default nextConfig;
