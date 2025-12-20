@@ -36,7 +36,7 @@ export async function generateStaticParams() {
   return [...paths];
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: SitePageProps) {
   const { postId } = await params;
   const post = await fetchBlogDetail('blog', postId);
   const breadcrumb = [

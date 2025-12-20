@@ -8,7 +8,7 @@ import type {
 
 declare global {
   // Page Props
-  export type PageProps = {
+  export type SitePageProps = {
     params: Promise<Record<string, string>>;
   }
 
