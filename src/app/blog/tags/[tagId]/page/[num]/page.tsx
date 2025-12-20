@@ -48,8 +48,8 @@ export default async function Page({ params }: Props) {
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: 'タグ | 投稿', url: `${SITE_URL}/blog/` },
-    { name: `${tagName} | ${num}ページ`, url: `${SITE_URL}/blog/tags/page/${num}/` }
+    { name: 'タグ | 投稿', url: `/blog/` },
+    { name: `${tagName} | ${num}ページ`, url: `/blog/tags/page/${num}/` }
   ];
 
   const type = {

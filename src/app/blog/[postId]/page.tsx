@@ -41,8 +41,8 @@ export default async function Page({ params }: SitePageProps) {
   const post = await fetchBlogDetail('blog', postId);
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: '投稿', url: `${SITE_URL}/blog/` },
-    { name: post.title, url: `${SITE_URL}/blog/${post.id}/` },
+    { name: '投稿', url: `/blog/` },
+    { name: post.title, url: `/blog/${post.id}/` },
   ];
 
   return (

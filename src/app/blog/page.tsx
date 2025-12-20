@@ -12,7 +12,7 @@ export default async function Page({ params }: SitePageProps) {
     <>
       <Breadcrumb data={[
         { name: 'トップページ', url: SITE_URL },
-        { name: '投稿', url: `${SITE_URL}/blog/` }
+        { name: '投稿', url: `/blog/` }
       ]} />
       <div className={styles.container}>
         <section>

@@ -46,8 +46,8 @@ export default async function Page({ params }: Props) {
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: '年別アーカイブ | 投稿', url: `${SITE_URL}/blog/` },
-    { name: `${yearLabel} | ${num}ページ`, url: `${SITE_URL}/blog/archive/page/${num}/` }
+    { name: '年別アーカイブ | 投稿', url: `/blog/` },
+    { name: `${yearLabel} | ${num}ページ`, url: `/blog/archive/page/${num}/` }
   ];
 
   const type = {

@@ -41,8 +41,8 @@ export default async function Page({ params }: Props) {
     <>
       <Breadcrumb data={[
         { name: 'トップページ', url: SITE_URL },
-        { name: '投稿', url: `${SITE_URL}/blog/` },
-        { name: `${num}ページ`, url: `${SITE_URL}/blog/page/${num}/` }
+        { name: '投稿', url: `/blog/` },
+        { name: `${num}ページ`, url: `/blog/page/${num}/` }
       ]} />
       <div className={styles.container}>
         <section>
