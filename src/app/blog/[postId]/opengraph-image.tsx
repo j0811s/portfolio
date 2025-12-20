@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 import Image from 'next/image'
-import { getDetail } from "../../libs/microcms/blog";
+import { fetchBlogDetail } from '@/src/libs/microcms/blog';
 
 // Route segment config
 export const runtime = 'edge'
@@ -24,7 +24,7 @@ export default async function OgImage({ params: { postId } }: Props) {
   //   new URL('../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)
   // ).then((res) => res.arrayBuffer())
 
-  const post = await getDetail('blog', postId);
+  const post = await fetchBlogDetail('blog', postId);
 
   if (post.eyecatch?.url) {
     return (new ImageResponse(<Image src={post.eyecatch?.url} alt={alt} width="1200" height="630" />))

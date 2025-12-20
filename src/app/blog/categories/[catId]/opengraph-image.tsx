@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { getDetail } from '../../../libs/microcms/blog'
+import { fetchBlogDetail } from '@/src/libs/microcms/blog'
  
 // Route segment config
 export const runtime = 'edge'
@@ -19,7 +19,7 @@ type Props = {
 };
 export default async function Image({ params: { catId } }: Props) {
   const typeName = 'categories';
-  const category = await getDetail(typeName, catId);
+  const category = await fetchBlogDetail(typeName, catId);
  
   // const notoSansBold = await fetch(
   //   new URL('../../../../public/fonts/NotoSansJP-Bold.woff', import.meta.url)

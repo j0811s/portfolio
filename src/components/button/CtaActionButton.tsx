@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '@/src/styles/components/button/CtaButton.module.css';
 import { faArrowLeftLong, faArrowRightLong, faXmark } from '@fortawesome/free-solid-svg-icons';
-import type { ButtonActionProps } from '@/src/types/CtaButton.types';
+import type { ButtonActionProps } from '@/src/components/types/CtaButton.types';
 
 export default function CtaActionButton({
   prevIcon = false,
