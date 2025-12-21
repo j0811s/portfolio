@@ -33,15 +33,16 @@
   }
 
   .postInner {
-    display: grid;
-    gap: 0.25em;
-    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
     order: 1;
   }
 
   .title {
     color: inherit;
-    font-size: var(--font-size-m);
+    font-size: 1rem;
     font-weight: 500;
   }
 
@@ -67,6 +68,7 @@
     }
 
     .postInner {
+      margin-top: 1em;
       order: 2;
     }
 

@@ -4,11 +4,11 @@
     color: var(--text-primary);
     text-align: center;
     padding: 1em;
-    background-color: transparent;
+    background-color: var(--bg-secondary);
   }
 
   .navigation {
-    font-size: calc(16 / var(--font-size) * 1rem);
+    font-size: calc(14 / var(--font-size) * 1rem);
     background-color: transparent;
   }
 
@@ -33,7 +33,7 @@
 
   .copyright {
     display: block;
-    font-size: calc(14 / var(--font-size) * 1rem);
+    font-size: calc(12 / var(--font-size) * 1rem);
     margin-top: 1em;
   }
 }

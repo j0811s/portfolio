@@ -1,7 +1,7 @@
 @layer feature {
   .postDateContainer {
     margin-top: auto;
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-m);
   }
 
   .postDate {

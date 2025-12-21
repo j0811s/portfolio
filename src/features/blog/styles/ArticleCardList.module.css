@@ -9,4 +9,10 @@
   .item {
     display: grid;
   }
+
+  @media screen and (width <= 580px) {
+    .item {
+        grid-auto-rows: minmax(140px, 1fr);
+    }
+  }
 }
