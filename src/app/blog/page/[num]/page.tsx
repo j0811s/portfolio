@@ -1,14 +1,10 @@
 import styles from "@/src/styles/pages/blog/layout.module.css";
 import { SITE_URL } from "@/src/constants/site";
+import { LIMIT} from "@/src/constants/blog";
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { fetchBlogList } from "@/src/libs/microcms/blog";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
 import { Metadata } from 'next';
-import { LIMIT } from "@/src/constants/blog";
-
-type generateMetadataProps = {
-  params: Promise<{ num: string }>
-}
 
 type Props = {
   params: Promise<{
@@ -16,17 +12,33 @@ type Props = {
   }>
 }
 
-export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
-  const params = await props.params;
-  const { num } = params;
+export const revalidate = 3600;
+
+/**
+ * 静的に生成するページ番号を列挙
+ */
+export async function generateStaticParams() {
+  const { totalCount } = await fetchBlogList('blog', { limit: LIMIT });
+  const totalPages = Math.ceil(totalCount / LIMIT);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    num: String(i + 1),
+  }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { num } =  await params;
 
   return {
-    metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${num}ページ | 投稿 | J.Sato`,
     description: `「${num}」ページ目`,
     openGraph: {
       description: `「${num}」ページ目`
-    }
+    },
+    robots: num === '1' ? 'noindex, follow' : 'index, follow',
+    alternates: num === '1'
+      ? { canonical: '/blog/' }
+      : { canonical: `/blog/page/${num}/` },
   }
 }
 

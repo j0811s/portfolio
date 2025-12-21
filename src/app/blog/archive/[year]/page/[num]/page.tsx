@@ -1,17 +1,10 @@
 import styles from "@/src/styles/pages/blog/layout.module.css";
 import { LIMIT } from '@/src/constants/blog';
 import { SITE_URL } from '@/src/constants/site';
-import { fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
+import { fetchBlogDetail, fetchBlogList, fetchBlogListAll } from '@/src/libs/microcms/blog';
 import { Metadata } from 'next';
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
-
-type generateMetadataProps = {
-  params: Promise<{
-    year: string;
-    num: string;
-  }>
-}
 
 type Props = {
   params: Promise<{
@@ -20,17 +13,46 @@ type Props = {
   }>
 }
 
-export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
-  const params = await props.params;
-  const { year, num } = params;
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  // すべてのパラメータ
+  const allParams: { year: string; num: string }[] = [];
+
+  // 公開年
+  const posts = await fetchBlogListAll('blog');
+  const years = Array.from(new Set(posts.map(post => post.publishedAt.slice(0, 4))));
+
+  // ページ数
+  const { totalCount } = await fetchBlogList('blog', { limit: LIMIT });
+  const totalPages = Math.ceil(totalCount / LIMIT);
+
+  // パラメータを1箇所にまとめる
+  for (const year of years) {
+    for (let i = 1; i <= totalPages; i++) {
+      allParams.push({
+        year: year,
+        num: String(i),
+      });
+    }
+  }
+
+  return allParams;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { year, num } = await params;
 
   return {
-    metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${num}ページ目 | ${year}年 | 年別アーカイブ | 投稿 | J.Sato`,
     description: `「${year}年」の${num}ページ目です。`,
     openGraph: {
       description: `「${year}年」の${num}ページ目です。`
-    }
+    },
+    robots: num === '1' ? 'noindex, follow' : 'index, follow',
+    alternates: num === '1'
+      ? { canonical: '/blog/' }
+      : { canonical: `/blog/archive/page/${num}/` },
   }
 }
 

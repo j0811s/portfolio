@@ -3,25 +3,30 @@ import { Metadata } from 'next';
 import { SITE_URL } from "@/src/constants/site";
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
-import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
+import { client, fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
 import { LIMIT } from "@/src/constants/blog";
-
-type generateMetadataProps = {
-  params: Promise<{ catId: string }>
-}
 
 type Props = {
   params: Promise<{
-    catId: string;
-  }>;
+    catId: string
+  }>
 }
 
-export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
-  const params = await props.params;
-  const cat = await fetchBlogDetail('categories', params.catId);
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const categories = await client.getAllContents({
+    endpoint: 'categories'
+  });
+
+  return categories.map(({ id }) => ({ catId: id }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { catId } = await params;
+  const cat = await fetchBlogDetail('categories', catId);
 
   return {
-    metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${cat?.name} | カテゴリー | 投稿 | J.Sato`,
     description: `「${cat?.name}」の一覧ページです。`,
     openGraph: {
@@ -36,13 +41,13 @@ export default async function Page({ params }: Props) {
     limit: LIMIT,
     filters: `category[contains]${catId}`
   });
+  const categoryContent = await fetchBlogDetail('categories', catId);
+  const catName = categoryContent.name;
   
-  const catName = contents[0].category.filter(cat => cat.id === catId)[0].name;
-
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
     { name: 'カテゴリー | 投稿', url: `/blog/` },
-    { name: catName, url: `/blog/tags/page/${catId}/` }
+    { name: catName, url: `/blog/categories/${catId}/` }
   ];
 
   const type = {

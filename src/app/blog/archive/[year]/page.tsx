@@ -3,19 +3,26 @@ import { Metadata } from 'next';
 import { SITE_URL } from "@/src/constants/site";
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
-import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
+import { fetchBlogListAll, fetchBlogList } from "@/src/libs/microcms/blog";
 import { LIMIT } from "@/src/constants/blog";
 
-type generateMetadataProps = {
+type Props = {
   params: Promise<{ year: string }>
 }
 
-export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
-  const params = await props.params;
-  const year = params.year;
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const posts = await fetchBlogListAll('blog');
+  const years = Array.from(new Set(posts.map(post => post.publishedAt.slice(0, 4))));
+  
+  return years.map(year => ({ year }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { year } = await params;
 
   return {
-    metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${year}年 | 年別アーカイブ | 投稿 | J.Sato`,
     description: `「${year}年」の一覧ページです。`,
     openGraph: {
@@ -23,12 +30,6 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
     }
   }
 }
-
-type Props = {
-  params: Promise<{
-    year: string;
-  }>;
-};
 
 export default async function Page({ params }: Props) {
   const { year } = await params;

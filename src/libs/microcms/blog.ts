@@ -49,7 +49,8 @@ export const fetchBlogList = async (
 export const fetchBlogDetail = async (
   endpoint: string = "blog",
   contentId: string,
-  queries?: MicroCMSQueries
+  queries?: MicroCMSQueries,
+  customRequestInit?: CustomRequestInit
 ) => {
   let response;
 
@@ -57,7 +58,8 @@ export const fetchBlogDetail = async (
     response = await client.getListDetail<Blog>({
       endpoint,
       contentId,
-      queries
+      queries,
+      customRequestInit
     });
   } catch (error) {
     notFound();

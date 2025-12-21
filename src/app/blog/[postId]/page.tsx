@@ -10,6 +10,8 @@ type generateMetadataProps = {
   params: Promise<{ postId: string }>
 }
 
+export const revalidate = 3600;
+
 export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
   const params = await props.params;
   const post = await fetchBlogDetail('blog', params.postId);

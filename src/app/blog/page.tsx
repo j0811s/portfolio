@@ -5,7 +5,9 @@ import { Breadcrumb, SectionTitle } from "@/src/components";
 import { fetchBlogList } from "@/src/libs/microcms/blog";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
 
-export default async function Page({ params }: SitePageProps) {
+export const revalidate = 3600;
+
+export default async function Page() {
   const { contents, totalCount } = await fetchBlogList('blog', { limit: LIMIT });
 
   return (

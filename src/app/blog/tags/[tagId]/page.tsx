@@ -3,32 +3,34 @@ import { Metadata } from 'next';
 import { SITE_URL } from "@/src/constants/site";
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
-import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
+import { client, fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
 import { LIMIT } from "@/src/constants/blog";
 
-
-type generateMetadataProps = {
-  params: Promise<{ tagId: string }>
+type Props = {
+  params: Promise<{
+    tagId: string;
+  }>;
 }
 
-export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
-  const params = await props.params;
-  const tag = await fetchBlogDetail('tags', params.tagId);
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const tags = await client.getAllContents({ endpoint: 'tags' });
+
+  return tags.map(({ id }) => ({ tagId: id }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { tagId } = await params;
+  const tag = await fetchBlogDetail('tags', tagId);
 
   return {
-    metadataBase: new URL('https://www.jsato1993.com/'),
     title: `${tag?.name ?? ''} | タグ | 投稿 | J.Sato`,
     description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`,
     openGraph: {
       description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`
     }
   }
-}
-
-type Props = {
-  params: Promise<{
-    tagId: string;
-  }>;
 }
 
 export default async function Page({ params }: Props) {
@@ -38,12 +40,13 @@ export default async function Page({ params }: Props) {
     filters: `tag[contains]${tagId}`
   });
   
-  const tagName = contents[0].tag.filter(tag => tag.id === tagId)[0].name;
+  const tagContent = await fetchBlogDetail('tags', tagId);
+  const tagName = tagContent.name;
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
     { name: 'タグ | 投稿', url: `/blog/` },
-    { name: tagName, url: `/blog/tags/page/${tagId}/` }
+    { name: tagName, url: `/blog/tags/${tagId}/` }
   ];
 
   const type = {
