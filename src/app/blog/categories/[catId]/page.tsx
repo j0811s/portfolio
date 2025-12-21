@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 
   return {
     ...rootMetadata,
-    title: `${cat?.name} | カテゴリー | 投稿`,
+    title: `${cat?.name} | 投稿`,
     description: `「${cat?.name}」の一覧ページです。`,
     openGraph: {
       description: `「${cat?.name}」の一覧ページです。`
@@ -48,7 +48,7 @@ export default async function Page({ params }: Props) {
   
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: 'カテゴリー | 投稿', url: `/blog/` },
+    { name: '投稿', url: `/blog/` },
     { name: catName, url: `/blog/categories/${catId}/` }
   ];
 

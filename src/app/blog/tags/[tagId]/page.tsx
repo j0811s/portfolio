@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tag = await fetchBlogDetail('tags', tagId);
 
   return {
-    title: `${tag?.name ?? ''} | タグ | 投稿`,
+    title: `${tag?.name ?? ''} | 投稿`,
     description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`,
     openGraph: {
       description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`
@@ -45,7 +45,7 @@ export default async function Page({ params }: Props) {
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: 'タグ | 投稿', url: `/blog/` },
+    { name: '投稿', url: `/blog/` },
     { name: tagName, url: `/blog/tags/${tagId}/` }
   ];
 

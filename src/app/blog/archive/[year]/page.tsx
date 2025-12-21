@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { year } = await params;
 
   return {
-    title: `${year}年 | 年別アーカイブ | 投稿`,
+    title: `${year}年 | 投稿`,
     description: `「${year}年」の一覧ページです。`,
     openGraph: {
       description: `「${year}年」の一覧ページです。`
@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
-    { name: '年別アーカイブ | 投稿', url: `/blog/` },
+    { name: '投稿', url: `/blog/` },
     { name: `${yearLabel}`, url: `/blog/tags/page/${year}/` }
   ];
 
