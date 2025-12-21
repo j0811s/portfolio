@@ -46,8 +46,8 @@
   }
 
   .postContent p {
-    font-size: var(--font-size-m);
-    line-height: 1.6;
+    font-size: clamp(1rem, 0.9482rem + 0.221vw, 1.125rem);
+    line-height: 1.8;
   }
 
   .postContent a {
