@@ -4,8 +4,22 @@ import { LIMIT } from "@/src/constants/blog";
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { fetchBlogList } from "@/src/libs/microcms/blog";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
+import { Metadata } from 'next';
+import { metadata as rootMetadata } from '@/src/app/layout';
 
 export const revalidate = 3600;
+
+export async function generateMetadata(): Promise<Metadata> {
+
+  return {
+    ...rootMetadata,
+    title: `投稿`,
+    description: `「投稿」の一覧ページです。`,
+    openGraph: {
+      description: `「投稿」の一覧ページです。`
+    }
+  }
+}
 
 export default async function Page() {
   const { contents, totalCount } = await fetchBlogList('blog', { limit: LIMIT });

@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og';
 import { OgImageContent } from '@/src/components';
-import { fetchBlogDetail } from '@/src/libs/microcms/blog';
  
 export const runtime = 'edge';
 export const size = {
@@ -10,9 +9,5 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: Promise<Record<string, string>> }) {
-  const { tagId } = await params;
-  const tagContent = await fetchBlogDetail('tags', tagId);
-  const tagName = tagContent.name;
-
-  return new ImageResponse(<OgImageContent text={`タグ：${tagName}`} />, { ...size });
+  return new ImageResponse(<OgImageContent text={'ポートフォリオサイト'} />, { ...size });
 }

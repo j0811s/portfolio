@@ -53,7 +53,7 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
   const cat = await fetchBlogDetail('categories', catId);
 
   return {
-    title: `${num}ページ目 | ${cat?.name} | カテゴリー | 投稿 | J.Sato`,
+    title: `${num}ページ目 | ${cat?.name} | カテゴリー | 投稿 | ポートフォリオサイト`,
     description: `「${cat?.name}」の${num}ページ目です。`,
     openGraph: {
       description: `「${cat?.name}」の${num}ページ目です。`

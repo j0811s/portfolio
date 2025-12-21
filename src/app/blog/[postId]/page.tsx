@@ -5,20 +5,17 @@ import { Breadcrumb, JsonLd } from '@/src/components';
 import { createArticleJsonLd } from '@/src/libs/seo/jsonLd';
 import { ArticleDetail, AsideMenu } from "@/src/features/blog";
 import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
-
-type generateMetadataProps = {
-  params: Promise<{ postId: string }>
-}
+import { metadata as rootMetadata } from '@/src/app/layout';
 
 export const revalidate = 3600;
 
-export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
-  const params = await props.params;
-  const post = await fetchBlogDetail('blog', params.postId);
+export async function generateMetadata({ params }: { params: Promise<{ postId: string }> }): Promise<Metadata> {
+  const { postId } = await params;
+  const post = await fetchBlogDetail('blog', postId);
 
   return {
-    metadataBase: new URL('https://www.jsato1993.com/'),
-    title: `${post?.title} | 投稿 | J.Sato`,
+    ...rootMetadata,
+    title: `${post?.title} | 投稿`,
     description: `「${post?.title}」の詳細ページです。`,
     openGraph: {
       description: `「${post?.title}」の詳細ページです。`

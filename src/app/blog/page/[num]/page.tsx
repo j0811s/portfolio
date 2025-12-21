@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { num } =  await params;
 
   return {
-    title: `${num}ページ | 投稿 | J.Sato`,
+    title: `${num}ページ | 投稿 | ポートフォリオサイト`,
     description: `「${num}」ページ目`,
     openGraph: {
       description: `「${num}」ページ目`

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tag = await fetchBlogDetail('tags', tagId);
 
   return {
-    title: `${tag?.name ?? ''} | タグ | 投稿 | J.Sato`,
+    title: `${tag?.name ?? ''} | タグ | 投稿`,
     description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`,
     openGraph: {
       description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`

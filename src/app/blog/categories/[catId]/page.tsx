@@ -1,10 +1,11 @@
 import styles from "@/src/styles/pages/blog/layout.module.css";
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 import { SITE_URL } from "@/src/constants/site";
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
 import { client, fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
 import { LIMIT } from "@/src/constants/blog";
+import { metadata as rootMetadata } from '@/src/app/layout';
 
 type Props = {
   params: Promise<{
@@ -22,12 +23,13 @@ export async function generateStaticParams() {
   return categories.map(({ id }) => ({ catId: id }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const { catId } = await params;
   const cat = await fetchBlogDetail('categories', catId);
 
   return {
-    title: `${cat?.name} | カテゴリー | 投稿 | J.Sato`,
+    ...rootMetadata,
+    title: `${cat?.name} | カテゴリー | 投稿`,
     description: `「${cat?.name}」の一覧ページです。`,
     openGraph: {
       description: `「${cat?.name}」の一覧ページです。`

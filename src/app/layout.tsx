@@ -11,7 +11,7 @@ import { GlobalFooter } from '@/src/features/footer';
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  robots: { index: false, follow: false },
+  // robots: { index: false, follow: false },
   metadataBase: SITE_META.siteUrl,
   title: {
     default: `${SITE_META.title}`,
@@ -42,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" suppressHydrationWarning>
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
+      {gaId && <GoogleAnalytics gaId={gaId} />}
       <body>
         <GlobalHeader />
         <main>
@@ -49,7 +50,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <GlobalFooter />
       </body>
-      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   )
 }

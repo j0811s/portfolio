@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { year, num } = await params;
 
   return {
-    title: `${num}ページ目 | ${year}年 | 年別アーカイブ | 投稿 | J.Sato`,
+    title: `${num}ページ目 | ${year}年 | 年別アーカイブ | 投稿 | ポートフォリオサイト`,
     description: `「${year}年」の${num}ページ目です。`,
     openGraph: {
       description: `「${year}年」の${num}ページ目です。`

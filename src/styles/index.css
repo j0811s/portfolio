@@ -257,7 +257,6 @@
     box-shadow: var(--neumorphism-shadow);
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    transition: all 0.3s ease;
   }
 
   .u-neumorphism--press::after {
