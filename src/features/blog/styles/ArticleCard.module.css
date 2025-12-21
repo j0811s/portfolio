@@ -25,7 +25,9 @@
     position: relative;
     z-index: 0;
     display: grid;
-    grid-template-rows: max-content 1fr;
+    grid-template-columns: 1fr 0.6fr;
+    grid-template-rows: auto;
+    gap: 1em;
     height: 100%;
     padding: 1em;
   }
@@ -34,6 +36,7 @@
     display: grid;
     gap: 0.25em;
     margin-top: 1em;
+    order: 1;
   }
 
   .title {
@@ -44,6 +47,7 @@
 
   .eyecatch {
     display: block;
+    order: 2;
   }
 
   .thmubnail {
@@ -53,6 +57,22 @@
     object-fit: cover;
     aspect-ratio: 16/9;
     border-radius: 10px;
+  }
+
+  @media screen and (width > 580px) {
+    .post {
+      grid-template-columns: 1fr;
+      grid-template-rows: max-content 1fr;
+      gap: 0;
+    }
+
+    .postInner {
+      order: 2;
+    }
+
+    .eyecatch {
+      order: 1;
+    }
   }
 
   @media (any-hover: hover) {
