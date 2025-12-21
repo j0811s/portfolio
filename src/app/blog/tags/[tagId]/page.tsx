@@ -12,7 +12,7 @@ type Props = {
   }>;
 }
 
-export const revalidate = 3600;
+// export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const tags = await client.getAllContents({ endpoint: 'tags' });

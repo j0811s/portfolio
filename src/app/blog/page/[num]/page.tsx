@@ -12,7 +12,7 @@ type Props = {
   }>
 }
 
-export const revalidate = 3600;
+// export const revalidate = 3600;
 
 /**
  * 静的に生成するページ番号を列挙

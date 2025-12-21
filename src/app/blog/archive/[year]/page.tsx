@@ -10,7 +10,7 @@ type Props = {
   params: Promise<{ year: string }>
 }
 
-export const revalidate = 3600;
+// export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const posts = await fetchBlogListAll('blog');

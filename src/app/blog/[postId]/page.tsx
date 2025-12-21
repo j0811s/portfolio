@@ -7,7 +7,7 @@ import { ArticleDetail, AsideMenu } from "@/src/features/blog";
 import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
 import { metadata as rootMetadata } from '@/src/app/layout';
 
-export const revalidate = 3600;
+// export const revalidate = 3600;
 
 export async function generateMetadata({ params }: { params: Promise<{ postId: string }> }): Promise<Metadata> {
   const { postId } = await params;
