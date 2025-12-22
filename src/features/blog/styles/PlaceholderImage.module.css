@@ -1,0 +1,10 @@
+@layer feature {
+  .placeholderImage {
+    display: grid;
+    place-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 300px;
+    font-size: 1rem;
+  }
+}

@@ -3,7 +3,7 @@ import { SITE_URL } from "@/src/constants/site";
 import { LIMIT} from "@/src/constants/blog";
 import { Breadcrumb, SectionTitle } from "@/src/components";
 import { fetchBlogList } from "@/src/libs/microcms/blog";
-import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
+import { ArticleCardList, AsideMenu, Pagination } from "@/src/features/blog";
 import { Metadata } from 'next';
 
 type Props = {
@@ -60,7 +60,7 @@ export default async function Page({ params }: Props) {
         <section>
           <SectionTitle title="投稿" />
           <ArticleCardList contents={contents} />
-          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} />
+          <Pagination pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} />
         </section>
         <AsideMenu />
       </div>

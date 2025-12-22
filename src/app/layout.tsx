@@ -1,4 +1,5 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import 'highlight.js/styles/hybrid.css';
 import "../styles/index.css";
 import { SITE_META } from '@/src/constants/site';
 import { Metadata, Viewport } from 'next';

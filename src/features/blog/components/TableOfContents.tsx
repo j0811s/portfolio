@@ -46,9 +46,9 @@ export default function TableOfContents({ content }: Props) {
       <details className={styles.details} open>
         <summary className={styles.title}>目次 <FontAwesomeIcon icon={faChevronDown} size="1x" className={styles.arrowIcon} /></summary>
         <ol className={styles.list}>
-          {toc.map((item) => (
+          {toc.map((item, i) => (
             <li
-              key={item.id}
+              key={`${item.id}-${i}`}
               className={styles[`level${item.level}`]}
             >
               <a href={`#${item.id}`} onClick={handleScroll}>{item.text}</a>

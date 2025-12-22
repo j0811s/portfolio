@@ -4,7 +4,7 @@ import { SITE_URL } from '@/src/constants/site';
 import { client, fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
 import { Metadata } from 'next';
 import { Breadcrumb, SectionTitle } from "@/src/components";
-import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
+import { ArticleCardList, AsideMenu, Pagination } from "@/src/features/blog";
 
 type Props = {
   params: Promise<{
@@ -87,7 +87,7 @@ export default async function Page({ params }: Props) {
         <section>
           <SectionTitle title={`${tagName} | ${num}ページ`} />
           <ArticleCardList contents={contents} />
-          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} type={type} />
+          <Pagination pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} type={type} />
         </section>
         <AsideMenu />
       </div>

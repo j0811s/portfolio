@@ -1,0 +1,21 @@
+@layer feature {
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+  .skeletonImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-height: 300px;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 37%, #e0e0e0 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+  }
+}

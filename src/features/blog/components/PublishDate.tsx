@@ -1,7 +1,7 @@
 import styles from "@/src/features/blog/styles/PublishDate.module.css";
 import { faCalendarDay, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DateTime } from "@/src/features/blog";
+import DateTime from "@/src/features/blog/components/DateTime";
 import clsx from "clsx";
 import dayjs from 'dayjs';
 

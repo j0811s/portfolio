@@ -3,7 +3,6 @@ import type { JSX } from "react";
 import clsx from "clsx";
 import parse, { HTMLReactParserOptions, Element, Text, DOMNode } from "html-react-parser";
 import hljs, { AutoHighlightResult } from 'highlight.js';
-import 'highlight.js/styles/hybrid.css';
 import { CtaLinkButton } from "@/src/components";
 import { Eyecatch, PublishDate, TableOfContents, Tag } from "@/src/features/blog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -52,7 +51,7 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 async function ArticleDetail({ post }: { post: Blog }) {
   const contents = await fetchBlogDetail('blog', post.id);
   const tags: ResultPostData = getTotalCount([contents], 'tag');
-  const eyecatchPath = `${post.eyecatch?.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
+  const eyecatchPath = typeof post.eyecatch?.url === 'undefined' ? undefined : `${post.eyecatch.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
 
   return (
     <article id={post.id} className={styles.postWrapper}>
@@ -63,7 +62,6 @@ async function ArticleDetail({ post }: { post: Blog }) {
             src={eyecatchPath}
             width={post.eyecatch?.width}
             height={post.eyecatch?.height}
-            isDummy={typeof post.eyecatch?.url === 'undefined'}
           />
           <h1 className={styles.postTitle}>{post.title}</h1>
           <PublishDate className={styles.date} publishedAt={post.publishedAt} updatedAt={post.updatedAt} />

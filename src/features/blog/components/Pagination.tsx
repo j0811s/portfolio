@@ -1,7 +1,7 @@
-import styles from "@/src/features/blog/styles/Pagenation.module.css";
+import styles from "@/src/features/blog/styles/Pagination.module.css";
 import Link from "next/link"
 
-type PagenationParam = {
+type PaginationParam = {
   pager: {
     totalCount: number;
     limit: number;
@@ -14,7 +14,7 @@ type PagenationParam = {
   }
 }
 
-export default function Pagenation({ pager, type }: PagenationParam) {
+export default function Pagination({ pager, type }: PaginationParam) {
   
   const { totalCount, limit, currentPage = 1 } = pager;
   if (!totalCount) return

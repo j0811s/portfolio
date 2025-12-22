@@ -2,7 +2,7 @@ import styles from "@/src/styles/pages/blog/layout.module.css";
 import { Metadata, ResolvingMetadata } from 'next';
 import { SITE_URL } from "@/src/constants/site";
 import { Breadcrumb, SectionTitle } from "@/src/components";
-import { ArticleCardList, AsideMenu, Pagenation } from "@/src/features/blog";
+import { ArticleCardList, AsideMenu, Pagination } from "@/src/features/blog";
 import { client, fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
 import { LIMIT } from "@/src/constants/blog";
 import { metadata as rootMetadata } from '@/src/app/layout';
@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
         <section>
           <SectionTitle title={catName} />
           <ArticleCardList contents={contents} />
-          <Pagenation pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
+          <Pagination pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
         </section>
         <AsideMenu />
       </div>
