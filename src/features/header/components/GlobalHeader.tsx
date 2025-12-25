@@ -1,19 +1,20 @@
+'use client';
+
 import styles from "@/src/features/header/styles/GlobalHeader.module.css";
 import { Logo, DrawerOpenButton, DrawerCloseButton, DrawerMenu } from "@/src/features/header";
 import { ThemeProvider, ThemeSwitch } from '@/src/features/theme';
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
+import { useSession } from "next-auth/react";
 
-export default async function GlobalHeader() { 
-  const session = await getServerSession(authOptions);
+export default function GlobalHeader() { 
+  const { status } = useSession();
 
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
-        {session ? <DrawerOpenButton /> : <div aria-hidden="true"></div>}
+        {status === 'authenticated' ? <DrawerOpenButton /> : <div aria-hidden="true"></div>}
         <Logo />
         {
-          session && 
+          status === 'authenticated' && 
             <DrawerMenu>
               <DrawerCloseButton />
             </DrawerMenu>
