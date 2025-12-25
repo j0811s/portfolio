@@ -9,7 +9,7 @@ interface Token extends JWT {
 
 const isProd = process.env.NODE_ENV === "production";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
@@ -39,7 +39,7 @@ const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt" as const,
-    maxAge: isProd ? 86400 : 1,
+    maxAge: isProd ? 86400 : 60,
   },
   callbacks: {
     async session({ session, token }: { session: Session; token: Token }) {
