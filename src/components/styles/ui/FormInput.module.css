@@ -1,0 +1,13 @@
+.input {
+  appearance: none;
+  color: var(--text-primary);
+  background-color: transparent;
+  font-size: var(--font-size-m);
+  padding: 0.5em 0.25em;
+  border: none;
+  border-bottom: 1px solid var(--text-primary);
+}
+
+.input:focus-visible {
+  outline-offset: 0;
+}

@@ -1,0 +1,29 @@
+@layer page {
+  .form {
+      display: grid;
+      place-items: center;
+      place-content: center;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 3rem;
+    }
+  
+    .title {
+      display: grid;
+      grid-template-columns: 0.5em max-content;
+      place-items: center;
+      gap: 0.5em;
+    }
+  
+    .label {
+      display: grid;
+      font-size: var(--font-size-s);
+    }
+
+    .error {
+      font-size: var(--font-size-m);
+      color: var(--error);
+    }
+}

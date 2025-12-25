@@ -1,4 +1,4 @@
-import styles from "@/src/styles/components/ui/Breadcrumb.module.css";
+import styles from "@/src/components/styles/ui/Breadcrumb.module.css";
 import clsx from "clsx";
 import Link from "next/link";
 import { JsonLd } from "@/src/components";

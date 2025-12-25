@@ -1,32 +1,27 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 export const config = {
-  matcher: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  matcher: '/((?!api|auth|_next/static|_next/image|favicon.ico).*)',
 }
 
-function proxy(req: NextRequest): NextResponse {
-  const basicAuth = req.headers.get('authorization');
-  const url = req.nextUrl;
+async function proxy(req: NextRequest) {
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
 
-  if (process.env.NODE_ENV === 'production') {
-    if (basicAuth) {
-      const BASIC_AUTH_USER = process.env.BASIC_AUTH_USER;
-      const BASIC_AUTH_PASSWORD = process.env.BASIC_AUTH_PASSWORD;
-      const authValue = basicAuth.split(' ')[1] ?? '';
-      const [user, pwd] = atob(authValue).split(':');
+  if (!token) {
+    const loginUrl = new URL('/auth', req.url);
 
-      if (user === BASIC_AUTH_USER && pwd === BASIC_AUTH_PASSWORD) {
-        return NextResponse.next();
-      }
-    }
+    // 元いたURLを保持するために追加
+    loginUrl.searchParams.set('callbackUrl', req.nextUrl.pathname + req.nextUrl.search);
 
-    url.pathname = '/api/basic-auth';
-
-    return NextResponse.rewrite(url);
-  } else {
-    return NextResponse.next();
+    return NextResponse.redirect(loginUrl);
   }
+
+  return NextResponse.next();
 }
 
 export default proxy;

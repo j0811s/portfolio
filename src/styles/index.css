@@ -22,6 +22,7 @@
     --bg-secondary: #EFEFF1;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
+    --error: #e53935;
   }
   
   :root[data-theme="light"] {
@@ -33,6 +34,7 @@
     --bg-secondary: #EFEFF1;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
+    --error: #e53935;
   }
   
   :root[data-theme="dark"] {
@@ -44,6 +46,7 @@
     --bg-secondary: #2A2D31;
     --theme-primary: #224F6D;
     --text-link-color: #6aa8ff;
+    --error: #f87171;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -56,6 +59,7 @@
       --bg-secondary: #2A2D31;
       --theme-primary: #224F6D;
       --text-link-color: #6aa8ff;
+      --error: #f87171;
     }
   }
 }
