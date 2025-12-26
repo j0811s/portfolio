@@ -4,11 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report",
+    "e2e:codegen": "playwright codegen http://localhost:3000"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
@@ -31,6 +34,7 @@
     "microcms-js-sdk": "^3.2.0",
     "next": "^16.1.0",
     "next-auth": "^4.24.13",
+    "npm-run-all2": "^8.0.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "schema-dts": "^1.1.5",
@@ -39,6 +43,7 @@
     "typescript": "5.9.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "sass": "^1.97.1"
   }
 }
