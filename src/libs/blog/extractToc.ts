@@ -15,7 +15,7 @@ export function extractTocFromHtml(
 ): TocItem[] {
   if (!html) return [];
 
-  const headingRegex = /<h([1-6])[^>]*id="([^"]+)"[^>]*>(.*?)<\/h\1>/gi;
+  const headingRegex = /<h([1-6])[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/gi;
 
   const toc: TocItem[] = [];
 
