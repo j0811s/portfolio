@@ -1,19 +1,16 @@
 'use client';
 
 import styles from "@/src/features/header/styles/GlobalHeader.module.css";
-import { Logo, DrawerOpenButton, DrawerCloseButton, DrawerMenu } from "@/src/features/header";
+import { Logo } from "@/src/features/header";
 import { ThemeProvider, ThemeSwitch } from '@/src/features/theme';
 
-export default function GlobalHeader() { 
+export default function GlobalSimpleHeader() { 
 
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
-        <DrawerOpenButton />
+        <div aria-hidden="true"></div>
         <Logo />
-        <DrawerMenu>
-          <DrawerCloseButton />
-        </DrawerMenu>
         <ThemeSwitch />
         <ThemeProvider />
       </div>

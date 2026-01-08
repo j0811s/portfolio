@@ -6,9 +6,6 @@ import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { GoogleTagManager } from '@next/third-parties/google'
 import { config } from '@fortawesome/fontawesome-svg-core';
-import { AuthProvider } from '@/src/components/provider/AuthProvider';
-import { GlobalHeader } from '@/src/features/header';
-import { GlobalFooter } from '@/src/features/footer';
 
 config.autoAddCss = false;
 
@@ -46,13 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
       {gaId && <GoogleAnalytics gaId={gaId} />}
       <body>
-        <AuthProvider>
-          <GlobalHeader />
-          <main>
-            {children}
-          </main>
-          <GlobalFooter />
-        </AuthProvider>
+        {children}
       </body>
     </html>
   )
