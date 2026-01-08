@@ -3,16 +3,17 @@ import Link from "next/link";
 
 type Props = {
   as?: 'h1' | 'div';
+  link?: boolean;
 }
 
-export default function Logo({ as = 'div' }: Props) {
+export default function Logo({ as = 'div', link = true }: Props) {
   const Tag = as;
 
   return (
     <Tag className={styles.title}>
-      <Link className={styles.link} href={`/`}>
-        Portfolio Site
-      </Link>
+      {
+        link ? <Link className={styles.link} href={`/`}>Portfolio Site</Link> : <span className={styles.link}>Portfolio Site</span>
+      }
     </Tag>
   )
 }

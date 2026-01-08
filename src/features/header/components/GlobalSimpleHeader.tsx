@@ -10,7 +10,7 @@ export default function GlobalSimpleHeader() {
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <div aria-hidden="true"></div>
-        <Logo />
+        <Logo link={false} />
         <ThemeSwitch />
         <ThemeProvider />
       </div>
