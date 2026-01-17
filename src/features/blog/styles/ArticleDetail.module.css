@@ -158,6 +158,9 @@
 }
 
 @layer overwrite {
+  .postEyecatchContainer > img {
+    object-fit: contain;
+  }
   .date {
     margin-top: 1rem;
     font-size: var(--font-size-m);
