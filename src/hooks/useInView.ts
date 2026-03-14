@@ -11,7 +11,13 @@ type UseInView = (props: UseInViewProps) => boolean;
 
 const useInView: UseInView = ({ ref, once = false, ...options }): boolean => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  
+  const { root, rootMargin, threshold } = options;
+  const memoOptions = useMemo(
+    () => ({ root, rootMargin, threshold }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [root, rootMargin, JSON.stringify(threshold)]
+  );
+
   useEffect(() => {
     const target = ref.current;
     if (!target) {
@@ -24,7 +30,7 @@ const useInView: UseInView = ({ ref, once = false, ...options }): boolean => {
           observer.unobserve(entry.target);
         }
       },
-      options
+      memoOptions
     );
 
     observer.observe(target);
@@ -33,7 +39,7 @@ const useInView: UseInView = ({ ref, once = false, ...options }): boolean => {
       observer.unobserve(target);
       observer.disconnect();
     }
-  }, [ref, options, once]);
+  }, [ref, memoOptions, once]);
 
   return isVisible
 }

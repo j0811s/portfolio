@@ -90,7 +90,6 @@ export const fetchBlogListAll = async (
 // エンドポイントのコンテンツIDをすべて取得
 export const fetchAllBlogId = async (endpoint: string = "blog") => {
   const ids = await client.getAllContentIds({ endpoint })
-    .then((res) => console.log(res))
     .catch((err) => console.error(err));
 
   return ids;

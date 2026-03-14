@@ -72,10 +72,10 @@ export default function Drawer({ children }: { children: React.ReactNode }) {
       document.body.style.overflow = '';
     }
 
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = async (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault();
-        closeDialog();
+        await closeDialog();
       }
     }
 
