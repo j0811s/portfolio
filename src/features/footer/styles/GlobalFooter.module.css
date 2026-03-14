@@ -1,39 +1,79 @@
 @layer feature {
   .container {
-    display: block;
     color: var(--text-primary);
     text-align: center;
-    padding: 1em;
-    background-color: var(--bg-secondary);
+    padding: 2em clamp(1.25rem, 0.732rem + 2.21vw, 2.5rem);
+    background-color: var(--bg-primary);
+    box-shadow: 0 -6px 20px #c5c7cc;
+  }
+
+  :global([data-theme="dark"]) .container {
+    box-shadow: 0 -6px 20px #060708;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .container {
+      box-shadow: 0 -6px 20px #060708;
+    }
   }
 
   .navigation {
-    font-size: calc(14 / var(--font-size) * 1rem);
-    background-color: transparent;
+    font-size: var(--font-size-m);
   }
 
   .navigationList {
     display: flex;
     justify-content: center;
+    gap: 1em;
   }
 
   .navigationListItem {
-    overflow: hidden;
     display: block;
   }
 
-  .navigationListItemLink {
+  .navigationListItemLink,
+  .navigationListItemLinkHover {
+    position: relative;
     display: block;
-    font-weight: 400;
-    padding: 0.5em 1em;
+    font-weight: 500;
+    padding: 0.6em 1.4em;
     border-radius: 9999px;
-    font-feature-settings: 'palt';
+    background-color: var(--bg-primary);
+    box-shadow: var(--neumorphism-shadow-sm);
     color: var(--text-primary);
+    text-decoration: none;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .navigationListItemLink::after,
+  .navigationListItemLinkHover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--neumorphism-shadow-sm-hover);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  @media (any-hover: hover) {
+    .navigationListItemLink:hover,
+    .navigationListItemLinkHover:hover {
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .navigationListItemLink:hover::after,
+    .navigationListItemLinkHover:hover::after {
+      opacity: 1;
+    }
   }
 
   .copyright {
     display: block;
-    font-size: calc(12 / var(--font-size) * 1rem);
-    margin-top: 1em;
+    font-size: var(--font-size-s);
+    margin-top: 1.5em;
+    opacity: 0.6;
   }
 }

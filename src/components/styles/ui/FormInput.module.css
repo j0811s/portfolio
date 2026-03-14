@@ -1,13 +1,17 @@
 .input {
   appearance: none;
   color: var(--text-primary);
-  background-color: transparent;
+  background-color: var(--bg-primary);
   font-size: var(--font-size-m);
-  padding: 0.5em 0.25em;
+  padding: 0.75em 1em;
   border: none;
-  border-bottom: 1px solid var(--text-primary);
+  border-radius: 10px;
+  box-shadow: var(--neumorphism-shadow-hover);
+  transition: box-shadow 0.3s ease;
+  width: 100%;
 }
 
 .input:focus-visible {
-  outline-offset: 0;
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 2px;
 }

@@ -9,12 +9,20 @@
     display: grid;
     place-content: center;
     aspect-ratio: 1;
-    background-color: var(--theme-primary);
-    width: 40px;
+    background-color: var(--bg-primary);
+    width: 48px;
     border-radius: 9999px;
-    color: var(--white);
-    font-size: calc(16 / var(--font-size) * 1rem);
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    color: var(--theme-primary);
+    font-size: calc(18 / var(--font-size) * 1rem);
+    transition: opacity 0.3s ease, visibility 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--neumorphism-shadow);
+  }
+
+  @media (any-hover: hover) {
+    .container.add-show:hover {
+      opacity: 1;
+      box-shadow: var(--neumorphism-shadow-hover);
+    }
   }
 
   .container.add-show {

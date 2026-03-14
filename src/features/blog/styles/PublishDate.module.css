@@ -5,11 +5,10 @@
   }
 
   .postDate {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    grid-template-columns: repeat(2, max-content);
-    justify-content: flex-end;
-    gap: 0.5em;
+    gap: 0.3em 0.6em;
   }
 
   .postDateIcon {

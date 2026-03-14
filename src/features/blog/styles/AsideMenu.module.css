@@ -11,7 +11,8 @@
   }
 
   .container {
-    overflow: hidden;
+    padding: 8px;
+    margin: -8px;
   }
 
   .container[open] .arrowIcon {
@@ -31,15 +32,39 @@
   }
 
   .listIetmTitle {
+    position: relative;
     display: grid;
     align-items: center;
     grid-template-columns: 1fr max-content;
     font-size: var(--font-size-m);
     color: var(--text-primary);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
+    box-shadow: var(--neumorphism-shadow-sm);
     margin-bottom: 0.5em;
     padding: 1em;
-    border-radius: 4px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .listIetmTitle::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--neumorphism-shadow-sm-hover);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  @media (any-hover: hover) {
+    .listIetmTitle:hover {
+      box-shadow: none;
+    }
+
+    .listIetmTitle:hover::after {
+      opacity: 1;
+    }
   }
 
   .listItemTitleIcon {

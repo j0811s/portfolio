@@ -19,7 +19,7 @@ export default function SkillSet({ data }: { data: SkillSet[] }) {
                     width={skill.logo.width} 
                     height={skill.logo.height}
                   />
-                  <span className="u-ellipsis">{skill.name}</span>
+                  {/* <span className="u-ellipsis">{skill.name}</span> */}
                 </li>
               ))}
             </ul>

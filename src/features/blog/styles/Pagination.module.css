@@ -16,15 +16,28 @@
   }
 
   .pageLink {
+    position: relative;
     text-decoration: none;
     display: grid;
     place-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    border-radius: 4px;
+    border-radius: 10px;
     box-shadow: var(--neumorphism-shadow);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .pageLink::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--neumorphism-shadow-hover);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
   .omit {
@@ -35,15 +48,18 @@
   .currentText {
     pointer-events: none;
     box-shadow: var(--neumorphism-shadow-hover);
+    color: var(--theme-primary);
+    font-weight: 700;
   }
 
   @media (any-hover: hover) {
-    .pageLink {
-      transition: box-shadow 0.3s ease;
+    .pageLink:hover {
+      opacity: 1;
+      box-shadow: none;
     }
 
-    .pageLink:hover {
-      box-shadow: var(--neumorphism-shadow-hover);
+    .pageLink:hover::after {
+      opacity: 1;
     }
   }
 }

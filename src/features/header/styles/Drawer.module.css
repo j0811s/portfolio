@@ -20,17 +20,41 @@
   }
 
   .openButton {
-    text-align: left;
+    position: relative;
     appearance: none;
-    display: block;
-    background: none;
-    border: none;
+    display: grid;
+    place-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background-color: var(--bg-primary);
+    box-shadow: var(--neumorphism-shadow-sm);
     cursor: pointer;
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    transition: box-shadow 0.3s ease;
   }
 
-  .openButton {
-    color: var(--text-primary);
-    font-size: clamp(1.625rem, 1.5214rem + 0.442vw, 1.875rem);
+  .openButton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--neumorphism-shadow-sm-hover);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  @media (any-hover: hover) {
+    .openButton:hover {
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .openButton:hover::after {
+      opacity: 1;
+    }
   }
 
   .closeButton {

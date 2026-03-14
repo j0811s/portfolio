@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom';
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { isDrawerOpenAtom } from "@/src/features/header/stores/atoms";
-import { faHouse, faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { GithubLink } from "@/src/features/header/components/GithubLink";
 
 const waitModalAnimation = (modal: HTMLDialogElement): Promise<PromiseSettledResult<Animation>[]> => {
@@ -35,7 +35,7 @@ const MenuList = ({
         </li>
         <li>
           <Link href={`/blog/`}>
-            <FontAwesomeIcon icon={faFileLines} /><span>投稿</span>
+            <FontAwesomeIcon icon={faPenToSquare} /><span>投稿</span>
           </Link>
         </li>
         <li>

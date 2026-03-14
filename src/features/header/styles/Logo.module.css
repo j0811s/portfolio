@@ -2,8 +2,6 @@
   .title {
     text-align: center;
     color: var(--text-primary);
-    font-size: var(--font-size-l);
-    font-weight: bold;
   }
 
   .link {
@@ -11,13 +9,8 @@
     text-decoration: none;
     color: var(--text-primary);
     font-size: clamp(1rem, 0.9482rem + 0.221vw, 1.125rem);
-  }
-
-  .img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--black);
-    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 }
