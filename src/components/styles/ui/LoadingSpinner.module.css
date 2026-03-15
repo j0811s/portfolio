@@ -1,67 +1,51 @@
 @layer components {
-  @keyframes load {
-    0% {
-      box-shadow: 0 0;
-      height: 4em;
-    }
-
-    40% {
-      box-shadow: 0 -2em;
-      height: 5em;
-    }
-
-    80% {
-      box-shadow: 0 0;
-      height: 4em;
-    }
-
-    100% {
-      box-shadow: 0 0;
-      height: 4em;
-    }
-  }
-
   .container {
     position: fixed;
     inset: 0;
     z-index: 10000;
     background-color: var(--bg-primary);
+    display: grid;
+    place-items: center;
   }
 
-  .loader {
-    color: var(--theme-primary);
-    text-indent: -9999em;
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    z-index: 10;
-    font-size: 1rem;
-    transform: translateZ(0);
-    animation-delay: -0.16s;
-    background-color: var(--theme-primary);
-    animation: load 1s infinite ease-in-out;
-    width: 1em;
-    height: 4em;
+  .spinner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
 
-  .loader::before,
-  .loader::after {
-    position: absolute;
-    top: 0;
-    content: "";
-    background-color: var(--theme-primary);
-    animation: load 1s infinite ease-in-out;
-    width: 1em;
-    height: 4em;
+  .tile {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background-color: var(--bg-primary);
+    box-shadow: var(--neumorphism-shadow-sm);
+    animation: press 1.8s ease-in-out infinite;
   }
 
-  .loader::before {
-    left: -1.5em;
-    animation-delay: -0.32s;
+  .tile:nth-child(2) {
+    animation-delay: 0.3s;
   }
 
-  .loader::after {
-    left: 1.5em;
-    animation-delay: -0.32s;
+  .tile:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes press {
+    0% {
+      box-shadow: var(--neumorphism-shadow-sm);
+      transform: scale(1) translateY(0);
+      background-color: var(--bg-primary);
+    }
+    16%, 28% {
+      box-shadow: var(--neumorphism-shadow-sm-hover);
+      transform: scale(0.9) translateY(2px);
+      background-color: var(--bg-secondary);
+    }
+    44%, 100% {
+      box-shadow: var(--neumorphism-shadow-sm);
+      transform: scale(1) translateY(0);
+      background-color: var(--bg-primary);
+    }
   }
 }
