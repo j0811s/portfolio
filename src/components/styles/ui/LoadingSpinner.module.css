@@ -15,37 +15,32 @@
   }
 
   .tile {
-    width: 18px;
-    height: 18px;
-    border-radius: 6px;
-    background-color: var(--bg-primary);
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+    background-color: var(--theme-primary);
     box-shadow: var(--neumorphism-shadow-sm);
-    animation: press 1.8s ease-in-out infinite;
+    animation: levitate 1.8s ease-in-out infinite;
   }
 
   .tile:nth-child(2) {
-    animation-delay: 0.3s;
+    animation-delay: 0.25s;
   }
 
   .tile:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 0.5s;
   }
 
-  @keyframes press {
-    0% {
+  @keyframes levitate {
+    0%, 100% {
       box-shadow: var(--neumorphism-shadow-sm);
-      transform: scale(1) translateY(0);
-      background-color: var(--bg-primary);
+      transform: translateY(0) scale(1);
+      opacity: 0.5;
     }
-    16%, 28% {
-      box-shadow: var(--neumorphism-shadow-sm-hover);
-      transform: scale(0.9) translateY(2px);
-      background-color: var(--bg-secondary);
-    }
-    44%, 100% {
-      box-shadow: var(--neumorphism-shadow-sm);
-      transform: scale(1) translateY(0);
-      background-color: var(--bg-primary);
+    40%, 60% {
+      box-shadow: var(--neumorphism-shadow);
+      transform: translateY(-10px) scale(1.1);
+      opacity: 1;
     }
   }
 }

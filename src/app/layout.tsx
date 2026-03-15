@@ -6,6 +6,7 @@ import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { GoogleTagManager } from '@next/third-parties/google'
 import { config } from '@fortawesome/fontawesome-svg-core';
+import { cookies } from 'next/headers';
 
 config.autoAddCss = false;
 
@@ -34,12 +35,15 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId: string = process.env.GA_ID || '';
   const gtmId: string = process.env.GTM_ID || '';
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get('theme')?.value;
+  const dataTheme = themeCookie === 'dark' ? 'dark' : 'light';
 
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" data-theme={dataTheme}>
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
       {gaId && <GoogleAnalytics gaId={gaId} />}
       <body>
