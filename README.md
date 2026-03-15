@@ -1,49 +1,111 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio Site
 
-## Getting Started
+Next.js (App Router) + MicroCMS で構築したポートフォリオサイト。
 
-First, run the development server:
+## 技術スタック
 
-```bash
-npm run dev
-npm run dev --host=localhost
-# or
-yarn dev
-# or
-pnpm dev
-```
+| カテゴリ | ライブラリ |
+|---|---|
+| フレームワーク | Next.js 16 (App Router) |
+| 言語 | TypeScript |
+| CMS | MicroCMS |
+| 認証 | NextAuth.js v4 |
+| 状態管理 | Jotai |
+| スタイル | CSS Modules (SCSS) |
+| ユニットテスト | Vitest |
+| E2E テスト | Playwright |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## セットアップ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 環境変数
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
----
+`.env.local` を作成して以下を設定します。
 
 ```
-# .env.local
-NODE_ENV=development
-BASIC_AUTH_USER=
-BASIC_AUTH_PASSWORD=
 MICROCMS_SERVICE_DOMAIN=
 MICROCMS_API_KEY=
 MICROCMS_HISTORY_SERVICE_DOMAIN=
 MICROCMS_HISTORY_API_KEY=
 SITE_URL=http://127.0.0.1:3000
+GA_ID=
+GTM_ID=
+AUTH_USERNAME=
+AUTH_PASSWORD=
+AUTH_SECRET=
+```
+
+### 起動
+
+```bash
+npm install
+npm run dev
+```
+
+[http://localhost:3000](http://localhost:3000) で起動します。
+
+## コマンド
+
+```bash
+npm run dev          # 開発サーバー起動 (port 3000)
+npm run build        # プロダクションビルド
+npm run lint         # ESLint チェック
+npm run lint:fix     # ESLint 自動修正
+npm run test         # ユニットテスト (Vitest)
+npm run coverage     # カバレッジレポート
+npm run e2e          # E2E テスト (Playwright)
+npm run e2e:report   # Playwright HTML レポート表示
+npm run e2e:codegen  # E2E テスト自動生成
+```
+
+## ページ構成
+
+| パス | 説明 |
+|---|---|
+| `/` | トップページ（投稿一覧・スキル） |
+| `/blog/` | ブログ記事一覧 |
+| `/blog/[postId]/` | ブログ記事詳細 |
+| `/blog/page/[num]/` | ページネーション |
+| `/blog/categories/[catId]/` | カテゴリー別記事一覧 |
+| `/blog/tags/[tagId]/` | タグ別記事一覧 |
+| `/blog/archive/[year]/` | 年別アーカイブ |
+| `/auth/` | ログイン |
+
+## MicroCMS プレビュー
+
+MicroCMS の管理画面から下書きコンテンツをプレビューできます。
+
+**設定手順：**
+
+1. MicroCMS 管理画面で `API設定 > 画面プレビュー` を開く
+2. 遷移先 URL に以下を設定する
+
+```
+https://your-domain.com/api/draft?id={CONTENT_ID}&draftKey={DRAFT_KEY}
+```
+
+プレビュー画面には「プレビューモードで表示中」バナーが表示され、バナー内のリンクからプレビューを終了できます。
+
+## ディレクトリ構成
+
+```
+src/
+├── app/                  # ページ・API ルート
+│   ├── (login)/          # 認証が必要なページ
+│   ├── (logout)/         # 認証不要なページ (ログイン画面)
+│   └── api/              # API ルート
+├── features/             # 機能別コンポーネント
+│   ├── blog/
+│   ├── header/
+│   ├── footer/
+│   ├── theme/
+│   └── skills/
+├── components/           # 共通 UI コンポーネント
+├── libs/                 # ユーティリティ
+│   ├── microcms/         # MicroCMS クライアント
+│   ├── blog/             # ブログヘルパー
+│   └── seo/              # メタデータ生成
+├── hooks/                # カスタムフック
+├── stores/               # Jotai atoms
+├── types/                # TypeScript 型定義
+└── constants/            # 定数
 ```
