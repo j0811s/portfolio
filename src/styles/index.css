@@ -1,5 +1,5 @@
 @import "kiso.css" layer(reset);
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @layer reset, variables, base, components, feature, page, utilities, overwrite;
 
 @layer variables {
@@ -7,7 +7,7 @@
     scrollbar-gutter: stable;
     --page-width: 1280px;
     --font-mono: 'JetBrains Mono', monospace;
-    --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+    --font-sans: 'M PLUS Rounded 1c', sans-serif;
     --font-size: 16;
     --font-size-s: clamp(0.75rem, 0.7241rem + 0.1105vw, 0.8125rem);
     --font-size-m: clamp(0.875rem, 0.8232rem + 0.221vw, 1rem);
