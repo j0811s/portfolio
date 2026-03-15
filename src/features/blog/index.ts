@@ -1,4 +1,5 @@
 // 投稿
+export { default as DraftBanner } from "@/src/features/blog/components/DraftBanner";
 export { default as ArticleDetail } from "@/src/features/blog/components/ArticleDetail";
 export { default as ArticleCard } from "@/src/features/blog/components/ArticleCard";
 export { default as ArticleCardList } from "@/src/features/blog/components/ArticleCardList";

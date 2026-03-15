@@ -1,15 +1,21 @@
 import styles from "@/src/styles/pages/blog/layout.module.css";
 import { Metadata } from 'next';
+import { draftMode } from 'next/headers';
 import { SITE_URL } from '@/src/constants/site';
 import { Breadcrumb, JsonLd } from '@/src/components';
 import { createArticleJsonLd } from '@/src/libs/seo/jsonLd';
-import { ArticleDetail, AsideMenu } from "@/src/features/blog";
+import { ArticleDetail, AsideMenu, DraftBanner } from "@/src/features/blog";
 import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
 import { metadata as rootMetadata } from '@/src/app/layout';
 
 // export const revalidate = 3600;
 
-export async function generateMetadata({ params }: { params: Promise<{ postId: string }> }): Promise<Metadata> {
+type Props = {
+  params: Promise<{ postId: string }>;
+  searchParams: Promise<{ draftKey?: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { postId } = await params;
   const post = await fetchBlogDetail('blog', postId);
 
@@ -35,9 +41,17 @@ export async function generateStaticParams() {
   return [...paths];
 }
 
-export default async function Page({ params }: SitePageProps) {
+export default async function Page({ params, searchParams }: Props) {
   const { postId } = await params;
-  const post = await fetchBlogDetail('blog', postId);
+  const { isEnabled } = await draftMode();
+  const { draftKey } = await searchParams;
+
+  const post = await fetchBlogDetail(
+    'blog',
+    postId,
+    isEnabled && draftKey ? { draftKey } : undefined
+  );
+
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
     { name: '投稿', url: `/blog/` },
@@ -46,6 +60,7 @@ export default async function Page({ params }: SitePageProps) {
 
   return (
     <>
+      {isEnabled && <DraftBanner />}
       <JsonLd data={createArticleJsonLd({
         title: post.title,
         description: `「${post.title}」の記事です。`,
