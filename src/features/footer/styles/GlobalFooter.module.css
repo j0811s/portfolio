@@ -42,7 +42,6 @@
     box-shadow: var(--neumorphism-shadow-sm);
     color: var(--text-primary);
     text-decoration: none;
-    transition: box-shadow 0.3s ease;
   }
 
   .navigationListItemLink::after,

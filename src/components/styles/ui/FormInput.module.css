@@ -7,7 +7,6 @@
   border: none;
   border-radius: 10px;
   box-shadow: var(--neumorphism-shadow-hover);
-  transition: box-shadow 0.3s ease;
   width: 100%;
 }
 

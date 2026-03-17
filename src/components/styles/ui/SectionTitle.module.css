@@ -1,7 +1,7 @@
 @layer components {
   .title {
     position: relative;
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-2xl);
     font-weight: bold;
     text-align: center;
     padding-bottom: 0.6em;

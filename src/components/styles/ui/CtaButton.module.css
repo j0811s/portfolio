@@ -14,7 +14,6 @@
     border-radius: 12px;
     text-decoration: none;
     box-shadow: var(--neumorphism-shadow);
-    transition: box-shadow 0.3s ease;
   }
 
   .button::after {

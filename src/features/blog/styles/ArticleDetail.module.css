@@ -1,11 +1,10 @@
 @layer feature {
   .postWrapper {
-    overflow: hidden;
     padding-bottom: 1rem;
   }
 
   .postTitle {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-2xl);
     line-height: 1.3;
     margin-top: 1em;
   }
@@ -35,14 +34,18 @@
   }
 
   .postContent h2 {
-    font-size: clamp(1.25rem, 1.146rem + 0.44vw, 1.5rem);
+    font-size: var(--font-size-xl);
+    padding-left: 0.75em;
+    border-left: 3px solid var(--theme-primary);
   }
 
   .postContent h3,
   .postContent h4,
   .postContent h5,
   .postContent h6 {
-    font-size: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
+    font-size: var(--font-size-l);
+    padding-left: 0.5em;
+    border-left: 2px solid var(--bg-secondary);
   }
 
   .postContent p {
@@ -82,17 +85,17 @@
   }
 
   .postContent table {
-    overflow: hidden;
+    overflow: auto hidden;
     display: block;
     white-space: pre-wrap;
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: var(--neumorphism-shadow);
   }
 
   .postContent tbody {
     display: block;
-    overflow: auto hidden;
   }
 
   .postContent tr {
@@ -104,40 +107,70 @@
     display: table-cell;
     min-width: 120px;
     word-break: break-all;
-    padding: 0.5em;
+    padding: 0.75em 1em;
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    border: 1px solid var(--text-primary);
+    border: none;
+    border-bottom: 1px solid var(--bg-secondary);
+  }
+
+  .postContent th {
+    background-color: var(--bg-secondary);
+    color: var(--theme-primary);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  .postContent tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .postContent tbody tr:nth-child(even) td {
+    background-color: var(--bg-secondary);
   }
 
   .postContent .fileName {
     padding: 0.5em 1em;
-    border: 1px solid #c5c8c6;
-    border-bottom: none;
+    background-color: #1d1f21;
+    border-radius: 8px 8px 0 0;
+    font-size: var(--font-size-s);
+    font-family: var(--font-mono);
+    color: #abb2bf;
+    box-shadow: var(--neumorphism-shadow);
   }
 
   .postContent .codeBlock_code {
-    border: 1px solid #c5c8c6;
+    border-radius: 0;
   }
 
   .postContent code:not(.codeBlock_code) {
     font-size: 85%;
     white-space: break-spaces;
-    border-radius: 3px;
-    color: var(--white);
-    background-color: #304050;
+    border-radius: 6px;
+    color: var(--theme-primary);
+    background-color: var(--bg-secondary);
     margin: 0 0.4em;
-    padding: 0.2em 0.4em;
+    padding: 0.2em 0.5em;
   }
 
   .postContent .codeBlock_pre {
     margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--neumorphism-shadow);
+  }
+
+  .postContent .fileName + .codeBlock_pre {
+    border-radius: 0 0 8px 8px;
+    box-shadow: none;
   }
 
   .postContent blockquote {
-    color: #656d76;
-    border-left: 0.25em solid #d0d7de;
-    padding-left: 1em;
+    background-color: var(--bg-secondary);
+    border-radius: 0 10px 10px 0;
+    border-left: 3px solid var(--theme-primary);
+    padding: 1em 1.25em;
+    color: var(--text-primary);
   }
 
   .postContent blockquote > blockquote {
@@ -147,7 +180,7 @@
   .postContent hr {
     border: none;
     height: 1px;
-    background-color: var(--text-primary);
+    background-color: var(--bg-secondary);
   }
 
   .backToLink {

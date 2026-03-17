@@ -9,9 +9,11 @@
     --font-mono: 'JetBrains Mono', monospace;
     --font-sans: 'M PLUS Rounded 1c', sans-serif;
     --font-size: 16;
-    --font-size-s: clamp(0.75rem, 0.7241rem + 0.1105vw, 0.8125rem);
+    --font-size-s: clamp(0.8125rem, 0.7866rem + 0.1105vw, 0.875rem);
     --font-size-m: clamp(0.875rem, 0.8232rem + 0.221vw, 1rem);
-    --font-size-l: clamp(1.5rem, 1.2928rem + 0.884vw, 2rem);
+    --font-size-l: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 1.146rem + 0.44vw, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 1.2928rem + 0.884vw, 2rem);
     --white: #fff;
     --black: #333;
     --shadow: rgba(0, 0, 0, 0.1);
@@ -220,15 +222,22 @@
   }
 
   @media (any-hover: hover) {
-    a,
+    a {
+      transition: color 0.3s ease;
+    }
+
     button {
       transition: opacity 0.3s ease;
     }
 
-    a:hover,
+    a:hover {
+      opacity: 1;
+      color: var(--theme-primary);
+      text-decoration: none;
+    }
+
     button:hover {
       opacity: 0.6;
-      text-decoration: none;
     }
   }
 }
@@ -269,10 +278,6 @@
     box-shadow: var(--neumorphism-shadow);
     color: var(--text-primary);
     background-color: var(--bg-primary);
-  }
-
-  .u-neumorphism--press {
-    transition: box-shadow 0.3s ease;
   }
 
   .u-neumorphism--press::after {

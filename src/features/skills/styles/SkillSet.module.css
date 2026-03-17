@@ -8,13 +8,14 @@
   }
 
   .name {
-    text-align: center;
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-size: clamp(1rem, 0.948rem + 0.221vw, 1.125rem);
+    font-weight: 700;
+    padding-left: 0.75em;
+    border-left: 2px solid var(--theme-primary);
   }
 
   .description {
-    font-size: 1rem;
+    font-size: var(--font-size-m);
     margin-top: 1.5rem;
   }
 
@@ -25,7 +26,6 @@
   }
 
   .item {
-    position: relative;
     display: grid;
     place-content: center;
     gap: 0.75em;
@@ -38,28 +38,6 @@
     border-radius: 14px;
     background-color: var(--bg-primary);
     box-shadow: var(--neumorphism-shadow);
-    transition: box-shadow 0.3s ease;
-  }
-
-  .item::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    box-shadow: var(--neumorphism-shadow-hover);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  @media (any-hover: hover) {
-    .item:hover {
-      box-shadow: none;
-    }
-
-    .item:hover::after {
-      opacity: 1;
-    }
   }
 
   .icon {

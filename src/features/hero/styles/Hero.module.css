@@ -1,0 +1,157 @@
+@layer feature {
+  .hero {
+    position: relative;
+    height: max(500px, calc(100svh - 8rem));
+    max-height: 800px;
+    display: flex;
+    align-items: center;
+  }
+
+  .shape1,
+  .shape2,
+  .shape3,
+  .shape4 {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: float ease-in-out infinite;
+  }
+
+  .shape1 {
+    width: clamp(100px, 13vw, 180px);
+    height: clamp(100px, 13vw, 180px);
+    top: 5vh;
+    right: 5vw;
+    box-shadow: var(--neumorphism-shadow);
+    animation-duration: 7s;
+    animation-delay: 0s;
+  }
+
+  .shape2 {
+    width: clamp(80px, 10vw, 140px);
+    height: clamp(80px, 10vw, 140px);
+    top: 50vh;
+    right: 15vw;
+    box-shadow: var(--neumorphism-shadow);
+    animation-duration: 9s;
+    animation-delay: 1.5s;
+  }
+
+  .shape3 {
+    width: clamp(60px, 7vw, 100px);
+    height: clamp(60px, 7vw, 100px);
+    top: 30vh;
+    right: 20vw;
+    box-shadow: var(--neumorphism-shadow-sm);
+    animation-duration: 6s;
+    animation-delay: 0.8s;
+  }
+
+  .shape4 {
+    width: clamp(46px, 5.5vw, 78px);
+    height: clamp(46px, 5.5vw, 78px);
+    top: 15vh;
+    right: 25vw;
+    box-shadow: var(--neumorphism-shadow-sm);
+    animation-duration: 5s;
+    animation-delay: 2.2s;
+  }
+
+  .shapeIcon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 60%;
+    max-height: 60%;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shape1,
+    .shape2,
+    .shape3,
+    .shape4 {
+      animation: none;
+    }
+  }
+
+  .inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .greeting {
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    color: var(--theme-primary);
+    letter-spacing: 0.1em;
+  }
+
+  .name {
+    font-size: clamp(2.5rem, 1.5rem + 4.5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-top: 0.15em;
+  }
+
+  .role {
+    display: inline-block;
+    margin-top: 1em;
+    padding: 0.4em 1.2em;
+    border-radius: 9999px;
+    background-color: var(--bg-primary);
+    box-shadow: var(--neumorphism-shadow);
+    font-size: var(--font-size-l);
+    font-weight: 500;
+    color: var(--theme-primary);
+  }
+
+  .description {
+    margin-top: 1.5em;
+    font-size: var(--font-size-m);
+    line-height: 1.8;
+    max-width: 520px;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 2em;
+  }
+
+  .githubLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  @media (any-hover: hover) {
+    .githubLink:hover {
+      opacity: 1;
+      color: var(--theme-primary);
+    }
+  }
+
+  @media screen and (width >= 768px) {
+    .inner {
+      max-width: 680px;
+    }
+  }
+}

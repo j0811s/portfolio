@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: transparent;
+    transition: color 0.3s ease;
   }
 
   .icon {
@@ -16,6 +17,7 @@
     font-size: var(--font-size-m);
     color: var(--text-primary);
     background-color: var(--bg-primary);
+    transition: color 0.3s ease;
   }
 
   .badge {
@@ -27,5 +29,21 @@
     text-align: center;
     color: var(--text-primary);
     background-color: var(--bg-primary);
+    transition: color 0.3s ease;
+  }
+
+  @media (any-hover: hover) {
+    .link:hover {
+      opacity: 1;
+      color: var(--theme-primary);
+    }
+
+    .link:hover .name {
+      color: var(--theme-primary);
+    }
+
+    .link:hover .badge {
+      color: var(--theme-primary);
+    }
   }
 }

@@ -40,6 +40,14 @@
   text-decoration: none;
   display: inline-block;
   color: inherit;
+  transition: color 0.3s ease;
+}
+
+@media (any-hover: hover) {
+  .list a:hover {
+    opacity: 1;
+    color: var(--theme-primary);
+  }
 }
 
 .list li.level2 {

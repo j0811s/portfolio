@@ -4,9 +4,14 @@ import { fetchSkillAll } from "@/src/libs/microcms/skill";
 import { fetchBlogList } from "@/src/libs/microcms/blog";
 import { SkillSet } from "@/src/features/skills";
 import { ArticleCardList } from "@/src/features/blog";
+import { Hero } from "@/src/features/hero";
 import { CtaLinkButton, SectionTitle } from "@/src/components/";
 import { JsonLd } from '@/src/components';
 import { createBreadcrumbJsonLd, createWebsiteJsonLd } from "@/src/libs/seo/jsonLd";
+
+function pickRandom<T>(array: T[], count: number): T[] {
+  return [...array].sort(() => Math.random() - 0.5).slice(0, count);
+}
 
 export default async function Top() {
   const skills = await fetchSkillAll();
@@ -16,10 +21,14 @@ export default async function Top() {
     }
   );
 
+  const allSkills = skills.flatMap(s => s.skills).filter(s => !s.hidden);
+  const heroSkills = pickRandom(allSkills, 4);
+
   return (
     <>
       <JsonLd data={createWebsiteJsonLd()} />
       <JsonLd data={createBreadcrumbJsonLd([{ name: 'トップページ', url: SITE_URL }])} />
+      <Hero skills={heroSkills} />
       <section className={styles.section}>
         <SectionTitle title="投稿" level={2} />
         <ArticleCardList contents={portfolioArticles} />

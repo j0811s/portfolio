@@ -12,6 +12,6 @@
   }
 
   .postDateIcon {
-    color: #7986cb;
+    color: var(--theme-primary);
   }
 }

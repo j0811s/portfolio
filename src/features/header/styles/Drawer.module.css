@@ -1,10 +1,13 @@
 @layer feature {
   .drawer {
     opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .drawer[data-open='true'] {
     opacity: 1;
+    transform: translateY(0);
   }
 
   .drawer::backdrop {
@@ -32,7 +35,6 @@
     cursor: pointer;
     color: var(--text-primary);
     font-size: 1.125rem;
-    transition: box-shadow 0.3s ease;
   }
 
   .openButton::after {
@@ -58,30 +60,32 @@
   }
 
   .closeButton {
+    margin-top: 3rem;
     font-size: var(--font-size-m);
-    margin: 50px auto 0;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  .closeButton {
-    box-shadow: none;
+  .closeButton::after {
+    display: none;
   }
 
   .nav {
     display: grid;
     place-content: center;
-    padding: 15px;
+    padding: 1rem;
   }
 
   .navList {
     display: grid;
     align-items: center;
-    place-content: flex-start;
     grid-template-columns: auto;
-    grid-template-rows: repeat(3, max-content);
     gap: 2em;
     padding: 0;
     margin: 0;
-    color: var(--white);
+    color: #fff;
   }
 
   .navList a {
