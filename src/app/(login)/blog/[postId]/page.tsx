@@ -1,12 +1,15 @@
 import styles from "@/src/styles/pages/blog/layout.module.css";
 import { Metadata } from 'next';
+import { cache } from 'react';
 import { draftMode } from 'next/headers';
 import { SITE_URL } from '@/src/constants/site';
 import { Breadcrumb, JsonLd } from '@/src/components';
 import { createArticleJsonLd } from '@/src/libs/seo/jsonLd';
 import { ArticleDetail, AsideMenu, DraftBanner } from "@/src/features/blog";
-import { fetchBlogDetail, fetchBlogList } from "@/src/libs/microcms/blog";
+import { fetchAllBlogId, fetchBlogDetail } from "@/src/libs/microcms/blog";
 import { metadata as rootMetadata } from '@/src/app/layout';
+
+const getBlogDetail = cache((postId: string) => fetchBlogDetail('blog', postId));
 
 // export const revalidate = 3600;
 
@@ -17,7 +20,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { postId } = await params;
-  const post = await fetchBlogDetail('blog', postId);
+  const post = await getBlogDetail(postId);
 
   return {
     ...rootMetadata,
@@ -30,15 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const { contents } = await fetchBlogList('blog');
-  const paths = contents.map((post) => {
-    return {
-      endpoint: post.endpoint,
-      postId: post.id
-    };
-  });
-
-  return [...paths];
+  const ids = await fetchAllBlogId('blog');
+  return (ids ?? []).map((id) => ({ postId: id }));
 }
 
 export default async function Page({ params, searchParams }: Props) {
@@ -47,11 +43,9 @@ export default async function Page({ params, searchParams }: Props) {
   const isEnabled = isDraftMode || process.env.NODE_ENV === 'development';
   const { draftKey } = await searchParams;
 
-  const post = await fetchBlogDetail(
-    'blog',
-    postId,
-    isEnabled && draftKey ? { draftKey } : undefined
-  );
+  const post = isEnabled && draftKey
+    ? await fetchBlogDetail('blog', postId, { draftKey })
+    : await getBlogDetail(postId);
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
