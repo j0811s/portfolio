@@ -1,4 +1,4 @@
-import { draftMode } from 'next/headers';
+import { cookies, draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest } from 'next/server';
 
@@ -14,5 +14,13 @@ export async function GET(request: NextRequest) {
   const draft = await draftMode();
   draft.enable();
 
-  redirect(`/blog/${id}/?draftKey=${draftKey}`);
+  const cookieStore = await cookies();
+  cookieStore.set('draft_key', draftKey, {
+    httpOnly: true,
+    maxAge: 60 * 60,
+    path: '/',
+    sameSite: 'lax',
+  });
+
+  redirect(`/blog/${id}/preview/`);
 }

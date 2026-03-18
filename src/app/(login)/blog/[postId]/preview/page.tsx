@@ -1,43 +1,26 @@
 import styles from "@/src/styles/pages/blog/layout.module.css";
-import { Metadata } from 'next';
-import { cache } from 'react';
+import { draftMode } from 'next/headers';
+import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 import { SITE_URL } from '@/src/constants/site';
 import { Breadcrumb, JsonLd } from '@/src/components';
 import { createArticleJsonLd } from '@/src/libs/seo/jsonLd';
-import { ArticleDetail, AsideMenu } from "@/src/features/blog";
-import { fetchAllBlogId, fetchBlogDetail } from "@/src/libs/microcms/blog";
-import { metadata as rootMetadata } from '@/src/app/layout';
-
-export const revalidate = 3600;
-
-const getBlogDetail = cache((postId: string) => fetchBlogDetail('blog', postId));
+import { ArticleDetail, AsideMenu, DraftBanner } from "@/src/features/blog";
+import { fetchBlogDetail } from "@/src/libs/microcms/blog";
 
 type Props = {
   params: Promise<{ postId: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { postId } = await params;
-  const post = await getBlogDetail(postId);
-
-  return {
-    ...rootMetadata,
-    title: `${post?.title} | 投稿`,
-    description: `「${post?.title}」の詳細ページです。`,
-    openGraph: {
-      description: `「${post?.title}」の詳細ページです。`
-    }
-  }
-}
-
-export async function generateStaticParams() {
-  const ids = await fetchAllBlogId('blog');
-  return (ids ?? []).map((id) => ({ postId: id }));
-}
-
 export default async function Page({ params }: Props) {
+  const { isEnabled } = await draftMode();
+  if (!isEnabled && process.env.NODE_ENV !== 'development') notFound();
+
   const { postId } = await params;
-  const post = await getBlogDetail(postId);
+  const cookieStore = await cookies();
+  const draftKey = cookieStore.get('draft_key')?.value;
+
+  const post = await fetchBlogDetail('blog', postId, draftKey ? { draftKey } : undefined, { cache: 'no-store' });
 
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
@@ -47,6 +30,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <DraftBanner />
       <JsonLd data={createArticleJsonLd({
         title: post.title,
         description: `「${post.title}」の記事です。`,

@@ -6,9 +6,10 @@ import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { GoogleTagManager } from '@next/third-parties/google'
 import { config } from '@fortawesome/fontawesome-svg-core';
-import { cookies } from 'next/headers';
 
 config.autoAddCss = false;
+
+const themeInitScript = `(function(){try{var c=document.cookie.split('; ').find(function(r){return r.startsWith('theme=')});var t=c?c.split('=')[1]:null;if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
 
 export const metadata: Metadata = {
   // robots: { index: false, follow: false },
@@ -35,15 +36,15 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId: string = process.env.GA_ID || '';
   const gtmId: string = process.env.GTM_ID || '';
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get('theme')?.value;
-  const dataTheme = themeCookie === 'dark' ? 'dark' : 'light';
 
   return (
-    <html lang="ja" data-theme={dataTheme}>
+    <html lang="ja" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
       {gaId && <GoogleAnalytics gaId={gaId} />}
       <body>
