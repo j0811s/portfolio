@@ -1,59 +1,28 @@
 import styles from "@/src/features/blog/styles/YearArchive.module.css";
-import { client, fetchBlogList } from "@/src/libs/microcms/blog";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 
 type YearsData = {
-  [key: string]: {
-    length: number
-  }
+  [key: string]: number
 }
 
-// 投稿公開日から年別を取得
-const createYearsArray = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i);
-
-const getBlogYears = async () => {
-  const newestPost = await client.get({
-    endpoint: 'blog',
-    queries: { fields: 'publishedAt', orders: '-publishedAt', limit: 1 }
-  });
-  const newestPostYear = Number(newestPost.contents[0].publishedAt.substr(0, 4));
-
-  const oldestPost = await client.get({
-    endpoint: 'blog',
-    queries: {
-      fields: 'publishedAt',
-      orders: 'publishedAt',
-      limit: 1
-    }
-  });
-  const oldestPostYear = Number(oldestPost.contents[0].publishedAt.substr(0, 4));
-
-  const postYears = createYearsArray(oldestPostYear, newestPostYear);
-
-  return postYears;
-}
-
-async function YearArchive() {
-  const years = await getBlogYears();
-  if (years.length === 0) return;
-
+const buildYearsData = (contents: Blog[]): YearsData => {
   const yearsData: YearsData = {};
-  
-  await Promise.all(years.map(async year => {
-    const { contents } = await fetchBlogList('blog', {
-      offset: 0,
-      limit: 100,
-      filters: `publishedAt[contains]${year}`
-    })
+  contents.forEach(post => {
+    const year = post.publishedAt?.substring(0, 4);
+    if (year) yearsData[year] = (yearsData[year] ?? 0) + 1;
+  });
+  return yearsData;
+}
 
-    yearsData[year] = {
-      length: contents.length
-    }
-  }));
-  
+function YearArchive({ contents }: { contents: Blog[] }) {
+  const yearsData = buildYearsData(contents);
+  const years = Object.keys(yearsData).sort((a, b) => Number(b) - Number(a));
+
+  if (years.length === 0) return null;
+
   return (
     <details className={styles.container} open>
       <summary className={styles.listIetmTitle}>
@@ -67,7 +36,7 @@ async function YearArchive() {
         {years.map(year => (
           <li className={styles.listItem} key={year}>
             <Link className={styles.listIetmLink} href={`/blog/archive/${year}`}>
-              <span>{year}年</span> <span className={styles.numberBadge}>({yearsData[year].length})</span>
+              <span>{year}年</span> <span className={styles.numberBadge}>({yearsData[year]})</span>
             </Link>
           </li>
         ))}

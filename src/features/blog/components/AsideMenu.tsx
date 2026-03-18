@@ -8,7 +8,7 @@ import { getTotalCount } from "@/src/libs/blog/getTotalCount";
 import { fetchBlogListAll } from "@/src/libs/microcms/blog";
 
 async function AsideMenu({ className = '' }) {
-  const contents = await fetchBlogListAll('blog');
+  const contents = await fetchBlogListAll('blog', { fields: 'id,category,tag,publishedAt' });
   const categories: ResultPostData = getTotalCount(contents, 'category');
   const tags: ResultPostData = getTotalCount(contents, 'tag');
 
@@ -50,7 +50,7 @@ async function AsideMenu({ className = '' }) {
           }
         </ul>
       </details>
-      <YearArchive />
+      <YearArchive contents={contents} />
     </aside>
   )
 }

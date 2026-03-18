@@ -7,7 +7,6 @@ import { CtaLinkButton } from "@/src/components";
 import { Eyecatch, PublishDate, TableOfContents, Tag } from "@/src/features/blog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
-import { fetchBlogDetail } from "@/src/libs/microcms/blog";
 import type { ResultPostData } from "@/src/libs/blog/getTotalCount";
 import { getTotalCount } from "@/src/libs/blog/getTotalCount";
 
@@ -49,8 +48,7 @@ const PostContentElement = ({content = '', parseOptions}: {content: string, pars
 }
 
 async function ArticleDetail({ post }: { post: Blog }) {
-  const contents = await fetchBlogDetail('blog', post.id);
-  const tags: ResultPostData = getTotalCount([contents], 'tag');
+  const tags: ResultPostData = getTotalCount([post], 'tag');
   const eyecatchPath = typeof post.eyecatch?.url === 'undefined' ? undefined : `${post.eyecatch.url}?auto=format&w=880&ar=16:9&fit=crop&q=50`;
 
   return (
