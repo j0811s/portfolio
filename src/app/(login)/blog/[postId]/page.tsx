@@ -43,7 +43,8 @@ export async function generateStaticParams() {
 
 export default async function Page({ params, searchParams }: Props) {
   const { postId } = await params;
-  const { isEnabled } = await draftMode();
+  const { isEnabled: isDraftMode } = await draftMode();
+  const isEnabled = isDraftMode || process.env.NODE_ENV === 'development';
   const { draftKey } = await searchParams;
 
   const post = await fetchBlogDetail(
