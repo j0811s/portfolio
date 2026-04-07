@@ -9,6 +9,7 @@ Next.js (App Router) + MicroCMS で構築したポートフォリオサイト。
 | フレームワーク | Next.js 16 (App Router) |
 | 言語 | TypeScript |
 | CMS | MicroCMS |
+| API | Hono |
 | 認証 | NextAuth.js v4 |
 | 状態管理 | Jotai |
 | スタイル | CSS Modules (SCSS) |
@@ -68,7 +69,20 @@ npm run e2e:codegen  # E2E テスト自動生成
 | `/blog/categories/[catId]/` | カテゴリー別記事一覧 |
 | `/blog/tags/[tagId]/` | タグ別記事一覧 |
 | `/blog/archive/[year]/` | 年別アーカイブ |
+| `/blog/search/` | キーワード検索結果 |
 | `/auth/` | ログイン |
+
+## API ルート
+
+`src/app/api/[[...route]]/route.ts` に Hono でまとめています。
+
+| エンドポイント | 説明 |
+|---|---|
+| `GET /api/draft` | プレビューモード有効化 |
+| `GET /api/draft/disable` | プレビューモード解除 |
+| `GET /api/blog` | ブログ一覧取得 |
+| `GET /api/blog/:id` | ブログ記事詳細取得 |
+| `GET /api/skills` | スキル一覧取得 |
 
 ## MicroCMS プレビュー
 
