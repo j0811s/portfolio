@@ -30,6 +30,7 @@
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.0",
     "highlight.js": "^11.11.1",
+    "hono": "^4.12.12",
     "html-react-parser": "^5.2.11",
     "http-server": "^14.1.1",
     "jotai": "^2.16.0",

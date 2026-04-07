@@ -33,7 +33,7 @@ export const fetchSkillList = async (
   let response;
 
   try {
-    response = await historyClient.getList({
+    response = await historyClient.getList<SkillSet>({
       endpoint,
       queries,
       customRequestInit,
@@ -54,7 +54,7 @@ export const fetchSkillDetail = async (
   let response;
 
   try {
-    response = await historyClient.getListDetail({
+    response = await historyClient.getListDetail<SkillSet>({
       endpoint,
       contentId,
       queries
@@ -74,7 +74,7 @@ export const fetchSkillAll = async (
   let response;
 
   try {
-    response = await historyClient.getAllContents({
+    response = await historyClient.getAllContents<SkillSet>({
       endpoint,
       queries
     })
