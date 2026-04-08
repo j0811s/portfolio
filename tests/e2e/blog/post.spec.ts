@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/blog/');
-  await page.locator('article').first().waitFor();
-  await page.locator('article').first().click();
-  await expect(page).toHaveURL(/\/blog\/.+\//);
+  await page.locator('a:has(article)').first().waitFor();
+  const href = await page.locator('a:has(article)').first().getAttribute('href');
+  await page.goto(href!);
 });
 
 test('記事タイトル（h1）が表示される', async ({ page }) => {

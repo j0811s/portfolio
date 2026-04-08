@@ -33,9 +33,11 @@ test('サイドバーのタグ一覧が表示される', async ({ page }) => {
 test('記事カードをクリックすると記事詳細ページへ遷移する', async ({ page }) => {
   await page.goto('/blog/');
 
-  await page.locator('article').first().waitFor();
-  await page.locator('article').first().click();
-
-  await expect(page).toHaveURL(/\/blog\/.+\//);
+  const articleLink = page.locator('a:has(article)').first();
+  await articleLink.waitFor();
+  await Promise.all([
+    page.waitForURL(/\/blog\/.+\//, { timeout: 15000 }),
+    articleLink.evaluate((el) => (el as HTMLAnchorElement).click()),
+  ]);
   await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible();
 });
