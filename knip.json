@@ -1,0 +1,3 @@
+{
+  "entry": ["tests/e2e/auth.setup.ts"]
+}

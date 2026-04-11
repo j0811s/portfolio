@@ -18,14 +18,14 @@ if (!process.env.MICROCMS_HISTORY_API_KEY) {
 }
 
 // API取得用のクライアントを作成
-export const historyClient = createClient({
+const historyClient = createClient({
   serviceDomain: process.env.MICROCMS_HISTORY_SERVICE_DOMAIN,
   apiKey: process.env.MICROCMS_HISTORY_API_KEY,
   retry: true,
 })
 
 // 経歴エンドポイントを取得
-export const fetchSkillList = async (
+const fetchSkillList = async (
   endpoint: string = "skill",
   queries?: MicroCMSQueries,
   customRequestInit?: CustomRequestInit
@@ -46,7 +46,7 @@ export const fetchSkillList = async (
 }
 
 // 経歴エンドポイントの詳細を取得
-export const fetchSkillDetail = async (
+const fetchSkillDetail = async (
   endpoint: string = "skill",
   contentId: string,
   queries?: MicroCMSQueries

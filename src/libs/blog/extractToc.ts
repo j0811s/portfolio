@@ -1,4 +1,4 @@
-export type TocItem = {
+type TocItem = {
   id: string;
   text: string;
   level: number;

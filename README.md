@@ -107,7 +107,7 @@ src/
 │   ├── (login)/          # 認証が必要なページ
 │   ├── (logout)/         # 認証不要なページ (ログイン画面)
 │   └── api/              # API ルート
-├── features/             # 機能別コンポーネント
+├── features/             # 機能別コンポーネント（各機能に stores/ を内包）
 │   ├── blog/
 │   ├── header/
 │   ├── footer/
@@ -119,7 +119,6 @@ src/
 │   ├── blog/             # ブログヘルパー
 │   └── seo/              # メタデータ生成
 ├── hooks/                # カスタムフック
-├── stores/               # Jotai atoms
 ├── types/                # TypeScript 型定義
 └── constants/            # 定数
 ```

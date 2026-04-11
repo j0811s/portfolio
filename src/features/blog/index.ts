@@ -15,8 +15,6 @@ export { default as YearArchive } from "@/src/features/blog/components/YearArchi
 
 // 日付
 export { default as PublishDate } from "@/src/features/blog/components/PublishDate";
-export { default as DateTime } from "@/src/features/blog/components/DateTime";
 
 // 画像
 export { default as Eyecatch } from "@/src/features/blog/components/Eyecatch";
-export { default as PlaceholderImage } from "@/src/features/blog/components/PlaceholderImage";
