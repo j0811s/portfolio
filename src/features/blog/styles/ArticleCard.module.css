@@ -1,24 +1,13 @@
 @layer feature {
   .link {
     overflow: hidden;
-    position: relative;
     display: block;
-    border-radius: 18px;
-    box-shadow: var(--neumorphism-shadow);
+    border-radius: 12px;
+    border: 1px solid color-mix(in srgb, var(--text-primary) 12%, transparent);
     color: var(--text-primary);
     background-color: var(--bg-primary);
     text-decoration: none;
-  }
-
-  .link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    box-shadow: var(--neumorphism-shadow-hover);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
   .post {
@@ -29,15 +18,16 @@
     height: 100%;
   }
 
-  .eyecatch {
-    display: block;
-  }
-
   .thmubnail {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
     height: auto;
+    overflow: hidden;
+  }
+
+  .thmubnail img {
+    transition: transform 0.4s ease;
   }
 
   .postInner {
@@ -58,12 +48,13 @@
 
   @media (any-hover: hover) {
     .link:hover {
-      opacity: 1;
-      box-shadow: none;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--text-primary) 12%, transparent);
+      border-color: color-mix(in srgb, var(--theme-primary) 50%, transparent);
     }
 
-    .link:hover::after {
-      opacity: 1;
+    .link:hover .thmubnail img {
+      transform: scale(1.06);
     }
 
     .link:hover .title {
