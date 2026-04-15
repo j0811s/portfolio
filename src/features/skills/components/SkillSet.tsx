@@ -12,7 +12,7 @@ export default function SkillSet({ data }: { data: SkillSet[] }) {
               {skillSet.skills.map(
                 (skill) =>
                   !skill.hidden && (
-                    <li className={styles.item} key={skill.fieldId}>
+                    <li className={styles.item} key={skill.name}>
                       <Image
                         className={styles.icon}
                         src={skill.logo.url}
