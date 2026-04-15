@@ -63,8 +63,11 @@
   .icon {
     color: var(--theme-primary);
     position: relative;
+    /* biome-ignore lint/complexity/noImportantStyles: intentional override */
     box-sizing: border-box !important;
+    /* biome-ignore lint/complexity/noImportantStyles: intentional override */
     display: block !important;
+    /* biome-ignore lint/complexity/noImportantStyles: intentional override */
     width: calc(50% - 0.25em) !important;
     margin: 0;
     padding: 0;

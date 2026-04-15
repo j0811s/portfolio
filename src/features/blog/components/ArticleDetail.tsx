@@ -51,7 +51,7 @@ const PostContentElement = ({
 }: {
   content: string;
   parseOptions: HTMLReactParserOptions;
-}): JSX.Element => {
+}): JSX.Element | null => {
   return content !== '' ? (
     <div id="js-postContents" className={styles.postContent}>
       {parse(content, parseOptions)}

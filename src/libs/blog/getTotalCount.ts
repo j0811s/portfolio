@@ -12,8 +12,11 @@ export type ResultPostData = {
 export const getTotalCount = (contents: Blog[], type: string): ResultPostData => {
   const data: ResultPostData = {};
 
-  contents.forEach((post: { [type: string]: { name: string; id: string; slug?: string }[] }) => {
-    post[type].forEach((type: { name: string; id: string; slug?: string }) => {
+  contents.forEach((post) => {
+    const items = (
+      post as unknown as Record<string, { name: string; id: string; slug?: string }[]>
+    )[type];
+    items.forEach((type: { name: string; id: string; slug?: string }) => {
       if (data[type.id]) {
         data[type.id].count++;
       } else {

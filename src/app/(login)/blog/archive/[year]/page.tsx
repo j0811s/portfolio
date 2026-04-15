@@ -14,7 +14,11 @@ type Props = {
 
 export async function generateStaticParams() {
   const posts = await fetchBlogListAll('blog');
-  const years = Array.from(new Set(posts.map((post) => post.publishedAt.slice(0, 4))));
+  const years = Array.from(
+    new Set(
+      posts.map((post) => post.publishedAt?.slice(0, 4)).filter((y): y is string => y !== undefined)
+    )
+  );
 
   return years.map((year) => ({ year }));
 }

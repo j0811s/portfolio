@@ -21,7 +21,11 @@ export async function generateStaticParams() {
 
   // 公開年
   const posts = await fetchBlogListAll('blog');
-  const years = Array.from(new Set(posts.map((post) => post.publishedAt.slice(0, 4))));
+  const years = Array.from(
+    new Set(
+      posts.map((post) => post.publishedAt?.slice(0, 4)).filter((y): y is string => y !== undefined)
+    )
+  );
 
   // ページ数
   const { totalCount } = await fetchBlogList('blog', { limit: LIMIT });
