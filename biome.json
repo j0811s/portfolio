@@ -1,0 +1,97 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**", "!.next/**", "!out/**", "!build/**", "!next-env.d.ts"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "correctness": {
+        "noNextAsyncClientComponent": "warn"
+      },
+      "performance": {
+        "noImgElement": "warn",
+        "noUnwantedPolyfillio": "warn",
+        "useGoogleFontPreconnect": "warn"
+      },
+      "style": {
+        "noHeadElement": "warn"
+      },
+      "suspicious": {
+        "noDocumentImportInPage": "error",
+        "noHeadImportInDocument": "error",
+        "useGoogleFontDisplay": "warn"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "es5",
+      "semicolons": "always"
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.{js,jsx,mjs,ts,tsx,mts,cts}"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noAriaUnsupportedElements": "warn",
+            "useAltText": "warn",
+            "useAriaPropsForRole": "warn",
+            "useAriaPropsSupportedByRole": "warn",
+            "useValidAriaProps": "warn",
+            "useValidAriaValues": "warn"
+          },
+          "correctness": {
+            "noChildrenProp": "error",
+            "noNextAsyncClientComponent": "warn",
+            "useExhaustiveDependencies": "warn",
+            "useHookAtTopLevel": "error",
+            "useJsxKeyInIterable": "error"
+          },
+          "performance": {
+            "noImgElement": "warn",
+            "noUnwantedPolyfillio": "warn",
+            "useGoogleFontPreconnect": "warn"
+          },
+          "security": {
+            "noDangerouslySetInnerHtmlWithChildren": "error"
+          },
+          "style": {
+            "noHeadElement": "warn"
+          },
+          "suspicious": {
+            "noCommentText": "error",
+            "noDocumentImportInPage": "error",
+            "noDuplicateJsxProps": "error",
+            "noHeadImportInDocument": "error",
+            "useGoogleFontDisplay": "warn"
+          }
+        }
+      }
+    }
+  ],
+  "css": {
+    "linter": {
+      "enabled": true
+    }
+  },
+  "assist": {
+    "enabled": false
+  }
+}
