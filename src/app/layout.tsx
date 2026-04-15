@@ -12,7 +12,7 @@ config.autoAddCss = false;
 const themeInitScript = `(function(){try{var c=document.cookie.split('; ').find(function(r){return r.startsWith('theme=')});var t=c?c.split('=')[1]:null;if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
 
 export const metadata: Metadata = {
-  // robots: { index: false, follow: false },
+  robots: { index: false, follow: false },
   metadataBase: SITE_META.siteUrl,
   title: {
     default: `${SITE_META.title}`,
