@@ -1,8 +1,8 @@
-export { default as JsonLd } from "@/src/components/seo/JsonLd";
-export { default as OgImageContent } from "@/src/components/seo/OgImageContent";
+export { default as JsonLd } from '@/src/components/seo/JsonLd';
+export { default as OgImageContent } from '@/src/components/seo/OgImageContent';
 export { default as CtaActionButton } from '@/src/components/ui/CtaActionButton';
 export { default as CtaLinkButton } from '@/src/components/ui/CtaLinkButton';
 export { default as SectionTitle } from '@/src/components/ui/SectionTitle';
 export { default as LoadingSpinner } from '@/src/components/ui/LoadingSpinner';
-export { default as Breadcrumb } from "@/src/components/ui/Breadcrumb";
-export { default as FormInput } from "@/src/components/ui/FormInput";
+export { default as Breadcrumb } from '@/src/components/ui/Breadcrumb';
+export { default as FormInput } from '@/src/components/ui/FormInput';

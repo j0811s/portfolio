@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import styles from '@/src/features/blog/styles/Eyecatch.module.css';
 import clsx from 'clsx';
@@ -8,9 +8,9 @@ import { SkeletonImage } from '@/src/features/skeleton';
 import PlaceholderImage from '@/src/features/blog/components/PlaceholderImage';
 
 interface Props extends React.ComponentPropsWithoutRef<'figure'> {
-  src?: string,
-  width?: number,
-  height?: number
+  src?: string;
+  width?: number;
+  height?: number;
 }
 
 function Eyecatch({ src, width, height, className = '' }: Props) {
@@ -24,10 +24,7 @@ function Eyecatch({ src, width, height, className = '' }: Props) {
 
       {src && (
         <Image
-          className={clsx(
-            styles.postListEyecatch,
-            loaded && styles.isLoaded
-          )}
+          className={clsx(styles.postListEyecatch, loaded && styles.isLoaded)}
           src={src}
           alt=""
           width={width}
@@ -36,7 +33,7 @@ function Eyecatch({ src, width, height, className = '' }: Props) {
         />
       )}
     </figure>
-  )
+  );
 }
 
 export default Eyecatch;

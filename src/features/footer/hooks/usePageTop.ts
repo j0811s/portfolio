@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from "react";
+import { useRef } from 'react';
 
 export function usePageTop() {
   const isProcessing = useRef(false);
@@ -11,7 +11,7 @@ export function usePageTop() {
 
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
 
     setTimeout(() => {

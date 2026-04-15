@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from 'react';
 
 interface UseInViewProps extends IntersectionObserverInit {
   ref: React.RefObject<HTMLElement | null>;
@@ -15,7 +15,7 @@ const useInView: UseInView = ({ ref, once = false, ...options }): boolean => {
   const memoOptions = useMemo(
     () => ({ root, rootMargin, threshold }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [root, rootMargin, JSON.stringify(threshold)]
+    [root, rootMargin, threshold]
   );
 
   useEffect(() => {
@@ -25,23 +25,21 @@ const useInView: UseInView = ({ ref, once = false, ...options }): boolean => {
     }
 
     const observer = new IntersectionObserver(([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        if (once && entry.isIntersecting) {
-          observer.unobserve(entry.target);
-        }
-      },
-      memoOptions
-    );
+      setIsVisible(entry.isIntersecting);
+      if (once && entry.isIntersecting) {
+        observer.unobserve(entry.target);
+      }
+    }, memoOptions);
 
     observer.observe(target);
 
     return () => {
       observer.unobserve(target);
       observer.disconnect();
-    }
+    };
   }, [ref, memoOptions, once]);
 
-  return isVisible
-}
+  return isVisible;
+};
 
 export default useInView;

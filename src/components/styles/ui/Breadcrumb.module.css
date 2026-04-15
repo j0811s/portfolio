@@ -17,7 +17,7 @@
   }
 
   .listItem:not(:last-of-type)::after {
-    content: '>';
+    content: ">";
     display: inline-block;
     margin-left: 0.5em;
   }

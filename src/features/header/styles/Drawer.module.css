@@ -2,10 +2,12 @@
   .drawer {
     opacity: 0;
     transform: translateY(-6px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
-  .drawer[data-open='true'] {
+  .drawer[data-open="true"] {
     opacity: 1;
     transform: translateY(0);
   }
@@ -14,7 +16,7 @@
     opacity: 0;
   }
 
-  .drawer[data-open='true']::backdrop {
+  .drawer[data-open="true"]::backdrop {
     opacity: 1;
   }
 

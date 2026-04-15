@@ -14,7 +14,9 @@
     border-radius: 9999px;
     color: var(--theme-primary);
     font-size: calc(18 / var(--font-size) * 1rem);
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
     box-shadow: var(--neumorphism-shadow);
   }
 

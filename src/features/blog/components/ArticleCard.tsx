@@ -1,8 +1,8 @@
-import styles from "@/src/features/blog/styles/ArticleCard.module.css";
-import clsx from "clsx";
-import Link from "next/link";
-import PublishDate from "@/src/features/blog/components/PublishDate";
-import Eyecatch from "@/src/features/blog/components/Eyecatch";
+import styles from '@/src/features/blog/styles/ArticleCard.module.css';
+import clsx from 'clsx';
+import Link from 'next/link';
+import PublishDate from '@/src/features/blog/components/PublishDate';
+import Eyecatch from '@/src/features/blog/components/Eyecatch';
 
 interface Props extends BlogPost {
   className?: string;
@@ -24,5 +24,5 @@ export default function ArticleCard(props: Props) {
         </div>
       </article>
     </Link>
-  )
+  );
 }

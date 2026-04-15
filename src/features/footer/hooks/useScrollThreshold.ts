@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function useScrollThreshold(threshold = 0) {
   const [passed, setPassed] = useState(false);
@@ -11,10 +11,10 @@ export function useScrollThreshold(threshold = 0) {
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [threshold]);
 

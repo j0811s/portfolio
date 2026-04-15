@@ -1,4 +1,3 @@
-
 export default function OgImageContent({ text }: { text: string }) {
   return (
     <div
@@ -13,10 +12,10 @@ export default function OgImageContent({ text }: { text: string }) {
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        padding: 60
+        padding: 60,
       }}
     >
       {text}
     </div>
-  )
+  );
 }

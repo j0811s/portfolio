@@ -1,22 +1,18 @@
 import dayjs from 'dayjs';
 
 type ConvertDateOptions = {
-  date: string
-  format?: string
-}
+  date: string;
+  format?: string;
+};
 
 function DateTime({ date, format = 'YYYY/MM/DD' }: ConvertDateOptions) {
   if (!date) {
-    return <></>;
+    return null;
   }
-  
+
   const formatedDate = dayjs(date).format(format);
-  
-  return (
-    <time dateTime={date}>
-      {formatedDate}
-    </time>
-  );
+
+  return <time dateTime={date}>{formatedDate}</time>;
 }
 
 export default DateTime;

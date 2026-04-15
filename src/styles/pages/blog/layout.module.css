@@ -3,7 +3,7 @@
     max-width: 800px;
     margin-inline: auto;
   }
-  
+
   @media screen and (width >= 1080px) {
     .container {
       display: grid;

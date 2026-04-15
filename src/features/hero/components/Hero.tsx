@@ -29,11 +29,11 @@ export default function Hero({ skills }: Props) {
       ))}
       <div className={styles.inner}>
         <h1 className={styles.name}>j-sato</h1>
-        <p className={styles.description}>
-          ポートフォリオサイト
-        </p>
+        <p className={styles.description}>ポートフォリオサイト</p>
         <div className={styles.actions}>
-          <CtaLinkButton href="/blog/" nextIcon>投稿を見る</CtaLinkButton>
+          <CtaLinkButton href="/blog/" nextIcon>
+            投稿を見る
+          </CtaLinkButton>
           <Link className={styles.githubLink} href={GITHUB_URL} target="_blank" rel="noreferrer">
             <FontAwesomeIcon icon={faGithub as IconProp} />
             <span>GitHub</span>

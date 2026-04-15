@@ -6,13 +6,17 @@
     display: block;
   }
 
-  .aside>*+* {
+  .aside > * + * {
     margin: 30px 0 0;
   }
 
   .container {
     padding: 8px;
     margin: -8px;
+  }
+
+  .arrowIcon {
+    transition: transform 0.3s ease;
   }
 
   .container[open] .arrowIcon {
@@ -72,10 +76,6 @@
 
   .listIetmTitleText {
     padding-left: 0.5em;
-  }
-
-  .arrowIcon {
-    transition: transform 0.3s ease;
   }
 
   @media screen and (width >= 1080px) {

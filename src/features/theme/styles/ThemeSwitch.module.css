@@ -13,7 +13,9 @@
     color: var(--text-primary);
     background-color: var(--theme-primary);
     border-radius: 9999px;
-    transition: color .2s ease-in-out, background-color .2s ease-in-out;
+    transition:
+      color 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
   }
 
   .button {
@@ -39,7 +41,7 @@
   }
 
   .button::before {
-    content: '';
+    content: "";
     display: flex;
     align-items: center;
     position: absolute;
@@ -51,7 +53,7 @@
     background-color: var(--white);
     aspect-ratio: 1;
     transform: translate3d(100%, 0, 0);
-    transition: transform .2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
   }
 
   .button.light::before {
@@ -61,9 +63,9 @@
   .icon {
     color: var(--theme-primary);
     position: relative;
-    box-sizing: border-box !important;
-    display: block !important;
-    width: calc(50% - 0.25em) !important;
+    box-sizing: border-box;
+    display: block;
+    width: calc(50% - 0.25em);
     margin: 0;
     padding: 0;
     aspect-ratio: 1;

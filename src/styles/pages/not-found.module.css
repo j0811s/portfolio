@@ -1,7 +1,6 @@
 @layer page {
   .container {
     display: grid;
-    align-content: center;
     place-content: center;
     grid-template-columns: 1fr;
     height: 100%;

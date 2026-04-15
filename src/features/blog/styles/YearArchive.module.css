@@ -4,6 +4,10 @@
     margin: -8px;
   }
 
+  .arrowIcon {
+    transition: transform 0.3s ease;
+  }
+
   .container[open] .arrowIcon {
     transform: rotateX(0.5turn);
   }
@@ -61,10 +65,6 @@
 
   .listIetmTitleText {
     padding: 0.5em;
-  }
-
-  .arrowIcon {
-    transition: transform 0.3s ease;
   }
 
   .listIetmLink {

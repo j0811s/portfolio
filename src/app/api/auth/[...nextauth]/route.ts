@@ -1,33 +1,33 @@
 import type { NextAuthOptions, Session } from 'next-auth';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import type { JWT } from "next-auth/jwt";
+import type { JWT } from 'next-auth/jwt';
 
 interface Token extends JWT {
   role?: string;
 }
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production';
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
-        username: { label: "ID", type: "text" },
-        password: { label: "パスワード", type: "password" },
+        username: { label: 'ID', type: 'text' },
+        password: { label: 'パスワード', type: 'password' },
       },
       async authorize(credentials) {
         const matched =
           credentials?.username === process.env.AUTH_USERNAME &&
           credentials?.password === process.env.AUTH_PASSWORD;
-        
+
         if (matched) {
           // 現状のroleは飾り
           return {
-            id: "1",
-            name: "管理者",
-            role: "admin"
-          }
+            id: '1',
+            name: '管理者',
+            role: 'admin',
+          };
         } else {
           return null;
         }
@@ -35,10 +35,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth",
+    signIn: '/auth',
   },
   session: {
-    strategy: "jwt" as const,
+    strategy: 'jwt' as const,
     maxAge: isProd ? 86400 : 300,
   },
   callbacks: {
@@ -50,14 +50,14 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async jwt({ token, user }: { token: Token; user?: unknown }) {
-      if (user && typeof user === "object" && "role" in user) {
+      if (user && typeof user === 'object' && 'role' in user) {
         token.role = (user as { role?: string }).role;
       }
       return token;
     },
   },
-}
+};
 
-const handler = NextAuth(authOptions)
+const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };

@@ -1,11 +1,10 @@
 'use client';
 
-import styles from "@/src/features/header/styles/GlobalHeader.module.css";
-import { Logo } from "@/src/features/header";
+import styles from '@/src/features/header/styles/GlobalHeader.module.css';
+import { Logo } from '@/src/features/header';
 import { ThemeProvider, ThemeSwitch } from '@/src/features/theme';
 
-export default function GlobalSimpleHeader() { 
-
+export default function GlobalSimpleHeader() {
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
@@ -15,5 +14,5 @@ export default function GlobalSimpleHeader() {
         <ThemeProvider />
       </div>
     </header>
-  )
+  );
 }

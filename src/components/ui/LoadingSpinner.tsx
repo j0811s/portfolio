@@ -9,5 +9,5 @@ export default function LoadingSpinner() {
         <div className={styles.tile}></div>
       </div>
     </div>
-  )
+  );
 }

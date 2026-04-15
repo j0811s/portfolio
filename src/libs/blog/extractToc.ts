@@ -19,23 +19,19 @@ export function extractTocFromHtml(
 
   const toc: TocItem[] = [];
 
-  let match: RegExpExecArray | null;
+  let match = headingRegex.exec(html);
 
-  while ((match = headingRegex.exec(html))) {
+  while (match !== null) {
     const level = Number(match[1]);
     const id = match[2];
 
     // タグを除去（a, strong など）
     const text = match[3].replace(/<[^>]+>/g, '').trim();
 
-    if (
-      level >= minLevel &&
-      level <= maxLevel &&
-      id &&
-      text
-    ) {
+    if (level >= minLevel && level <= maxLevel && id && text) {
       toc.push({ id, text, level });
     }
+    match = headingRegex.exec(html);
   }
 
   return toc;

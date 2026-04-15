@@ -1,13 +1,13 @@
 @import "kiso.css" layer(reset);
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap");
 @layer reset, variables, base, components, feature, page, utilities, overwrite;
 
 @layer variables {
   :root {
     scrollbar-gutter: stable;
     --page-width: 1280px;
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-sans: 'M PLUS Rounded 1c', sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --font-sans: "M PLUS Rounded 1c", sans-serif;
     --font-size: 16;
     --font-size-s: clamp(0.8125rem, 0.7866rem + 0.1105vw, 0.875rem);
     --font-size-m: clamp(0.875rem, 0.8232rem + 0.221vw, 1rem);
@@ -22,8 +22,8 @@
     --neumorphism-shadow-sm: 3px 3px 7px #c5c7cc, -3px -3px 7px #ffffff;
     --neumorphism-shadow-sm-hover: inset 3px 3px 6px #c5c7cc, inset -3px -3px 6px #ffffff;
     --text-primary: #3d3f47;
-    --bg-primary: #E8EAF0;
-    --bg-secondary: #DFE1E9;
+    --bg-primary: #e8eaf0;
+    --bg-secondary: #dfe1e9;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
     --error: #e53935;
@@ -36,8 +36,8 @@
     --neumorphism-shadow-sm: 3px 3px 7px #c5c7cc, -3px -3px 7px #ffffff;
     --neumorphism-shadow-sm-hover: inset 3px 3px 6px #c5c7cc, inset -3px -3px 6px #ffffff;
     --text-primary: #3d3f47;
-    --bg-primary: #E8EAF0;
-    --bg-secondary: #DFE1E9;
+    --bg-primary: #e8eaf0;
+    --bg-secondary: #dfe1e9;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
     --error: #e53935;
@@ -49,7 +49,7 @@
     --neumorphism-shadow-hover: inset 5px 5px 10px #060708, inset -5px -5px 10px #30343a;
     --neumorphism-shadow-sm: 3px 3px 7px #060708, -3px -3px 7px #30343a;
     --neumorphism-shadow-sm-hover: inset 3px 3px 6px #060708, inset -3px -3px 6px #30343a;
-    --text-primary: #E6E6E6;
+    --text-primary: #e6e6e6;
     --bg-primary: #1a1c1e;
     --bg-secondary: #222527;
     --theme-primary: #3a7fa8;
@@ -64,7 +64,7 @@
       --neumorphism-shadow-hover: inset 5px 5px 10px #060708, inset -5px -5px 10px #30343a;
       --neumorphism-shadow-sm: 3px 3px 7px #060708, -3px -3px 7px #30343a;
       --neumorphism-shadow-sm-hover: inset 3px 3px 6px #060708, inset -3px -3px 6px #30343a;
-      --text-primary: #E6E6E6;
+      --text-primary: #e6e6e6;
       --bg-primary: #1a1c1e;
       --bg-secondary: #222527;
       --theme-primary: #3a7fa8;
@@ -78,12 +78,12 @@
   * {
     box-sizing: border-box;
   }
-  
+
   body {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: max-content 1fr max-content;
-    grid-template-areas: 
+    grid-template-areas:
       "header"
       "main"
       "footer";
@@ -108,7 +108,8 @@
     width: 100%;
     max-width: calc(var(--page-width) + 40px);
     margin: 0 auto;
-    padding: clamp(1.875rem, 1.0981rem + 3.3149vw, 3.75rem) clamp(1.25rem, 0.732rem + 2.21vw, 2.5rem);
+    padding: clamp(1.875rem, 1.0981rem + 3.3149vw, 3.75rem)
+      clamp(1.25rem, 0.732rem + 2.21vw, 2.5rem);
   }
 
   h1,
@@ -179,7 +180,6 @@
   dialog {
     display: grid;
     justify-content: safe center;
-    background-color: transparent;
     overflow: auto;
     overscroll-behavior: contain;
     width: 100%;
@@ -256,7 +256,7 @@
   }
 
   .util-hidden {
-    display: none !important;
+    display: none;
   }
 
   .u-ellipsis {

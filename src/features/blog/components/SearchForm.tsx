@@ -35,6 +35,7 @@ export default function SearchForm({ defaultValue = '' }: Props) {
   };
 
   return (
+    // biome-ignore lint/a11y/useSemanticElements: <search>要素はReactのJSX型定義が未対応
     <form className={styles.form} onSubmit={handleSubmit} role="search">
       <input
         ref={inputRef}

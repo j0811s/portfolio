@@ -25,18 +25,20 @@ export default async function Page({ searchParams }: Props) {
   const { q } = await searchParams;
   const keyword = q?.trim() ?? '';
 
-  const { contents, totalCount } = await fetchBlogList('blog', {
+  const { contents, totalCount } = (await fetchBlogList('blog', {
     q: keyword || undefined,
     limit: LIMIT,
-  }) ?? { contents: [], totalCount: 0 };
+  })) ?? { contents: [], totalCount: 0 };
 
   return (
     <>
-      <Breadcrumb data={[
-        { name: 'トップページ', url: SITE_URL },
-        { name: '投稿', url: '/blog/' },
-        { name: '検索', url: '/blog/search' },
-      ]} />
+      <Breadcrumb
+        data={[
+          { name: 'トップページ', url: SITE_URL },
+          { name: '投稿', url: '/blog/' },
+          { name: '検索', url: '/blog/search' },
+        ]}
+      />
       <div className={styles.container}>
         <section>
           <SectionTitle title={keyword ? `「${keyword}」の検索結果：${totalCount}件` : '検索'} />

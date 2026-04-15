@@ -1,36 +1,30 @@
 // https://blog.microcms.io/microcms-next15-jamstack-blog/
 import { notFound } from 'next/navigation';
-import { createClient } from "microcms-js-sdk";
-import type {
-  MicroCMSQueries,
-  MicroCMSImage,
-  MicroCMSDate,
-  CustomRequestInit,
-  MicroCMSContentId
-} from "microcms-js-sdk";
+import { createClient } from 'microcms-js-sdk';
+import type { MicroCMSListResponse, MicroCMSQueries, CustomRequestInit } from 'microcms-js-sdk';
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
-  throw new Error("MICROCMS_SERVICE_DOMAIN is required");
+  throw new Error('MICROCMS_SERVICE_DOMAIN is required');
 }
 
 if (!process.env.MICROCMS_API_KEY) {
-  throw new Error("MICROCMS_API_KEY is required");
+  throw new Error('MICROCMS_API_KEY is required');
 }
 
 // API取得用のクライアントを作成
 export const client = createClient({
   serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
   apiKey: process.env.MICROCMS_API_KEY,
-  retry: true
-})
+  retry: true,
+});
 
 // 投稿一覧を取得
 export const fetchBlogList = async (
-  endpoint: string = "blog",
+  endpoint: string = 'blog',
   queries?: MicroCMSQueries,
   customRequestInit?: CustomRequestInit
 ) => {
-  let response;
+  let response: MicroCMSListResponse<Blog> | undefined;
 
   try {
     response = await client.getList<Blog>({
@@ -38,59 +32,55 @@ export const fetchBlogList = async (
       queries,
       customRequestInit,
     });
-  } catch (error) {
+  } catch (_error) {
     notFound();
   }
 
   return response;
-}
+};
 
 // 投稿の詳細を取得
 export const fetchBlogDetail = async (
-  endpoint: string = "blog",
+  endpoint: string = 'blog',
   contentId: string,
   queries?: MicroCMSQueries,
   customRequestInit?: CustomRequestInit
 ) => {
-  let response;
+  let response: Blog | undefined;
 
   try {
     response = await client.getListDetail<Blog>({
       endpoint,
       contentId,
       queries,
-      customRequestInit
+      customRequestInit,
     });
-  } catch (error) {
+  } catch (_error) {
     notFound();
   }
 
   return response;
-}
+};
 
 // コンテンツをすべて取得
-export const fetchBlogListAll = async (
-  endpoint: string = "blog",
-  queries?: MicroCMSQueries
-) => {
-  let response;
+export const fetchBlogListAll = async (endpoint: string = 'blog', queries?: MicroCMSQueries) => {
+  let response: Blog[] | undefined;
 
   try {
     response = await client.getAllContents({
       endpoint,
-      queries
+      queries,
     });
-  } catch (error) {
+  } catch (_error) {
     notFound();
   }
 
   return response;
-}
+};
 
 // エンドポイントのコンテンツIDをすべて取得
-export const fetchAllBlogId = async (endpoint: string = "blog") => {
-  const ids = await client.getAllContentIds({ endpoint })
-    .catch((err) => console.error(err));
+export const fetchAllBlogId = async (endpoint: string = 'blog') => {
+  const ids = await client.getAllContentIds({ endpoint }).catch((err) => console.error(err));
 
   return ids;
-}
+};

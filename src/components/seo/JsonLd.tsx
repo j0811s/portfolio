@@ -1,6 +1,6 @@
 type JsonLdProps<T extends object> = {
   data: T;
-}
+};
 
 function JsonLd<T extends object>({ data }: JsonLdProps<T>) {
   return (
