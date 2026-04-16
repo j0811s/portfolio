@@ -7,7 +7,7 @@ import { authOptions } from '@/src/app/api/auth/[...nextauth]/route';
 import { fetchBlogList, fetchBlogDetail } from '@/src/libs/microcms/blog';
 import { fetchSkillAll } from '@/src/libs/microcms/skill';
 
-const app = new Hono().basePath('/api');
+const app = new Hono({ strict: false }).basePath('/api');
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // プレビュー用
