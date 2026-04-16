@@ -11,7 +11,7 @@
     display: grid;
     place-items: center;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 2rem auto 0;
     padding: 3rem;
     text-align: center;
   }
@@ -52,7 +52,7 @@
 
   .successMessage {
     font-size: var(--font-size-m);
-    color: var(--theme-primary);
+    margin-bottom: 2rem;
   }
 
   .submit {

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
-import { CtaActionButton, FormInput } from '@/src/components';
+import { CtaActionButton, CtaLinkButton, FormInput } from '@/src/components';
 import styles from '@/src/features/contact/styles/ContactForm.module.css';
 
 type FormData = {
@@ -43,7 +43,10 @@ export default function ContactForm() {
   if (status === 'success') {
     return (
       <div className={clsx(styles.result, 'u-neumorphism')}>
-        <p className={styles.successMessage}>送信しました。お返事をお待ちください。</p>
+        <p className={styles.successMessage}>お問い合わせの送信を完了しました。</p>
+        <CtaLinkButton href={'/'} prevIcon={true}>
+          トップページに戻る
+        </CtaLinkButton>
       </div>
     );
   }
