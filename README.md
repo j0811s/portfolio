@@ -11,8 +11,11 @@ Next.js (App Router) + MicroCMS で構築したポートフォリオサイト。
 | CMS | MicroCMS |
 | API | Hono |
 | 認証 | NextAuth.js v4 |
+| メール送信 | Resend |
+| フォーム | react-hook-form |
 | 状態管理 | Jotai |
 | スタイル | CSS Modules (SCSS) |
+| Lint / Format | Biome |
 | ユニットテスト | Vitest |
 | E2E テスト | Playwright |
 
@@ -32,7 +35,11 @@ GA_ID=
 GTM_ID=
 AUTH_USERNAME=
 AUTH_PASSWORD=
-AUTH_SECRET=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+RESEND_API_KEY=
+RESEND_FROM_EMAIL=
+CONTACT_TO_EMAIL=
 ```
 
 ### 起動
@@ -49,8 +56,10 @@ npm run dev
 ```bash
 npm run dev          # 開発サーバー起動 (port 3000)
 npm run build        # プロダクションビルド
-npm run lint         # ESLint チェック
-npm run lint:fix     # ESLint 自動修正
+npm run lint         # Biome lint チェック
+npm run lint:fix     # Biome lint 自動修正
+npm run format       # Biome フォーマット自動修正
+npm run check        # Biome lint + format チェック
 npm run test         # ユニットテスト (Vitest)
 npm run coverage     # カバレッジレポート
 npm run e2e          # E2E テスト (Playwright)
@@ -70,19 +79,23 @@ npm run e2e:codegen  # E2E テスト自動生成
 | `/blog/tags/[tagId]/` | タグ別記事一覧 |
 | `/blog/archive/[year]/` | 年別アーカイブ |
 | `/blog/search/` | キーワード検索結果 |
+| `/contact/` | お問い合わせフォーム |
 | `/auth/` | ログイン |
+| `/sitemap.xml` | サイトマップ（自動生成） |
+| `/robots.txt` | クローラー設定（自動生成） |
 
 ## API ルート
 
 `src/app/api/[[...route]]/route.ts` に Hono でまとめています。
 
-| エンドポイント | 説明 |
-|---|---|
-| `GET /api/draft` | プレビューモード有効化 |
-| `GET /api/draft/disable` | プレビューモード解除 |
-| `GET /api/blog` | ブログ一覧取得 |
-| `GET /api/blog/:id` | ブログ記事詳細取得 |
-| `GET /api/skills` | スキル一覧取得 |
+| エンドポイント | 認証 | 説明 |
+|---|---|---|
+| `GET /api/draft` | — | プレビューモード有効化 |
+| `GET /api/draft/disable` | — | プレビューモード解除 |
+| `GET /api/blog` | — | ブログ一覧取得 |
+| `GET /api/blog/:id` | — | ブログ記事詳細取得 |
+| `GET /api/skills` | — | スキル一覧取得 |
+| `POST /api/contact` | 必須 | お問い合わせメール送信（Resend） |
 
 ## MicroCMS プレビュー
 
@@ -105,14 +118,21 @@ https://your-domain.com/api/draft?id={CONTENT_ID}&draftKey={DRAFT_KEY}
 src/
 ├── app/                  # ページ・API ルート
 │   ├── (login)/          # 認証が必要なページ
+│   │   ├── blog/         # ブログ関連ページ
+│   │   └── contact/      # お問い合わせページ
 │   ├── (logout)/         # 認証不要なページ (ログイン画面)
-│   └── api/              # API ルート
-├── features/             # 機能別コンポーネント（各機能に stores/ を内包）
+│   ├── api/              # API ルート (Hono)
+│   ├── sitemap.ts        # sitemap.xml 自動生成
+│   └── robots.ts         # robots.txt 自動生成
+├── features/             # 機能別コンポーネント
 │   ├── blog/
+│   ├── contact/          # お問い合わせフォーム (react-hook-form)
 │   ├── header/
 │   ├── footer/
+│   ├── hero/
 │   ├── theme/
-│   └── skills/
+│   ├── skills/
+│   └── skeleton/
 ├── components/           # 共通 UI コンポーネント
 ├── libs/                 # ユーティリティ
 │   ├── microcms/         # MicroCMS クライアント
