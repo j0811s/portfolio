@@ -1,10 +1,14 @@
 import { cookies, draftMode } from 'next/headers';
 import { Hono } from 'hono';
 import { handle } from 'hono/vercel';
+import { Resend } from 'resend';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/src/app/api/auth/[...nextauth]/route';
 import { fetchBlogList, fetchBlogDetail } from '@/src/libs/microcms/blog';
 import { fetchSkillAll } from '@/src/libs/microcms/skill';
 
 const app = new Hono().basePath('/api');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // プレビュー用
 app.get('/draft', async (c) => {
@@ -69,6 +73,47 @@ app.get('/skills', async (c) => {
   } catch {
     return c.json({ error: 'Not found' }, 404);
   }
+});
+
+// お問い合わせ
+app.post('/contact', async (c) => {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return c.json({ error: 'Unauthorized' }, 401);
+  }
+
+  let body: { name: string; email: string; subject: string; message: string };
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: 'Invalid request body' }, 400);
+  }
+
+  const { name, email, subject, message } = body;
+
+  if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+    return c.json({ error: 'All fields are required' }, 400);
+  }
+
+  const from = process.env.RESEND_FROM_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL;
+  if (!from || !to) {
+    return c.json({ error: 'Server misconfiguration' }, 500);
+  }
+
+  const { error } = await resend.emails.send({
+    from,
+    to,
+    subject: `【お問い合わせ】${subject}`,
+    text: `お名前: ${name}\nメールアドレス: ${email}\n\n${message}`,
+    replyTo: email,
+  });
+
+  if (error) {
+    return c.json({ error: 'Failed to send email' }, 500);
+  }
+
+  return c.json({ success: true });
 });
 
 export type AppType = typeof app;

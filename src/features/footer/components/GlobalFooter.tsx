@@ -29,6 +29,14 @@ export default function GlobalFooter() {
                 <span>投稿</span>
               </Link>
             </li>
+            <li className={styles.navigationListItem}>
+              <Link
+                className={`${styles.navigationListItemLink} ${styles.navigationListItemLinkHover}`}
+                href={`/contact/`}
+              >
+                <span>お問い合わせ</span>
+              </Link>
+            </li>
           </ul>
         </div>
         <small className={styles.copyright} translate="no">

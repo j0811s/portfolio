@@ -1,0 +1,63 @@
+@layer features {
+  .form {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 2rem auto 0;
+    padding: 3rem;
+  }
+
+  .result {
+    display: grid;
+    place-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .label {
+    display: grid;
+    gap: 0.5rem;
+    font-size: var(--font-size-s);
+  }
+
+  .labelText {
+    font-weight: bold;
+  }
+
+  .textarea {
+    appearance: none;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    font-size: var(--font-size-m);
+    font-family: inherit;
+    padding: 0.75em 1em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--neumorphism-shadow-hover);
+    width: 100%;
+    resize: vertical;
+  }
+
+  .textarea:focus-visible {
+    outline: 2px solid var(--theme-primary);
+    outline-offset: 2px;
+  }
+
+  .errorText {
+    font-size: var(--font-size-s);
+    color: var(--error);
+  }
+
+  .successMessage {
+    font-size: var(--font-size-m);
+    color: var(--theme-primary);
+  }
+
+  .submit {
+    display: grid;
+    place-content: center;
+    margin-top: 0.5rem;
+  }
+}
