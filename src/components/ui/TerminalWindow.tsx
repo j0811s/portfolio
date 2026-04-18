@@ -64,12 +64,16 @@ export default function TerminalWindow({
         <span className={styles.dotGreen} />
         <span className={styles.title}>{title}</span>
       </div>
-      <div className={styles.body}>
+      <div
+        className={styles.body}
+        style={autoResize ? { height: `${rows * 17 + 24}px` } : undefined}
+      >
         <Terminal
           ref={ref}
           cols={cols}
           rows={rows}
           autoResize={autoResize}
+          style={autoResize ? { height: '100%' } : undefined}
           theme="portfolio"
           cursorBlink
           onReady={handleReady}
