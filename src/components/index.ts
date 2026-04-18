@@ -6,3 +6,4 @@ export { default as SectionTitle } from '@/src/components/ui/SectionTitle';
 export { default as LoadingSpinner } from '@/src/components/ui/LoadingSpinner';
 export { default as Breadcrumb } from '@/src/components/ui/Breadcrumb';
 export { default as FormInput } from '@/src/components/ui/FormInput';
+export { default as TerminalWindow } from '@/src/components/ui/TerminalWindow';

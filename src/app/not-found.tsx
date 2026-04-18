@@ -1,8 +1,9 @@
 import styles from '@/src/styles/pages/not-found.module.css';
-import { CtaLinkButton, SectionTitle } from '@/src/components';
+import { SectionTitle } from '@/src/components';
 import { AuthProvider } from '@/src/components/provider/AuthProvider';
 import { GlobalHeader } from '@/src/features/header';
 import { GlobalFooter } from '@/src/features/footer';
+import { NotFoundTerminal } from '@/src/features/not-found';
 
 export default function NotFound() {
   return (
@@ -10,19 +11,12 @@ export default function NotFound() {
       <GlobalHeader />
       <main>
         <section className={styles.container}>
-          <p className={styles.errorCode}>404</p>
-          <div className={styles.titleWrapper}>
-            <SectionTitle title="Page Not Found" level={1} />
-            <p className={styles.pageSubTitle}>ご指定のページが見つかりませんでした。</p>
-            <div className={styles.divider} />
-          </div>
-          <div className={styles.btn}>
-            <CtaLinkButton href={'/'} prevIcon={true}>
-              トップページに戻る
-            </CtaLinkButton>
-            <CtaLinkButton href={'/blog/'} nextIcon={true}>
-              投稿を見る
-            </CtaLinkButton>
+          <hgroup className={styles.titleWrapper}>
+            <p className={styles.errorCode}>404</p>
+            <SectionTitle title="ページが見つかりませんでした" level={1} />
+          </hgroup>
+          <div className={styles.terminalWrapper}>
+            <NotFoundTerminal />
           </div>
         </section>
       </main>

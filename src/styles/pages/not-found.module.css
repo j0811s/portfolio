@@ -49,6 +49,13 @@
     margin-top: 2.5rem;
   }
 
+  .terminalWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
   @media screen and (width >= 768px) {
     .btn {
       grid-template-columns: repeat(2, max-content);

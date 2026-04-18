@@ -1,5 +1,8 @@
 import type { MicroCMSImage, MicroCMSDate, MicroCMSContentId } from 'microcms-js-sdk';
 
+declare module '@wterm/react/css' {}
+declare module '@wterm/dom/css' {}
+
 declare global {
   // Page Props
   export type SitePageProps = {

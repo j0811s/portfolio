@@ -4,6 +4,7 @@ const nextConfig = {
   // output: 'export',
   // distDir: 'dist',
   trailingSlash: true,
+  serverExternalPackages: ['just-bash', '@wterm/just-bash'],
   reactStrictMode: true,
   images: {
     remotePatterns: [
