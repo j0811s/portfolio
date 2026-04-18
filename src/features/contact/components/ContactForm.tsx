@@ -43,7 +43,7 @@ export default function ContactForm() {
   if (status === 'success') {
     return (
       <div className={clsx(styles.result, 'u-neumorphism')}>
-        <p className={styles.successMessage}>お問い合わせの送信を完了しました。</p>
+        <p className={styles.successMessage}>送信しました。お返事をお待ちください。</p>
         <CtaLinkButton href={'/'} prevIcon={true}>
           トップページに戻る
         </CtaLinkButton>
@@ -57,6 +57,13 @@ export default function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
     >
+      {process.env.NODE_ENV === 'development' && (
+        <div className={styles.devPreview}>
+          <button type="button" onClick={() => setStatus('success')}>
+            [Dev] 完了画面プレビュー
+          </button>
+        </div>
+      )}
       <label className={styles.label} htmlFor="contact-name">
         <span className={styles.labelText}>お名前</span>
         <FormInput

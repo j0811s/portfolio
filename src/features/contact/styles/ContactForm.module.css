@@ -55,6 +55,25 @@
     margin-bottom: 2rem;
   }
 
+  .devPreview {
+    font-size: var(--font-size-s);
+    text-align: right;
+  }
+
+  .devPreview button {
+    color: var(--text-secondary);
+    background: none;
+    border: 1px dashed currentColor;
+    border-radius: 4px;
+    padding: 0.25em 0.75em;
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  .devPreview button:hover {
+    opacity: 1;
+  }
+
   .submit {
     display: grid;
     place-content: center;
