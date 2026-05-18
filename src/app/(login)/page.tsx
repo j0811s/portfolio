@@ -31,7 +31,7 @@ export default async function Top() {
       <JsonLd data={createBreadcrumbJsonLd([{ name: 'トップページ', url: SITE_URL }])} />
       <Hero skills={allSkills} />
       <section className={styles.section}>
-        <SectionTitle title="投稿" level={2} />
+        <SectionTitle title="投稿" label="01" variant="editorial" level={2} />
         <ArticleCardList contents={portfolioArticles} />
         <div className={styles.moreLinkWrapper}>
           <CtaLinkButton className={styles.moreLink} href="/blog/" nextIcon={true}>
@@ -40,7 +40,7 @@ export default async function Top() {
         </div>
       </section>
       <section className={styles.section}>
-        <SectionTitle title="経験" level={2} />
+        <SectionTitle title="経験" label="02" variant="editorial" level={2} />
         <SkillSet data={skills} />
       </section>
     </>

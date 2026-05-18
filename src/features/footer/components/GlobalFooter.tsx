@@ -10,38 +10,36 @@ export default function GlobalFooter() {
   return (
     <>
       <PageTop />
-      <footer className={`${styles.container}`}>
-        <div className={styles.navigation}>
-          <ul className={styles.navigationList}>
-            <li className={styles.navigationListItem}>
-              <Link
-                className={`${styles.navigationListItemLink} ${styles.navigationListItemLinkHover}`}
-                href={`/`}
-              >
-                <span>トップページ</span>
-              </Link>
-            </li>
-            <li className={styles.navigationListItem}>
-              <Link
-                className={`${styles.navigationListItemLink} ${styles.navigationListItemLinkHover}`}
-                href={`/blog/`}
-              >
-                <span>投稿</span>
-              </Link>
-            </li>
-            <li className={styles.navigationListItem}>
-              <Link
-                className={`${styles.navigationListItemLink} ${styles.navigationListItemLinkHover}`}
-                href={`/contact/`}
-              >
-                <span>お問い合わせ</span>
-              </Link>
-            </li>
-          </ul>
+      <footer className={styles.container}>
+        <div className={styles.inner}>
+          <div className={styles.top}>
+            <Link className={styles.brand} href="/" translate="no">
+              j-sato
+            </Link>
+            <nav className={styles.navigation}>
+              <ul className={styles.navigationList}>
+                <li className={styles.navigationListItem}>
+                  <Link className={styles.navigationListItemLink} href="/">
+                    トップページ
+                  </Link>
+                </li>
+                <li className={styles.navigationListItem}>
+                  <Link className={styles.navigationListItemLink} href="/blog/">
+                    投稿
+                  </Link>
+                </li>
+                <li className={styles.navigationListItem}>
+                  <Link className={styles.navigationListItemLink} href="/contact/">
+                    お問い合わせ
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <small className={styles.copyright} translate="no">
+            &copy; j-sato
+          </small>
         </div>
-        <small className={styles.copyright} translate="no">
-          &copy; j-sato
-        </small>
       </footer>
     </>
   );

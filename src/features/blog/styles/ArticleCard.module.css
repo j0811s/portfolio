@@ -2,15 +2,14 @@
   .link {
     overflow: hidden;
     display: block;
-    border-radius: 12px;
-    border: 1px solid color-mix(in srgb, var(--text-primary) 12%, transparent);
+    border-radius: 14px;
     color: var(--text-primary);
     background-color: var(--bg-primary);
+    box-shadow: var(--neumorphism-shadow);
     text-decoration: none;
     transition:
       transform 0.3s ease,
-      box-shadow 0.3s ease,
-      border-color 0.3s ease;
+      box-shadow 0.3s ease;
   }
 
   .post {
@@ -30,7 +29,7 @@
   }
 
   .thmubnail img {
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
   }
 
   .postInner {
@@ -38,7 +37,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 0.75em;
-    padding: 1.5em;
+    padding: 1.25em 1.5em 1.5em;
   }
 
   .title {
@@ -51,9 +50,11 @@
 
   @media (any-hover: hover) {
     .link:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px color-mix(in srgb, var(--text-primary) 12%, transparent);
-      border-color: color-mix(in srgb, var(--theme-primary) 50%, transparent);
+      transform: translateY(-5px);
+      box-shadow:
+        var(--neumorphism-shadow),
+        0 16px 32px color-mix(in srgb, var(--text-primary) 10%, transparent);
+      opacity: 1;
     }
 
     .link:hover .thmubnail img {

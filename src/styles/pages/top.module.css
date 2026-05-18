@@ -1,11 +1,23 @@
 @layer page {
+  .section {
+    position: relative;
+  }
+
   .section + .section {
-    margin-top: 4rem;
+    margin-top: clamp(5rem, 3rem + 6vw, 8rem);
   }
 
   .moreLinkWrapper {
-    display: grid;
-    place-content: center;
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
     margin-top: 3rem;
+  }
+
+  .moreLinkWrapper::before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: color-mix(in srgb, var(--text-primary) 14%, transparent);
   }
 }
