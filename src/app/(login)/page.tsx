@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 function pickRandom<T>(array: T[], count: number): T[] {
-  return [...array].sort(() => Math.random() - 0.5).slice(0, count);
+  return array.toSorted(() => Math.random() - 0.5).slice(0, count);
 }
 
 export default async function Top() {
