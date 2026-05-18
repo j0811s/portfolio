@@ -17,10 +17,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-function pickRandom<T>(array: T[], count: number): T[] {
-  return array.toSorted(() => Math.random() - 0.5).slice(0, count);
-}
-
 export default async function Top() {
   const [skills, { contents: portfolioArticles }] = await Promise.all([
     fetchSkillAll(),
@@ -28,13 +24,12 @@ export default async function Top() {
   ]);
 
   const allSkills = skills.flatMap((s) => s.skills.filter((skill) => !skill.hidden));
-  const heroSkills = pickRandom(allSkills, 4);
 
   return (
     <>
       <JsonLd data={createWebsiteJsonLd()} />
       <JsonLd data={createBreadcrumbJsonLd([{ name: 'トップページ', url: SITE_URL }])} />
-      <Hero skills={heroSkills} />
+      <Hero skills={allSkills} />
       <section className={styles.section}>
         <SectionTitle title="投稿" level={2} />
         <ArticleCardList contents={portfolioArticles} />

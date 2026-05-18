@@ -1,9 +1,19 @@
 'use client';
 
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from 'motion/react';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '@/src/features/hero/styles/Hero.module.css';
+
+const SWAP_INTERVAL = 6000;
+const SLOT_KEYS = ['slot-0', 'slot-1', 'slot-2', 'slot-3'] as const;
 
 const SHAPES = [
   {
@@ -49,13 +59,21 @@ type SpringValue = ReturnType<typeof useSpring>;
 type ShapeProps = {
   skill: SkillInfo[number];
   index: number;
+  delay: number;
   springX: SpringValue;
   springY: SpringValue;
 };
 
-function HeroShape({ skill, index, springX, springY }: ShapeProps) {
+function HeroShape({ skill, index, delay, springX, springY }: ShapeProps) {
   const shouldReduceMotion = useReducedMotion();
   const { wrapper, shadow, depth, floatY, floatDuration, floatDelay, entryDelay } = SHAPES[index];
+  const isFirstMount = useRef(true);
+
+  useEffect(() => {
+    isFirstMount.current = false;
+  }, []);
+
+  const activeDelay = isFirstMount.current ? entryDelay : delay;
 
   const x = useTransform(springX, (v) => v * depth);
   const y = useTransform(springY, (v) => v * depth);
@@ -65,32 +83,40 @@ function HeroShape({ skill, index, springX, springY }: ShapeProps) {
       className={wrapper}
       style={{ x: shouldReduceMotion ? undefined : x, y: shouldReduceMotion ? undefined : y }}
     >
-      <motion.span
-        className={`${styles.shapeInner} ${shadow}`}
-        initial={shouldReduceMotion ? false : { scale: 0, opacity: 0 }}
-        animate={
-          shouldReduceMotion ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1, y: floatY }
-        }
-        transition={{
-          scale: { type: 'spring', stiffness: 260, damping: 20, delay: entryDelay },
-          opacity: { duration: 0.4, delay: entryDelay },
-          y: {
-            duration: floatDuration,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: floatDelay,
-          },
-        }}
-        whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
-      >
-        <Image
-          className={styles.shapeIcon}
-          src={skill.logo.url}
-          alt=""
-          width={skill.logo.width}
-          height={skill.logo.height}
-        />
-      </motion.span>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={skill.name}
+          className={`${styles.shapeInner} ${shadow}`}
+          initial={shouldReduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
+          animate={
+            shouldReduceMotion ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1, y: floatY }
+          }
+          exit={
+            shouldReduceMotion
+              ? { opacity: 0, transition: { duration: 0.15, delay: activeDelay } }
+              : { scale: 0, opacity: 0, transition: { duration: 0.2, delay: activeDelay } }
+          }
+          transition={{
+            scale: { type: 'spring', stiffness: 260, damping: 20, delay: activeDelay },
+            opacity: { duration: 0.4, delay: activeDelay },
+            y: {
+              duration: floatDuration,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: floatDelay,
+            },
+          }}
+          whileHover={shouldReduceMotion ? undefined : { scale: 1.12 }}
+        >
+          <Image
+            className={styles.shapeIcon}
+            src={skill.logo.url}
+            alt=""
+            width={skill.logo.width}
+            height={skill.logo.height}
+          />
+        </motion.span>
+      </AnimatePresence>
     </motion.div>
   );
 }
@@ -105,6 +131,9 @@ export default function HeroShapes({ skills }: Props) {
   const springX = useSpring(mouseX, { stiffness: 60, damping: 25 });
   const springY = useSpring(mouseY, { stiffness: 60, damping: 25 });
 
+  const [displayed, setDisplayed] = useState<SkillInfo>(() => skills.slice(0, 4));
+  const [delays, setDelays] = useState([0, 0, 0, 0]);
+
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX - window.innerWidth / 2);
@@ -114,10 +143,31 @@ export default function HeroShapes({ skills }: Props) {
     return () => window.removeEventListener('mousemove', onMouseMove);
   }, [mouseX, mouseY]);
 
+  useEffect(() => {
+    if (skills.length <= 4) return;
+    const id = setInterval(() => {
+      setDelays([0, 1, 2, 3].toSorted(() => Math.random() - 0.5).map((rank) => rank * 0.25));
+      setDisplayed((prev) => {
+        const prevNames = new Set(prev.map((s) => s.name));
+        const pool = skills.filter((s) => !prevNames.has(s.name));
+        const source = pool.length >= 4 ? pool : skills;
+        return source.toSorted(() => Math.random() - 0.5).slice(0, 4);
+      });
+    }, SWAP_INTERVAL);
+    return () => clearInterval(id);
+  }, [skills]);
+
   return (
     <>
-      {skills.map((skill, i) => (
-        <HeroShape key={skill.name} skill={skill} index={i} springX={springX} springY={springY} />
+      {displayed.map((skill, i) => (
+        <HeroShape
+          key={SLOT_KEYS[i]}
+          skill={skill}
+          index={i}
+          delay={delays[i]}
+          springX={springX}
+          springY={springY}
+        />
       ))}
     </>
   );
