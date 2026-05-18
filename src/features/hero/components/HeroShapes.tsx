@@ -131,8 +131,10 @@ export default function HeroShapes({ skills }: Props) {
   const springX = useSpring(mouseX, { stiffness: 60, damping: 25 });
   const springY = useSpring(mouseY, { stiffness: 60, damping: 25 });
 
-  const [displayed, setDisplayed] = useState<SkillInfo>(() => skills.slice(0, 4));
-  const [delays, setDelays] = useState([0, 0, 0, 0]);
+  const [swap, setSwap] = useState(() => ({
+    displayed: skills.slice(0, 4) as SkillInfo,
+    delays: [0, 0, 0, 0],
+  }));
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
@@ -146,12 +148,14 @@ export default function HeroShapes({ skills }: Props) {
   useEffect(() => {
     if (skills.length <= 4) return;
     const id = setInterval(() => {
-      setDelays([0, 1, 2, 3].toSorted(() => Math.random() - 0.5).map((rank) => rank * 0.25));
-      setDisplayed((prev) => {
-        const prevNames = new Set(prev.map((s) => s.name));
+      setSwap((prev) => {
+        const prevNames = new Set(prev.displayed.map((s) => s.name));
         const pool = skills.filter((s) => !prevNames.has(s.name));
         const source = pool.length >= 4 ? pool : skills;
-        return source.toSorted(() => Math.random() - 0.5).slice(0, 4);
+        return {
+          displayed: source.toSorted(() => Math.random() - 0.5).slice(0, 4) as SkillInfo,
+          delays: [0, 1, 2, 3].toSorted(() => Math.random() - 0.5).map((rank) => rank * 0.25),
+        };
       });
     }, SWAP_INTERVAL);
     return () => clearInterval(id);
@@ -159,12 +163,12 @@ export default function HeroShapes({ skills }: Props) {
 
   return (
     <>
-      {displayed.map((skill, i) => (
+      {swap.displayed.map((skill, i) => (
         <HeroShape
           key={SLOT_KEYS[i]}
           skill={skill}
           index={i}
-          delay={delays[i]}
+          delay={swap.delays[i]}
           springX={springX}
           springY={springY}
         />
