@@ -1,5 +1,5 @@
 // https://blog.microcms.io/microcms-next15-jamstack-blog/
-import { notFound } from 'next/navigation';
+import { notFound, unstable_rethrow } from 'next/navigation';
 import { createClient } from 'microcms-js-sdk';
 import type { MicroCMSQueries } from 'microcms-js-sdk';
 
@@ -27,7 +27,8 @@ export const fetchSkillAll = async (endpoint: string = 'skill', queries?: MicroC
       endpoint,
       queries,
     });
-  } catch (_error) {
+  } catch (error) {
+    unstable_rethrow(error);
     notFound();
   }
 

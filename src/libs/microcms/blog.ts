@@ -1,5 +1,5 @@
 // https://blog.microcms.io/microcms-next15-jamstack-blog/
-import { notFound } from 'next/navigation';
+import { notFound, unstable_rethrow } from 'next/navigation';
 import { createClient } from 'microcms-js-sdk';
 import type { MicroCMSListResponse, MicroCMSQueries, CustomRequestInit } from 'microcms-js-sdk';
 
@@ -32,7 +32,8 @@ export const fetchBlogList = async (
       queries,
       customRequestInit,
     });
-  } catch (_error) {
+  } catch (error) {
+    unstable_rethrow(error);
     notFound();
   }
 
@@ -55,7 +56,8 @@ export const fetchBlogDetail = async (
       queries,
       customRequestInit,
     });
-  } catch (_error) {
+  } catch (error) {
+    unstable_rethrow(error);
     notFound();
   }
 
@@ -71,7 +73,8 @@ export const fetchBlogListAll = async (endpoint: string = 'blog', queries?: Micr
       endpoint,
       queries,
     });
-  } catch (_error) {
+  } catch (error) {
+    unstable_rethrow(error);
     notFound();
   }
 

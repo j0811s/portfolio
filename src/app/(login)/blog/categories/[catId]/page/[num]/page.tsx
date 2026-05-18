@@ -66,13 +66,14 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
 
 export default async function Page({ params }: Props) {
   const { catId, num } = await params;
-  const { contents, totalCount } = await fetchBlogList('blog', {
-    limit: LIMIT,
-    filters: `category[contains]${catId}`,
-    offset: LIMIT * (Number(num) - 1),
-  });
-
-  const categoryContent = await fetchBlogDetail('categories', catId);
+  const [{ contents, totalCount }, categoryContent] = await Promise.all([
+    fetchBlogList('blog', {
+      limit: LIMIT,
+      filters: `category[contains]${catId}`,
+      offset: LIMIT * (Number(num) - 1),
+    }),
+    fetchBlogDetail('categories', catId),
+  ]);
   const catName = categoryContent.name;
 
   const breadcrumb = [

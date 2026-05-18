@@ -1,5 +1,7 @@
 import styles from '@/src/styles/pages/top.module.css';
+import type { Metadata } from 'next';
 import { SITE_URL } from '@/src/constants/site';
+import { SITE_META } from '@/src/constants/site';
 import { fetchSkillAll } from '@/src/libs/microcms/skill';
 import { fetchBlogList } from '@/src/libs/microcms/blog';
 import { SkillSet } from '@/src/features/skills';
@@ -9,18 +11,23 @@ import { CtaLinkButton, SectionTitle } from '@/src/components/';
 import { JsonLd } from '@/src/components';
 import { createBreadcrumbJsonLd, createWebsiteJsonLd } from '@/src/libs/seo/jsonLd';
 
+export const metadata: Metadata = {
+  title: SITE_META.title,
+  description: SITE_META.description,
+  robots: { index: true, follow: true },
+};
+
 function pickRandom<T>(array: T[], count: number): T[] {
   return [...array].sort(() => Math.random() - 0.5).slice(0, count);
 }
 
 export default async function Top() {
-  const skills = await fetchSkillAll();
-  const { contents: portfolioArticles } = await fetchBlogList('blog', {
-    limit: 8,
-    filters: 'category[contains]portfolio',
-  });
+  const [skills, { contents: portfolioArticles }] = await Promise.all([
+    fetchSkillAll(),
+    fetchBlogList('blog', { limit: 8, filters: 'category[contains]portfolio' }),
+  ]);
 
-  const allSkills = skills.flatMap((s) => s.skills).filter((s) => !s.hidden);
+  const allSkills = skills.flatMap((s) => s.skills.filter((skill) => !skill.hidden));
   const heroSkills = pickRandom(allSkills, 4);
 
   return (

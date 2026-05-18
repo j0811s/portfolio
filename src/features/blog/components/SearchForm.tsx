@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function SearchForm({ defaultValue = '' }: Props) {
-  const router = useRouter();
+  const { push } = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasValue, setHasValue] = useState(defaultValue !== '');
 
@@ -23,7 +23,7 @@ export default function SearchForm({ defaultValue = '' }: Props) {
       return;
     }
 
-    router.push(`/blog/search?q=${encodeURIComponent(q)}`);
+    push(`/blog/search?q=${encodeURIComponent(q)}`);
   };
 
   const handleReset = () => {
@@ -31,7 +31,7 @@ export default function SearchForm({ defaultValue = '' }: Props) {
       inputRef.current.value = '';
     }
     setHasValue(false);
-    router.push('/blog/');
+    push('/blog/');
   };
 
   return (

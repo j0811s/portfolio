@@ -42,11 +42,10 @@ export async function generateMetadata(
 
 export default async function Page({ params }: Props) {
   const { catId } = await params;
-  const { contents, totalCount } = await fetchBlogList('blog', {
-    limit: LIMIT,
-    filters: `category[contains]${catId}`,
-  });
-  const categoryContent = await fetchBlogDetail('categories', catId);
+  const [{ contents, totalCount }, categoryContent] = await Promise.all([
+    fetchBlogList('blog', { limit: LIMIT, filters: `category[contains]${catId}` }),
+    fetchBlogDetail('categories', catId),
+  ]);
   const catName = categoryContent.name;
 
   const breadcrumb = [

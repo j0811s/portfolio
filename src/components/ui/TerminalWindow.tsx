@@ -25,7 +25,7 @@ export default function TerminalWindow({
   ...shellOptions
 }: TerminalWindowProps) {
   const { ref, write } = useTerminal();
-  const router = useRouter();
+  const { push } = useRouter();
   const shellRef = useRef<BashShell | null>(null);
   const shellOptionsRef = useRef(shellOptions);
 
@@ -37,12 +37,12 @@ export default function TerminalWindow({
         if (visible) {
           write(visible);
         }
-        setTimeout(() => router.push(match[1]), 1000);
+        setTimeout(() => push(match[1]), 1000);
         return;
       }
       write(data);
     },
-    [write, router]
+    [write, push]
   );
 
   const handleReady = useCallback(() => {

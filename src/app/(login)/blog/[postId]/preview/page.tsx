@@ -1,7 +1,12 @@
 import styles from '@/src/styles/pages/blog/layout.module.css';
+import type { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
+  robots: 'noindex, nofollow',
+};
 import { SITE_URL } from '@/src/constants/site';
 import { Breadcrumb, JsonLd } from '@/src/components';
 import { createArticleJsonLd } from '@/src/libs/seo/jsonLd';
@@ -13,11 +18,13 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-  const { isEnabled } = await draftMode();
+  const [{ isEnabled }, { postId }, cookieStore] = await Promise.all([
+    draftMode(),
+    params,
+    cookies(),
+  ]);
   if (!isEnabled && process.env.NODE_ENV !== 'development') notFound();
 
-  const { postId } = await params;
-  const cookieStore = await cookies();
   const draftKey = cookieStore.get('draft_key')?.value;
 
   const post = await fetchBlogDetail('blog', postId, draftKey ? { draftKey } : undefined, {
