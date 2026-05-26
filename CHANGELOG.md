@@ -18,3 +18,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `CLAUDE.md`: `src/` 編集後のワークフローで `/pre-push` スキルを優先使用するよう更新
+- `.husky/pre-push`: CHANGELOG.md 未更新時に push を警告からブロック（exit 1）に変更。回避は `--no-verify`
