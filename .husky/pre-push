@@ -21,14 +21,11 @@ done
 
 if [ "$warn" = "true" ]; then
   echo ""
-  echo "⚠️  CHANGELOG.md が更新されていません。"
-  echo "   /wrap-up を実行してから push することを推奨します。"
-  echo "   このまま push を続行するには Enter を押してください（または Ctrl+C で中断）。"
+  echo "🚫 CHANGELOG.md が更新されていません。"
+  echo "   /wrap-up を実行してから push してください。"
+  echo "   スキップする場合は git push --no-verify を使用してください。"
   echo ""
-  # ブロックせず警告のみ（端末が TTY の場合のみ入力待ち）
-  if [ -t 1 ]; then
-    read -r _
-  fi
+  exit 1
 fi
 
 exit 0
