@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Warn if CHANGELOG.md has not been updated in the commits being pushed
+
+warn=true
+
+while read local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+    range="$local_sha"
+  else
+    range="$remote_sha..$local_sha"
+  fi
+
+  changed=$(git diff --name-only "$range" 2>/dev/null | grep "^CHANGELOG\.md$")
+
+  if [ -n "$changed" ]; then
+    warn=false
+    break
+  fi
+done
+
+if [ "$warn" = "true" ]; then
+  echo ""
+  echo "⚠️  CHANGELOG.md が更新されていません。"
+  echo "   /wrap-up を実行してから push することを推奨します。"
+  echo "   このまま push を続行するには Enter を押してください（または Ctrl+C で中断）。"
+  echo ""
+  # ブロックせず警告のみ（端末が TTY の場合のみ入力待ち）
+  if [ -t 1 ]; then
+    read -r _
+  fi
+fi
+
+exit 0
