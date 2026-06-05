@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "input=$(cat); echo \"$input\" | grep -q '\"file_path\".*[/]src[/]' && (npm run check 2>&1 | tail -20); exit 0"
+            "command": "input=$(cat); echo \"$input\" | grep -q '\"file_path\".*[/]src[/]' && (cd /Users/sato/github/portfolio && npm run check 2>&1 | tail -20); exit 0"
           }
         ]
       }
