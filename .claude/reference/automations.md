@@ -13,6 +13,7 @@
 |-------------|------|
 | `doc-curator` | JSDoc・セッションサマリーの生成（`/wrap-up` から利用） |
 | `security-reviewer` | NextAuth・Hono API・フォームの認証/認可/XSS をレビュー |
+| `code-reviewer` | 型安全性・React/Next.js 規約・CSS Modules・パフォーマンス・アクセシビリティをレビュー |
 
 ## MCP サーバー
 

@@ -19,4 +19,3 @@
 1. `git status`,`git add -A`を実行（`git commit`は実行しない）
 2. `npm run test`と`npm run e2e`を実行する
 3. 追加・変更した機能に合わせて `CLAUDE.md` と `README.md` を更新（不要なら省略可）
-4. `/difit-review` でコードレビューを実施
