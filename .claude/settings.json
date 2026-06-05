@@ -1,0 +1,29 @@
+{
+  "env": {
+    "CLAUDE_CODE_NEW_INIT": "true"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); echo \"$input\" | grep -q '\"file_path\".*\\.env' && echo 'BLOCKED: .env ファイルへの書き込みは禁止されています' && exit 2; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); echo \"$input\" | grep -q '\"file_path\".*[/]src[/]' && (npm run check 2>&1 | tail -20); exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}
