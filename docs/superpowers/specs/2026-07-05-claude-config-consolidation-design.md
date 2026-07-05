@@ -25,8 +25,9 @@
 既存ステップ 1〜4(git add → `npm run check` → `npm run build` → test/e2e)の後に **ステップ5: レビューフェーズ** を追加する。
 
 1. `git diff HEAD`(未コミットが無い場合は main との差分)から変更の種類を判定する
-2. `code-reviewer` エージェントを常時起動する
-3. 変更内容に応じて追加エージェントを起動する(条件表は workflow.md から本スキルへ移設):
+2. `.tsx` / `.jsx` の変更がある場合は `/react-doctor` を実行する
+3. `code-reviewer` エージェントを常時起動する
+4. 変更内容に応じて追加エージェントを起動する(条件表は workflow.md から本スキルへ移設):
 
    | 変更内容 | エージェント |
    |---------|-------------|
@@ -36,8 +37,8 @@
    | JSDoc・コメントの追加 | `pr-review-toolkit:comment-analyzer` |
    | 認証・API・フォーム変更 | `security-reviewer` |
 
-4. 最後に `/difit-review` を起動する
-5. 結果サマリー表に「レビュー」行を追加し、Must(要修正)指摘の件数を表示する
+5. 最後に `/difit-review` を起動する
+6. 結果サマリー表に「レビュー」行を追加し、Must(要修正)指摘の件数を表示する
 
 `git commit` / `git push` を実行しない方針は変更しない。
 

@@ -19,7 +19,7 @@
 さらに包括的なレビューが必要な場合は `/pr-review-toolkit:review-pr` を実行する
 （レビュー対象を絞る例: `/pr-review-toolkit:review-pr errors tests`）。
 
-## `test/` 配下にあるファイル編集後
+## `tests/` 配下にあるファイル編集後
 
 1. `git status`,`git add -A`を実行（`git commit`は実行しない）
 2. `npm run test`と`npm run e2e`を実行する
