@@ -25,6 +25,7 @@ TypeScript・React・Next.js のコード品質をプロジェクト規約に沿
 - データ取得の重複（`React.cache()` を使うべき箇所）
 - ISR の `revalidate` 設定漏れ
 - `generateStaticParams` の抜け漏れ
+- 内部遷移で `Link` コンポーネントを使わず `<a>` タグを直接使っていないか
 
 **CSS Modules**
 
@@ -43,6 +44,7 @@ TypeScript・React・Next.js のコード品質をプロジェクト規約に沿
 - 不要な再レンダリング（メモ化が有効な箇所）
 - 画像の `priority` / `sizes` 設定
 - バンドルサイズに影響する大きな依存の追加
+- Google Fonts に `<link rel="preconnect">` が設定されているか
 
 **アクセシビリティ**
 

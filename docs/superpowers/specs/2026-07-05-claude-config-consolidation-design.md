@@ -54,7 +54,7 @@
 
 - `.claude/skills/code-review/` を削除する。
 - スキルにのみ存在した観点を `code-reviewer` エージェント(`.claude/agents/code-reviewer.md`)へ移植する:
-  - `/react-doctor` を実行し、優先度「高」「中」の問題が消えるまで修正する(「低」は許容)
+  - `/react-doctor` の実行ステップは `/pre-push` のステップ5に移設する(code-reviewer エージェントの allowed-tools に Skill ツールが無く、エージェント内からスキルを起動できないため)
   - Google Fonts に `<link rel="preconnect">` が設定されているか
   - `Link` コンポーネントを使うべき箇所で `<a>` タグを直接使っていないか
 - `NEXT_PUBLIC_` プレフィックスの誤用によるシークレットのクライアントバンドル漏れチェックを `security-reviewer`(`.claude/agents/security-reviewer.md`)のシークレット管理欄に追加する。
