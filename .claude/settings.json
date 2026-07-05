@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "input=$(cat); echo \"$input\" | grep -q '\"file_path\".*[/]src[/]' && (cd /Users/sato/github/portfolio && npm run check 2>&1 | tail -20); exit 0"
+            "command": "input=$(cat); file=$(printf '%s' \"$input\" | sed -n 's/.*\"file_path\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p'); case \"$file\" in /Users/sato/github/portfolio/src/*) cd /Users/sato/github/portfolio && npx biome check \"$file\" 2>&1 | tail -20;; esac; exit 0"
           }
         ]
       }
