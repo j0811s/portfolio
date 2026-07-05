@@ -5,7 +5,7 @@
 | 種別 | トリガー | 動作 |
 |------|----------|------|
 | PreToolUse | Edit / Write で `.env` を含むパスを検出 | 書き込みをブロック |
-| PostToolUse | Edit / Write で `src/` 配下のファイルを編集後 | `npm run check` を自動実行（末尾20行を表示） |
+| PostToolUse | Edit / Write で `src/` 配下のファイルを編集後 | 編集ファイルのみ `npx biome check` を自動実行（末尾20行を表示） |
 
 ## サブエージェント（`.claude/agents/`）
 
@@ -18,6 +18,7 @@
 ## pr-review-toolkit エージェント（プラグイン）
 
 変更内容に応じて以下を使い分ける。`code-reviewer` と `security-reviewer` はプロジェクト固有のため上記を優先する。
+これらのレビューエージェントは `/pre-push` のステップ5（コードレビュー）から変更内容に応じて自動起動される。
 
 | エージェント | 使うタイミング |
 |-------------|--------------|
