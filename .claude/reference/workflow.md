@@ -1,36 +1,29 @@
 # ファイル編集後のワークフロー
 
-## `src/`配下にあるファイル編集後
+## `src/` 配下の編集中
 
-以下の順で必ず実行すること：
+- PostToolUse フックが編集ファイルのみを `npx biome check` で自動チェックする
+- エラーが解消しない場合は `/biome-autofix` を実行する
+- 編集ごとのコードレビューは行わない（push 前に集約）
 
-1. `/pre-push` スキルが利用可能な場合は優先して実行する（ステップ1〜4を自動化）。利用できない場合は以下を手動で実行：
-   1. `git status`,`git add -A`を実行（`git commit`は実行しない）
-   2. `npm run check`を実行し、エラーが出たら修正を提案する（不要なら省略可）
-   3. `npm run build`を実行し、エラーが出たら修正を提案する（不要なら省略可）
-   4. 必要なら`test/`にユニットテストとE2Eテストを作成し、`npm run test`と`npm run e2e`を実行する
-2. コードレビューを実施（必須）：
-   - **常時**: `code-reviewer` エージェント（型安全性・Next.js・CSS Modules）
-   - **変更内容に応じて追加**：
-     | 変更内容 | 使うエージェント |
-     |---------|----------------|
-     | エラーハンドリング・catch ブロック | `pr-review-toolkit:silent-failure-hunter` |
-     | 型定義の追加・変更 | `pr-review-toolkit:type-design-analyzer` |
-     | テストの追加・変更 | `pr-review-toolkit:pr-test-analyzer` |
-     | JSDoc・コメントの追加 | `pr-review-toolkit:comment-analyzer` |
-     | 認証・API・フォーム変更 | `security-reviewer` |
-3. 追加・変更した機能に合わせて `CLAUDE.md` と `README.md` を更新（不要なら省略可）
-4. `/difit-review` でコードレビューを実施（必須）
+## push / PR 作成前（必須）
 
-## `test/`配下にあるファイル編集後
+`/pre-push` スキルを実行する。以下が一括で実行される：
 
-以下の順で必ず実行すること：
+1. `git add` とステージング確認
+2. `npm run check`（`src/` 全体）
+3. `npm run build`
+4. `npm run test` / `npm run e2e`（変更内容に応じて）
+5. コードレビュー（react-doctor → code-reviewer → 変更内容に応じた追加エージェント → `/difit-review`）
+
+さらに包括的なレビューが必要な場合は `/pr-review-toolkit:review-pr` を実行する
+（レビュー対象を絞る例: `/pr-review-toolkit:review-pr errors tests`）。
+
+## `test/` 配下にあるファイル編集後
 
 1. `git status`,`git add -A`を実行（`git commit`は実行しない）
 2. `npm run test`と`npm run e2e`を実行する
-3. 追加・変更した機能に合わせて `CLAUDE.md` と `README.md` を更新（不要なら省略可）
 
-## PR 作成前の総合レビュー
+## ドキュメント更新
 
-push 前に包括的なレビューを行う場合は `/pr-review-toolkit:review-pr` を実行する。
-変更内容に応じてレビュー対象を絞ることもできる（例: `/pr-review-toolkit:review-pr errors tests`）。
+追加・変更した機能に合わせて `CLAUDE.md` と `README.md` を更新する（不要なら省略可）。
