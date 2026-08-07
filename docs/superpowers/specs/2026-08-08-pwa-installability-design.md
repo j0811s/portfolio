@@ -39,7 +39,17 @@
 - `public/icon-192.png` を `logo.png` から縮小生成して新規追加する。
 - iOS 用の `src/app/apple-touch-icon.png` は既存のものをそのまま流用し、変更しない。
 
-### 3. `viewport.themeColor` の追加（`src/app/layout.tsx`）
+### 3. 認証ミドルウェアの除外対象に `manifest.webmanifest` を追加（`src/proxy.ts`）
+
+`src/proxy.ts` の `matcher` は `/((?!api|auth|_next/static|_next/image|favicon.ico).*)` となっており、`manifest.webmanifest` が除外対象に含まれていない。このままだとブラウザが未ログイン状態（セッション Cookie なし）でマニフェストを取得しようとした際にミドルウェアが `/auth` へリダイレクトし、JSON ではなく HTML が返ってしまう。マニフェストの内容自体（サイト名・アイコンパス・配色）に機密情報はなく、`api` / `auth` / `favicon.ico` と同様に公開して問題ない静的メタデータであるため、matcher から除外する。
+
+```ts
+export const config = {
+  matcher: '/((?!api|auth|manifest.webmanifest|_next/static|_next/image|favicon.ico).*)',
+};
+```
+
+### 4. `viewport.themeColor` の追加（`src/app/layout.tsx`）
 
 マニフェストの `theme_color` は静的な1色しか持てず、OS のダークモード設定に連動しない。`layout.tsx` の `viewport` export に `themeColor` を light/dark 両対応で追加し、ブラウザのアドレスバー/ステータスバー色を OS のカラースキームに追従させる。
 
