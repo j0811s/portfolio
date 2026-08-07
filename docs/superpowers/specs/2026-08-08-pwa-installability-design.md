@@ -29,7 +29,9 @@
 | `background_color` | `#e8eaf0`（ライトテーマの `--bg-primary`） |
 | `theme_color` | `#ff7e0f`（ライトテーマの `--theme-primary`） |
 | `lang` | `ja` |
-| `icons` | 192×192・512×512（`purpose: "any maskable"`） |
+| `icons` | 192×192・512×512 それぞれ `purpose: 'any'` と `purpose: 'maskable'` の2エントリ（計4件） |
+
+※ Next.js の `MetadataRoute.Manifest` 型では `icons[].purpose` が単一値（`'any' \| 'maskable' \| 'monochrome'`）しか受け付けず、Web App Manifest 仕様にある `"any maskable"` のような複合値は指定できない（`node_modules/next/dist/lib/metadata/types/manifest-types.d.ts` で確認済み）。そのため同じ画像を `purpose` 違いで2エントリずつ登録する。
 
 ### 2. アイコン画像
 
