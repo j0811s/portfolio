@@ -83,6 +83,7 @@ npm run e2e:codegen  # E2E テスト自動生成
 | `/auth/` | ログイン |
 | `/sitemap.xml` | サイトマップ（自動生成） |
 | `/robots.txt` | クローラー設定（自動生成） |
+| `/manifest.webmanifest` | Web App Manifest（自動生成、PWAインストール可能化） |
 
 ## API ルート
 
@@ -123,7 +124,8 @@ src/
 │   ├── (logout)/         # 認証不要なページ (ログイン画面)
 │   ├── api/              # API ルート (Hono)
 │   ├── sitemap.ts        # sitemap.xml 自動生成
-│   └── robots.ts         # robots.txt 自動生成
+│   ├── robots.ts         # robots.txt 自動生成
+│   └── manifest.ts       # manifest.webmanifest 自動生成
 ├── features/             # 機能別コンポーネント
 │   ├── blog/
 │   ├── contact/          # お問い合わせフォーム (react-hook-form)

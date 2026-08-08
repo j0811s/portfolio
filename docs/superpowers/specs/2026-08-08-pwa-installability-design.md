@@ -37,7 +37,9 @@
 
 - `public/logo.png`（512×512、既存）をそのまま 512 用アイコンとして使う。中央の「J」ロゴの周囲に十分な余白があり、maskable purpose（Android のアダプティブアイコンによる円形/角丸クロップ）にも耐える構図であることを確認済み。
 - `public/icon-192.png` を `logo.png` から縮小生成して新規追加する。
-- iOS 用の `src/app/apple-touch-icon.png` は既存のものをそのまま流用し、変更しない。
+- ~~iOS 用の `src/app/apple-touch-icon.png` は既存のものをそのまま流用し、変更しない。~~
+
+※【最終レビューで判明した訂正】上記の前提は誤りだった。Next.js が静的メタデータとして自動認識するファイル名は `icon` / `apple-icon` / `opengraph-image` / `twitter-image` / `favicon` のみであり、`apple-touch-icon`（Apple の慣習的なファイル名）にはマッチしない（`node_modules/next/dist/lib/metadata/is-metadata-route.js` の正規表現で確認済み）。そのため `src/app/apple-touch-icon.png` はどの URL にも配信されておらず、iOS のホーム画面アイコンをカバーできていない。この状態は本ブランチ以前から存在する既存の問題であり、iOS 16.4+ はマニフェストの `icons` から取得できるため実害は小さいと判断し、今回は対応しない（別issueとして切り出す候補）。
 
 ### 3. 認証ミドルウェアの除外対象に `manifest.webmanifest` を追加（`src/proxy.ts`）
 

@@ -58,6 +58,10 @@ JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・Bre
 `src/app/sitemap.ts` — MicroCMS の記事・カテゴリ・タグを取得して `/sitemap.xml` を動的生成（`revalidate = 3600`）。
 `src/app/robots.ts` — 全クローラーは `/api/`・`/auth/`・`/blog/*/preview/` を拒否。主要 AI クローラー（GPTBot・Google-Extended・ClaudeBot 等 6種）はサイト全体を拒否。
 
+## PWA
+
+`src/app/manifest.ts` — `sitemap.ts` / `robots.ts` と同じファイル規約で `/manifest.webmanifest` を生成し、ホーム画面への追加・スタンドアロン起動を可能にする（Service Worker によるオフライン対応は行わない）。マニフェスト本体と、そこが参照する `public/icon-192.png` / `public/logo.png` は認証ミドルウェア（`src/proxy.ts` の `matcher`）から除外しており、未ログイン状態でも取得できる。`layout.tsx` の `viewport.themeColor` は OS のカラースキーム（`prefers-color-scheme`）に連動し、サイト内の Cookie ベースのテーマ切替とは独立している。
+
 ## Lint・フォーマット
 
 Biome（`biome.json`）で lint とフォーマットを一元管理する。ESLint は使用していない。husky + lint-staged により `git commit` 時に `src/` 以下のステージ済みファイルへ自動実行される。`.ts/.tsx` はフォーマット後に lint チェック、`.css` は同様。lint エラーはコミットをブロックし、自動修正は行わない。フォーマットのみ自動修正される。
