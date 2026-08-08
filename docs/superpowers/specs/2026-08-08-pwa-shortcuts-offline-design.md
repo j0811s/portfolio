@@ -77,7 +77,7 @@ const swRegisterScript = `if('serviceWorker' in navigator){window.addEventListen
 
 ```js
 const CACHE_NAME = 'static-v1';
-const OFFLINE_URL = '/offline';
+const OFFLINE_URL = '/offline/'; // trailingSlash: true により /offline は308リダイレクトされるため末尾スラッシュ必須（実装時に判明、[[2026-08-08-pwa-shortcuts-offline]] 参照）
 const PRECACHE_URLS = [OFFLINE_URL, '/icon-192.png'];
 
 self.addEventListener('install', (event) => {

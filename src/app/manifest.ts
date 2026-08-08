@@ -17,5 +17,11 @@ export default function manifest(): MetadataRoute.Manifest {
       { src: '/logo.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
       { src: '/logo.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
+    shortcuts: [
+      { name: 'ブログ一覧', url: '/blog/' },
+      { name: 'ブログ検索', url: '/blog/search/' },
+      { name: 'スキル一覧', url: '/#skills' },
+      { name: 'お問い合わせ', url: '/contact/' },
+    ],
   };
 }

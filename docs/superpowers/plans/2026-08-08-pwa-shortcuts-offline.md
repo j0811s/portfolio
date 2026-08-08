@@ -320,11 +320,13 @@ import { test, expect } from '@playwright/test';
 test('オフライン時にフォールバックページが表示される', async ({ page, context }) => {
   await page.goto('/');
 
-  // Service Workerのインストールと/offlineのプリキャッシュ完了を待つ
+  // Service Workerのインストールと/offline/のプリキャッシュ完了を待つ
+  // (next.config.tsのtrailingSlash: trueにより/offlineは308で/offline/にリダイレクトされるため、
+  //  末尾スラッシュ付きのURLでキャッシュする。Task 2の実装検証で判明した)
   await page.waitForFunction(async () => {
     if (!('caches' in window)) return false;
     const cache = await caches.open('static-v1');
-    const match = await cache.match('/offline');
+    const match = await cache.match('/offline/');
     return !!match;
   });
 
@@ -345,13 +347,17 @@ Run:
 npx playwright test tests/e2e/offline/page.spec.ts
 ```
 
-Expected: FAIL（`public/sw.js` がまだ存在しないため、`caches.open('static-v1').match('/offline')` が常に `undefined` を返し続け、`page.waitForFunction` がタイムアウトする）。
+Expected: FAIL（`public/sw.js` がまだ存在しないため、`caches.open('static-v1').match('/offline/')` が常に `undefined` を返し続け、`page.waitForFunction` がタイムアウトする）。
 
 - [ ] **Step 3: `public/sw.js` を作成する**
 
 ```js
 const CACHE_NAME = 'static-v1';
-const OFFLINE_URL = '/offline';
+// trailingSlash: true により /offline は308で /offline/ にリダイレクトされるため、
+// リダイレクトを経由しない /offline/ を直接指定する（リダイレクト後のResponseを
+// キャッシュしてnavigateリクエストにrespondWithすると、ブラウザによっては
+// 「redirected responseで応答できない」エラーになりうるため）
+const OFFLINE_URL = '/offline/';
 const PRECACHE_URLS = [OFFLINE_URL, '/icon-192.png'];
 
 self.addEventListener('install', (event) => {

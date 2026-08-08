@@ -81,6 +81,7 @@ npm run e2e:codegen  # E2E テスト自動生成
 | `/blog/search/` | キーワード検索結果 |
 | `/contact/` | お問い合わせフォーム |
 | `/auth/` | ログイン |
+| `/offline/` | オフライン時のフォールバックページ |
 | `/sitemap.xml` | サイトマップ（自動生成） |
 | `/robots.txt` | クローラー設定（自動生成） |
 | `/manifest.webmanifest` | Web App Manifest（自動生成、PWAインストール可能化） |
@@ -123,6 +124,7 @@ src/
 │   │   └── contact/      # お問い合わせページ
 │   ├── (logout)/         # 認証不要なページ (ログイン画面)
 │   ├── api/              # API ルート (Hono)
+│   ├── offline/          # オフライン時のフォールバックページ
 │   ├── sitemap.ts        # sitemap.xml 自動生成
 │   ├── robots.ts         # robots.txt 自動生成
 │   └── manifest.ts       # manifest.webmanifest 自動生成
@@ -144,3 +146,5 @@ src/
 ├── types/                # TypeScript 型定義
 └── constants/            # 定数
 ```
+
+`public/sw.js` — 手書きの Service Worker。`/_next/static/*` を cache-first、ページ遷移を network-first でキャッシュし、オフライン時は `/offline/` にフォールバックする。
