@@ -3,7 +3,8 @@ import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 export const config = {
-  matcher: '/((?!api|auth|manifest.webmanifest|_next/static|_next/image|favicon.ico).*)',
+  matcher:
+    '/((?!api|auth|manifest.webmanifest|_next/static|_next/image|favicon.ico|icon-192.png|logo.png).*)',
 };
 
 async function proxy(req: NextRequest) {
