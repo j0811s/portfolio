@@ -147,4 +147,4 @@ src/
 └── constants/            # 定数
 ```
 
-`public/sw.js` — 手書きの Service Worker（本番環境のみ登録）。`/_next/static/*` を cache-first、ページ遷移を network-first でキャッシュし、オフライン時は `/offline/` にフォールバックする。
+`public/sw.js` — 手書きの Service Worker。`/_next/static/*` を cache-first、ページ遷移を network-first でキャッシュし、オフライン時は `/offline/` にフォールバックする。
