@@ -6,4 +6,3 @@ export const SITE_META = {
   description: 'ポートフォリオサイト',
   siteUrl: new URL(SITE_URL),
 };
-const _x = 1;
