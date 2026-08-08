@@ -39,7 +39,7 @@ export default async function Top() {
           </CtaLinkButton>
         </div>
       </section>
-      <section className={styles.section}>
+      <section className={styles.section} id="skills">
         <SectionTitle title="経験" label="02" variant="editorial" level={2} />
         <SkillSet data={skills} />
       </section>
