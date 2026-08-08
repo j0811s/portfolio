@@ -62,7 +62,7 @@ JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・Bre
 
 `src/app/manifest.ts` — `sitemap.ts` / `robots.ts` と同じファイル規約で `/manifest.webmanifest` を生成し、ホーム画面への追加・スタンドアロン起動を可能にする。`shortcuts` により、ホーム画面アイコン長押しメニューからブログ一覧・検索・スキル一覧・お問い合わせへ直接遷移できる。マニフェスト本体と、そこが参照する `public/icon-192.png` / `public/logo.png` は認証ミドルウェア（`src/proxy.ts` の `matcher`）から除外しており、未ログイン状態でも取得できる。`layout.tsx` の `viewport.themeColor` は OS のカラースキーム（`prefers-color-scheme`）に連動し、サイト内の Cookie ベースのテーマ切替とは独立している。
 
-`public/sw.js` は外部依存のない手書きの Service Worker で、本番環境（`NODE_ENV === 'production'`）のみ `layout.tsx` のインラインスクリプト（テーマ初期化スクリプトと同じパターン）から登録される。`/_next/static/*` は cache-first、ページ遷移は network-first でオフライン時に事前キャッシュ済みの `/offline/`（`src/app/offline/page.tsx`。共通ヘッダー・フッターや MicroCMS 依存を持たない独立したページ）にフォールバックする。ページ本文や API レスポンスはキャッシュしない。`offline` と `sw.js` も `manifest.webmanifest` / `icon-192.png` / `logo.png` と同様に認証ミドルウェアの `matcher` から除外している。
+`public/sw.js` は外部依存のない手書きの Service Worker で、`layout.tsx` のインラインスクリプト（テーマ初期化スクリプトと同じパターン）から登録される。`/_next/static/*` は cache-first、ページ遷移は network-first でオフライン時に事前キャッシュ済みの `/offline/`（`src/app/offline/page.tsx`。共通ヘッダー・フッターや MicroCMS 依存を持たない独立したページ）にフォールバックする。ページ本文や API レスポンスはキャッシュしない。`offline` と `sw.js` も `manifest.webmanifest` / `icon-192.png` / `logo.png` と同様に認証ミドルウェアの `matcher` から除外している。
 
 ## Lint・フォーマット
 

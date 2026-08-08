@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test('オフライン時にフォールバックページが表示される', async ({ page, context }) => {
+  test.skip(({ browserName }) => browserName !== 'chromium', 'SW offline simulation is Chromium-only in Playwright');
+
   await page.goto('/');
 
   // Service Workerがアクティブ化し、fetchイベントを処理できる状態になるまで待つ
