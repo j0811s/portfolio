@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
 
 export const config = {
   matcher:
-    '/((?!api|auth|manifest.webmanifest|_next/static|_next/image|favicon.ico|icon-192.png|logo.png).*)',
+    '/((?!api|auth|manifest.webmanifest|icon-192.png|logo.png|offline|_next/static|_next/image|favicon.ico).*)',
 };
 
 async function proxy(req: NextRequest) {
