@@ -3,15 +3,10 @@ import { test, expect } from '@playwright/test';
 test('オフライン時にフォールバックページが表示される', async ({ page, context }) => {
   await page.goto('/');
 
-  // Service Workerのインストールと/offline/のプリキャッシュ完了を待つ
-  // (next.config.tsのtrailingSlash: trueにより/offlineは308で/offline/にリダイレクトされるため、
-  //  末尾スラッシュ付きのURLでキャッシュする。Task 2の実装検証で判明した)
-  await page.waitForFunction(async () => {
-    if (!('caches' in window)) return false;
-    const cache = await caches.open('static-v1');
-    const match = await cache.match('/offline/');
-    return !!match;
-  });
+  // Service Workerがアクティブ化し、fetchイベントを処理できる状態になるまで待つ
+  // (waitForFunctionにasync述語を渡すと常にtruthyなPromiseが返り実質no-opになるため、
+  //  同期的な述語でnavigator.serviceWorker.controllerを確認する。最終レビューで判明・実測検証済み)
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller);
 
   await context.setOffline(true);
   try {

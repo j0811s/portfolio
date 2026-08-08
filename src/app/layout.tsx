@@ -50,8 +50,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: FOUC防止のインラインスクリプト */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Service Worker登録の軽量インラインスクリプト */}
-        <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Service Worker登録の軽量インラインスクリプト */}
+            <script dangerouslySetInnerHTML={{ __html: swRegisterScript }} />
+          </>
+        )}
       </head>
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
       {gaId && <GoogleAnalytics gaId={gaId} />}
