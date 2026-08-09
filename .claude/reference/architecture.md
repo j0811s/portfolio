@@ -60,9 +60,14 @@ JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・Bre
 
 ## PWA
 
-`src/app/manifest.ts` — `sitemap.ts` / `robots.ts` と同じファイル規約で `/manifest.webmanifest` を生成し、ホーム画面への追加・スタンドアロン起動を可能にする。`shortcuts` により、ホーム画面アイコン長押しメニューからブログ一覧・検索・スキル一覧・お問い合わせへ直接遷移できる。マニフェスト本体と、そこが参照する `public/icon-192.png` / `public/logo.png` は認証ミドルウェア（`src/proxy.ts` の `matcher`）から除外しており、未ログイン状態でも取得できる。`layout.tsx` の `viewport.themeColor` は OS のカラースキーム（`prefers-color-scheme`）に連動し、サイト内の Cookie ベースのテーマ切替とは独立している。
+`src/app/manifest.ts` — `sitemap.ts` / `robots.ts` と同じファイル規約で `/manifest.webmanifest` を生成し、ホーム画面への追加・スタンドアロン起動を可能にする。`shortcuts` により、ホーム画面アイコン長押しメニューからブログ一覧・検索・スキル一覧・お問い合わせへ直接遷移できる。アイコンは `purpose: 'any'`（`icon-192.png` / `logo.png`）と `purpose: 'maskable'`（`icon-maskable-512.png`）を別ファイルに分けている。maskable用はOSのマスク形状（丸型・角丸など）で端が切り取られてもロゴが欠けないよう、セーフゾーン（中央80%円）内に収めた上で背景色（`background_color`）を全面に敷いた専用画像。マニフェスト本体と、そこが参照する `public/icon-192.png` / `public/icon-maskable-512.png` / `public/logo.png` は認証ミドルウェア（`src/proxy.ts` の `matcher`）から除外しており、未ログイン状態でも取得できる。`layout.tsx` の `viewport.themeColor` は OS のカラースキーム（`prefers-color-scheme`）に連動し、サイト内の Cookie ベースのテーマ切替とは独立している。
 
-`public/sw.js` は外部依存のない手書きの Service Worker で、`layout.tsx` のインラインスクリプト（テーマ初期化スクリプトと同じパターン）から登録される。`/_next/static/*` は cache-first、ページ遷移は network-first でオフライン時に事前キャッシュ済みの `/offline/`（`src/app/offline/page.tsx`。共通ヘッダー・フッターや MicroCMS 依存を持たない独立したページ）にフォールバックする。ページ本文や API レスポンスはキャッシュしない。`offline` と `sw.js` も `manifest.webmanifest` / `icon-192.png` / `logo.png` と同様に認証ミドルウェアの `matcher` から除外している。
+`public/sw.js` は外部依存のない手書きの Service Worker で、`layout.tsx` のインラインスクリプト（テーマ初期化スクリプトと同じパターン）から登録される。キャッシュは用途別に2系統に分離している。
+
+- `precache-v1`（install時に確定）: `/offline/` とその `<link rel="stylesheet">`（ビルド毎にファイル名がハッシュ化されるため、キャッシュ済みHTMLから実際のhrefを読み取って動的に取得する）、`icon-192.png`。オンラインで一度も `/offline/` を開いたことがなくても、初回オフライン時からフォールバックページがスタイル込みで表示される。
+- `runtime-v1`（`/_next/static/*` の cache-first ランタイムキャッシュ）: コンテンツハッシュ付きで実質不変だが、デプロイの度に新しいファイルが積み上がり続けるため、件数上限（`MAX_RUNTIME_ENTRIES`）を超えたら挿入順で古いエントリから間引く。`activate` イベントのクリーンアップは `precache-v1` / `runtime-v1` 以外のキャッシュ名を削除する。
+
+ページ遷移は network-first でオフライン時に `precache-v1` の `/offline/`（`src/app/offline/page.tsx`。共通ヘッダー・フッターや MicroCMS 依存を持たない独立したページ）にフォールバックする。ページ本文や API レスポンスはキャッシュしない。`offline` と `sw.js` も `manifest.webmanifest` / アイコン群と同様に認証ミドルウェアの `matcher` から除外している。
 
 ## Lint・フォーマット
 

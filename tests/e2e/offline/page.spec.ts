@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('オフライン時にフォールバックページが表示される', async ({ page, context }) => {
-  test.skip(({ browserName }) => browserName !== 'chromium', 'SW offline simulation is Chromium-only in Playwright');
+test('オフライン時にフォールバックページが表示される', async ({ page, context, browserName }) => {
+  test.skip(browserName !== 'chromium', 'SW offline simulation is Chromium-only in Playwright');
 
   await page.goto('/');
 
