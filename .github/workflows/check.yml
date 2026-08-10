@@ -3,6 +3,17 @@ name: Check
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'biome.json'
+      - 'tsconfig.json'
+      - 'next.config.js'
+      - 'vitest.config.mts'
+      - '.nvmrc'
+      - '.github/workflows/check.yml'
   pull_request:
 
 jobs:
