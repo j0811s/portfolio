@@ -30,7 +30,7 @@
     appearance: none;
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    font-size: var(--font-size-m);
+    font-size: 1rem;
     font-family: inherit;
     padding: 0.75em 1em;
     border: none;

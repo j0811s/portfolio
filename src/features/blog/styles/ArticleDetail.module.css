@@ -4,7 +4,7 @@
   }
 
   .postTitle {
-    font-size: var(--font-size-2xl);
+    font-size: clamp(1.75rem, 1.5428rem + 0.884vw, 2.25rem);
     line-height: 1.3;
     margin-top: 1em;
   }
@@ -34,7 +34,7 @@
   }
 
   .postContent h2 {
-    font-size: var(--font-size-xl);
+    font-size: clamp(1.5rem, 1.3969rem + 0.44vw, 1.75rem);
     padding-left: 0.75em;
     border-left: 3px solid var(--theme-primary);
   }
@@ -43,7 +43,7 @@
   .postContent h4,
   .postContent h5,
   .postContent h6 {
-    font-size: var(--font-size-l);
+    font-size: clamp(1.25rem, 1.1982rem + 0.221vw, 1.375rem);
     padding-left: 0.5em;
     border-left: 2px solid var(--bg-secondary);
   }
@@ -70,7 +70,7 @@
   .postContent li {
     list-style-type: inherit;
     color: inherit;
-    font-size: var(--font-size-m);
+    font-size: clamp(1rem, 0.9482rem + 0.221vw, 1.125rem);
     line-height: 1.6;
     margin: 1em 0 0;
   }
@@ -141,11 +141,13 @@
   }
 
   .postContent .codeBlock_code {
+    line-height: 1;
     border-radius: 0;
   }
 
   .postContent code:not(.codeBlock_code) {
     font-size: 85%;
+    line-height: 1;
     white-space: break-spaces;
     border-radius: 6px;
     color: var(--theme-primary);
@@ -155,6 +157,7 @@
   }
 
   .postContent .codeBlock_pre {
+    font-size: clamp(1rem, 0.9482rem + 0.221vw, 1.125rem);
     margin: 0;
     border-radius: 8px;
     overflow: hidden;
