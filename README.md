@@ -67,6 +67,12 @@ npm run e2e:report   # Playwright HTML レポート表示
 npm run e2e:codegen  # E2E テスト自動生成
 ```
 
+## CI
+
+`.github/workflows/check.yml` が `main` への push / PR で `npm run check`（Biome lint + format）と `npm run test`（Vitest）を実行します。
+
+`main` はブランチ保護されており、Check が失敗している PR はマージできません。owner の直接 push のみ保護ルールをバイパスできます（`enforce_admins: false`）。
+
 ## ページ構成
 
 | パス | 説明 |

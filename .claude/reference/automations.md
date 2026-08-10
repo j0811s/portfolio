@@ -30,6 +30,10 @@
 
 一括実行: `/pr-review-toolkit:review-pr`（PR 作成前の総合レビューに使用）
 
+## CI（GitHub Actions）
+
+`.github/workflows/check.yml` が `main` への push / PR で `npm run check`・`npm run test` を実行する。`main` はブランチ保護されており、この Check が失敗している PR はマージ不可（`enforce_admins: false` のため owner の直接 push のみバイパス可能）。
+
 ## MCP サーバー
 
 | サーバー | 用途 |
