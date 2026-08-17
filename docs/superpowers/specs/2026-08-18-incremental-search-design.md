@@ -89,7 +89,7 @@ export default async function Page({ searchParams }: Props) {
   2. 300ms デバウンスする（`setTimeout`。連続入力中は前回のタイマーを`clearTimeout`）。
   3. デバウンス確定時、直前の`fetch`が残っていれば`AbortController.abort()`で中断してから、新しい`AbortController`で`fetch('/api/blog?q=' + encodeURIComponent(trimmedValue) + '&limit=' + LIMIT, { signal })`を実行する（`trimmedValue`が空文字なら`q`パラメータを付けない）。
   4. レスポンスを`contents`・`totalCount`のstateに反映し、`isFetching`を`false`にする。中断（`AbortError`）は正常系として無視する。
-  5. `router.replace(trimmedValue ? \`/blog/search?q=${encodeURIComponent(trimmedValue)}\` : '/blog/search', { scroll: false })`でURLを同期する（履歴には積まない）。
+  5. `window.history.replaceState(null, '', trimmedValue ? \`/blog/search?q=${encodeURIComponent(trimmedValue)}\` : '/blog/search')`でURLを同期する（履歴には積まない）。**`next/navigation`の`router.replace`は使わない** — App Routerの`router.replace`/`push`はNext.jsのクライアントサイドナビゲーションそのものであり、`search/page.tsx`（Server Component）を再度呼び出して`fetchBlogList`をサーバー側でも再実行し、Task 1で追加した`search/loading.tsx`のSuspenseフォールバックを毎回再度発火させてしまう（今回なくそうとしているまさにその画面点滅を再導入することになる）。`window.history.replaceState`はNext.jsのルーター機構を経由せず素のブラウザ履歴のみを書き換えるため、この問題が起きない（`node_modules/next/dist/docs/01-app/01-getting-started/04-linking-and-navigating.md`の「Native History API」節で公式に案内されているパターン）。
 - **見出し**: `trimmedValue`が空なら「検索」、それ以外は「「`trimmedValue`」の検索結果：`totalCount`件」（`SectionTitle`にそのまま渡す、現行ロジックと同一）。
 - **アクセシビリティ**: 視覚的に隠した`aria-live="polite"`領域を1つ設置し、結果件数が変わるたびに「`totalCount`件の検索結果」を読み上げさせる（スクリーンリーダー利用者が、視覚的な一覧の変化に気づけるようにするため）。
 
@@ -107,11 +107,11 @@ export default async function Page({ searchParams }: Props) {
 
 ## テスト・確認方法
 
-- **ユニットテスト（新規）**: `tests/unit/features/blog/components/SearchExperience.test.tsx`で、`fetch`・`next/navigation`の`useRouter().replace`・`ArticleCardList`/`SectionTitle`をモックし、フェイクタイマーでデバウンスを検証する。
+- **ユニットテスト（新規）**: `tests/unit/features/blog/components/SearchExperience.test.tsx`で、`fetch`・`next/navigation`の`useRouter().push`（リセットボタン用）・`window.history.replaceState`（`vi.spyOn`）・`ArticleCardList`/`SectionTitle`をモックし、フェイクタイマーでデバウンスを検証する。
   - 初期表示が`initialContents`/`initialTotalCount`と一致する。
   - 入力後300ms経過で正しいクエリ文字列を付けて`fetch`が呼ばれる。
   - fetch結果で`contents`/`totalCount`が更新される。
-  - 入力を空にすると`q`なしでfetchし、見出しが「検索」に戻り、`router.replace`が`/blog/search`（パラメータなし）で呼ばれる。
+  - 入力を空にすると`q`なしでfetchし、見出しが「検索」に戻り、`window.history.replaceState`が`/blog/search`（パラメータなし）で呼ばれる。
   - fetch失敗時に直前の結果を保持したままエラーメッセージが表示される。
   - 連続入力時、古いリクエストの`AbortController.abort`が呼ばれる（最新の入力のみ反映される）。
 - **`/api/blog`エンドポイント自体の自動テストは追加しない**（既存のAPI層に単体テストの前例がなく、MicroCMSクライアントの新規モックが必要になるため）。実際の疎通確認はe2eに委ねる。
