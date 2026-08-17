@@ -43,7 +43,12 @@ export default async function Page({ searchParams }: Props) {
         <section>
           <SectionTitle title={keyword ? `「${keyword}」の検索結果：${totalCount}件` : '検索'} />
           <SearchForm defaultValue={keyword} />
-          <ArticleCardList contents={contents} />
+          <ArticleCardList
+            contents={contents}
+            emptyMessage={
+              keyword ? `「${keyword}」に一致する記事が見つかりませんでした。` : undefined
+            }
+          />
         </section>
         <AsideMenu />
       </div>

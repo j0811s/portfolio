@@ -47,3 +47,9 @@ test('検索結果ページでパンくずリストが表示される', async ({
 
   await expect(page.getByRole('link', { name: '投稿' }).first()).toBeVisible();
 });
+
+test('検索結果が0件のとき空メッセージが表示される', async ({ page }) => {
+  await page.goto('/blog/search?q=zzzzzzzzzz-nonexistent-keyword-zzzzzzzzzz');
+
+  await expect(page.getByText('に一致する記事が見つかりませんでした。')).toBeVisible();
+});
