@@ -46,8 +46,13 @@ app.get('/draft/disable', async (c) => {
 
 // ブログ一覧
 app.get('/blog', async (c) => {
+  const q = c.req.query('q');
+  const limit = c.req.query('limit');
   try {
-    const data = await fetchBlogList();
+    const data = await fetchBlogList('blog', {
+      q: q || undefined,
+      limit: limit ? Number(limit) : undefined,
+    });
     return c.json(data);
   } catch {
     return c.json({ error: 'Not found' }, 404);
