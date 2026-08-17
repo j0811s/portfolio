@@ -8,6 +8,14 @@
     place-items: center;
   }
 
+  .inline {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    min-height: 200px;
+    padding: 2.5rem 1rem;
+  }
+
   .spinner {
     display: flex;
     align-items: center;

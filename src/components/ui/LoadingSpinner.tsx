@@ -1,8 +1,17 @@
+import clsx from 'clsx';
 import styles from '@/src/components/styles/ui/LoadingSpinner.module.css';
 
-export default function LoadingSpinner() {
+type Props = {
+  fullscreen?: boolean;
+};
+
+export default function LoadingSpinner({ fullscreen = true }: Props) {
   return (
-    <div className={styles.container} role="status" aria-label="読み込み中">
+    <div
+      className={clsx(styles.container, !fullscreen && styles.inline)}
+      role="status"
+      aria-label="読み込み中"
+    >
       <div className={styles.spinner}>
         <div className={styles.tile}></div>
         <div className={styles.tile}></div>
