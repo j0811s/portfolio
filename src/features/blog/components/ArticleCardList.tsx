@@ -5,11 +5,12 @@ import { ArticleCard } from '@/src/features/blog/';
 interface Props {
   contents: BlogPost[];
   className?: string;
+  emptyMessage?: string;
 }
 
-export default function ArticleCardList({ contents, className = '' }: Props) {
+export default function ArticleCardList({ contents, className = '', emptyMessage }: Props) {
   if (contents.length < 1) {
-    return null;
+    return emptyMessage ? <p className={styles.empty}>{emptyMessage}</p> : null;
   }
 
   return (

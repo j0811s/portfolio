@@ -10,6 +10,13 @@
     display: grid;
   }
 
+  .empty {
+    margin-top: 2.5rem;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: var(--text-secondary, #999);
+  }
+
   @supports (animation-timeline: scroll()) {
     .item {
       animation: cardReveal linear both;
