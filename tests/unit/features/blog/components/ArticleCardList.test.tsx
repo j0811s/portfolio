@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import ArticleCardList from '@/src/features/blog/components/ArticleCardList';
 
-vi.mock('@/src/features/blog/', () => ({
-  ArticleCard: ({ title }: { title: string }) => <div>{title}</div>,
+vi.mock('@/src/features/blog/components/ArticleCard', () => ({
+  default: ({ title }: { title: string }) => <div>{title}</div>,
 }));
 
 const createBlogPost = (overrides: Partial<BlogPost> = {}): BlogPost => ({

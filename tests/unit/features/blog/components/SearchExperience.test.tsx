@@ -15,8 +15,8 @@ vi.mock('@/src/components', () => ({
   SectionTitle: ({ title }: { title: string }) => <h1>{title}</h1>,
 }));
 
-vi.mock('@/src/features/blog/', () => ({
-  ArticleCardList: ({
+vi.mock('@/src/features/blog/components/ArticleCardList', () => ({
+  default: ({
     contents,
     emptyMessage,
   }: {

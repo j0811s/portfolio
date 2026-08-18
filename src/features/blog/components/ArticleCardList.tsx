@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import styles from '@/src/features/blog/styles/ArticleCardList.module.css';
-import { ArticleCard } from '@/src/features/blog/';
+import ArticleCard from '@/src/features/blog/components/ArticleCard';
 
 interface Props {
   contents: BlogPost[];

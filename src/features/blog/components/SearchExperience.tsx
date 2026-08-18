@@ -2,7 +2,7 @@
 
 import styles from '@/src/features/blog/styles/SearchExperience.module.css';
 import searchFormStyles from '@/src/features/blog/styles/SearchForm.module.css';
-import { ArticleCardList } from '@/src/features/blog/';
+import ArticleCardList from '@/src/features/blog/components/ArticleCardList';
 import { SectionTitle } from '@/src/components';
 import { LIMIT } from '@/src/constants/blog';
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons';
