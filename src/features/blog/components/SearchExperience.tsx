@@ -29,7 +29,7 @@ export default function SearchExperience({
   const [hasError, setHasError] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const abortControllerRef = useRef<AbortController | undefined>(undefined);
-  const isFirstRender = useRef(true);
+  const previousKeywordRef = useRef(initialKeyword);
 
   const runSearch = (value: string) => {
     const trimmed = value.trim();
@@ -66,10 +66,10 @@ export default function SearchExperience({
   };
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
+    if (keyword === previousKeywordRef.current) {
       return;
     }
+    previousKeywordRef.current = keyword;
 
     if (timerRef.current) {
       clearTimeout(timerRef.current);
