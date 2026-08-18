@@ -6,6 +6,7 @@ export { default as ArticleCardList } from '@/src/features/blog/components/Artic
 
 // ナビゲーション
 export { default as SearchForm } from '@/src/features/blog/components/SearchForm';
+export { default as SearchExperience } from '@/src/features/blog/components/SearchExperience';
 export { default as TableOfContents } from '@/src/features/blog/components/TableOfContents';
 export { default as Pagination } from '@/src/features/blog/components/Pagination';
 export { default as AsideMenu } from '@/src/features/blog/components/AsideMenu';
