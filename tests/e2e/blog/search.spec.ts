@@ -53,3 +53,29 @@ test('検索結果が0件のとき空メッセージが表示される', async (
 
   await expect(page.getByText('に一致する記事が見つかりませんでした。')).toBeVisible();
 });
+
+test('検索結果ページ滞在中に別キーワードを入力すると、ページ遷移なしに結果とURLが更新される', async ({
+  page,
+}) => {
+  await page.goto('/blog/search?q=Next.js');
+  await expect(page.getByRole('heading', { name: /Next\.js/, level: 1 })).toBeVisible();
+
+  const input = page.getByPlaceholder('キーワードで検索');
+  await input.selectText();
+  await input.pressSequentially('Hono');
+
+  await expect(page).toHaveURL(/\/blog\/search\/?\?q=Hono/);
+  await expect(page.getByRole('heading', { name: /Hono/, level: 1 })).toBeVisible();
+});
+
+test('検索結果ページ滞在中に0件になるキーワードを入力すると空メッセージが表示される', async ({
+  page,
+}) => {
+  await page.goto('/blog/search?q=Next.js');
+
+  const input = page.getByPlaceholder('キーワードで検索');
+  await input.selectText();
+  await input.pressSequentially('zzzzzzzzzz-nonexistent-keyword-zzzzzzzzzz');
+
+  await expect(page.getByText('に一致する記事が見つかりませんでした。')).toBeVisible();
+});

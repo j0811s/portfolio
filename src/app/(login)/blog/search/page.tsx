@@ -1,10 +1,9 @@
 import styles from '@/src/styles/pages/blog/layout.module.css';
 import { SITE_URL } from '@/src/constants/site';
 import { LIMIT } from '@/src/constants/blog';
-import { Breadcrumb, SectionTitle } from '@/src/components';
+import { Breadcrumb } from '@/src/components';
 import { fetchBlogList } from '@/src/libs/microcms/blog';
-import { ArticleCardList, AsideMenu } from '@/src/features/blog';
-import SearchForm from '@/src/features/blog/components/SearchForm';
+import { AsideMenu, SearchExperience } from '@/src/features/blog';
 import type { Metadata } from 'next';
 import { metadata as rootMetadata } from '@/src/app/layout';
 
@@ -40,16 +39,11 @@ export default async function Page({ searchParams }: Props) {
         ]}
       />
       <div className={styles.container}>
-        <section>
-          <SectionTitle title={keyword ? `「${keyword}」の検索結果：${totalCount}件` : '検索'} />
-          <SearchForm defaultValue={keyword} />
-          <ArticleCardList
-            contents={contents}
-            emptyMessage={
-              keyword ? `「${keyword}」に一致する記事が見つかりませんでした。` : undefined
-            }
-          />
-        </section>
+        <SearchExperience
+          initialKeyword={keyword}
+          initialContents={contents}
+          initialTotalCount={totalCount}
+        />
         <AsideMenu />
       </div>
     </>
