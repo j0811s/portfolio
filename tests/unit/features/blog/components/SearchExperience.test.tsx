@@ -185,6 +185,7 @@ describe('SearchExperience', () => {
 
   it('リセットボタンをデバウンス発火前にクリックすると保留中の検索は実行されない', async () => {
     const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
+    // 既存テストがspyをmockRestoreしていないため、vi.spyOnは呼び出し履歴が残った同一spyを返す
     replaceStateSpy.mockClear();
     render(<SearchExperience initialKeyword="" initialContents={[]} initialTotalCount={0} />);
 
