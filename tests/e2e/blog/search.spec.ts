@@ -59,6 +59,7 @@ test('検索結果ページ滞在中に別キーワードを入力すると、�
 }) => {
   await page.goto('/blog/search?q=Next.js');
   await expect(page.getByRole('heading', { name: /Next\.js/, level: 1 })).toBeVisible();
+  await page.waitForLoadState('networkidle');
 
   const input = page.getByPlaceholder('キーワードで検索');
   await input.selectText();
@@ -72,6 +73,8 @@ test('検索結果ページ滞在中に0件になるキーワードを入力す�
   page,
 }) => {
   await page.goto('/blog/search?q=Next.js');
+  await expect(page.getByRole('heading', { name: /Next\.js/, level: 1 })).toBeVisible();
+  await page.waitForLoadState('networkidle');
 
   const input = page.getByPlaceholder('キーワードで検索');
   await input.selectText();
