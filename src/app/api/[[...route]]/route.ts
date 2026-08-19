@@ -52,6 +52,7 @@ app.get('/blog', async (c) => {
     const data = await fetchBlogList('blog', {
       q: q || undefined,
       limit: limit ? Number(limit) : undefined,
+      fields: 'id,title,eyecatch,publishedAt,updatedAt',
     });
     return c.json(data);
   } catch {

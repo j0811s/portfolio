@@ -27,6 +27,7 @@ export default async function Page({ searchParams }: Props) {
   const { contents, totalCount } = (await fetchBlogList('blog', {
     q: keyword || undefined,
     limit: LIMIT,
+    fields: 'id,title,eyecatch,publishedAt,updatedAt',
   })) ?? { contents: [], totalCount: 0 };
 
   return (

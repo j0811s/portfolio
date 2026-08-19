@@ -44,7 +44,12 @@ export default function SearchExperience({
     const query = trimmed ? `?q=${encodeURIComponent(trimmed)}&limit=${LIMIT}` : `?limit=${LIMIT}`;
 
     fetch(`/api/blog${query}`, { signal: controller.signal })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`/api/blog responded ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data: { contents: BlogPost[]; totalCount: number }) => {
         setContents(data.contents);
         setTotalCount(data.totalCount);
@@ -61,11 +66,14 @@ export default function SearchExperience({
     window.history.replaceState(
       null,
       '',
-      trimmed ? `/blog/search?q=${encodeURIComponent(trimmed)}` : '/blog/search'
+      trimmed ? `/blog/search/?q=${encodeURIComponent(trimmed)}` : '/blog/search/'
     );
   };
 
   useEffect(() => {
+    // previousKeywordRef (not a boolean flag) makes this guard idempotent under React
+    // StrictMode's dev-mode double-invoked effects — see the StrictMode bugfix in this
+    // branch's history for what breaks if this becomes a one-shot isFirstRender check.
     if (keyword === previousKeywordRef.current) {
       return;
     }
@@ -83,7 +91,6 @@ export default function SearchExperience({
         clearTimeout(timerRef.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -108,7 +115,7 @@ export default function SearchExperience({
       <SectionTitle
         title={trimmedKeyword ? `「${trimmedKeyword}」の検索結果：${totalCount}件` : '検索'}
       />
-      <div aria-live="polite" className={styles.visuallyHidden}>
+      <div aria-live="polite" className="sr-only">
         {trimmedKeyword ? `${totalCount}件の検索結果` : ''}
       </div>
       {/* biome-ignore lint/a11y/useSemanticElements: <search>要素はReactのJSX型定義が未対応 */}
@@ -137,7 +144,11 @@ export default function SearchExperience({
           <FontAwesomeIcon icon={faSearch} size="sm" />
         </button>
       </form>
-      {hasError && <p className={styles.error}>検索に失敗しました。</p>}
+      {hasError && (
+        <p className={styles.error} role="status">
+          検索に失敗しました。
+        </p>
+      )}
       <ArticleCardList
         contents={contents}
         emptyMessage={

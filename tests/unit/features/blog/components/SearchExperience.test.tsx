@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { StrictMode } from 'react';
 import SearchExperience from '@/src/features/blog/components/SearchExperience';
 
 vi.mock('@fortawesome/react-fontawesome', () => ({
@@ -59,6 +60,7 @@ describe('SearchExperience', () => {
     mockFetch.mockReset();
     mockPush.mockReset();
     mockFetch.mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve({ contents: [], totalCount: 0 }),
     });
   });
@@ -94,6 +96,7 @@ describe('SearchExperience', () => {
 
   it('fetch結果でcontents/totalCountが更新される', async () => {
     mockFetch.mockResolvedValue({
+      ok: true,
       json: () =>
         Promise.resolve({
           contents: [createBlogPost({ id: 'post-2', title: '新しい記事' })],
@@ -128,11 +131,34 @@ describe('SearchExperience', () => {
 
     expect(mockFetch).toHaveBeenCalledWith('/api/blog?limit=12', expect.anything());
     expect(screen.getByRole('heading', { name: '検索' })).toBeTruthy();
-    expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '/blog/search');
+    expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '/blog/search/');
   });
 
   it('fetch失敗時は直前の結果を保持したままエラーメッセージが表示される', async () => {
     mockFetch.mockRejectedValue(new Error('network error'));
+    render(
+      <SearchExperience
+        initialKeyword="Next.js"
+        initialContents={[createBlogPost({ title: '保持される記事' })]}
+        initialTotalCount={1}
+      />
+    );
+    fireEvent.change(screen.getByPlaceholderText('キーワードで検索'), {
+      target: { value: 'Hono' },
+    });
+
+    await flush();
+
+    expect(screen.getByText('保持される記事')).toBeTruthy();
+    expect(screen.getByText('検索に失敗しました。')).toBeTruthy();
+  });
+
+  it('fetchがHTTPエラーを返した場合も直前の結果を保持したままエラーメッセージが表示される', async () => {
+    mockFetch.mockResolvedValue({
+      ok: false,
+      status: 404,
+      json: () => Promise.resolve({ error: 'Not found' }),
+    });
     render(
       <SearchExperience
         initialKeyword="Next.js"
@@ -199,5 +225,21 @@ describe('SearchExperience', () => {
     expect(mockPush).toHaveBeenCalledWith('/blog/');
     expect(mockFetch).not.toHaveBeenCalled();
     expect(replaceStateSpy).not.toHaveBeenCalled();
+  });
+
+  it('StrictMode下でマウントしてもキーワード未変更ならfetchが呼ばれない', async () => {
+    render(
+      <StrictMode>
+        <SearchExperience
+          initialKeyword="Next.js"
+          initialContents={[createBlogPost()]}
+          initialTotalCount={1}
+        />
+      </StrictMode>
+    );
+
+    await flush();
+
+    expect(mockFetch).not.toHaveBeenCalled();
   });
 });
