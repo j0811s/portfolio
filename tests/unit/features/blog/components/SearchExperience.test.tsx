@@ -182,4 +182,21 @@ describe('SearchExperience', () => {
     fireEvent.click(screen.getByRole('button', { name: 'リセット' }));
     expect(mockPush).toHaveBeenCalledWith('/blog/');
   });
+
+  it('リセットボタンをデバウンス発火前にクリックすると保留中の検索は実行されない', async () => {
+    const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
+    replaceStateSpy.mockClear();
+    render(<SearchExperience initialKeyword="" initialContents={[]} initialTotalCount={0} />);
+
+    fireEvent.change(screen.getByPlaceholderText('キーワードで検索'), {
+      target: { value: 'Hono' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'リセット' }));
+
+    await flush();
+
+    expect(mockPush).toHaveBeenCalledWith('/blog/');
+    expect(mockFetch).not.toHaveBeenCalled();
+    expect(replaceStateSpy).not.toHaveBeenCalled();
+  });
 });

@@ -95,6 +95,9 @@ export default function SearchExperience({
   };
 
   const handleReset = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     push('/blog/');
   };
 
