@@ -24,8 +24,11 @@
     height: 44px;
     color: var(--text-primary);
     background-color: var(--bg-primary);
+    border: none;
     border-radius: 10px;
     box-shadow: var(--neumorphism-shadow);
+    font: inherit;
+    cursor: pointer;
   }
 
   .pageLink::after {

@@ -12,9 +12,10 @@ type PaginationParam = {
     id?: string;
     name?: string;
   };
+  onPageChange?: (page: number) => void;
 };
 
-export default function Pagination({ pager, type }: PaginationParam) {
+export default function Pagination({ pager, type, onPageChange }: PaginationParam) {
   const { totalCount, limit, currentPage = 1 } = pager;
   if (!totalCount) return;
 
@@ -24,15 +25,26 @@ export default function Pagination({ pager, type }: PaginationParam) {
 
   const currentPageCheck = (page: number): boolean => currentPage === page + 1;
 
+  const renderPageLink = (page: number, label: number) => {
+    if (onPageChange) {
+      return (
+        <button type="button" className={styles.pageLink} onClick={() => onPageChange(page)}>
+          {label}
+        </button>
+      );
+    }
+    return (
+      <Link className={styles.pageLink} href={`${urlPath}${page}`}>
+        {label}
+      </Link>
+    );
+  };
+
   const firstPageNumber = () => {
     if (3 >= currentPage) return null;
     return (
       <>
-        <li className={`${styles.listItem}`}>
-          <Link className={styles.pageLink} href={`${urlPath}${1}`}>
-            1
-          </Link>
-        </li>
+        <li className={`${styles.listItem}`}>{renderPageLink(1, 1)}</li>
         <li className={`${styles.listItem}`} style={{ pointerEvents: 'none' }}>
           <div className={`${styles.pageLink} ${styles.omit}`}>...</div>
         </li>
@@ -50,9 +62,7 @@ export default function Pagination({ pager, type }: PaginationParam) {
           {currentPageCheck(page) ? (
             <div className={`${styles.currentText} ${styles.pageLink}`}>{page + 1}</div>
           ) : (
-            <Link className={styles.pageLink} href={`${urlPath}${page + 1}`}>
-              {page + 1}
-            </Link>
+            renderPageLink(page + 1, page + 1)
           )}
         </li>
       );
@@ -68,9 +78,7 @@ export default function Pagination({ pager, type }: PaginationParam) {
             <div className={`${styles.pageLink} ${styles.omit}`}>...</div>
           </li>
           <li className={`${styles.listItem}`}>
-            <Link className={styles.pageLink} href={`${urlPath}${pageCount.length}`}>
-              {pageCount.length}
-            </Link>
+            {renderPageLink(pageCount.length, pageCount.length)}
           </li>
         </>
       );

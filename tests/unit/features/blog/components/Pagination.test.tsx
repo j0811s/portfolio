@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import Pagination from '@/src/features/blog/components/Pagination';
 
@@ -80,5 +80,29 @@ describe('Pagination', () => {
     render(<Pagination pager={{ totalCount: 20, limit: 10, currentPage: 1 }} />);
     const link = screen.getByRole('link', { name: '2' });
     expect(link.getAttribute('href')).toBe('/blog/page/2');
+  });
+
+  it('onPageChangeが渡された場合はbuttonが描画されクリックでコールバックが呼ばれる', () => {
+    const onPageChange = vi.fn();
+    render(
+      <Pagination
+        pager={{ totalCount: 30, limit: 10, currentPage: 1 }}
+        onPageChange={onPageChange}
+      />
+    );
+    const page2Button = screen.getByRole('button', { name: '2' });
+    fireEvent.click(page2Button);
+    expect(onPageChange).toHaveBeenCalledWith(2);
+  });
+
+  it('onPageChangeが渡された場合は現在ページ以外にLinkが描画されない', () => {
+    const onPageChange = vi.fn();
+    render(
+      <Pagination
+        pager={{ totalCount: 30, limit: 10, currentPage: 1 }}
+        onPageChange={onPageChange}
+      />
+    );
+    expect(screen.queryByRole('link', { name: '2' })).toBeNull();
   });
 });
