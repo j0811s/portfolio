@@ -48,10 +48,12 @@ app.get('/draft/disable', async (c) => {
 app.get('/blog', async (c) => {
   const q = c.req.query('q');
   const limit = c.req.query('limit');
+  const offset = c.req.query('offset');
   try {
     const data = await fetchBlogList('blog', {
       q: q || undefined,
       limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
       fields: 'id,title,eyecatch,publishedAt,updatedAt',
     });
     return c.json(data);
