@@ -1,84 +1,14 @@
 import { test, expect } from '@playwright/test';
 
-test('検索フォームが表示される', async ({ page }) => {
-  await page.goto('/blog/');
-
-  await expect(page.getByRole('search')).toBeVisible();
-  await expect(page.getByPlaceholder('キーワードで検索')).toBeVisible();
-});
-
-test('キーワードを入力してEnterで検索結果ページへ遷移する', async ({ page }) => {
-  await page.goto('/blog/');
-
-  await page.getByPlaceholder('キーワードで検索').fill('Next.js');
-  await page.getByPlaceholder('キーワードで検索').press('Enter');
-
-  await expect(page).toHaveURL(/\/blog\/search\/?\?q=Next\.js/);
-});
-
-test('検索結果ページに見出しと件数が表示される', async ({ page }) => {
+test('/blog/search?q=X は /blog/?q=X へリダイレクトされ結果が表示される', async ({ page }) => {
   await page.goto('/blog/search?q=Next.js');
 
+  await expect(page).toHaveURL(/\/blog\/\?q=Next\.js/);
   await expect(page.getByRole('heading', { name: /Next\.js/, level: 1 })).toBeVisible();
 });
 
-test('検索結果ページのフォームに入力値が残る', async ({ page }) => {
-  await page.goto('/blog/search?q=Next.js');
-
-  await expect(page.getByPlaceholder('キーワードで検索')).toHaveValue('Next.js');
-});
-
-test('検索結果ページでリセットボタンが表示される', async ({ page }) => {
-  await page.goto('/blog/search?q=Next.js');
-
-  await expect(page.getByRole('button', { name: 'リセット' })).toBeVisible();
-});
-
-test('リセットボタンをクリックするとブログ一覧へ戻る', async ({ page }) => {
-  await page.goto('/blog/search?q=Next.js');
-
-  await page.getByRole('button', { name: 'リセット' }).click();
+test('/blog/search（キーワードなし）は /blog/ へリダイレクトされる', async ({ page }) => {
+  await page.goto('/blog/search');
 
   await expect(page).toHaveURL('/blog/');
-});
-
-test('検索結果ページでパンくずリストが表示される', async ({ page }) => {
-  await page.goto('/blog/search?q=Next.js');
-
-  await expect(page.getByRole('link', { name: '投稿' }).first()).toBeVisible();
-});
-
-test('検索結果が0件のとき空メッセージが表示される', async ({ page }) => {
-  await page.goto('/blog/search?q=zzzzzzzzzz-nonexistent-keyword-zzzzzzzzzz');
-
-  await expect(page.getByText('に一致する記事が見つかりませんでした。')).toBeVisible();
-});
-
-test('検索結果ページ滞在中に別キーワードを入力すると、ページ遷移なしに結果とURLが更新される', async ({
-  page,
-}) => {
-  await page.goto('/blog/search?q=Next.js');
-  await expect(page.getByRole('heading', { name: /Next\.js/, level: 1 })).toBeVisible();
-  await page.waitForLoadState('networkidle');
-
-  const input = page.getByPlaceholder('キーワードで検索');
-  await input.selectText();
-  await input.pressSequentially('Hono');
-
-  await expect(page).toHaveURL(/\/blog\/search\/?\?q=Hono/);
-  await expect(page.getByRole('heading', { name: /Hono/, level: 1 })).toBeVisible();
-});
-
-test('検索結果ページ滞在中に0件になるキーワードを入力すると空メッセージが表示される', async ({
-  page,
-}) => {
-  await page.goto('/blog/search?q=Next.js');
-  await expect(page.getByRole('heading', { name: /Next\.js/, level: 1 })).toBeVisible();
-  await page.waitForLoadState('networkidle');
-
-  const input = page.getByPlaceholder('キーワードで検索');
-  await input.selectText();
-  await input.pressSequentially('zzzzzzzzzz-nonexistent-keyword-zzzzzzzzzz');
-
-  await expect(page.getByText('に一致する記事が見つかりませんでした。')).toBeVisible();
 });
