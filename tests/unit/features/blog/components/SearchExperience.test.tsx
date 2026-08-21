@@ -7,11 +7,6 @@ vi.mock('@fortawesome/react-fontawesome', () => ({
   FontAwesomeIcon: () => null,
 }));
 
-const mockPush = vi.fn();
-vi.mock('next/navigation', () => ({
-  useRouter: () => ({ push: mockPush }),
-}));
-
 vi.mock('@/src/components', () => ({
   SectionTitle: ({ title }: { title: string }) => <h1>{title}</h1>,
 }));
@@ -31,6 +26,30 @@ vi.mock('@/src/features/blog/components/ArticleCardList', () => ({
       {contents.length < 1 && emptyMessage && <p>{emptyMessage}</p>}
     </div>
   ),
+}));
+
+vi.mock('@/src/features/blog/components/Pagination', () => ({
+  default: ({
+    pager,
+    onPageChange,
+  }: {
+    pager: { totalCount: number; limit: number; currentPage?: number };
+    onPageChange?: (page: number) => void;
+  }) => {
+    const pageCount = Math.ceil(pager.totalCount / pager.limit);
+    if (pageCount < 2) {
+      return null;
+    }
+    return (
+      <nav>
+        {Array.from({ length: pageCount }, (_, i) => i + 1).map((p) => (
+          <button key={p} type="button" onClick={() => onPageChange?.(p)}>
+            {p}
+          </button>
+        ))}
+      </nav>
+    );
+  },
 }));
 
 const mockFetch = vi.fn();
@@ -58,7 +77,6 @@ describe('SearchExperience', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     mockFetch.mockReset();
-    mockPush.mockReset();
     mockFetch.mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({ contents: [], totalCount: 0 }),
@@ -73,6 +91,7 @@ describe('SearchExperience', () => {
     render(
       <SearchExperience
         initialKeyword="Next.js"
+        initialPage={1}
         initialContents={[createBlogPost({ title: '初期記事' })]}
         initialTotalCount={1}
       />
@@ -81,8 +100,27 @@ describe('SearchExperience', () => {
     expect(screen.getByRole('heading', { name: /Next\.js/ })).toBeTruthy();
   });
 
+  it('キーワードなしで0件の場合は「記事が見つかりませんでした。」が表示される', () => {
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={1}
+        initialContents={[]}
+        initialTotalCount={0}
+      />
+    );
+    expect(screen.getByText('記事が見つかりませんでした。')).toBeTruthy();
+  });
+
   it('入力後300ms経過で正しいクエリを付けてfetchが呼ばれる', async () => {
-    render(<SearchExperience initialKeyword="" initialContents={[]} initialTotalCount={0} />);
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={1}
+        initialContents={[]}
+        initialTotalCount={0}
+      />
+    );
     fireEvent.change(screen.getByPlaceholderText('キーワードで検索'), {
       target: { value: 'Hono' },
     });
@@ -103,7 +141,14 @@ describe('SearchExperience', () => {
           totalCount: 1,
         }),
     });
-    render(<SearchExperience initialKeyword="" initialContents={[]} initialTotalCount={0} />);
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={1}
+        initialContents={[]}
+        initialTotalCount={0}
+      />
+    );
     fireEvent.change(screen.getByPlaceholderText('キーワードで検索'), {
       target: { value: 'Hono' },
     });
@@ -114,11 +159,12 @@ describe('SearchExperience', () => {
     expect(screen.getByRole('heading', { name: /Hono.*：1件/ })).toBeTruthy();
   });
 
-  it('入力を空にするとqなしでfetchし見出しが「検索」に戻る', async () => {
+  it('入力を空にするとqなしでfetchし見出しが「投稿」に戻る', async () => {
     const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
     render(
       <SearchExperience
         initialKeyword="Next.js"
+        initialPage={1}
         initialContents={[createBlogPost()]}
         initialTotalCount={1}
       />
@@ -130,8 +176,8 @@ describe('SearchExperience', () => {
     await flush();
 
     expect(mockFetch).toHaveBeenCalledWith('/api/blog?limit=12', expect.anything());
-    expect(screen.getByRole('heading', { name: '検索' })).toBeTruthy();
-    expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '/blog/search/');
+    expect(screen.getByRole('heading', { name: '投稿' })).toBeTruthy();
+    expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '/blog/');
   });
 
   it('fetch失敗時は直前の結果を保持したままエラーメッセージが表示される', async () => {
@@ -139,6 +185,7 @@ describe('SearchExperience', () => {
     render(
       <SearchExperience
         initialKeyword="Next.js"
+        initialPage={1}
         initialContents={[createBlogPost({ title: '保持される記事' })]}
         initialTotalCount={1}
       />
@@ -162,6 +209,7 @@ describe('SearchExperience', () => {
     render(
       <SearchExperience
         initialKeyword="Next.js"
+        initialPage={1}
         initialContents={[createBlogPost({ title: '保持される記事' })]}
         initialTotalCount={1}
       />
@@ -179,7 +227,14 @@ describe('SearchExperience', () => {
   it('連続入力時は古いリクエストのAbortControllerがabortされる', async () => {
     const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
     mockFetch.mockImplementationOnce(() => new Promise(() => {}));
-    render(<SearchExperience initialKeyword="" initialContents={[]} initialTotalCount={0} />);
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={1}
+        initialContents={[]}
+        initialTotalCount={0}
+      />
+    );
 
     fireEvent.change(screen.getByPlaceholderText('キーワードで検索'), {
       target: { value: 'H' },
@@ -197,34 +252,43 @@ describe('SearchExperience', () => {
     expect(mockFetch).toHaveBeenCalledTimes(2);
   });
 
-  it('リセットボタンで/blog/へ遷移する', () => {
+  it('リセットボタンをクリックするとキーワードがクリアされ一覧に戻る', async () => {
     render(
       <SearchExperience
         initialKeyword="Next.js"
+        initialPage={1}
         initialContents={[createBlogPost()]}
         initialTotalCount={1}
       />
     );
+
     fireEvent.click(screen.getByRole('button', { name: 'リセット' }));
-    expect(mockPush).toHaveBeenCalledWith('/blog/');
+
+    expect((screen.getByPlaceholderText('キーワードで検索') as HTMLInputElement).value).toBe('');
+    expect(mockFetch).toHaveBeenCalledWith('/api/blog?limit=12', expect.anything());
   });
 
-  it('リセットボタンをデバウンス発火前にクリックすると保留中の検索は実行されない', async () => {
-    const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
-    // 既存テストがspyをmockRestoreしていないため、vi.spyOnは呼び出し履歴が残った同一spyを返す
-    replaceStateSpy.mockClear();
-    render(<SearchExperience initialKeyword="" initialContents={[]} initialTotalCount={0} />);
+  it('リセットボタンをデバウンス発火前にクリックすると保留中の検索の代わりに即座にクリアされる', async () => {
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={1}
+        initialContents={[]}
+        initialTotalCount={0}
+      />
+    );
 
     fireEvent.change(screen.getByPlaceholderText('キーワードで検索'), {
       target: { value: 'Hono' },
     });
     fireEvent.click(screen.getByRole('button', { name: 'リセット' }));
 
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+    expect(mockFetch).toHaveBeenCalledWith('/api/blog?limit=12', expect.anything());
+
     await flush();
 
-    expect(mockPush).toHaveBeenCalledWith('/blog/');
-    expect(mockFetch).not.toHaveBeenCalled();
-    expect(replaceStateSpy).not.toHaveBeenCalled();
+    expect(mockFetch).toHaveBeenCalledTimes(1);
   });
 
   it('StrictMode下でマウントしてもキーワード未変更ならfetchが呼ばれない', async () => {
@@ -232,6 +296,7 @@ describe('SearchExperience', () => {
       <StrictMode>
         <SearchExperience
           initialKeyword="Next.js"
+          initialPage={1}
           initialContents={[createBlogPost()]}
           initialTotalCount={1}
         />
@@ -241,5 +306,41 @@ describe('SearchExperience', () => {
     await flush();
 
     expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  it('ページ番号クリックで正しいoffset付きURLをfetchしURLに?page=が反映される', () => {
+    const replaceStateSpy = vi.spyOn(window.history, 'replaceState');
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={1}
+        initialContents={[createBlogPost()]}
+        initialTotalCount={20}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: '2' }));
+
+    expect(mockFetch).toHaveBeenCalledWith('/api/blog?limit=12&offset=12', expect.anything());
+    expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '/blog/?page=2');
+  });
+
+  it('キーワード変更でページが1にリセットされる', async () => {
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={3}
+        initialContents={[createBlogPost()]}
+        initialTotalCount={40}
+      />
+    );
+
+    fireEvent.change(screen.getByPlaceholderText('キーワードで検索'), {
+      target: { value: 'Hono' },
+    });
+
+    await flush();
+
+    expect(mockFetch).toHaveBeenCalledWith('/api/blog?q=Hono&limit=12', expect.anything());
   });
 });

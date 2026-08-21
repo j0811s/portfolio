@@ -3,26 +3,28 @@
 import styles from '@/src/features/blog/styles/SearchExperience.module.css';
 import searchFormStyles from '@/src/features/blog/styles/SearchForm.module.css';
 import ArticleCardList from '@/src/features/blog/components/ArticleCardList';
+import Pagination from '@/src/features/blog/components/Pagination';
 import { SectionTitle } from '@/src/components';
 import { LIMIT } from '@/src/constants/blog';
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   initialKeyword: string;
+  initialPage: number;
   initialContents: BlogPost[];
   initialTotalCount: number;
 };
 
 export default function SearchExperience({
   initialKeyword,
+  initialPage,
   initialContents,
   initialTotalCount,
 }: Props) {
-  const { push } = useRouter();
   const [keyword, setKeyword] = useState(initialKeyword);
+  const [page, setPage] = useState(initialPage);
   const [contents, setContents] = useState(initialContents);
   const [totalCount, setTotalCount] = useState(initialTotalCount);
   const [isFetching, setIsFetching] = useState(false);
@@ -31,8 +33,9 @@ export default function SearchExperience({
   const abortControllerRef = useRef<AbortController | undefined>(undefined);
   const previousKeywordRef = useRef(initialKeyword);
 
-  const runSearch = (value: string) => {
+  const runSearch = (value: string, targetPage: number) => {
     const trimmed = value.trim();
+    const offset = (targetPage - 1) * LIMIT;
 
     abortControllerRef.current?.abort();
     const controller = new AbortController();
@@ -41,9 +44,16 @@ export default function SearchExperience({
     setIsFetching(true);
     setHasError(false);
 
-    const query = trimmed ? `?q=${encodeURIComponent(trimmed)}&limit=${LIMIT}` : `?limit=${LIMIT}`;
+    const apiParams = new URLSearchParams();
+    if (trimmed) {
+      apiParams.set('q', trimmed);
+    }
+    apiParams.set('limit', String(LIMIT));
+    if (offset > 0) {
+      apiParams.set('offset', String(offset));
+    }
 
-    fetch(`/api/blog${query}`, { signal: controller.signal })
+    fetch(`/api/blog?${apiParams.toString()}`, { signal: controller.signal })
       .then((res) => {
         if (!res.ok) {
           throw new Error(`/api/blog responded ${res.status}`);
@@ -63,11 +73,15 @@ export default function SearchExperience({
         setHasError(true);
       });
 
-    window.history.replaceState(
-      null,
-      '',
-      trimmed ? `/blog/search/?q=${encodeURIComponent(trimmed)}` : '/blog/search/'
-    );
+    const urlParams = new URLSearchParams();
+    if (trimmed) {
+      urlParams.set('q', trimmed);
+    }
+    if (targetPage > 1) {
+      urlParams.set('page', String(targetPage));
+    }
+    const queryString = urlParams.toString();
+    window.history.replaceState(null, '', queryString ? `/blog/?${queryString}` : '/blog/');
   };
 
   useEffect(() => {
@@ -78,12 +92,13 @@ export default function SearchExperience({
       return;
     }
     previousKeywordRef.current = keyword;
+    setPage(1);
 
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
     timerRef.current = setTimeout(() => {
-      runSearch(keyword);
+      runSearch(keyword, 1);
     }, 300);
 
     return () => {
@@ -98,14 +113,26 @@ export default function SearchExperience({
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    runSearch(keyword);
+    setPage(1);
+    runSearch(keyword, 1);
   };
 
   const handleReset = () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    push('/blog/');
+    previousKeywordRef.current = '';
+    setKeyword('');
+    setPage(1);
+    runSearch('', 1);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    setPage(newPage);
+    runSearch(keyword, newPage);
   };
 
   const trimmedKeyword = keyword.trim();
@@ -113,10 +140,10 @@ export default function SearchExperience({
   return (
     <section>
       <SectionTitle
-        title={trimmedKeyword ? `「${trimmedKeyword}」の検索結果：${totalCount}件` : '検索'}
+        title={trimmedKeyword ? `「${trimmedKeyword}」の検索結果：${totalCount}件` : '投稿'}
       />
       <div aria-live="polite" className="sr-only">
-        {trimmedKeyword ? `${totalCount}件の検索結果` : ''}
+        {totalCount}件の記事
       </div>
       {/* biome-ignore lint/a11y/useSemanticElements: <search>要素はReactのJSX型定義が未対応 */}
       <form className={searchFormStyles.form} onSubmit={handleSubmit} role="search">
@@ -152,8 +179,16 @@ export default function SearchExperience({
       <ArticleCardList
         contents={contents}
         emptyMessage={
-          trimmedKeyword ? `「${trimmedKeyword}」に一致する記事が見つかりませんでした。` : undefined
+          contents.length < 1
+            ? trimmedKeyword
+              ? `「${trimmedKeyword}」に一致する記事が見つかりませんでした。`
+              : '記事が見つかりませんでした。'
+            : undefined
         }
+      />
+      <Pagination
+        pager={{ totalCount, limit: LIMIT, currentPage: page }}
+        onPageChange={handlePageChange}
       />
     </section>
   );
