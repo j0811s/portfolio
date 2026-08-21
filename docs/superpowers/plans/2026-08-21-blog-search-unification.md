@@ -968,13 +968,15 @@ export default async function Page({ searchParams }: Props) {
 
 - [ ] **Step 3: 型チェックとlintを確認する**
 
-Run: `npx tsc --noEmit` および `npx biome check "src/app/(login)/blog/"`
-Expected: 両方ともエラーなし。
+Run: `npx biome check "src/app/(login)/blog/"`
+Expected: エラーなし。
 
-- [ ] **Step 4: ビルドを確認する**
+Run: `npx tsc --noEmit`
+Expected: `src/app/(login)/blog/search/page.tsx`の`<SearchExperience initialKeyword={keyword} initialContents={contents} initialTotalCount={totalCount} />`呼び出しで、`initialPage`が渡されていないことによる型エラーが1件出る。これは想定内（このファイルはTask 5で`permanentRedirect`のみのファイルに書き換えられ、`SearchExperience`の呼び出し自体が無くなるため、Task 5完了まで解消しない既知の一時的な状態）。それ以外に新規のエラーが無いことを確認する。
 
-Run: `npm run build`
-Expected: ビルド成功。`/blog/`が動的レンダリング（`ƒ`）になっていることをルートサマリーで確認する。
+- [ ] **Step 4: ビルドはここでは実行しない**
+
+`/blog/search/page.tsx`がまだ`SearchExperience`の旧シグネチャ（`initialPage`無し）を呼んでいるため、Task 5でこのファイルを書き換えるまで`npm run build`は失敗する。このタスクでは`npm run build`を実行しない。フルビルドの成功確認はTask 5のStep 6で行う。
 
 - [ ] **Step 5: コミット**
 
