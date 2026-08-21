@@ -46,12 +46,12 @@ export default async function Page({ searchParams }: Props) {
   const keyword = q?.trim() ?? '';
   const pageNum = parsePage(page);
 
-  const { contents, totalCount } = (await fetchBlogList('blog', {
+  const { contents, totalCount } = await fetchBlogList('blog', {
     q: keyword || undefined,
     limit: LIMIT,
     offset: LIMIT * (pageNum - 1),
     fields: 'id,title,eyecatch,publishedAt,updatedAt',
-  })) ?? { contents: [], totalCount: 0 };
+  });
 
   return (
     <>

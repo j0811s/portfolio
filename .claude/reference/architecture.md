@@ -26,6 +26,12 @@ API ルートはミドルウェアの `matcher` 対象外のため認証され�
 
 ブログとスキルのデータは `src/libs/microcms/` 経由で MicroCMS から取得する（`blog.ts` と `skill.ts` の2クライアント）。ブログページは `generateStaticParams` による SSG + ISR（`revalidate = 3600`）。1レンダリング内の重複リクエストは React `cache()` で排除している。
 
+## ブログ一覧・検索の統合
+
+`/blog/` は `?q=`（検索キーワード）・`?page=`（ページ番号）を受け付ける唯一のブログ一覧エントリーポイントで、`src/features/blog/components/SearchExperience.tsx`（Client Component）が入力・ページ送りの両方をデバウンス付きの `/api/blog` フェッチと `window.history.replaceState` によるURL同期でライブに処理する（`next/navigation` のナビゲーションは発生しない）。`/blog/page/[num]` と `/blog/search` は `permanentRedirect` によって `/blog/` へのリダイレクトのみを行う薄いルートになっている。
+
+`src/app/(login)/blog/loading.tsx` はNext.jsのファイル規約上、`/blog/` 自身だけでなく `/blog/[postId]`・`/blog/archive/*`・`/blog/tags/*`・`/blog/categories/*` とそれぞれの `page/[num]` など、配下の全ルートの遷移時フォールバックにもなる（`loading.tsx` はそのセグメント以下の子ルート全てをSuspense境界でラップするため）。これにより、これらのページへの遷移時もルート直下の `src/app/loading.tsx`（ヘッダー・フッターごと覆う全画面オーバーレイ）ではなく、ヘッダー・フッターを残した狭いフォールバックに変わる。意図して設計した副作用ではなく、`/blog/` の統合ページ化に伴う波及効果だが、個別に切り分けるにはルートグループの再編が必要になる規模のため、現状は許容している。
+
 ## ブログコンテンツのレンダリング
 
 MicroCMS から取得したブログ記事の HTML は `html-react-parser` でレンダリングする。`ArticleDetail` は `<pre>` ブロックを `highlight.js`（自動検出モード）でシンタックスハイライトした出力に置き換える。コードのファイル名は親要素の `data-filename` 属性から読み取る。

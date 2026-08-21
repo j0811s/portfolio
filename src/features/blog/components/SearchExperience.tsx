@@ -132,6 +132,7 @@ export default function SearchExperience({
       clearTimeout(timerRef.current);
     }
     setPage(newPage);
+    window.scrollTo({ top: 0 });
     runSearch(keyword, newPage);
   };
 
@@ -143,7 +144,7 @@ export default function SearchExperience({
         title={trimmedKeyword ? `「${trimmedKeyword}」の検索結果：${totalCount}件` : '投稿'}
       />
       <div aria-live="polite" className="sr-only">
-        {totalCount}件の記事
+        {page > 1 ? `${page}ページ目・${totalCount}件の記事` : `${totalCount}件の記事`}
       </div>
       {/* biome-ignore lint/a11y/useSemanticElements: <search>要素はReactのJSX型定義が未対応 */}
       <form className={searchFormStyles.form} onSubmit={handleSubmit} role="search">

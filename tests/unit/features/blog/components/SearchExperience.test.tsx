@@ -76,6 +76,7 @@ const flush = async () => {
 describe('SearchExperience', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
     mockFetch.mockReset();
     mockFetch.mockResolvedValue({
       ok: true,
@@ -85,6 +86,7 @@ describe('SearchExperience', () => {
 
   afterEach(() => {
     vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   it('初期表示はinitialContents/initialTotalCountと一致する', () => {
@@ -323,6 +325,22 @@ describe('SearchExperience', () => {
 
     expect(mockFetch).toHaveBeenCalledWith('/api/blog?limit=12&offset=12', expect.anything());
     expect(replaceStateSpy).toHaveBeenCalledWith(null, '', '/blog/?page=2');
+  });
+
+  it('ページ番号クリックでスクロール位置がトップにリセットされる', () => {
+    const scrollToSpy = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    render(
+      <SearchExperience
+        initialKeyword=""
+        initialPage={1}
+        initialContents={[createBlogPost()]}
+        initialTotalCount={20}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: '2' }));
+
+    expect(scrollToSpy).toHaveBeenCalledWith({ top: 0 });
   });
 
   it('キーワード変更でページが1にリセットされる', async () => {

@@ -78,13 +78,13 @@ npm run e2e:codegen  # E2E テスト自動生成
 | パス | 説明 |
 |---|---|
 | `/` | トップページ（投稿一覧・スキル） |
-| `/blog/` | ブログ記事一覧 |
+| `/blog/` | ブログ記事一覧・検索・ページ送り（`?q=`・`?page=`） |
 | `/blog/[postId]/` | ブログ記事詳細 |
-| `/blog/page/[num]/` | ページネーション |
+| `/blog/page/[num]/` | `/blog/?page=[num]` へリダイレクト（旧ページネーションURL） |
 | `/blog/categories/[catId]/` | カテゴリー別記事一覧 |
 | `/blog/tags/[tagId]/` | タグ別記事一覧 |
 | `/blog/archive/[year]/` | 年別アーカイブ |
-| `/blog/search/` | キーワード検索結果 |
+| `/blog/search/` | `/blog/?q=` へリダイレクト（旧検索結果URL） |
 | `/contact/` | お問い合わせフォーム |
 | `/auth/` | ログイン |
 | `/offline/` | オフライン時のフォールバックページ |
@@ -100,7 +100,7 @@ npm run e2e:codegen  # E2E テスト自動生成
 |---|---|---|
 | `GET /api/draft` | — | プレビューモード有効化 |
 | `GET /api/draft/disable` | — | プレビューモード解除 |
-| `GET /api/blog` | — | ブログ一覧取得 |
+| `GET /api/blog` | — | ブログ一覧取得（`q`・`limit`・`offset`対応） |
 | `GET /api/blog/:id` | — | ブログ記事詳細取得 |
 | `GET /api/skills` | — | スキル一覧取得 |
 | `POST /api/contact` | 必須 | お問い合わせメール送信（Resend） |
