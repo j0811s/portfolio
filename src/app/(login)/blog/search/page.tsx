@@ -1,52 +1,14 @@
-import styles from '@/src/styles/pages/blog/layout.module.css';
-import { SITE_URL } from '@/src/constants/site';
-import { LIMIT } from '@/src/constants/blog';
-import { Breadcrumb } from '@/src/components';
-import { fetchBlogList } from '@/src/libs/microcms/blog';
-import { AsideMenu, SearchExperience } from '@/src/features/blog';
-import type { Metadata } from 'next';
-import { metadata as rootMetadata } from '@/src/app/layout';
+import { permanentRedirect } from 'next/navigation';
 
 type Props = {
   searchParams: Promise<{ q?: string }>;
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const { q } = await searchParams;
-  return {
-    ...rootMetadata,
-    title: q ? `「${q}」の検索結果` : '検索',
-    robots: { index: false },
-  };
-}
-
 export default async function Page({ searchParams }: Props) {
   const { q } = await searchParams;
-  const keyword = q?.trim() ?? '';
-
-  const { contents, totalCount } = (await fetchBlogList('blog', {
-    q: keyword || undefined,
-    limit: LIMIT,
-    fields: 'id,title,eyecatch,publishedAt,updatedAt',
-  })) ?? { contents: [], totalCount: 0 };
-
-  return (
-    <>
-      <Breadcrumb
-        data={[
-          { name: 'トップページ', url: SITE_URL },
-          { name: '投稿', url: '/blog/' },
-          { name: '検索', url: '/blog/search' },
-        ]}
-      />
-      <div className={styles.container}>
-        <SearchExperience
-          initialKeyword={keyword}
-          initialContents={contents}
-          initialTotalCount={totalCount}
-        />
-        <AsideMenu />
-      </div>
-    </>
-  );
+  const keyword = q?.trim();
+  if (keyword) {
+    permanentRedirect(`/blog/?q=${encodeURIComponent(keyword)}`);
+  }
+  permanentRedirect('/blog/');
 }
