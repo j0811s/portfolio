@@ -13,9 +13,6 @@ export default function GlobalFooter() {
       <footer className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.top}>
-            <Link className={styles.brand} href="/" translate="no">
-              j-sato
-            </Link>
             <nav className={styles.navigation}>
               <ul className={styles.navigationList}>
                 <li className={styles.navigationListItem}>
