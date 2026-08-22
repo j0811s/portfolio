@@ -12,10 +12,8 @@ export default function LoadingSpinner({ fullscreen = true }: Props) {
       role="status"
       aria-label="読み込み中"
     >
-      <div className={styles.spinner}>
-        <div className={styles.tile}></div>
-        <div className={styles.tile}></div>
-        <div className={styles.tile}></div>
+      <div className={styles.disc}>
+        <div className={styles.ring}></div>
       </div>
     </div>
   );

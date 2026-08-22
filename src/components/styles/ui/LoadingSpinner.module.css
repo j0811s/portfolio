@@ -16,41 +16,28 @@
     padding: 2.5rem 1rem;
   }
 
-  .spinner {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+  .disc {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+    box-shadow: var(--neumorphism-shadow);
   }
 
-  .tile {
-    width: 16px;
-    height: 16px;
-    border-radius: 5px;
-    background-color: var(--theme-primary);
-    box-shadow: var(--neumorphism-shadow-sm);
-    animation: levitate 1.8s ease-in-out infinite;
+  .ring {
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 6px solid transparent;
+    border-top-color: var(--theme-primary);
+    border-right-color: var(--theme-primary);
+    animation: spin 0.9s linear infinite;
   }
 
-  .tile:nth-child(2) {
-    animation-delay: 0.25s;
-  }
-
-  .tile:nth-child(3) {
-    animation-delay: 0.5s;
-  }
-
-  @keyframes levitate {
-    0%,
-    100% {
-      box-shadow: var(--neumorphism-shadow-sm);
-      transform: translateY(0) scale(1);
-      opacity: 0.5;
-    }
-    40%,
-    60% {
-      box-shadow: var(--neumorphism-shadow);
-      transform: translateY(-10px) scale(1.1);
-      opacity: 1;
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
     }
   }
 }
