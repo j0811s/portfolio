@@ -1,8 +1,16 @@
 {
-  "env": {
-    "CLAUDE_CODE_NEW_INIT": "true"
-  },
   "permissions": {
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Bash(git push --force:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(printenv:*)",
+      "Bash(env:*)",
+      "Read(/.env)",
+      "Read(/.env.*)"
+    ],
     "allow": [
       "Bash(npm run:*)",
       "Bash(npm test:*)",
@@ -10,18 +18,9 @@
       "Bash(git status)",
       "Bash(git diff:*)"
     ],
-    "deny": [
-      "Bash(rm -rf:*)",
-      "Bash(sudo:*)",
-      "Bash(git push --force:*)",
-      "Bash(curl:*)",
-      "Bash(brew:*)",
-      "Read(/.env)",
-      "Read(/.env.*)"
-    ],
     "ask": [
-      "Bash(git commit:*)", 
-      "Bash(npm install)", 
+      "Bash(git commit:*)",
+      "Bash(npm install)",
       "Bash(npm ci)"
     ]
   },
@@ -32,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "input=$(cat); echo \"$input\" | grep -q '\"file_path\".*\\.env' && echo 'BLOCKED: .env ファイルへの書き込みは禁止されています' && exit 2; exit 0"
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/block-env-write.sh"
           }
         ]
       }
@@ -43,14 +42,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "input=$(cat); file=$(printf '%s' \"$input\" | sed -n 's/.*\"file_path\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p'); case \"$file\" in /Users/sato/github/portfolio/src/*) cd /Users/sato/github/portfolio && npx biome check \"$file\" 2>&1 | tail -20;; esac; exit 0"
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/biome-check.sh"
           }
         ]
       }
     ]
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
+  "env": {
+    "CLAUDE_CODE_NEW_INIT": "true"
   }
 }
