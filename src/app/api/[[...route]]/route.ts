@@ -9,6 +9,12 @@ import { fetchSkillAll } from '@/src/libs/microcms/skill';
 
 const app = new Hono({ strict: false }).basePath('/api');
 
+// microCMS のコンテンツ ID に使える文字は英大小文字・数字・`-`・`_` のみ（「コンテンツIDの設定」）で、
+// リダイレクト先パスや Cookie 値に `/`・`..`・`;`・改行等が混入するのを防ぐ。
+// 文字数は API 側で設定しない限り無制限のため、実運用で十分な上限として 100 文字を設ける。
+// draftKey の形式は公開仕様が無いため、実際の値（英数字）を包含する同じパターンで検証する。
+const DRAFT_PARAM_PATTERN = /^[A-Za-z0-9_-]{1,100}$/;
+
 // プレビュー用
 app.get('/draft', async (c) => {
   const id = c.req.query('id');
@@ -16,6 +22,10 @@ app.get('/draft', async (c) => {
 
   if (!id || !draftKey) {
     return c.text('id and draftKey are required', 400);
+  }
+
+  if (!DRAFT_PARAM_PATTERN.test(id) || !DRAFT_PARAM_PATTERN.test(draftKey)) {
+    return c.text('invalid id or draftKey', 400);
   }
 
   const draft = await draftMode();
