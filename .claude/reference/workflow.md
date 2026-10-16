@@ -14,7 +14,7 @@
 2. `npm run check`（`src/` 全体）
 3. `npm run build`
 4. `npm run test` / `npm run e2e`（変更内容に応じて）
-5. コードレビュー（react-doctor → code-reviewer → 変更内容に応じた追加エージェント → `/difit-review`）
+5. コードレビュー（react-doctor → code-reviewer → 変更内容に応じた追加エージェント）
 
 さらに包括的なレビューが必要な場合は `/pr-review-toolkit:review-pr` を実行する
 （レビュー対象を絞る例: `/pr-review-toolkit:review-pr errors tests`）。
