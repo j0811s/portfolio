@@ -69,9 +69,11 @@ npm run e2e:codegen  # E2E テスト自動生成
 
 ## CI
 
-`.github/workflows/check.yml` が `main` への push / PR で `npm run check`（Biome lint + format）と `npm run test`（Vitest）を実行します。
+`.github/workflows/check.yml` が PR と `main` への push（`src/`・`tests/`・依存や設定ファイルの変更時のみ）で `npm run check`（Biome lint + format）と `npm run test`（Vitest）を実行します。
 
-`main` はブランチ保護されており、Check が失敗している PR はマージできません。owner の直接 push のみ保護ルールをバイパスできます（`enforce_admins: false`）。
+`main` はリポジトリルールセットで保護されており、変更は PR 経由のみで、Check が通過していない PR はマージできません。
+
+`.github/workflows/release.yml` が `main` へのマージ時に、前回の `v*` タグ以降のコミットの型（Conventional Commits）から次のバージョンを決めて GitHub Release を自動作成します（`feat` → minor、`fix` → patch、破壊的変更 → major、それ以外のみならリリースなし）。
 
 ## ページ構成
 

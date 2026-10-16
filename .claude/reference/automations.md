@@ -32,7 +32,11 @@
 
 ## CI（GitHub Actions）
 
-`.github/workflows/check.yml` が `main` への push / PR で `npm run check`・`npm run test` を実行する。`main` はブランチ保護されており、この Check が失敗している PR はマージ不可（`enforce_admins: false` のため owner の直接 push のみバイパス可能）。
+`.github/workflows/check.yml` が PR と `main` への push（`src/`・`tests/`・依存や設定ファイルの変更時のみ）で `npm run check`・`npm run test` を実行する。
+
+`main` はリポジトリルールセットで保護されている：PR 経由の変更のみ（直接 push・force push・削除は禁止）、CI の `check` ジョブ通過が必須、approve は不要。マージは人間が GitHub 上で行う（`/ship-issue` は PR 作成・CI 通過までで停止する）。
+
+`.github/workflows/release.yml` が `main` への push（PR マージ）で `scripts/next-version.sh` を実行し、前回の `v*` タグ以降のコミットの型から次のバージョンを決めて GitHub Release（タグ・自動生成リリースノート）を作成する。`!:` / `BREAKING CHANGE` → major、`feat` → minor、`fix` → patch、それ以外のみならリリースしない。`package.json` の `version` は更新しない（バージョンはタグで管理）。
 
 ## MCP サーバー
 
