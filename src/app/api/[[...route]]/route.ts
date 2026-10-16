@@ -8,7 +8,6 @@ import { fetchBlogList, fetchBlogDetail } from '@/src/libs/microcms/blog';
 import { fetchSkillAll } from '@/src/libs/microcms/skill';
 
 const app = new Hono({ strict: false }).basePath('/api');
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 // プレビュー用
 app.get('/draft', async (c) => {
@@ -103,12 +102,24 @@ app.post('/contact', async (c) => {
     return c.json({ error: 'All fields are required' }, 400);
   }
 
+  const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL;
   const to = process.env.CONTACT_TO_EMAIL;
-  if (!from || !to) {
+  if (!apiKey || !from || !to) {
+    const missing = Object.entries({
+      RESEND_API_KEY: apiKey,
+      RESEND_FROM_EMAIL: from,
+      CONTACT_TO_EMAIL: to,
+    })
+      .filter(([, value]) => !value)
+      .map(([name]) => name);
+    console.error(`[contact] 環境変数が未設定です: ${missing.join(', ')}`);
     return c.json({ error: 'Server misconfiguration' }, 500);
   }
 
+  // モジュール評価時に初期化すると、キー未設定の環境（Vercel Preview など）で
+  // ビルドが失敗するため、リクエスト時に生成する
+  const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({
     from,
     to,
