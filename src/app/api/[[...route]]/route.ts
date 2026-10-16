@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/src/app/api/auth/[...nextauth]/route';
 import { fetchBlogList, fetchBlogDetail } from '@/src/libs/microcms/blog';
 import { fetchSkillAll } from '@/src/libs/microcms/skill';
+import { validateContact } from '@/src/libs/contact/validateContact';
 
 const app = new Hono({ strict: false }).basePath('/api');
 
@@ -89,18 +90,18 @@ app.post('/contact', async (c) => {
     return c.json({ error: 'Unauthorized' }, 401);
   }
 
-  let body: { name: string; email: string; subject: string; message: string };
+  let body: unknown;
   try {
     body = await c.req.json();
   } catch {
     return c.json({ error: 'Invalid request body' }, 400);
   }
 
-  const { name, email, subject, message } = body;
-
-  if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
-    return c.json({ error: 'All fields are required' }, 400);
+  const result = validateContact(body);
+  if (!result.ok) {
+    return c.json({ error: result.error }, 400);
   }
+  const { name, email, subject, message } = result.value;
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL;
@@ -120,15 +121,22 @@ app.post('/contact', async (c) => {
   // モジュール評価時に初期化すると、キー未設定の環境（Vercel Preview など）で
   // ビルドが失敗するため、リクエスト時に生成する
   const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({
-    from,
-    to,
-    subject: `【お問い合わせ】${subject}`,
-    text: `お名前: ${name}\nメールアドレス: ${email}\n\n${message}`,
-    replyTo: email,
-  });
-
-  if (error) {
+  try {
+    const { error } = await resend.emails.send({
+      from,
+      to,
+      subject: `【お問い合わせ】${subject}`,
+      text: `お名前: ${name}\nメールアドレス: ${email}\n\n${message}`,
+      replyTo: email,
+    });
+    if (error) {
+      // Resend の message には入力値が含まれうるため、エラー種別のみ出力する
+      console.error(`[contact] メール送信に失敗しました: ${error.name}`);
+      return c.json({ error: 'Failed to send email' }, 500);
+    }
+  } catch (e) {
+    const detail = e instanceof Error ? e.name : 'Unknown error';
+    console.error(`[contact] メール送信中に例外が発生しました: ${detail}`);
     return c.json({ error: 'Failed to send email' }, 500);
   }
 

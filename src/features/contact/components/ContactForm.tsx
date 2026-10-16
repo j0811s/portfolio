@@ -5,15 +5,24 @@ import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import { CtaActionButton, CtaLinkButton, FormInput } from '@/src/components';
 import styles from '@/src/features/contact/styles/ContactForm.module.css';
+import {
+  CONTACT_EMAIL_PATTERN,
+  CONTACT_MAX_LENGTH,
+  type ContactInput,
+} from '@/src/libs/contact/validateContact';
 
-type FormData = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
+type FormData = ContactInput;
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
+
+// サーバー（POST /api/contact）と同じく、空白のみの入力を未入力とみなす共通ルール
+const textRules = (field: keyof FormData, requiredMessage: string) => ({
+  validate: (value: string) => !!value.trim() || requiredMessage,
+  maxLength: {
+    value: CONTACT_MAX_LENGTH[field],
+    message: `${CONTACT_MAX_LENGTH[field]}文字以内で入力してください`,
+  },
+});
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -71,7 +80,10 @@ export default function ContactForm() {
           type="text"
           placeholder="山田 太郎"
           aria-invalid={!!errors.name}
-          {...register('name', { required: 'お名前は必須です' })}
+          {...register('name', {
+            required: 'お名前は必須です',
+            ...textRules('name', 'お名前は必須です'),
+          })}
         />
         {errors.name && <span className={styles.errorText}>{errors.name.message}</span>}
       </label>
@@ -85,8 +97,9 @@ export default function ContactForm() {
           aria-invalid={!!errors.email}
           {...register('email', {
             required: 'メールアドレスは必須です',
+            ...textRules('email', 'メールアドレスは必須です'),
             pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              value: CONTACT_EMAIL_PATTERN,
               message: '正しいメールアドレスを入力してください',
             },
           })}
@@ -101,7 +114,10 @@ export default function ContactForm() {
           type="text"
           placeholder="件名を入力してください"
           aria-invalid={!!errors.subject}
-          {...register('subject', { required: '件名は必須です' })}
+          {...register('subject', {
+            required: '件名は必須です',
+            ...textRules('subject', '件名は必須です'),
+          })}
         />
         {errors.subject && <span className={styles.errorText}>{errors.subject.message}</span>}
       </label>
@@ -116,7 +132,7 @@ export default function ContactForm() {
           aria-invalid={!!errors.message}
           {...register('message', {
             required: 'メッセージは必須です',
-            maxLength: { value: 2000, message: '2000文字以内で入力してください' },
+            ...textRules('message', 'メッセージは必須です'),
           })}
         />
         {errors.message && <span className={styles.errorText}>{errors.message.message}</span>}

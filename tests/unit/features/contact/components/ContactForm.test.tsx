@@ -104,4 +104,30 @@ describe('ContactForm', () => {
       expect(screen.getByText('2000文字以内で入力してください')).toBeTruthy();
     });
   });
+
+  it.each([
+    ['お名前', 'あ'.repeat(101), '100文字以内で入力してください'],
+    ['メールアドレス', `${'a'.repeat(243)}@example.com`, '254文字以内で入力してください'],
+    ['件名', 'あ'.repeat(201), '200文字以内で入力してください'],
+  ])('%s が上限を超えるとエラーが表示され送信されない', async (label, value, message) => {
+    render(<ContactForm />);
+    fillAllFields();
+    fireEvent.change(screen.getByLabelText(label), { target: { value } });
+    fireEvent.click(screen.getByRole('button', { name: '送信する' }));
+    await waitFor(() => {
+      expect(screen.getByText(message)).toBeTruthy();
+    });
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  it('空白のみの入力は必須エラーになり送信されない', async () => {
+    render(<ContactForm />);
+    fillAllFields();
+    fireEvent.change(screen.getByLabelText('件名'), { target: { value: '   ' } });
+    fireEvent.click(screen.getByRole('button', { name: '送信する' }));
+    await waitFor(() => {
+      expect(screen.getByText('件名は必須です')).toBeTruthy();
+    });
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
 });
