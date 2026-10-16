@@ -13,26 +13,41 @@ export default function LoginForm() {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  // signIn を並行させると CSRF Cookie が複数発行されて検証に失敗するため、送信中は再送信させない
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { replace } = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     setErrorMessage('');
 
     const callbackUrl = new URL(window.location.href).searchParams.get('callbackUrl') ?? '/';
 
-    const res = await signIn('credentials', {
-      redirect: false,
-      username: userId,
-      password,
-      callbackUrl,
-    });
+    try {
+      const res = await signIn('credentials', {
+        redirect: false,
+        username: userId,
+        password,
+        callbackUrl,
+      });
 
-    if (res?.error) {
-      setErrorMessage('IDまたはパスワードが間違っています');
-    } else if (res?.ok) {
-      replace(res.url ?? '/');
+      if (res?.error) {
+        setErrorMessage('IDまたはパスワードが間違っています');
+      } else if (res?.url && new URL(res.url).searchParams.get('csrf') === 'true') {
+        // NextAuth は CSRF 検証の失敗を error なし・ok: true の signin?csrf=true で返す
+        setErrorMessage('ログインに失敗しました。もう一度お試しください');
+      } else if (res?.ok) {
+        // 遷移が完了するまで再送信させないため、成功時は送信中のままにする
+        replace(res.url ?? '/');
+        return;
+      }
+    } catch {
+      // ネットワークエラーや 5xx の HTML 応答で signIn が reject した場合
+      setErrorMessage('ログインに失敗しました。もう一度お試しください');
     }
+    setIsSubmitting(false);
   };
 
   return (
@@ -67,7 +82,9 @@ export default function LoginForm() {
 
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
-      <CtaActionButton type="submit">ログイン</CtaActionButton>
+      <CtaActionButton type="submit" disabled={isSubmitting}>
+        ログイン
+      </CtaActionButton>
     </form>
   );
 }

@@ -4,8 +4,10 @@
 
 `src/proxy.ts` の Next.js ミドルウェアが全ルートを保護し、未認証リクエストを `/auth` にリダイレクトする。ルートグループは2つ：
 
-- `src/app/(login)/` — 認証必須。コンテンツページやブログ全般
-- `src/app/(logout)/` — 公開。`/auth` ログインページのみ
+- `src/app/(login)/` — 認証必須。コンテンツページやブログ全般（`AuthProvider` = `SessionProvider` でラップ）
+- `src/app/(logout)/` — 公開。`/auth` ログインページのみ。`SessionProvider` を置かない（初回の `/api/auth/session` 取得が `signIn` と並行すると CSRF Cookie が上書きされ、CSRF 検証に失敗するため）
+
+`LoginForm` は送信中の再送信を禁止し、NextAuth が CSRF 検証失敗を `ok: true` の `signin?csrf=true` で返すケースもエラーとして表示する。
 
 認証は NextAuth v4 の Credentials プロバイダー（`src/app/api/auth/[...nextauth]/route.ts`）で処理し、`AUTH_USERNAME` / `AUTH_PASSWORD` 環境変数を照合する。セッションは JWT 戦略（開発: 5分、本番: 24時間）。
 
