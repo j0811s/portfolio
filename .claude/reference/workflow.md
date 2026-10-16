@@ -27,3 +27,7 @@
 ## ドキュメント更新
 
 追加・変更した機能に合わせて `CLAUDE.md` と `README.md` を更新する（不要なら省略可）。
+
+## GitHub Issue 起点の開発
+
+Issue の実装〜PR〜マージ〜リリースは `/ship-issue <Issue番号>` で進める（方針・PR作成・マージ・バージョン決定の各段階でユーザー承認を挟む）。スキル本体は share-claude（`project/portfolio/skills/ship-issue/`）で管理し、`bin/deploy.py` で配布する。
