@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Determine next version
+        id: version
+        run: |
+          next=$(bash scripts/next-version.sh)
+          echo "next=$next" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        if: steps.version.outputs.next != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NEXT: ${{ steps.version.outputs.next }}
+        run: gh release create "v$NEXT" --target "$GITHUB_SHA" --generate-notes
+
+      - name: Skip release
+        if: steps.version.outputs.next == ''
+        run: echo "feat / fix / 破壊的変更を含まないためリリースをスキップしました"
