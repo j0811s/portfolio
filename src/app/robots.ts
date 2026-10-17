@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-import { SITE_URL } from '@/src/constants/site';
 
 const AI_CRAWLERS = [
   'GPTBot',
@@ -23,6 +22,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/',
       })),
     ],
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    // sitemap.xml は認証必須のまま公開しないため Sitemap 行は出さない
   };
 }
