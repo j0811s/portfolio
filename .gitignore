@@ -49,3 +49,4 @@ next-env.d.ts
 /.claude/rules/
 /.claude/settings.json
 /CLAUDE.md
+/AGENTS.md
