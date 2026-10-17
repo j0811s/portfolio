@@ -20,7 +20,7 @@
 - `GET /api/skills` — スキル一覧
 - `GET /api/draft` — Next.js ドラフトモード有効化、`draft_key` Cookie をセット、`/blog/:id/preview/` にリダイレクト
 - `GET /api/draft/disable` — ドラフトモード無効化
-- `POST /api/contact` — お問い合わせメール送信（`getServerSession` による認証必須、Resend 経由で送信）。Resend クライアントはリクエスト時に生成し、`RESEND_API_KEY` / `RESEND_FROM_EMAIL` / `CONTACT_TO_EMAIL` のいずれかが未設定なら 500 を返す（未設定の変数名をログ出力）。キー未設定の環境（Vercel Preview など）でもビルドは通る
+- `POST /api/contact` — お問い合わせメール送信（`getServerSession` による認証必須、Resend 経由で送信）。Resend クライアントはリクエスト時に生成し、`RESEND_API_KEY` / `RESEND_FROM_EMAIL` / `CONTACT_TO_EMAIL` のいずれかが未設定なら 500 を返す（未設定の変数名をログ出力）。キー未設定の環境（Vercel Preview など）でもビルドは通る。ボディは `src/libs/contact/validateContact.ts`（クライアントの `ContactForm` と共有するルール: 全フィールド文字列・空白のみ不可・メール形式・文字数上限・`name`/`email`/`subject` の改行禁止）で検証し、不正なら 400 を返す。`resend.emails.send` の戻り値 `error` と reject の両方を 500 `{ error: 'Failed to send email' }` で返し、入力値を含まない形でログ出力する
 
 API ルートはミドルウェアの `matcher` 対象外のため認証されない。認証が必要なエンドポイントはハンドラー内で `getServerSession(authOptions)` を呼んでセッションを確認する。
 
