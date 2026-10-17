@@ -65,8 +65,8 @@ MicroCMS から取得したブログ記事の HTML は `html-react-parser` で�
 
 JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・BreadcrumbList・BlogPosting）し、`<JsonLd>` コンポーネント経由で注入する。各ページのメタデータは `src/app/layout.tsx` のルート `metadata` エクスポートをスプレッドして構成する。
 
-`src/app/sitemap.ts` — MicroCMS の記事・カテゴリ・タグを取得して `/sitemap.xml` を動的生成（`revalidate = 3600`）。
-`src/app/robots.ts` — 全クローラーは `/api/`・`/auth/`・`/blog/*/preview/` を拒否。主要 AI クローラー（GPTBot・Google-Extended・ClaudeBot 等 6種）はサイト全体を拒否。
+`src/app/sitemap.ts` — MicroCMS の記事・カテゴリ・タグを取得して `/sitemap.xml` を動的生成（`revalidate = 3600`）。認証ミドルウェアの対象のままで、未ログインでは取得できない（サイト全体がログイン必須でクローラーは中身を読めず、記事 ID・カテゴリ・タグの一覧を外部に出さないため）。そのため `robots.txt` に `Sitemap:` 行は出さない。
+`src/app/robots.ts` — 全クローラーは `/api/`・`/auth/`・`/blog/*/preview/` を拒否。主要 AI クローラー（GPTBot・Google-Extended・ClaudeBot 等 6種）はサイト全体を拒否。`robots.txt` は認証ミドルウェア（`src/proxy.ts` の `matcher`）から除外しており、未ログインのクローラーも取得できる。
 
 ## PWA
 
@@ -89,4 +89,4 @@ Biome（`biome.json`）で lint とフォーマットを一元管理する。ESL
 - **e2e テスト**: Playwright。`tests/e2e/` 以下に配置。`.env.local` から `AUTH_USERNAME` / `AUTH_PASSWORD` を読み込む。
   - `auth.setup.ts` でログインし、ストレージ状態を `playwright/.auth/storageState.json` に保存する。
   - ほとんどのテストプロジェクトは `setup` に依存し、そのストレージ状態を使用する。
-  - `guest` プロジェクトのみ認証状態なしで `auth/page.spec.ts` を実行する。
+  - `guest` プロジェクトのみ認証状態なしで `auth/page.spec.ts` と `tests/e2e/guest/` 配下を実行する（`playwright.config.ts` の `GUEST_SPECS`。ログイン済みプロジェクトからは除外）。

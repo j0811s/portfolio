@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
 
+// 未ログイン状態で実行するテスト（guest プロジェクトのみが対象、ログイン済みプロジェクトからは除外）
+const GUEST_SPECS = /e2e\/(auth\/page|guest\/[^/]+)\.spec\.ts$/;
+
 export default defineConfig({
   testDir: 'tests/e2e',
   reporter: [
@@ -33,13 +36,13 @@ export default defineConfig({
     // 未ログイン（ログイン画面）
     {
       name: 'guest',
-      testMatch: /auth\/page\.spec\.ts/,
+      testMatch: GUEST_SPECS,
       use: { ...devices['Desktop Chrome'] },
     },
     // ログイン済み
     {
       name: 'Desktop Chrome',
-      testIgnore: /auth\/page\.spec\.ts/,
+      testIgnore: GUEST_SPECS,
       dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],
@@ -48,7 +51,7 @@ export default defineConfig({
     },
     {
       name: 'Desktop Safari',
-      testIgnore: /auth\/page\.spec\.ts/,
+      testIgnore: GUEST_SPECS,
       dependencies: ['setup'],
       use: {
         ...devices['Desktop Safari'],
@@ -57,7 +60,7 @@ export default defineConfig({
     },
     {
       name: 'iPhone 15',
-      testIgnore: /auth\/page\.spec\.ts/,
+      testIgnore: GUEST_SPECS,
       dependencies: ['setup'],
       use: {
         ...devices['iPhone 15'],
@@ -66,7 +69,7 @@ export default defineConfig({
     },
     {
       name: 'Pixel 7',
-      testIgnore: /auth\/page\.spec\.ts/,
+      testIgnore: GUEST_SPECS,
       dependencies: ['setup'],
       use: {
         ...devices['Pixel 7'],
