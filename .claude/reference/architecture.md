@@ -4,8 +4,10 @@
 
 `src/proxy.ts` の Next.js ミドルウェアが全ルートを保護し、未認証リクエストを `/auth` にリダイレクトする。ルートグループは2つ：
 
-- `src/app/(login)/` — 認証必須。コンテンツページやブログ全般（`AuthProvider` = `SessionProvider` でラップ）
-- `src/app/(logout)/` — 公開。`/auth` ログインページのみ。`SessionProvider` を置かない（初回の `/api/auth/session` 取得が `signIn` と並行すると CSRF Cookie が上書きされ、CSRF 検証に失敗するため）
+- `src/app/(login)/` — 認証必須。コンテンツページやブログ全般
+- `src/app/(logout)/` — 公開。`/auth` ログインページのみ
+
+next-auth の `SessionProvider` はどこにも置いていない。クライアント側でセッションを参照する箇所（`useSession`・`getSession`・`signOut` 等）が無く、`next-auth/react` の利用はログインフォームの `signIn`（Provider 不要）のみのため。`SessionProvider` はマウント時に `/api/auth/session` を取得し、ログイン画面では `signIn` と並行すると CSRF Cookie が上書きされて CSRF 検証に失敗する原因にもなっていた（PR #19）。セッションが必要になった場合は Provider を追加するより、Server Component で `getServerSession(authOptions)` を使う。
 
 `LoginForm` は送信中の再送信を禁止し、NextAuth が CSRF 検証失敗を `ok: true` の `signin?csrf=true` で返すケースもエラーとして表示する。
 
