@@ -37,7 +37,7 @@
     "clsx": "2.1.1",
     "dayjs": "1.11.21",
     "highlight.js": "11.11.1",
-    "hono": "4.13.0",
+    "hono": "4.13.13",
     "html-react-parser": "^5.2.11",
     "jotai": "2.20.2",
     "just-bash": "^2.14.2",
@@ -76,6 +76,6 @@
     "lint-staged": "17.3.0",
     "sass": "1.102.0",
     "vite-tsconfig-paths": "^6.0.3",
-    "vitest": "4.1.10"
+    "vitest": "4.1.11"
   }
 }
