@@ -1,10 +1,8 @@
-import styles from '@/src/styles/pages/blog/layout.module.css';
 import { LIMIT } from '@/src/constants/blog';
 import { SITE_URL } from '@/src/constants/site';
 import { client, fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
 import type { Metadata } from 'next';
-import { Breadcrumb, SectionTitle } from '@/src/components';
-import { ArticleCardList, AsideMenu, Pagination } from '@/src/features/blog';
+import { BlogListLayout } from '@/src/features/blog';
 
 type Props = {
   params: Promise<{
@@ -80,16 +78,12 @@ export default async function Page({ params }: Props) {
   };
 
   return (
-    <>
-      <Breadcrumb data={breadcrumb} />
-      <div className={styles.container}>
-        <section>
-          <SectionTitle title={`${tagName} | ${num}ページ`} />
-          <ArticleCardList contents={contents} />
-          <Pagination pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }} type={type} />
-        </section>
-        <AsideMenu />
-      </div>
-    </>
+    <BlogListLayout
+      breadcrumb={breadcrumb}
+      title={`${tagName} | ${num}ページ`}
+      contents={contents}
+      pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }}
+      type={type}
+    />
   );
 }

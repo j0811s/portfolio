@@ -9,6 +9,7 @@ export { default as SearchExperience } from '@/src/features/blog/components/Sear
 export { default as TableOfContents } from '@/src/features/blog/components/TableOfContents';
 export { default as Pagination } from '@/src/features/blog/components/Pagination';
 export { default as AsideMenu } from '@/src/features/blog/components/AsideMenu';
+export { default as BlogListLayout } from '@/src/features/blog/components/BlogListLayout';
 export { default as Category } from '@/src/features/blog/components/Category';
 export { default as Tag } from '@/src/features/blog/components/Tag';
 export { default as YearArchive } from '@/src/features/blog/components/YearArchive';
