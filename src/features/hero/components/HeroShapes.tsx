@@ -2,7 +2,9 @@
 
 import {
   AnimatePresence,
-  motion,
+  domAnimation,
+  LazyMotion,
+  m,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -79,12 +81,12 @@ function HeroShape({ skill, index, delay, springX, springY }: ShapeProps) {
   const y = useTransform(springY, (v) => v * depth);
 
   return (
-    <motion.div
+    <m.div
       className={wrapper}
       style={{ x: shouldReduceMotion ? undefined : x, y: shouldReduceMotion ? undefined : y }}
     >
       <AnimatePresence mode="wait">
-        <motion.span
+        <m.span
           key={skill.name}
           className={`${styles.shapeInner} ${shadow}`}
           initial={shouldReduceMotion ? { opacity: 0 } : { scale: 0, opacity: 0 }}
@@ -115,9 +117,9 @@ function HeroShape({ skill, index, delay, springX, springY }: ShapeProps) {
             width={skill.logo.width}
             height={skill.logo.height}
           />
-        </motion.span>
+        </m.span>
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -161,8 +163,9 @@ export default function HeroShapes({ skills }: Props) {
     return () => clearInterval(id);
   }, [skills]);
 
+  // LazyMotion + m で、使う機能（domAnimation）だけを読み込みバンドルを抑える
   return (
-    <>
+    <LazyMotion features={domAnimation} strict>
       {swap.displayed.map((skill, i) => (
         <HeroShape
           key={SLOT_KEYS[i]}
@@ -173,6 +176,6 @@ export default function HeroShapes({ skills }: Props) {
           springY={springY}
         />
       ))}
-    </>
+    </LazyMotion>
   );
 }
