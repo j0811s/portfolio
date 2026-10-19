@@ -52,6 +52,10 @@
 
 `.github/workflows/release.yml` が `main` への push（PR マージ）で `scripts/next-version.sh` を実行し、前回の `v*` タグ以降のコミットの型から次のバージョンを決めて GitHub Release（タグ・自動生成リリースノート）を作成する。`!:` / `BREAKING CHANGE` → major、`feat` → minor、`fix` → patch、それ以外のみならリリースしない。`package.json` の `version` は更新しない（バージョンはタグで管理）。
 
+`release.yml` は push 時のコミットではなく、実行時点の `main` の最新コミットを checkout して判定・タグ付けする。GitHub Actions の障害で古い実行が遅れて動き出しても、手動実行と重なっても、リリース済みの範囲は何もせず、重複・バージョンの逆転は起きない（`concurrency` で直列化）。
+
+GitHub Actions の障害で `release.yml` が長時間 `queued` のまま進まない・失敗した場合は、githubstatus.com で障害の解消を確認してから `gh workflow run release.yml`（`workflow_dispatch`、main のみ実行）で再実行する。再実行しなくても、次のマージ時の実行で取りこぼした分もまとめてリリースされる。
+
 ## MCP サーバー
 
 | サーバー | 用途 |

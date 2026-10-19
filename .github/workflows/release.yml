@@ -3,6 +3,9 @@ name: Release
 on:
   push:
     branches: [main]
+  # Actions の障害などで push 時の実行が取りこぼされたときに、手動で再実行するため
+  # （実行時点の main の最新を基準に前回タグ以降を判定するので、リリース済みなら何もしない）
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,11 +16,20 @@ concurrency:
 
 jobs:
   release:
+    # 手動実行で main 以外のブランチを指定してもリリースしない
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+      # push 時のコミットではなく、実行時点の main の最新を基準にする。
+      # 障害で遅れて動き出した古い実行や手動実行が、リリース済みの範囲を重複・逆転して作らないようにするため
       - uses: actions/checkout@v7
         with:
+          ref: main
           fetch-depth: 0
+
+      - name: Resolve target commit
+        id: target
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Determine next version
         id: version
@@ -30,7 +42,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           NEXT: ${{ steps.version.outputs.next }}
-        run: gh release create "v$NEXT" --target "$GITHUB_SHA" --generate-notes
+          TARGET: ${{ steps.target.outputs.sha }}
+        run: gh release create "v$NEXT" --target "$TARGET" --generate-notes
 
       - name: Skip release
         if: steps.version.outputs.next == ''
