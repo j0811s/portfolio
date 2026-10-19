@@ -5,8 +5,8 @@
   :root {
     scrollbar-gutter: stable;
     --page-width: 1280px;
-    --font-mono: "JetBrains Mono", monospace;
-    --font-sans: "M PLUS Rounded 1c", sans-serif;
+    --font-mono: var(--font-jetbrains-mono), monospace;
+    --font-sans: var(--font-m-plus-rounded), sans-serif;
     --font-size: 16;
     --font-size-s: clamp(0.8125rem, 0.7866rem + 0.1105vw, 0.875rem);
     --font-size-m: clamp(0.875rem, 0.8232rem + 0.221vw, 1rem);
