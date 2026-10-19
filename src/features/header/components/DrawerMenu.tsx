@@ -28,7 +28,7 @@ const MenuList = ({
   dialogRef: React.RefObject<HTMLDialogElement | null>;
 }) =>
   createPortal(
-    <dialog className={styles.drawer} ref={dialogRef}>
+    <dialog className={styles.drawer} ref={dialogRef} aria-label="メニュー">
       <nav className={styles.nav} aria-label="サイトナビゲーションメニュー">
         <ul className={styles.navList}>
           <li>
