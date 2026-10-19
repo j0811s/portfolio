@@ -28,7 +28,7 @@ const MenuList = ({
   dialogRef: React.RefObject<HTMLDialogElement | null>;
 }) =>
   createPortal(
-    <dialog className={styles.drawer} ref={dialogRef}>
+    <dialog className={styles.drawer} ref={dialogRef} aria-label="メニュー">
       <nav className={styles.nav} aria-label="サイトナビゲーションメニュー">
         <ul className={styles.navList}>
           <li>
@@ -50,6 +50,7 @@ const MenuList = ({
         {children}
       </nav>
     </dialog>,
+    // react-doctor-disable-next-line react-doctor/no-unguarded-browser-global-in-render-or-hook-init -- isDrawerOpen が true（クライアントでの操作後）のときだけ描画される
     document.body
   );
 

@@ -7,7 +7,8 @@ function JsonLd<T extends object>({ data }: JsonLdProps<T>) {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data),
+        // 値は microCMS の記事データ由来のため、`</script>` で script 要素を抜けられないよう `<` をエスケープする
+        __html: JSON.stringify(data).replace(/</g, '\\u003c'),
       }}
     />
   );

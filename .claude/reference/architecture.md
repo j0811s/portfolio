@@ -54,9 +54,9 @@ MicroCMS から取得したブログ記事の HTML は `html-react-parser` で�
 
 | フィーチャー | 概要                                                                                      |
 | ------------ | ----------------------------------------------------------------------------------------- |
-| `blog/`      | 記事一覧・詳細・カテゴリ・タグ・検索・アーカイブ・ToC・シンタックスハイライト             |
+| `blog/`      | 記事一覧・詳細・カテゴリ・タグ・検索・アーカイブ・ToC・シンタックスハイライト。アーカイブ・カテゴリ・タグ別一覧ページは `BlogListLayout` で共通化 |
 | `contact/`   | お問い合わせフォーム（react-hook-form）。`POST /api/contact` へ送信し Resend でメール配信 |
-| `hero/`      | トップページのヒーローセクション（スキルアイコンをランダム表示）                          |
+| `hero/`      | トップページのヒーローセクション（スキルアイコンをランダム表示）。アニメーションは `motion` を `LazyMotion`（`domAnimation`）+ `m` で読み込む |
 | `skills/`    | スキルセット一覧                                                                          |
 | `header/`    | グローバルヘッダー                                                                        |
 | `footer/`    | グローバルフッター（ナビゲーション・PageTop）                                             |
@@ -65,10 +65,20 @@ MicroCMS から取得したブログ記事の HTML は `html-react-parser` で�
 
 ## SEO
 
-JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・BreadcrumbList・BlogPosting）し、`<JsonLd>` コンポーネント経由で注入する。各ページのメタデータは `src/app/layout.tsx` のルート `metadata` エクスポートをスプレッドして構成する。
+JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・BreadcrumbList・BlogPosting）し、`<JsonLd>` コンポーネント経由で注入する。値は microCMS の記事データ由来のため、`<JsonLd>` は `<` を `\u003c` にエスケープして `</script>` で script 要素を抜けられないようにしている。各ページのメタデータは `src/app/layout.tsx` のルート `metadata` エクスポートをスプレッドして構成する。
+
+OG 画像（各 `opengraph-image.tsx`、`next/og` の `ImageResponse`）は Node.js Runtime で生成する（Edge Runtime は Next.js で非推奨のため使わない）。
 
 `src/app/sitemap.ts` — MicroCMS の記事・カテゴリ・タグを取得して `/sitemap.xml` を動的生成（`revalidate = 3600`）。認証ミドルウェアの対象のままで、未ログインでは取得できない（サイト全体がログイン必須でクローラーは中身を読めず、記事 ID・カテゴリ・タグの一覧を外部に出さないため）。そのため `robots.txt` に `Sitemap:` 行は出さない。
 `src/app/robots.ts` — 全クローラーは `/api/`・`/auth/`・`/blog/*/preview/` を拒否。主要 AI クローラー（GPTBot・Google-Extended・ClaudeBot 等 6種）はサイト全体を拒否。`robots.txt` は認証ミドルウェア（`src/proxy.ts` の `matcher`）から除外しており、未ログインのクローラーも取得できる。
+
+## フォント
+
+M PLUS Rounded 1c と JetBrains Mono は `src/app/layout.tsx` で `next/font/google` により読み込み（ビルド時に自己ホスト、外部の Google Fonts へはリクエストしない）、`<html>` に付けた CSS 変数 `--font-m-plus-rounded` / `--font-jetbrains-mono` を `src/styles/index.css` の `--font-sans` / `--font-mono` から参照する。M PLUS Rounded 1c は日本語グリフが unicode-range で分割配信されるため `preload: false`。
+
+## react-doctor
+
+`npx -y react-doctor@latest . --verbose` の指摘は 0 件を維持する。誤検知・意図的なものは該当行の直前に `react-doctor-disable-next-line <rule> -- <理由>` を書いて抑制する（現在 6 箇所: `LoginForm` の callbackUrl、`offline/page.tsx` の a 要素、`site.ts` の `new URL`、`SearchExperience` の effect 内取得、`PageTop` / `DrawerMenu` のポータル先 `document.body`）。
 
 ## PWA
 

@@ -84,6 +84,7 @@ export default function SearchExperience({
     window.history.replaceState(null, '', queryString ? `/blog/?${queryString}` : '/blog/');
   };
 
+  // react-doctor-disable-next-line react-doctor/no-fetch-in-effect -- デバウンス付きのライブ検索として意図的に effect で取得する
   useEffect(() => {
     // previousKeywordRef (not a boolean flag) makes this guard idempotent under React
     // StrictMode's dev-mode double-invoked effects — see the StrictMode bugfix in this

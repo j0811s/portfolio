@@ -23,6 +23,7 @@ export default function LoginForm() {
     setIsSubmitting(true);
     setErrorMessage('');
 
+    // react-doctor-disable-next-line react-doctor/url-prefilled-privileged-action -- callbackUrl は遷移先に使うだけ。NextAuth の既定の redirect コールバックが同一オリジン以外を baseUrl に置き換え、res.url もその検証済みの値になる
     const callbackUrl = new URL(window.location.href).searchParams.get('callbackUrl') ?? '/';
 
     try {

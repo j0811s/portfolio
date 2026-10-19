@@ -17,7 +17,8 @@ const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
     return;
   }
 
-  const targetId = document.querySelector(href);
+  // href はブログ記事の見出し id 由来のため、セレクタとして解釈させず id で引く
+  const targetId = document.getElementById(href.slice(1));
 
   if (targetId) {
     const yOffset = -80;

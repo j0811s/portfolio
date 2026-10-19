@@ -1,8 +1,6 @@
-import styles from '@/src/styles/pages/blog/layout.module.css';
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/src/constants/site';
-import { Breadcrumb, SectionTitle } from '@/src/components';
-import { ArticleCardList, AsideMenu, Pagination } from '@/src/features/blog';
+import { BlogListLayout } from '@/src/features/blog';
 import { client, fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
 import { LIMIT } from '@/src/constants/blog';
 
@@ -54,16 +52,12 @@ export default async function Page({ params }: Props) {
   };
 
   return (
-    <>
-      <Breadcrumb data={breadcrumb} />
-      <div className={styles.container}>
-        <section>
-          <SectionTitle title={tagName} />
-          <ArticleCardList contents={contents} />
-          <Pagination pager={{ totalCount, limit: LIMIT, currentPage: 1 }} type={type} />
-        </section>
-        <AsideMenu />
-      </div>
-    </>
+    <BlogListLayout
+      breadcrumb={breadcrumb}
+      title={tagName}
+      contents={contents}
+      pager={{ totalCount, limit: LIMIT, currentPage: 1 }}
+      type={type}
+    />
   );
 }
