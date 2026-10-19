@@ -30,4 +30,9 @@
 
 ## GitHub Issue 起点の開発
 
-Issue の実装〜PR〜マージ〜リリースは `/ship-issue <Issue番号>` で進める（方針・PR作成・マージ・バージョン決定の各段階でユーザー承認を挟む）。スキル本体は share-claude（`project/portfolio/skills/ship-issue/`）で管理し、`bin/deploy.py` で配布する。
+1. `/propose-issues` — コードベース・セッションの残課題・本番（Vercel・Lighthouse）・依存パッケージから根拠付きの Issue 候補を出し、選んだものだけ Issue を作成する（引数 `code` / `sessions` / `prod` / `deps` で情報源を絞れる）
+2. `/ship-issue <Issue番号>` — Issue の読み込み → 方針の承認 → 実装 → `/pre-push` → コミット・PR 内容の承認 → PR 作成 → CI 通過までを進め、停止する
+3. マージは人間が GitHub 上で行う（Claude は `gh pr merge` を実行しない）
+4. マージ後、`.github/workflows/release.yml` がコミットの型から GitHub Release を自動作成する（`!:` / `BREAKING CHANGE` → major、`feat` → minor、`fix` → patch、それ以外のみならリリースなし）。`/ship-issue <Issue番号>` を再度実行すると Release・Issue のクローズ確認とブランチの後片付けを行う
+
+コミットの型がリリースのバージョンを決めるため、型は変更内容に正確に合わせる。スキル本体は share-claude で管理し、`bin/deploy.py` で配布する（「Claude Code 自動化」のスキルの節を参照）。
