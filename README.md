@@ -14,7 +14,8 @@ Next.js (App Router) + MicroCMS で構築したポートフォリオサイト。
 | メール送信 | Resend |
 | フォーム | react-hook-form |
 | 状態管理 | Jotai |
-| スタイル | CSS Modules (SCSS) |
+| スタイル | CSS Modules |
+| フォント | next/font（M PLUS Rounded 1c / JetBrains Mono をビルド時に自己ホスト） |
 | Lint / Format | Biome |
 | ユニットテスト | Vitest |
 | E2E テスト | Playwright |
@@ -90,8 +91,8 @@ npm run e2e:codegen  # E2E テスト自動生成
 | `/contact/` | お問い合わせフォーム |
 | `/auth/` | ログイン |
 | `/offline/` | オフライン時のフォールバックページ |
-| `/sitemap.xml` | サイトマップ（自動生成） |
-| `/robots.txt` | クローラー設定（自動生成） |
+| `/sitemap.xml` | サイトマップ（自動生成）。ログイン必須で、未ログインには公開しない |
+| `/robots.txt` | クローラー設定（自動生成）。未ログインでも取得でき、主要 AI クローラーはサイト全体を拒否 |
 | `/manifest.webmanifest` | Web App Manifest（自動生成、PWAインストール可能化） |
 
 ## API ルート
@@ -153,6 +154,14 @@ src/
 ├── hooks/                # カスタムフック
 ├── types/                # TypeScript 型定義
 └── constants/            # 定数
+
+scripts/
+└── next-version.sh       # 自動リリース用: 前回タグ以降のコミットの型から次のバージョンを判定
+
+tests/
+├── unit/                 # Vitest
+└── e2e/                  # Playwright
+    └── guest/            # 未ログインで実行するテスト（認証ミドルウェアの対象外パス・robots.txt）。auth/page.spec.ts も未ログインで実行
 ```
 
 `public/sw.js` — 手書きの Service Worker。`/_next/static/*` を cache-first、ページ遷移を network-first でキャッシュし、オフライン時は事前キャッシュ済みの `/offline/`（スタイル込み）にフォールバックする。プリキャッシュとランタイムキャッシュ（件数上限付き）を別キャッシュに分離している。

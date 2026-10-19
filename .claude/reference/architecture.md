@@ -13,7 +13,7 @@ next-auth の `SessionProvider` はどこにも置いていない。クライア
 
 `LoginForm` は送信中の再送信を禁止し、NextAuth が CSRF 検証失敗を `ok: true` の `signin?csrf=true` で返すケースもエラーとして表示する。
 
-認証は NextAuth v4 の Credentials プロバイダー（`src/app/api/auth/[...nextauth]/route.ts`）で処理し、`AUTH_USERNAME` / `AUTH_PASSWORD` 環境変数を照合する。セッションは JWT 戦略（開発: 5分、本番: 24時間）。
+認証は NextAuth v4 の Credentials プロバイダー（`src/app/api/auth/[...nextauth]/route.ts`）で処理し、`AUTH_USERNAME` / `AUTH_PASSWORD` 環境変数を照合する。セッションは JWT 戦略（`maxAge` は開発: 60分、本番: 24時間）。
 
 ## API レイヤー（Hono）
 

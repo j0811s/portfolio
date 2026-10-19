@@ -7,6 +7,20 @@
 | PreToolUse | Edit / Write で `.env` を含むパスを検出 | 書き込みをブロック |
 | PostToolUse | Edit / Write で `src/` 配下のファイルを編集後 | 編集ファイルのみ `npx biome check` を自動実行（末尾20行を表示） |
 
+## スキル（`.claude/skills/`）
+
+`.claude/skills/`・`.claude/hooks/`・`.claude/rules/`・`.claude/settings.json`・`CLAUDE.md` は share-claude リポジトリ（`~/github/share-claude`）が配布元で、portfolio では gitignore している。編集は share-claude 側（共通は `common/`、portfolio 固有は `project/portfolio/`）で行い、`./bin/deploy.py portfolio` で配布する。
+
+| スキル | share-claude 内の配置 | 用途 |
+|--------|--------|------|
+| `/pre-push` | `project/portfolio/skills/` | push・PR 作成前の品質ゲート（check → build → test → e2e → コードレビュー） |
+| `/wrap-up` | `project/portfolio/skills/` | 未コミット変更を論理単位で conventional commit し、JSDoc・セッションサマリーを更新 |
+| `/biome-autofix` | `project/portfolio/skills/` | Biome の自動修正可能なエラーを一括適用し、残りを報告 |
+| `/ship-issue <番号>` | `project/portfolio/skills/` | Issue から PR 作成・CI 通過まで進め、マージ後に Release を確認（「ファイル編集後のワークフロー」参照） |
+| `/propose-issues` | `project/portfolio/skills/` | 根拠付きの Issue 候補を提示し、選んだものを作成 |
+| `/review-skill <スキル名>` | `common/skills/` | スキル（SKILL.md）を Claude Code 公式ドキュメントに照らしてレビューし、修正候補を提示 |
+| `playwright-cli` | `common/skills/` | ブラウザ操作・Playwright テストの作成 |
+
 ## サブエージェント（`.claude/agents/`）
 
 | エージェント | 用途 |
