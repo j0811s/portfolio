@@ -74,7 +74,7 @@ npm run e2e:codegen  # E2E テスト自動生成
 
 `main` はリポジトリルールセットで保護されており、変更は PR 経由のみで、Check が通過していない PR はマージできません。
 
-`.github/workflows/release.yml` が `main` へのマージ時に、前回の `v*` タグ以降のコミットの型（Conventional Commits）から次のバージョンを決めて GitHub Release を自動作成します（`feat` → minor、`fix` → patch、破壊的変更 → major、それ以外のみならリリースなし）。
+`.github/workflows/release.yml` が `main` へのマージ時に、前回の `v*` タグ以降のコミットの型（Conventional Commits）から次のバージョンを決めて GitHub Release を自動作成します（`feat` → minor、`fix` → patch、破壊的変更 → major、それ以外のみならリリースなし）。GitHub Actions の障害などで実行が取りこぼされた場合は、`gh workflow run release.yml` で手動で再実行できます。どの実行も実行時点の `main` の最新を基準にするため、リリース済みなら何もせず、遅れて動き出した古い実行とも重複しません。
 
 ## ページ構成
 
