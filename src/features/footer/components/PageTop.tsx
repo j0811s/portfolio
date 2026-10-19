@@ -21,6 +21,7 @@ export default function PageTop() {
     >
       <FontAwesomeIcon icon={faChevronUp} />
     </button>,
+    // react-doctor-disable-next-line react-doctor/no-unguarded-browser-global-in-render-or-hook-init -- GlobalFooter から dynamic(..., { ssr: false }) で読み込まれ、サーバーでは描画されない
     document.body
   );
 }

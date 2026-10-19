@@ -50,6 +50,7 @@ const MenuList = ({
         {children}
       </nav>
     </dialog>,
+    // react-doctor-disable-next-line react-doctor/no-unguarded-browser-global-in-render-or-hook-init -- isDrawerOpen が true（クライアントでの操作後）のときだけ描画される
     document.body
   );
 
