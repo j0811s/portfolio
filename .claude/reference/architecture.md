@@ -48,6 +48,8 @@ MicroCMS から取得したブログ記事の HTML は `html-react-parser` で�
 
 ダーク/ライトテーマは Cookie（`theme=light|dark`）に保存する。FOUC を防ぐため、`src/app/layout.tsx` のインラインスクリプトが React ハイドレーション前に Cookie を読み取り `<html>` の `data-theme` をセットする。ハイドレーション後は `ThemeProvider`（`src/features/theme/`）が Jotai の `themeAtom` と Cookie・DOM を同期する。
 
+色は `src/styles/index.css` の CSS 変数で、ライト・ダーク（`data-theme` と `prefers-color-scheme` の両方）ごとに定義する。文字色は WCAG AA（4.5:1）を満たすよう、控えめな文字は `opacity` で薄くせず `--text-secondary` を、ブランドカラー（`--theme-primary`）の背景に載せる文字は `--text-on-theme-primary` を使う。
+
 ## フィーチャー構成
 
 `src/features/` はドメインごとに分割されている。各フィーチャーは `components/`・`styles/` を持ち、必要に応じて `hooks/`・`stores/`・`types/` と `index.ts` バレルエクスポートを含む。

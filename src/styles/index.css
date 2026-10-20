@@ -25,6 +25,8 @@
     --bg-secondary: #dfe1e9;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
+    --text-secondary: #5f6169;
+    --text-on-theme-primary: #1a1c1e;
     --error: #e53935;
   }
 
@@ -39,6 +41,8 @@
     --bg-secondary: #dfe1e9;
     --theme-primary: #ff7e0f;
     --text-link-color: #0000ee;
+    --text-secondary: #5f6169;
+    --text-on-theme-primary: #1a1c1e;
     --error: #e53935;
   }
 
@@ -53,6 +57,8 @@
     --bg-secondary: #222527;
     --theme-primary: #3a7fa8;
     --text-link-color: #6aa8ff;
+    --text-secondary: #a9a9aa;
+    --text-on-theme-primary: #000000;
     --error: #f87171;
   }
 
@@ -68,6 +74,8 @@
       --bg-secondary: #222527;
       --theme-primary: #3a7fa8;
       --text-link-color: #6aa8ff;
+      --text-secondary: #a9a9aa;
+      --text-on-theme-primary: #000000;
       --error: #f87171;
     }
   }
