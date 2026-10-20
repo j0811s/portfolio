@@ -56,7 +56,7 @@
     font-family: var(--font-mono);
     font-size: var(--font-size-s);
     letter-spacing: 0.02em;
-    opacity: 0.4;
+    color: var(--text-secondary);
   }
 
   @media (any-hover: hover) {
