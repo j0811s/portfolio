@@ -76,6 +76,6 @@
     "lint-staged": "17.3.0",
     "sass": "1.102.0",
     "vite-tsconfig-paths": "^6.0.3",
-    "vitest": "4.1.11"
+    "vitest": "4.1.12"
   }
 }
