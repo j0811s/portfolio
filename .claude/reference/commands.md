@@ -9,9 +9,9 @@ npm run format       # Biome フォーマット自動修正 (src/)
 npm run check        # Biome lint + format チェック (src/)
 npm run test         # Vitest ユニットテスト（ウォッチモード）
 npm run coverage     # Vitest カバレッジレポート
-npm run e2e          # Playwright e2e テスト
+npm run e2e          # Playwright e2e テスト（毎回本番ビルドしてポート 3100 で起動。1〜2分かかる）
 npm run e2e:report   # Playwright HTML レポートを開く
-npm run e2e:codegen  # e2e テストをインタラクティブに生成
+npm run e2e:codegen  # e2e テストをインタラクティブに生成（起動中の開発サーバー localhost:3000 に対して記録する）
 ```
 
 単一のユニットテストファイルを実行：
