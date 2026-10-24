@@ -104,3 +104,7 @@ Biome（`biome.json`）で lint とフォーマットを一元管理する。ESL
   - `auth.setup.ts` でログインし、ストレージ状態を `playwright/.auth/storageState.json` に保存する。
   - ほとんどのテストプロジェクトは `setup` に依存し、そのストレージ状態を使用する。
   - `guest` プロジェクトのみ認証状態なしで `auth/page.spec.ts` と `tests/e2e/guest/` 配下を実行する（`playwright.config.ts` の `GUEST_SPECS`。ログイン済みプロジェクトからは除外）。
+  - テスト対象のサーバーは、毎回 `next build` した本番ビルドを e2e 専用ポート 3100 で `next start` する（`reuseExistingServer: false`）。開発サーバーは初回アクセス時のコンパイル待ちで `page.goto` がタイムアウトしやすいため使わない。`next dev` は `.next/dev` を使うので、開発サーバーを起動したままでも e2e を実行できる。
+  - e2e 用サーバーの環境変数で `NODE_ENV=production`（dotenv で読み込んだ `.env.local` の値が引き継がれるとビルドが失敗するため）、`RESEND_API_KEY` を空（モックが外れても本物のメールを送らない）、`GA_ID`・`GTM_ID` を空（本番のアナリティクスにテストのページビューを送らない。外部スクリプトで load が遅れるのも防ぐ）、`NEXTAUTH_URL` を 3100 に上書きする。
+  - `serviceWorkers: 'block'` を既定にしている。Service Worker がページを制御すると `page.route` のモックがすり抜け、実 API にリクエストが届くため（オフラインのテストのみ `test.use({ serviceWorkers: 'allow' })`）。
+  - retries は使わない（不安定さを隠さない）。失敗時は `trace: 'retain-on-failure'` でトレースを残す。

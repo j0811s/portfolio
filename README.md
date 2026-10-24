@@ -63,7 +63,7 @@ npm run format       # Biome フォーマット自動修正
 npm run check        # Biome lint + format チェック
 npm run test         # ユニットテスト (Vitest)
 npm run coverage     # カバレッジレポート
-npm run e2e          # E2E テスト (Playwright)
+npm run e2e          # E2E テスト (Playwright。毎回本番ビルドしてポート 3100 で起動)
 npm run e2e:report   # Playwright HTML レポート表示
 npm run e2e:codegen  # E2E テスト自動生成
 ```

@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+// Service Worker によるオフラインのフォールバックを検証するため、既定のブロックを解除する
+test.use({ serviceWorkers: 'allow' });
+
 test('オフライン時にフォールバックページが表示される', async ({ page, context, browserName }) => {
   test.skip(browserName !== 'chromium', 'SW offline simulation is Chromium-only in Playwright');
 

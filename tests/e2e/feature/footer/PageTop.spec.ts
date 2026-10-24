@@ -45,5 +45,11 @@ test('ページトップボタンをクリックするとページ上部へス�
   await expect(button).toBeVisible();
   await button.click();
 
-  await expect(button).toBeHidden({ timeout: 10000 });
+  // スムーズスクロールが最上部に到達するのを待ってから、ボタンが隠れることを確認する
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY || document.documentElement.scrollTop), {
+      timeout: 10000,
+    })
+    .toBe(0);
+  await expect(button).toBeHidden();
 });
