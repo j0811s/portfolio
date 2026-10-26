@@ -62,7 +62,7 @@ app.get('/blog', async (c) => {
   const offset = c.req.query('offset');
   try {
     const data = await fetchBlogList('blog', {
-      filters: q ? buildSearchFilters(q) : undefined,
+      filters: buildSearchFilters(q ?? ''),
       limit: limit ? Number(limit) : undefined,
       offset: offset ? Number(offset) : undefined,
       fields: 'id,title,eyecatch,publishedAt,updatedAt',

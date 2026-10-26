@@ -7,6 +7,14 @@ test('/blog/search?q=X は /blog/?q=X へリダイレクトされ結果が表示
   await expect(page.getByRole('heading', { name: /Next\.js/, level: 1 })).toBeVisible();
 });
 
+test('空白区切りの複数語でも全語を含む記事が表示される', async ({ page }) => {
+  await page.goto('/blog/?q=Next%20React');
+
+  await expect(page.getByRole('heading', { name: /Next React/, level: 1 })).toBeVisible();
+  await expect(page.getByText('に一致する記事が見つかりませんでした。')).toBeHidden();
+  await expect(page.locator('a:has(article)').first()).toBeVisible();
+});
+
 test('/blog/search（キーワードなし）は /blog/ へリダイレクトされる', async ({ page }) => {
   await page.goto('/blog/search');
 

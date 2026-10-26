@@ -1,20 +1,44 @@
 import { describe, it, expect } from 'vitest';
-import { buildSearchFilters } from '@/src/libs/blog/buildSearchFilters';
+import {
+  buildSearchFilters,
+  MAX_KEYWORD_LENGTH,
+  MAX_SEARCH_TERMS,
+} from '@/src/libs/blog/buildSearchFilters';
+
+const condition = (term: string) => `(title[contains]${term}[or]content[contains]${term})`;
 
 describe('buildSearchFilters', () => {
   it('1語はタイトル・本文のいずれかに含まれる条件になる', () => {
-    expect(buildSearchFilters('React')).toBe('(title[contains]React[or]content[contains]React)');
+    expect(buildSearchFilters('React')).toBe(condition('React'));
   });
 
   it('空白区切りの複数語は AND 条件になる（全角スペースも区切る）', () => {
     expect(buildSearchFilters(' Next.js　フレーム  ')).toBe(
-      '(title[contains]Next.js[or]content[contains]Next.js)[and](title[contains]フレーム[or]content[contains]フレーム)'
+      `${condition('Next.js')}[and]${condition('フレーム')}`
     );
   });
 
-  it('filters の構文として解釈される括弧は除く', () => {
+  it('[or] などを入力しても条件式に注入されず、ただの検索語として扱われる', () => {
     expect(buildSearchFilters('a[or]b(c)')).toBe(
-      '(title[contains]a[or]content[contains]a)[and](title[contains]or[or]content[contains]or)[and](title[contains]b[or]content[contains]b)[and](title[contains]c[or]content[contains]c)'
+      [condition('a'), condition('or'), condition('b'), condition('c')].join('[and]')
+    );
+  });
+
+  it('重複する語は1つにまとめる', () => {
+    expect(buildSearchFilters('React React')).toBe(condition('React'));
+  });
+
+  it(`先頭 ${MAX_SEARCH_TERMS} 語までを条件にする`, () => {
+    const terms = Array.from({ length: MAX_SEARCH_TERMS + 3 }, (_, i) => `w${i}`);
+
+    expect(buildSearchFilters(terms.join(' '))).toBe(
+      terms.slice(0, MAX_SEARCH_TERMS).map(condition).join('[and]')
+    );
+  });
+
+  it(`キーワードは先頭 ${MAX_KEYWORD_LENGTH} 文字のみを使う`, () => {
+    expect(buildSearchFilters('a'.repeat(MAX_KEYWORD_LENGTH + 50))).toBe(
+      condition('a'.repeat(MAX_KEYWORD_LENGTH))
     );
   });
 
