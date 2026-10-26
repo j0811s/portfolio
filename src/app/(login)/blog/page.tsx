@@ -3,6 +3,7 @@ import { SITE_URL } from '@/src/constants/site';
 import { LIMIT } from '@/src/constants/blog';
 import { Breadcrumb } from '@/src/components';
 import { fetchBlogList } from '@/src/libs/microcms/blog';
+import { buildSearchFilters } from '@/src/libs/blog/buildSearchFilters';
 import { AsideMenu, SearchExperience } from '@/src/features/blog';
 import type { Metadata } from 'next';
 import { metadata as rootMetadata } from '@/src/app/layout';
@@ -47,7 +48,7 @@ export default async function Page({ searchParams }: Props) {
   const pageNum = parsePage(page);
 
   const { contents, totalCount } = await fetchBlogList('blog', {
-    q: keyword || undefined,
+    filters: buildSearchFilters(keyword),
     limit: LIMIT,
     offset: LIMIT * (pageNum - 1),
     fields: 'id,title,eyecatch,publishedAt,updatedAt',

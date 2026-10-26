@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/src/app/api/auth/[...nextauth]/route';
 import { fetchBlogList, fetchBlogDetail } from '@/src/libs/microcms/blog';
 import { fetchSkillAll } from '@/src/libs/microcms/skill';
+import { buildSearchFilters } from '@/src/libs/blog/buildSearchFilters';
 import { validateContact } from '@/src/libs/contact/validateContact';
 
 const app = new Hono({ strict: false }).basePath('/api');
@@ -61,7 +62,7 @@ app.get('/blog', async (c) => {
   const offset = c.req.query('offset');
   try {
     const data = await fetchBlogList('blog', {
-      q: q || undefined,
+      filters: buildSearchFilters(q ?? ''),
       limit: limit ? Number(limit) : undefined,
       offset: offset ? Number(offset) : undefined,
       fields: 'id,title,eyecatch,publishedAt,updatedAt',
