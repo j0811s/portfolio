@@ -83,14 +83,17 @@ npm run e2e:codegen  # E2E テスト自動生成
 | `/` | トップページ（投稿一覧・スキル） |
 | `/blog/` | ブログ記事一覧・検索・ページ送り（`?q=`・`?page=`） |
 | `/blog/[postId]/` | ブログ記事詳細 |
+| `/blog/[postId]/preview/` | 下書きのプレビュー（MicroCMS プレビュー参照） |
 | `/blog/page/[num]/` | `/blog/?page=[num]` へリダイレクト（旧ページネーションURL） |
-| `/blog/categories/[catId]/` | カテゴリー別記事一覧 |
-| `/blog/tags/[tagId]/` | タグ別記事一覧 |
-| `/blog/archive/[year]/` | 年別アーカイブ |
+| `/blog/categories/[catId]/` | カテゴリー別記事一覧（`page/[num]/` でページ送り） |
+| `/blog/tags/[tagId]/` | タグ別記事一覧（`page/[num]/` でページ送り） |
+| `/blog/archive/[year]/` | 年別アーカイブ（`page/[num]/` でページ送り） |
+| `/blog/categories/`・`/blog/tags/`・`/blog/archive/` | 一覧ページは持たず、404 を返す（`noindex`） |
 | `/blog/search/` | `/blog/?q=` へリダイレクト（旧検索結果URL） |
 | `/contact/` | お問い合わせフォーム |
 | `/auth/` | ログイン |
 | `/offline/` | オフライン時のフォールバックページ |
+| （存在しないパス） | 404 ページ。ブラウザ内で動くターミナル演出から `bash blog.sh` などでページを移動できる。未ログインでは `/auth/` へリダイレクトされる |
 | `/sitemap.xml` | サイトマップ（自動生成）。ログイン必須で、未ログインには公開しない |
 | `/robots.txt` | クローラー設定（自動生成）。未ログインでも取得でき、主要 AI クローラーはサイト全体を拒否 |
 | `/manifest.webmanifest` | Web App Manifest（自動生成、PWAインストール可能化） |
@@ -134,6 +137,7 @@ src/
 │   ├── (logout)/         # 認証不要なページ (ログイン画面)
 │   ├── api/              # API ルート (Hono)
 │   ├── offline/          # オフライン時のフォールバックページ
+│   ├── not-found.tsx     # 404 ページ
 │   ├── sitemap.ts        # sitemap.xml 自動生成
 │   ├── robots.ts         # robots.txt 自動生成
 │   └── manifest.ts       # manifest.webmanifest 自動生成
@@ -145,15 +149,19 @@ src/
 │   ├── hero/
 │   ├── theme/
 │   ├── skills/
-│   └── skeleton/
+│   ├── skeleton/
+│   └── not-found/        # 404 ページのターミナル演出 (@wterm/react + @wterm/just-bash)
 ├── components/           # 共通 UI コンポーネント
 ├── libs/                 # ユーティリティ
 │   ├── microcms/         # MicroCMS クライアント
 │   ├── blog/             # ブログヘルパー
+│   ├── contact/          # お問い合わせの入力検証（クライアントと API で共有）
 │   └── seo/              # メタデータ生成
+├── styles/               # グローバル CSS（index.css）とページ単位の CSS Modules（pages/）
 ├── hooks/                # カスタムフック
 ├── types/                # TypeScript 型定義
-└── constants/            # 定数
+├── constants/            # 定数
+└── proxy.ts              # 認証ミドルウェア（未ログインを /auth へリダイレクト）
 
 scripts/
 └── next-version.sh       # 自動リリース用: 前回タグ以降のコミットの型から次のバージョンを判定
