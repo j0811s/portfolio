@@ -6,6 +6,8 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     max-width: 640px;
     width: 100%;
+    /* flex アイテムとして端末グリッドの固定幅（cols × セル幅）に押し広げられず、画面幅まで縮めるようにする */
+    min-width: 0;
   }
 
   .titleBar {
