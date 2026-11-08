@@ -93,6 +93,10 @@ M PLUS Rounded 1c と JetBrains Mono は `src/app/layout.tsx` で `next/font/goo
 
 ページ遷移は network-first でオフライン時に `precache-v1` の `/offline/`（`src/app/offline/page.tsx`。共通ヘッダー・フッターや MicroCMS 依存を持たない独立したページ）にフォールバックする。ページ本文や API レスポンスはキャッシュしない。`offline` と `sw.js` も `manifest.webmanifest` / アイコン群と同様に認証ミドルウェアの `matcher` から除外している。
 
+## 依存パッケージの overrides
+
+`package.json` の `overrides` で `guarded-fetch` 配下の `undici` を `7.30.2` に固定している（#54）。`just-bash@3.6.0` が依存する `guarded-fetch@0.1.3` は `undici@7.29.0` を固定で要求し、`npm audit` に high（GHSA-r53p-7pc4-xj5r など、修正は 7.30.1 以降）が出るため。`just-bash` は 404 ページのターミナル演出でブラウザ内だけで使い、ブラウザ用バンドルは `undici` を読み込まないので実害はない。`just-bash` の更新で `guarded-fetch` が `undici` 7.30.1 以降を要求するようになったら、この overrides を削除する（残すと上流の新しい `undici` を古い版に押し戻してしまう）。
+
 ## Lint・フォーマット
 
 Biome（`biome.json`）で lint とフォーマットを一元管理する。ESLint は使用していない。husky + lint-staged により `git commit` 時に `src/` 以下のステージ済みファイルへ自動実行される。`.ts/.tsx` はフォーマット後に lint チェック、`.css` は同様。lint エラーはコミットをブロックし、自動修正は行わない。フォーマットのみ自動修正される。

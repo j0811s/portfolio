@@ -31,16 +31,16 @@
     "@types/node": "22.13.13",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@wterm/dom": "^0.1.7",
-    "@wterm/just-bash": "^0.1.8",
-    "@wterm/react": "^0.1.8",
+    "@wterm/dom": "0.5.9",
+    "@wterm/just-bash": "0.5.9",
+    "@wterm/react": "0.5.9",
     "clsx": "2.1.1",
     "dayjs": "1.11.21",
     "highlight.js": "11.11.1",
     "hono": "4.13.13",
     "html-react-parser": "^5.2.11",
     "jotai": "2.20.2",
-    "just-bash": "^2.14.2",
+    "just-bash": "3.6.0",
     "kiso.css": "1.2.4",
     "microcms-js-sdk": "^3.2.0",
     "motion": "^12.39.0",
@@ -77,5 +77,10 @@
     "sass": "1.102.0",
     "vite-tsconfig-paths": "^6.0.3",
     "vitest": "4.1.12"
+  },
+  "overrides": {
+    "guarded-fetch": {
+      "undici": "7.30.2"
+    }
   }
 }
