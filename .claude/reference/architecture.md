@@ -52,7 +52,7 @@ MicroCMS から取得したブログ記事の HTML は `html-react-parser` で�
 
 ## フィーチャー構成
 
-`src/features/` はドメインごとに分割されている。各フィーチャーは `components/`・`styles/` を持ち、必要に応じて `hooks/`・`stores/`・`types/` と `index.ts` バレルエクスポートを含む。
+`src/features/` はドメインごとに分割されている。各フィーチャーは `components/` と `index.ts` バレルエクスポートを持ち、必要に応じて `styles/`・`hooks/`・`stores/`・`types/` を含む。
 
 | フィーチャー | 概要                                                                                      |
 | ------------ | ----------------------------------------------------------------------------------------- |
@@ -64,6 +64,7 @@ MicroCMS から取得したブログ記事の HTML は `html-react-parser` で�
 | `footer/`    | グローバルフッター（ナビゲーション・PageTop）                                             |
 | `theme/`     | ダーク/ライトテーマ切替（Jotai + Cookie）                                                 |
 | `skeleton/`  | ローディングスケルトン                                                                    |
+| `not-found/` | 404 ページ（`src/app/not-found.tsx`）のターミナル演出。`NotFoundTerminalClient` が `dynamic(..., { ssr: false })` で `TerminalWindow`（`src/components/ui/`。`@wterm/react` + `@wterm/just-bash`）をブラウザだけで読み込む。`styles/` は持たない（ページのレイアウトは `src/styles/pages/not-found.module.css`、ターミナルの見た目は `src/components/styles/ui/TerminalWindow.module.css`） |
 
 ## SEO
 
