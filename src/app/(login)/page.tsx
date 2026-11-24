@@ -11,6 +11,9 @@ import { CtaLinkButton, SectionTitle } from '@/src/components/';
 import { JsonLd } from '@/src/components';
 import { createBreadcrumbJsonLd, createWebsiteJsonLd } from '@/src/libs/seo/jsonLd';
 
+// microCMS 側の公開・公開終了を反映するため、1時間ごとに再生成する（未指定だとビルド時の内容のまま固定される）
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: SITE_META.title,
   description: SITE_META.description,

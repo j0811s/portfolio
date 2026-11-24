@@ -30,7 +30,7 @@ API ルートはミドルウェアの `matcher` 対象外のため認証され�
 
 ## MicroCMS データ取得
 
-ブログとスキルのデータは `src/libs/microcms/` 経由で MicroCMS から取得する（`blog.ts` と `skill.ts` の2クライアント）。ブログページは `generateStaticParams` による SSG + ISR（`revalidate = 3600`）。1レンダリング内の重複リクエストは React `cache()` で排除している。
+ブログとスキルのデータは `src/libs/microcms/` 経由で MicroCMS から取得する（`blog.ts` と `skill.ts` の2クライアント）。ブログ記事・アーカイブ・カテゴリ・タグ別一覧は `generateStaticParams` による SSG + ISR（`revalidate = 3600`）、トップページも ISR（`revalidate = 3600`）。`revalidate` を付けないページはビルド時の内容に固定され、microCMS で公開終了にした記事が次のデプロイまで残るため、microCMS のデータを表示するページには必ず付ける。1レンダリング内の重複リクエストは React `cache()` で排除している。
 
 ## ブログ一覧・検索の統合
 
