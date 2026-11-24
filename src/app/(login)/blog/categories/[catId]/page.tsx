@@ -11,7 +11,7 @@ type Props = {
   }>;
 };
 
-// export const revalidate = 3600;
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const categories = await client.getAllContents({

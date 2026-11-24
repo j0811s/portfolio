@@ -18,7 +18,7 @@ type Props = {
   }>;
 };
 
-// export const revalidate = 3600;
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   // すべてのパラメータ
