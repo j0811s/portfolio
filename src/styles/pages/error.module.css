@@ -1,0 +1,54 @@
+@layer page {
+  .container {
+    display: grid;
+    place-content: center;
+    place-items: center;
+    grid-template-columns: 1fr;
+    min-height: 60vh;
+    padding: 4rem 1.5rem;
+    color: var(--text-primary);
+    text-align: center;
+    gap: 0;
+  }
+
+  .errorCode {
+    font-family: var(--font-mono);
+    font-size: clamp(6rem, 4rem + 8.5vw, 12rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--theme-primary);
+    text-shadow: 0 4px 24px color-mix(in srgb, var(--theme-primary) 30%, transparent);
+    margin-bottom: 0.25em;
+  }
+
+  .titleWrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-size: var(--font-size-m);
+    color: var(--text-secondary);
+  }
+
+  .digest {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-s);
+    color: var(--text-secondary);
+  }
+
+  .btn {
+    display: grid;
+    place-items: center;
+    place-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  @media screen and (width >= 768px) {
+    .btn {
+      grid-template-columns: repeat(2, max-content);
+    }
+  }
+}
