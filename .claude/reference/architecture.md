@@ -32,6 +32,8 @@ API ルートはミドルウェアの `matcher` 対象外のため認証され�
 
 ブログとスキルのデータは `src/libs/microcms/` 経由で MicroCMS から取得する（`blog.ts` と `skill.ts` の2クライアント）。ブログ記事・アーカイブ・カテゴリ・タグ別一覧は `generateStaticParams` による SSG + ISR（`revalidate = 3600`）、トップページも ISR（`revalidate = 3600`）。`revalidate` を付けないページはビルド時の内容に固定され、microCMS で公開終了にした記事が次のデプロイまで残るため、microCMS のデータを表示するページには必ず付ける。1レンダリング内の重複リクエストは React `cache()` で排除している。
 
+取得関数（`fetchBlogList`・`fetchBlogDetail`・`fetchBlogListAll`・`fetchSkillAll`）の `catch` は `src/libs/microcms/handleMicroCMSError.ts` に集約しており、microCMS が 400 / 404 を返したときだけ `notFound()` にし（400 はコード側の fields / filters の誤りでも返るため `console.warn` でリクエスト先を記録する）、それ以外（5xx・429・ネットワークエラー・401/403）は投げ直す。一時的な障害まで `notFound()` にすると ISR の再生成で 404 が正常な結果としてキャッシュされ、最大1時間 404 のままになるため（#63）。投げ直せば再生成は失敗扱いになり、前回のページが出続ける。キャッシュの無いページやビルド時はエラーになる（ビルド時は SDK の再試行2回のあとビルドが失敗する）。
+
 ## ブログ一覧・検索の統合
 
 `/blog/` は `?q=`（検索キーワード）・`?page=`（ページ番号）を受け付ける唯一のブログ一覧エントリーポイントで、`src/features/blog/components/SearchExperience.tsx`（Client Component）が入力・ページ送りの両方をデバウンス付きの `/api/blog` フェッチと `window.history.replaceState` によるURL同期でライブに処理する（`next/navigation` のナビゲーションは発生しない）。`/blog/page/[num]` と `/blog/search` は `permanentRedirect` によって `/blog/` へのリダイレクトのみを行う薄いルートになっている。

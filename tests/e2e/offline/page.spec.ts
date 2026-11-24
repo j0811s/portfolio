@@ -15,7 +15,10 @@ test('オフライン時にフォールバックページが表示される', as
 
   await context.setOffline(true);
   try {
-    await page.goto('/');
+    // オフライン時の遷移先は動的ルートの /blog/ にする。ISR のページ（/ など）は `next start` だと
+    // `stale-while-revalidate` 付きで返るため、オフラインでもブラウザの HTTP キャッシュから表示されてしまう
+    // （本番の Vercel はブラウザに `max-age=0, must-revalidate` を返すので起きない）
+    await page.goto('/blog/');
     await expect(page.getByText('オフラインです')).toBeVisible();
   } finally {
     await context.setOffline(false);
