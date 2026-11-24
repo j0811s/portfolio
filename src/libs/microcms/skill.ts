@@ -1,6 +1,6 @@
 // https://blog.microcms.io/microcms-next15-jamstack-blog/
-import { notFound, unstable_rethrow } from 'next/navigation';
 import { createClient } from 'microcms-js-sdk';
+import { handleMicroCMSError } from './handleMicroCMSError';
 import type { MicroCMSQueries } from 'microcms-js-sdk';
 
 if (!process.env.MICROCMS_HISTORY_SERVICE_DOMAIN) {
@@ -28,8 +28,7 @@ export const fetchSkillAll = async (endpoint: string = 'skill', queries?: MicroC
       queries,
     });
   } catch (error) {
-    unstable_rethrow(error);
-    notFound();
+    handleMicroCMSError(error);
   }
 
   return response;
