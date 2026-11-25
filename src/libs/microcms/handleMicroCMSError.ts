@@ -5,6 +5,22 @@ import { isMicroCMSRequestError } from 'microcms-js-sdk';
 const NOT_FOUND_STATUSES = new Set([400, 404]);
 
 /**
+ * ログ用に、リクエスト先をパスとクエリのパラメータ名だけで表す（値は含めない）。
+ *
+ * @param url - SDK のエラーが持つリクエスト URL
+ * @returns 例: `/api/v1/blog?filters,limit`
+ */
+const describeRequest = (url: string): string => {
+  try {
+    const { pathname, searchParams } = new URL(url);
+    const names = [...new Set(searchParams.keys())];
+    return names.length > 0 ? `${pathname}?${names.join(',')}` : pathname;
+  } catch {
+    return '(unknown url)';
+  }
+};
+
+/**
  * microCMS の取得関数の catch 節で使うエラー処理。
  * microCMS が 400 / 404 を返したときだけ `notFound()` にし、それ以外は投げ直す。
  *
@@ -24,10 +40,10 @@ export function handleMicroCMSError(error: unknown): never {
     error.status !== undefined &&
     NOT_FOUND_STATUSES.has(error.status)
   ) {
-    // 400 はコード側の fields / filters の誤りでも返るため、404 にする前に原因を追えるよう記録する
-    // （SDK が url 内の draftKey を伏せ字にしている）
+    // 400 はコード側の fields / filters の誤りでも返るため、404 にする前に原因を追えるよう記録する。
+    // filters には検索語が入るので、クエリは値を出さずパラメータ名だけを記録する
     if (error.status === 400) {
-      console.warn(`microCMS returned 400: ${error.url}`);
+      console.warn(`microCMS returned 400: ${describeRequest(error.url)}`);
     }
     notFound();
   }

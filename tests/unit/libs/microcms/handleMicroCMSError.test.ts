@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createClient } from 'microcms-js-sdk';
 import { handleMicroCMSError } from '@/src/libs/microcms/handleMicroCMSError';
+import { createMicroCMSError } from '../../helpers/microcms';
 
 const { notFound, NOT_FOUND } = vi.hoisted(() => {
   const NOT_FOUND = new Error('notFound called');
@@ -19,25 +19,8 @@ vi.mock('next/navigation', async (importOriginal) => ({
   notFound,
 }));
 
-/** SDK に fetch の結果を処理させ、本物の microCMS のエラーオブジェクトを得る */
-const requestWith = async (fetchImpl: () => Promise<Response>): Promise<unknown> => {
-  vi.stubGlobal('fetch', vi.fn(fetchImpl));
-  const client = createClient({ serviceDomain: 'example', apiKey: 'key', retry: false });
-  return client.getList({ endpoint: 'blog' }).then(
-    () => {
-      throw new Error('リクエストが成功してしまった');
-    },
-    (error: unknown) => error
-  );
-};
-
-const createMicroCMSError = (status: number) =>
-  requestWith(async () => new Response(JSON.stringify({ message: 'error' }), { status }));
-
-const createNetworkError = () =>
-  requestWith(async () => {
-    throw new TypeError('fetch failed');
-  });
+const createMicroCMSErrorWithStatus = (status: number) => createMicroCMSError({ status });
+const createNetworkError = () => createMicroCMSError('network-error');
 
 /** handleMicroCMSError が投げた値を返す（同じオブジェクトが投げ直されたかを toBe で確かめるため） */
 const caughtFrom = (error: unknown): unknown => {
@@ -58,28 +41,29 @@ afterEach(() => {
 describe('handleMicroCMSError', () => {
   it.each([400, 404])('microCMS が %i を返したら notFound() を呼ぶ', async (status) => {
     vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const error = await createMicroCMSError(status);
+    const error = await createMicroCMSErrorWithStatus(status);
 
     expect(caughtFrom(error)).toBe(NOT_FOUND);
     expect(notFound).toHaveBeenCalledOnce();
   });
 
-  it('400 のときはリクエスト先を警告ログに出し、404 のときは出さない', async () => {
+  it('400 のときはリクエスト先をパスとパラメータ名だけで警告ログに出し、404 のときは出さない', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    caughtFrom(await createMicroCMSError(404));
+    caughtFrom(await createMicroCMSErrorWithStatus(404));
     expect(warn).not.toHaveBeenCalled();
 
-    caughtFrom(await createMicroCMSError(400));
-    expect(warn).toHaveBeenCalledWith(
-      'microCMS returned 400: https://example.microcms.io/api/v1/blog'
+    caughtFrom(
+      await createMicroCMSError({ status: 400 }, { filters: 'title[contains]secret-keyword', limit: '10' })
     );
+    expect(warn).toHaveBeenCalledWith('microCMS returned 400: /api/v1/blog?filters,limit');
+    expect(String(warn.mock.calls[0]?.[0])).not.toContain('secret-keyword');
   });
 
   it.each([401, 403, 429, 500, 502, 503])(
     'microCMS が %i を返したら notFound() を呼ばずにそのまま投げ直す',
     async (status) => {
-      const error = await createMicroCMSError(status);
+      const error = await createMicroCMSErrorWithStatus(status);
 
       expect(caughtFrom(error)).toBe(error);
       expect(notFound).not.toHaveBeenCalled();

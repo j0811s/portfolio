@@ -26,13 +26,15 @@ next-auth の `SessionProvider` はどこにも置いていない。クライア
 - `GET /api/draft/disable` — ドラフトモード無効化
 - `POST /api/contact` — お問い合わせメール送信（`getServerSession` による認証必須、Resend 経由で送信）。Resend クライアントはリクエスト時に生成し、`RESEND_API_KEY` / `RESEND_FROM_EMAIL` / `CONTACT_TO_EMAIL` のいずれかが未設定なら 500 を返す（未設定の変数名をログ出力）。キー未設定の環境（Vercel Preview など）でもビルドは通る。ボディは `src/libs/contact/validateContact.ts`（クライアントの `ContactForm` と共有するルール: 全フィールド文字列・空白のみ不可・メール形式・文字数上限・`name`/`email`/`subject` の改行禁止）で検証し、不正なら 400 を返す。`resend.emails.send` の戻り値 `error` と reject の両方を 500 `{ error: 'Failed to send email' }` で返し、入力値を含まない形でログ出力する
 
+`/api/blog`・`/api/blog/:id`・`/api/skills` の取得エラーは `respondFetchError` にまとめている。取得関数が `notFound()` を投げた場合（microCMS の 400 / 404）だけ 404 `{ error: 'Not found' }` を返し、それ以外（5xx・429・ネットワークエラーなど）は上流の障害として 502 `{ error: 'Failed to fetch' }` を返して、エンドポイント名とエラーメッセージをログに出す（検索語などリクエストの中身は含めない）。`notFound()` の判定には Next.js 内部の `isHTTPAccessFallbackError`（`next/dist/client/components/http-access-fallback/http-access-fallback`）を使っているため、Next.js を更新したら `tests/unit/app/api` の「本物の `notFound()`」のテストで壊れていないことを確認する。検索画面（`SearchExperience`）は 200 以外をすべて「検索に失敗しました。」と表示する。
+
 API ルートはミドルウェアの `matcher` 対象外のため認証されない。認証が必要なエンドポイントはハンドラー内で `getServerSession(authOptions)` を呼んでセッションを確認する。
 
 ## MicroCMS データ取得
 
 ブログとスキルのデータは `src/libs/microcms/` 経由で MicroCMS から取得する（`blog.ts` と `skill.ts` の2クライアント）。ブログ記事・アーカイブ・カテゴリ・タグ別一覧は `generateStaticParams` による SSG + ISR（`revalidate = 3600`）、トップページも ISR（`revalidate = 3600`）。`revalidate` を付けないページはビルド時の内容に固定され、microCMS で公開終了にした記事が次のデプロイまで残るため、microCMS のデータを表示するページには必ず付ける。1レンダリング内の重複リクエストは React `cache()` で排除している。
 
-取得関数（`fetchBlogList`・`fetchBlogDetail`・`fetchBlogListAll`・`fetchSkillAll`）の `catch` は `src/libs/microcms/handleMicroCMSError.ts` に集約しており、microCMS が 400 / 404 を返したときだけ `notFound()` にし（400 はコード側の fields / filters の誤りでも返るため `console.warn` でリクエスト先を記録する）、それ以外（5xx・429・ネットワークエラー・401/403）は投げ直す。一時的な障害まで `notFound()` にすると ISR の再生成で 404 が正常な結果としてキャッシュされ、最大1時間 404 のままになるため（#63）。投げ直せば再生成は失敗扱いになり、前回のページが出続ける。キャッシュの無いページやビルド時はエラーになる（ビルド時は SDK の再試行2回のあとビルドが失敗する）。
+取得関数（`fetchBlogList`・`fetchBlogDetail`・`fetchBlogListAll`・`fetchSkillAll`）の `catch` は `src/libs/microcms/handleMicroCMSError.ts` に集約しており、microCMS が 400 / 404 を返したときだけ `notFound()` にし（400 はコード側の fields / filters の誤りでも返るため `console.warn` でリクエスト先を記録する。filters に検索語が入るため、記録するのはパスとクエリのパラメータ名だけで値は出さない）、それ以外（5xx・429・ネットワークエラー・401/403）は投げ直す。一時的な障害まで `notFound()` にすると ISR の再生成で 404 が正常な結果としてキャッシュされ、最大1時間 404 のままになるため（#63）。投げ直せば再生成は失敗扱いになり、前回のページが出続ける。キャッシュの無いページやビルド時はエラーになる（ビルド時は SDK の再試行2回のあとビルドが失敗する）。
 
 リクエスト時のエラーは `src/app/(login)/error.tsx` が受け止め、ヘッダー・フッターを残したまま 500 の画面（`retry()` による再試行と、トップページへのリンク）を出す。エラーメッセージは表示せず、サーバーログと照合できる `digest` だけを出す。`src/app/layout.tsx` と `(login)/layout.tsx` はデータを取得しないので `global-error.tsx` は置いていない。`error.tsx` は同じセグメントの `layout.tsx` のエラーを受け止めないため、`(login)/layout.tsx` に取得処理を足すなら `global-error.tsx`（または上位の `error.tsx`）が必要になる。ISR のキャッシュがあるページは、再生成に失敗しても前回のページが出続ける（エラー画面はキャッシュされない。#69 で本番ビルドにより確認済み）。
 

@@ -1,5 +1,5 @@
 import { cookies, draftMode } from 'next/headers';
-import { Hono } from 'hono';
+import { Hono, type Context } from 'hono';
 import { handle } from 'hono/vercel';
 import { Resend } from 'resend';
 import { getServerSession } from 'next-auth';
@@ -8,8 +8,33 @@ import { fetchBlogList, fetchBlogDetail } from '@/src/libs/microcms/blog';
 import { fetchSkillAll } from '@/src/libs/microcms/skill';
 import { buildSearchFilters } from '@/src/libs/blog/buildSearchFilters';
 import { validateContact } from '@/src/libs/contact/validateContact';
+// next/navigation の unstable_rethrow も内部で使っている判定関数。公開 API ではないため、
+// Next.js の更新で壊れていないことを tests/unit/app/api の「本物の notFound()」のテストで確かめる
+import {
+  getAccessFallbackHTTPStatus,
+  isHTTPAccessFallbackError,
+} from 'next/dist/client/components/http-access-fallback/http-access-fallback';
 
 const app = new Hono({ strict: false }).basePath('/api');
+
+/**
+ * microCMS の取得関数が投げたエラーを API のレスポンスに変換する。
+ *
+ * 取得関数は microCMS の 400 / 404 を `notFound()` に変換して投げる（handleMicroCMSError）ので、それだけを 404 にする。
+ * それ以外（5xx・429・ネットワークエラーなど）は上流の障害なので 502 を返し、原因を追えるようログに残す。
+ * ログには検索語などリクエストの中身を含めない（SDK のエラーメッセージはステータスと microCMS の応答文だけで、
+ * リクエスト URL は含まない。400 のときの handleMicroCMSError の警告ログもクエリの値は出さない）。
+ */
+const respondFetchError = (c: Context, endpoint: string, error: unknown) => {
+  if (isHTTPAccessFallbackError(error) && getAccessFallbackHTTPStatus(error) === 404) {
+    return c.json({ error: 'Not found' }, 404);
+  }
+
+  // SDK のメッセージは改行を含む（`status: N\n  message is ...`）ため、ログが1行に収まるよう空白にまとめる
+  const detail = (error instanceof Error ? error.message : String(error)).replace(/\s+/g, ' ');
+  console.error(`[${endpoint}] microCMS からの取得に失敗しました: ${detail}`);
+  return c.json({ error: 'Failed to fetch' }, 502);
+};
 
 // microCMS のコンテンツ ID に使える文字は英大小文字・数字・`-`・`_` のみ（「コンテンツIDの設定」）で、
 // リダイレクト先パスや Cookie 値に `/`・`..`・`;`・改行等が混入するのを防ぐ。
@@ -68,8 +93,8 @@ app.get('/blog', async (c) => {
       fields: 'id,title,eyecatch,publishedAt,updatedAt',
     });
     return c.json(data);
-  } catch {
-    return c.json({ error: 'Not found' }, 404);
+  } catch (error) {
+    return respondFetchError(c, '/api/blog', error);
   }
 });
 
@@ -79,8 +104,8 @@ app.get('/blog/:id', async (c) => {
   try {
     const data = await fetchBlogDetail('blog', id);
     return c.json(data);
-  } catch {
-    return c.json({ error: 'Not found' }, 404);
+  } catch (error) {
+    return respondFetchError(c, '/api/blog/:id', error);
   }
 });
 
@@ -89,8 +114,8 @@ app.get('/skills', async (c) => {
   try {
     const data = await fetchSkillAll();
     return c.json(data);
-  } catch {
-    return c.json({ error: 'Not found' }, 404);
+  } catch (error) {
+    return respondFetchError(c, '/api/skills', error);
   }
 });
 
