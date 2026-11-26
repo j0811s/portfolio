@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { listPath } from '@/src/libs/blog/listPath';
 import { SITE_URL } from '@/src/constants/site';
 import { BlogListLayout } from '@/src/features/blog';
 import { fetchBlogSummaryAll, fetchBlogList } from '@/src/libs/microcms/blog';
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: `「${year}年」の一覧ページです。`,
     },
+    alternates: { canonical: listPath('archive', year) },
   };
 }
 
@@ -46,7 +48,7 @@ export default async function Page({ params }: Props) {
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
     { name: '投稿', url: `/blog/` },
-    { name: `${yearLabel}`, url: `/blog/tags/page/${year}/` },
+    { name: `${yearLabel}`, url: listPath('archive', year) },
   ];
 
   const type = {

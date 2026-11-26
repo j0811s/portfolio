@@ -36,7 +36,7 @@ API ルートはミドルウェアの `matcher` 対象外のため認証され�
 
 サイドメニュー（`AsideMenu`）が使う全記事の id・カテゴリ・タグ・公開日は `fetchBlogSummaryAll`（`blog.ts`）で取得し、`unstable_cache`（`revalidate: 3600`）で Next.js のデータキャッシュに保存する。`AsideMenu` は記事詳細とアーカイブ・カテゴリ・タグ別一覧のすべてのページで描画され、`cache()` では1ページの中でしか重複を除けないため、以前はページの数だけ全件取得を繰り返してビルド中に microCMS のレート制限（429）に当たることがあった（#72）。ビルドでは並列ワーカーの最初の数回だけ取得され、microCMS へのリクエストは 430 → 194 に減った。キャッシュが無いときの失敗は保存されずに投げ直される（ビルドの失敗、またはエラー画面）。期限切れのキャッシュがあるときは、再取得に失敗しても Next.js が `console.error`（`revalidating cache with key: ...`）に記録して古い集計を返す。`handleMicroCMSError` は通さず、400 / 404 も `notFound()` にせず投げ直す（全件の集計は個別のページではないため。`notFound()` にするとサイドメニューのある全ページが 404 になる）。ドラフトモードでは `unstable_cache` は使われない（Next.js の仕様）。キャッシュはデプロイをまたいで残るため、サイドメニューと `page/[num]` の生成ページ数は、再デプロイの直後も含めて最大で `revalidate` の分だけ古い集計になりうる（生成されなかったページはアクセス時に生成される）。
 
-アーカイブ・カテゴリ・タグ別一覧の `page/[num]` は、`fetchBlogSummaryAll` の結果から年・カテゴリ・タグごとの記事数を数えて、記事数に応じたページだけを `generateStaticParams` で生成する（記事の無いものは1ページ目だけ。#65）。ページ番号の計算は `src/libs/blog/pagination.ts` にまとめており、1 以上の整数でない番号は microCMS に問い合わせる前に、記事数を超える番号は取得結果の `totalCount` で判定して `notFound()` にする（ビルド後に記事が減った場合や URL の直接入力のため）。年別アーカイブは年を 4 桁の数字に限り（`20` のような部分一致を防ぐ）、記事の無い年は `notFound()` にする（年は記事の公開日から作るため。年ごとの集計は `src/libs/blog/countPostsByYear.ts` でサイドメニューと共有）。
+アーカイブ・カテゴリ・タグ別一覧の `page/[num]` は、`fetchBlogSummaryAll` の結果から年・カテゴリ・タグごとの記事数を数えて、記事数に応じたページだけを `generateStaticParams` で生成する（記事の無いものは1ページ目だけ。#65）。ページ番号の計算は `src/libs/blog/pagination.ts` にまとめており、1 以上の整数でない番号は microCMS に問い合わせる前に、記事数を超える番号は取得結果の `totalCount` で判定して `notFound()` にする（ビルド後に記事が減った場合や URL の直接入力のため）。年別アーカイブは年を 4 桁の数字に限り（`20` のような部分一致を防ぐ）、記事の無い年は `notFound()` にする（年は記事の公開日から作るため。年ごとの集計は `src/libs/blog/countPostsByYear.ts` でサイドメニューと共有）。タグ・カテゴリー・年別一覧の URL（パンくずリスト・JSON-LD・canonical）は `src/libs/blog/listPath.ts` の `listPath` で組み立て、手書きしない（手書きで ID や年が抜けていた。#64）。`page/[num]` の canonical は、1 ページ目は一覧の先頭（同じ内容のため。`noindex` も付ける）、2 ページ目以降は自身を指す。
 
 取得関数（`fetchBlogList`・`fetchBlogDetail`・`fetchSkillAll`。全件の集計 `fetchBlogSummaryAll` は前述のとおり通さない）の `catch` は `src/libs/microcms/handleMicroCMSError.ts` に集約しており、microCMS が 400 / 404 を返したときだけ `notFound()` にし（400 はコード側の fields / filters の誤りでも返るため `console.warn` でリクエスト先を記録する。filters に検索語が入るため、記録するのはパスとクエリのパラメータ名だけで値は出さない）、それ以外（5xx・429・ネットワークエラー・401/403）は投げ直す。一時的な障害まで `notFound()` にすると ISR の再生成で 404 が正常な結果としてキャッシュされ、最大1時間 404 のままになるため（#63）。投げ直せば再生成は失敗扱いになり、前回のページが出続ける。キャッシュの無いページやビルド時はエラーになる（ビルド時は SDK の再試行2回のあとビルドが失敗する）。
 
@@ -78,7 +78,7 @@ MicroCMS から取得したブログ記事の HTML は `html-react-parser` で�
 
 ## SEO
 
-JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・BreadcrumbList・BlogPosting）し、`<JsonLd>` コンポーネント経由で注入する。値は microCMS の記事データ由来のため、`<JsonLd>` は `<` を `\u003c` にエスケープして `</script>` で script 要素を抜けられないようにしている。各ページのメタデータは `src/app/layout.tsx` のルート `metadata` エクスポートをスプレッドして構成する。
+JSON-LD 構造化データは `src/libs/seo/jsonLd.ts` で生成（WebSite・BreadcrumbList・BlogPosting）し、`<JsonLd>` コンポーネント経由で注入する。値は microCMS の記事データ由来のため、`<JsonLd>` は `<` を `\u003c` にエスケープして `</script>` で script 要素を抜けられないようにしている。パンくずリストの `ListItem.item` は、`createBreadcrumbJsonLd` が相対パスを `SITE_URL` で絶対 URL にする（JSON-LD には canonical と違い `metadataBase` が効かないため）。各ページのメタデータは `src/app/layout.tsx` のルート `metadata` エクスポートをスプレッドして構成する。
 
 OG 画像（各 `opengraph-image.tsx`、`next/og` の `ImageResponse`）は Node.js Runtime で生成する（Edge Runtime は Next.js で非推奨のため使わない）。
 

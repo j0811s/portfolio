@@ -1,4 +1,5 @@
 import { LIMIT } from '@/src/constants/blog';
+import { listPath, pagedListCanonical } from '@/src/libs/blog/listPath';
 import { SITE_URL } from '@/src/constants/site';
 import { fetchBlogList, fetchBlogSummaryAll } from '@/src/libs/microcms/blog';
 import { isPageInRange, pageNumbers, parsePageNumber } from '@/src/libs/blog/pagination';
@@ -27,6 +28,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { year, num } = await params;
+  const page = parsePageNumber(num);
+  if (page === undefined || !isValidYear(year)) notFound();
 
   return {
     title: `${num}ページ目 | ${year}年 | 投稿 | ポートフォリオサイト`,
@@ -34,8 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: `「${year}年」の${num}ページ目です。`,
     },
-    robots: num === '1' ? 'noindex, follow' : 'index, follow',
-    alternates: num === '1' ? { canonical: '/blog/' } : { canonical: `/blog/archive/page/${num}/` },
+    robots: page === 1 ? 'noindex, follow' : 'index, follow',
+    alternates: { canonical: pagedListCanonical('archive', year, page) },
   };
 }
 
@@ -57,7 +60,7 @@ export default async function Page({ params }: Props) {
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
     { name: '投稿', url: `/blog/` },
-    { name: `${yearLabel} | ${num}ページ`, url: `/blog/archive/page/${num}/` },
+    { name: `${yearLabel} | ${num}ページ`, url: listPath('archive', year, page) },
   ];
 
   const type = {

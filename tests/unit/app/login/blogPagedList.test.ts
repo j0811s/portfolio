@@ -26,11 +26,15 @@ vi.mock('@/src/libs/microcms/blog', () => ({
 vi.mock('next/navigation', () => ({ notFound: mocks.notFound }));
 // 一覧の描画はこのテストの対象外のため、受け取った props を返すだけにする
 vi.mock('@/src/features/blog', () => ({ BlogListLayout: (props: unknown) => props }));
+// カテゴリー一覧の先頭はルートの metadata をスプレッドする。layout.tsx は next/font を読み込みテストでは動かないため空にする
+vi.mock('@/src/app/layout', () => ({ metadata: {} }));
 
 import * as tagsPage from '@/src/app/(login)/blog/tags/[tagId]/page/[num]/page';
 import * as categoriesPage from '@/src/app/(login)/blog/categories/[catId]/page/[num]/page';
 import * as archivePage from '@/src/app/(login)/blog/archive/[year]/page/[num]/page';
 import * as archiveTopPage from '@/src/app/(login)/blog/archive/[year]/page';
+import * as tagsTopPage from '@/src/app/(login)/blog/tags/[tagId]/page';
+import * as categoriesTopPage from '@/src/app/(login)/blog/categories/[catId]/page';
 
 const ref = (id: string) => ({ id, name: id, slug: id });
 
@@ -242,5 +246,92 @@ describe('年別アーカイブの一覧（/blog/archive/[year]/）', () => {
 
     const result = archiveTopPage.default({ params: Promise.resolve({ year: '1999' }) });
     await expect(result).rejects.toBe(NOT_FOUND);
+  });
+});
+
+type Rendered = { props: { breadcrumb: { name: string; url: string }[] } };
+/** パンくずリストの最後（現在のページ）の URL */
+const lastBreadcrumbUrl = (rendered: unknown) =>
+  (rendered as Rendered).props.breadcrumb.at(-1)?.url;
+
+describe.each(cases)(
+  '$name一覧の URL（パンくずリスト・canonical）',
+  ({ page, key, endpoint, ids }) => {
+    const id = ids[0];
+    const params = (num: string) => Promise.resolve({ [key]: id, num }) as never;
+
+    it('パンくずリストの現在のページは、ID とページ番号を含む URL を指す', async () => {
+      mocks.fetchBlogList.mockResolvedValue({ contents: [], totalCount: 13 });
+      mocks.fetchBlogDetail.mockResolvedValue({ name: id });
+
+      const rendered = await page.default({ params: params('2') });
+      expect(lastBreadcrumbUrl(rendered)).toBe(`/blog/${endpoint}/${id}/page/2/`);
+    });
+
+    it.each([
+      ['1', `/blog/${endpoint}/${id}/`],
+      ['2', `/blog/${endpoint}/${id}/page/2/`],
+    ])('%s ページ目の canonical は %s', async (num, expected) => {
+      mocks.fetchBlogDetail.mockResolvedValue({ name: id });
+
+      const metadata = await page.generateMetadata({ params: params(num) });
+      expect(metadata.alternates?.canonical).toBe(expected);
+    });
+  }
+);
+
+describe('年別アーカイブの URL（パンくずリスト・canonical）', () => {
+  it('page/[num] のパンくずリストの現在のページは、年とページ番号を含む URL を指す', async () => {
+    mocks.fetchBlogList.mockResolvedValue({ contents: [], totalCount: 13 });
+
+    const rendered = await archivePage.default({
+      params: Promise.resolve({ year: '2024', num: '2' }),
+    });
+    expect(lastBreadcrumbUrl(rendered)).toBe('/blog/archive/2024/page/2/');
+  });
+
+  it.each([
+    ['1', '/blog/archive/2024/'],
+    ['2', '/blog/archive/2024/page/2/'],
+  ])('page/[num] の %s ページ目の canonical は %s', async (num, expected) => {
+    const metadata = await archivePage.generateMetadata({
+      params: Promise.resolve({ year: '2024', num }),
+    });
+    expect(metadata.alternates?.canonical).toBe(expected);
+  });
+
+  it('page/[num] の generateMetadata も、不正なページ番号や年は notFound() を返す', async () => {
+    await expect(
+      archivePage.generateMetadata({ params: Promise.resolve({ year: '2024', num: 'abc' }) })
+    ).rejects.toBe(NOT_FOUND);
+    await expect(
+      archivePage.generateMetadata({ params: Promise.resolve({ year: '20', num: '1' }) })
+    ).rejects.toBe(NOT_FOUND);
+  });
+
+  it('一覧の先頭（/blog/archive/[year]/）のパンくずリストは、その年の一覧を指す', async () => {
+    mocks.fetchBlogList.mockResolvedValue({ contents: [], totalCount: 1 });
+
+    const rendered = await archiveTopPage.default({ params: Promise.resolve({ year: '2024' }) });
+    expect(lastBreadcrumbUrl(rendered)).toBe('/blog/archive/2024/');
+  });
+});
+
+describe.each([
+  { name: 'タグ', page: tagsTopPage, key: 'tagId', slug: 'tags', id: 'react' },
+  { name: 'カテゴリー', page: categoriesTopPage, key: 'catId', slug: 'categories', id: 'frontend' },
+  { name: '年別アーカイブ', page: archiveTopPage, key: 'year', slug: 'archive', id: '2024' },
+] as const)('$name一覧の先頭の URL（パンくずリスト・canonical）', ({ page, key, slug, id }) => {
+  const params = () => Promise.resolve({ [key]: id }) as never;
+
+  it('パンくずリストの現在のページと canonical は、一覧の先頭を指す', async () => {
+    mocks.fetchBlogList.mockResolvedValue({ contents: [], totalCount: 1 });
+    mocks.fetchBlogDetail.mockResolvedValue({ name: id });
+
+    const rendered = await page.default({ params: params() });
+    expect(lastBreadcrumbUrl(rendered)).toBe(`/blog/${slug}/${id}/`);
+
+    const metadata = await page.generateMetadata({ params: params() } as never, {} as never);
+    expect(metadata.alternates?.canonical).toBe(`/blog/${slug}/${id}/`);
   });
 });

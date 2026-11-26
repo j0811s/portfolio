@@ -1,4 +1,5 @@
 import { LIMIT } from '@/src/constants/blog';
+import { listPath, pagedListCanonical } from '@/src/libs/blog/listPath';
 import { SITE_URL } from '@/src/constants/site';
 import {
   client,
@@ -45,7 +46,8 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
   const params = await props.params;
   const { catId, num } = params;
   // 不正なページ番号なら、タイトル用の取得もせずに 404 にする
-  if (parsePageNumber(num) === undefined) notFound();
+  const page = parsePageNumber(num);
+  if (page === undefined) notFound();
   const cat = await fetchBlogDetail('categories', catId);
 
   return {
@@ -54,9 +56,8 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
     openGraph: {
       description: `「${cat?.name}」の${num}ページ目です。`,
     },
-    robots: num === '1' ? 'noindex, follow' : 'index, follow',
-    alternates:
-      num === '1' ? { canonical: '/blog/' } : { canonical: `/blog/categories/page/${num}/` },
+    robots: page === 1 ? 'noindex, follow' : 'index, follow',
+    alternates: { canonical: pagedListCanonical('categories', catId, page) },
   };
 }
 
@@ -79,7 +80,7 @@ export default async function Page({ params }: Props) {
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
     { name: '投稿', url: `/blog/` },
-    { name: `${catName} | ${num}ページ`, url: `/blog/categories/${num}/` },
+    { name: `${catName} | ${num}ページ`, url: listPath('categories', catId, page) },
   ];
 
   const type = {
