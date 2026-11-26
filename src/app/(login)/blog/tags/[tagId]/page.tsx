@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { listPath } from '@/src/libs/blog/listPath';
 import { SITE_URL } from '@/src/constants/site';
 import { BlogListLayout } from '@/src/features/blog';
 import { client, fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
@@ -28,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       description: `「${tag?.name ?? 'タグ'}」の一覧ページです。`,
     },
+    alternates: { canonical: listPath('tags', tagId) },
   };
 }
 
@@ -42,7 +44,7 @@ export default async function Page({ params }: Props) {
   const breadcrumb = [
     { name: 'トップページ', url: SITE_URL },
     { name: '投稿', url: `/blog/` },
-    { name: tagName, url: `/blog/tags/${tagId}/` },
+    { name: tagName, url: listPath('tags', tagId) },
   ];
 
   const type = {

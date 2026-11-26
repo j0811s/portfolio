@@ -1,7 +1,7 @@
 import type { BreadcrumbList, WebSite, BlogPosting, WithContext } from 'schema-dts';
 import { SITE_URL } from '@/src/constants/site';
 
-// パンくずリスト
+// パンくずリスト。`ListItem.item` は絶対 URL にする（canonical と違い metadataBase が効かないため、相対パスを SITE_URL で解決する）
 export const createBreadcrumbJsonLd = (
   items: { name: string; url: string }[]
 ): WithContext<BreadcrumbList> => ({
@@ -11,7 +11,7 @@ export const createBreadcrumbJsonLd = (
     '@type': 'ListItem',
     position: index + 1,
     name: item.name,
-    item: item.url,
+    item: new URL(item.url, SITE_URL).toString(),
   })),
 });
 
