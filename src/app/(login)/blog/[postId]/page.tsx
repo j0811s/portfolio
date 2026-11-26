@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const ids = await fetchAllBlogId('blog');
-  return (ids ?? []).map((id) => ({ postId: id }));
+  return ids.map((id) => ({ postId: id }));
 }
 
 export default async function Page({ params }: Props) {

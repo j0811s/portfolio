@@ -94,9 +94,13 @@ export const fetchBlogSummaryAll = unstable_cache(
   { revalidate: 3600 }
 );
 
-// エンドポイントのコンテンツIDをすべて取得
-export const fetchAllBlogId = async (endpoint: string = 'blog') => {
-  const ids = await client.getAllContentIds({ endpoint }).catch((err) => console.error(err));
-
-  return ids;
-};
+/**
+ * エンドポイントのコンテンツ ID をすべて取得する（記事詳細の `generateStaticParams` で使う）。
+ *
+ * 失敗したときは握りつぶさずにそのまま投げ、ビルドを失敗させる。以前は `console.error` だけで `undefined` を返し、
+ * 記事詳細を 1 件も静的生成しないままビルドが成功していた（#75）。
+ * ID の一覧は個別のページではないので、`fetchBlogSummaryAll` と同じく `handleMicroCMSError` は通さず、
+ * 400 / 404 も `notFound()` にしない。
+ */
+export const fetchAllBlogId = async (endpoint: string = 'blog'): Promise<string[]> =>
+  client.getAllContentIds({ endpoint });
