@@ -1,6 +1,14 @@
 import { LIMIT } from '@/src/constants/blog';
 import { SITE_URL } from '@/src/constants/site';
-import { client, fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
+import {
+  client,
+  fetchBlogDetail,
+  fetchBlogList,
+  fetchBlogSummaryAll,
+} from '@/src/libs/microcms/blog';
+import { getTotalCount } from '@/src/libs/blog/getTotalCount';
+import { isPageInRange, pageNumbers, parsePageNumber } from '@/src/libs/blog/pagination';
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { BlogListLayout } from '@/src/features/blog';
 
@@ -14,32 +22,22 @@ type Props = {
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  // すべてのパラメータ
-  const allParams: { tagId: string; num: string }[] = [];
+  const [tags, posts] = await Promise.all([
+    client.getAllContents({ endpoint: 'tags' }),
+    fetchBlogSummaryAll(),
+  ]);
+  // ページ数はタグごとの記事数から計算する（記事の無いタグは 1 ページ目だけ）
+  const counts = getTotalCount(posts, 'tag');
 
-  // タグ
-  const tags = await client.getAllContents({ endpoint: 'tags' });
-  const tagIds = tags.map(({ id }) => id);
-
-  // ページ数
-  const { totalCount } = await fetchBlogList('blog', { limit: LIMIT });
-  const totalPages = Math.ceil(totalCount / LIMIT);
-
-  // パラメータを1箇所にまとめる
-  for (const tagId of tagIds) {
-    for (let i = 1; i <= totalPages; i++) {
-      allParams.push({
-        tagId: String(tagId),
-        num: String(i),
-      });
-    }
-  }
-
-  return allParams;
+  return tags.flatMap(({ id }) =>
+    pageNumbers(counts[id]?.count ?? 0).map((num) => ({ tagId: id, num }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tagId, num } = await params;
+  // 不正なページ番号なら、タイトル用の取得もせずに 404 にする
+  if (parsePageNumber(num) === undefined) notFound();
   const tag = await fetchBlogDetail('tags', tagId);
 
   return {
@@ -55,14 +53,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { tagId, num } = await params;
+  const page = parsePageNumber(num);
+  if (page === undefined) notFound();
+
   const [{ contents, totalCount }, tagContent] = await Promise.all([
     fetchBlogList('blog', {
       limit: LIMIT,
       filters: `tag[contains]${tagId}`,
-      offset: LIMIT * (Number(num) - 1),
+      offset: LIMIT * (page - 1),
     }),
     fetchBlogDetail('tags', tagId),
   ]);
+  if (!isPageInRange(page, totalCount)) notFound();
   const tagName = tagContent.name;
 
   const breadcrumb = [
@@ -82,7 +84,7 @@ export default async function Page({ params }: Props) {
       breadcrumb={breadcrumb}
       title={`${tagName} | ${num}ページ`}
       contents={contents}
-      pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }}
+      pager={{ totalCount, limit: LIMIT, currentPage: page }}
       type={type}
     />
   );

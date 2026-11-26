@@ -5,10 +5,10 @@ import { faChevronDown, faListUl, faTags } from '@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { ResultPostData } from '@/src/libs/blog/getTotalCount';
 import { getTotalCount } from '@/src/libs/blog/getTotalCount';
-import { fetchBlogListAll } from '@/src/libs/microcms/blog';
+import { fetchBlogSummaryAll } from '@/src/libs/microcms/blog';
 
 async function AsideMenu({ className = '' }) {
-  const contents = await fetchBlogListAll('blog', { fields: 'id,category,tag,publishedAt' });
+  const contents = await fetchBlogSummaryAll();
   const categories: ResultPostData = getTotalCount(contents, 'category');
   const tags: ResultPostData = getTotalCount(contents, 'tag');
 

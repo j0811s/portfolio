@@ -9,7 +9,10 @@ export type ResultPostData = {
   [key: string]: PostData;
 };
 
-export const getTotalCount = (contents: Blog[], type: string): ResultPostData => {
+export const getTotalCount = (
+  contents: Pick<Blog, 'category' | 'tag'>[],
+  type: string
+): ResultPostData => {
   const data: ResultPostData = {};
 
   contents.forEach((post) => {

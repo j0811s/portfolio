@@ -1,6 +1,14 @@
 import { LIMIT } from '@/src/constants/blog';
 import { SITE_URL } from '@/src/constants/site';
-import { client, fetchBlogDetail, fetchBlogList } from '@/src/libs/microcms/blog';
+import {
+  client,
+  fetchBlogDetail,
+  fetchBlogList,
+  fetchBlogSummaryAll,
+} from '@/src/libs/microcms/blog';
+import { getTotalCount } from '@/src/libs/blog/getTotalCount';
+import { isPageInRange, pageNumbers, parsePageNumber } from '@/src/libs/blog/pagination';
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { BlogListLayout } from '@/src/features/blog';
 
@@ -21,33 +29,23 @@ type Props = {
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  // すべてのパラメータ
-  const allParams: { catId: string; num: string }[] = [];
+  const [categories, posts] = await Promise.all([
+    client.getAllContents({ endpoint: 'categories' }),
+    fetchBlogSummaryAll(),
+  ]);
+  // ページ数はカテゴリーごとの記事数から計算する（記事の無いカテゴリーは 1 ページ目だけ）
+  const counts = getTotalCount(posts, 'category');
 
-  // カテゴリー
-  const categories = await client.getAllContents({ endpoint: 'categories' });
-  const catIds = categories.map(({ id }) => id);
-
-  // ページ数
-  const { totalCount } = await fetchBlogList('blog', { limit: LIMIT });
-  const totalPages = Math.ceil(totalCount / LIMIT);
-
-  // パラメータを1箇所にまとめる
-  for (const catId of catIds) {
-    for (let i = 1; i <= totalPages; i++) {
-      allParams.push({
-        catId: catId,
-        num: String(i),
-      });
-    }
-  }
-
-  return allParams;
+  return categories.flatMap(({ id }) =>
+    pageNumbers(counts[id]?.count ?? 0).map((num) => ({ catId: id, num }))
+  );
 }
 
 export async function generateMetadata(props: generateMetadataProps): Promise<Metadata> {
   const params = await props.params;
   const { catId, num } = params;
+  // 不正なページ番号なら、タイトル用の取得もせずに 404 にする
+  if (parsePageNumber(num) === undefined) notFound();
   const cat = await fetchBlogDetail('categories', catId);
 
   return {
@@ -64,14 +62,18 @@ export async function generateMetadata(props: generateMetadataProps): Promise<Me
 
 export default async function Page({ params }: Props) {
   const { catId, num } = await params;
+  const page = parsePageNumber(num);
+  if (page === undefined) notFound();
+
   const [{ contents, totalCount }, categoryContent] = await Promise.all([
     fetchBlogList('blog', {
       limit: LIMIT,
       filters: `category[contains]${catId}`,
-      offset: LIMIT * (Number(num) - 1),
+      offset: LIMIT * (page - 1),
     }),
     fetchBlogDetail('categories', catId),
   ]);
+  if (!isPageInRange(page, totalCount)) notFound();
   const catName = categoryContent.name;
 
   const breadcrumb = [
@@ -91,7 +93,7 @@ export default async function Page({ params }: Props) {
       breadcrumb={breadcrumb}
       title={`${catName} | ${num}ページ`}
       contents={contents}
-      pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }}
+      pager={{ totalCount, limit: LIMIT, currentPage: page }}
       type={type}
     />
   );

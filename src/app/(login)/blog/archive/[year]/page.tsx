@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/src/constants/site';
 import { BlogListLayout } from '@/src/features/blog';
-import { fetchBlogListAll, fetchBlogList } from '@/src/libs/microcms/blog';
+import { fetchBlogSummaryAll, fetchBlogList } from '@/src/libs/microcms/blog';
 import { LIMIT } from '@/src/constants/blog';
+import { countPostsByYear, isValidYear } from '@/src/libs/blog/countPostsByYear';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: Promise<{ year: string }>;
@@ -11,12 +13,9 @@ type Props = {
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  const posts = await fetchBlogListAll('blog');
-  const years = Array.from(
-    new Set(posts.flatMap((post) => (post.publishedAt ? [post.publishedAt.slice(0, 4)] : [])))
-  );
+  const counts = countPostsByYear(await fetchBlogSummaryAll());
 
-  return years.map((year) => ({ year }));
+  return Object.keys(counts).map((year) => ({ year }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -33,10 +32,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { year } = await params;
+  if (!isValidYear(year)) notFound();
+
   const { contents, totalCount } = await fetchBlogList('blog', {
     limit: LIMIT,
     filters: `publishedAt[contains]${year}`,
   });
+  // 年は記事の公開日から作るので、記事の無い年は存在しない年として扱う
+  if (totalCount === 0) notFound();
 
   const yearLabel = `${year}年`;
 

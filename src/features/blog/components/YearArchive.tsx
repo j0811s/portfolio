@@ -3,22 +3,10 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
+import { countPostsByYear } from '@/src/libs/blog/countPostsByYear';
 
-type YearsData = {
-  [key: string]: number;
-};
-
-const buildYearsData = (contents: Blog[]): YearsData => {
-  const yearsData: YearsData = {};
-  contents.forEach((post) => {
-    const year = post.publishedAt?.substring(0, 4);
-    if (year) yearsData[year] = (yearsData[year] ?? 0) + 1;
-  });
-  return yearsData;
-};
-
-function YearArchive({ contents }: { contents: Blog[] }) {
-  const yearsData = buildYearsData(contents);
+function YearArchive({ contents }: { contents: Pick<Blog, 'publishedAt'>[] }) {
+  const yearsData = countPostsByYear(contents);
   const years = Object.keys(yearsData).sort((a, b) => Number(b) - Number(a));
 
   if (years.length === 0) return null;
