@@ -1,6 +1,9 @@
 import { LIMIT } from '@/src/constants/blog';
 import { SITE_URL } from '@/src/constants/site';
-import { fetchBlogList, fetchBlogListAll } from '@/src/libs/microcms/blog';
+import { fetchBlogList, fetchBlogSummaryAll } from '@/src/libs/microcms/blog';
+import { isPageInRange, pageNumbers, parsePageNumber } from '@/src/libs/blog/pagination';
+import { notFound } from 'next/navigation';
+import { countPostsByYear, isValidYear } from '@/src/libs/blog/countPostsByYear';
 import type { Metadata } from 'next';
 import { BlogListLayout } from '@/src/features/blog';
 
@@ -14,30 +17,12 @@ type Props = {
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  // すべてのパラメータ
-  const allParams: { year: string; num: string }[] = [];
+  // 公開年ごとの記事数（ページ数は年ごとの記事数から計算する）
+  const counts = countPostsByYear(await fetchBlogSummaryAll());
 
-  // 公開年
-  const posts = await fetchBlogListAll('blog');
-  const years = Array.from(
-    new Set(posts.flatMap((post) => (post.publishedAt ? [post.publishedAt.slice(0, 4)] : [])))
+  return Object.entries(counts).flatMap(([year, count]) =>
+    pageNumbers(count).map((num) => ({ year, num }))
   );
-
-  // ページ数
-  const { totalCount } = await fetchBlogList('blog', { limit: LIMIT });
-  const totalPages = Math.ceil(totalCount / LIMIT);
-
-  // パラメータを1箇所にまとめる
-  for (const year of years) {
-    for (let i = 1; i <= totalPages; i++) {
-      allParams.push({
-        year: year,
-        num: String(i),
-      });
-    }
-  }
-
-  return allParams;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -56,11 +41,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { year, num } = await params;
+  const page = parsePageNumber(num);
+  if (page === undefined || !isValidYear(year)) notFound();
+
   const { contents, totalCount } = await fetchBlogList('blog', {
     limit: LIMIT,
     filters: `publishedAt[contains]${year}`,
-    offset: LIMIT * (Number(num) - 1),
+    offset: LIMIT * (page - 1),
   });
+  // 年は記事の公開日から作るので、記事の無い年は存在しない年として扱う
+  if (totalCount === 0 || !isPageInRange(page, totalCount)) notFound();
 
   const yearLabel = `${year}年`;
 
@@ -81,7 +71,7 @@ export default async function Page({ params }: Props) {
       breadcrumb={breadcrumb}
       title={`${yearLabel} | ${num}ページ`}
       contents={contents}
-      pager={{ totalCount, limit: LIMIT, currentPage: Number(num) }}
+      pager={{ totalCount, limit: LIMIT, currentPage: page }}
       type={type}
     />
   );
