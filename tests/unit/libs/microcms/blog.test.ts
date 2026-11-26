@@ -82,3 +82,29 @@ describe('fetchBlogSummaryAll', () => {
     }
   );
 });
+
+describe('fetchAllBlogId', () => {
+  it('全記事の ID を返す', async () => {
+    const getAllContentIds = vi
+      .spyOn(blog.client, 'getAllContentIds')
+      .mockResolvedValue(['a', 'b']);
+
+    await expect(blog.fetchAllBlogId('blog')).resolves.toEqual(['a', 'b']);
+    expect(getAllContentIds).toHaveBeenCalledWith({ endpoint: 'blog' });
+  });
+
+  it.each([
+    { status: 400 } as const,
+    { status: 404 } as const,
+    { status: 503 } as const,
+    'network-error' as const,
+  ])('取得に失敗したら（%o）握りつぶさず、notFound() にもせず投げ直す', async (response) => {
+    const error = await createMicroCMSError(response);
+    vi.spyOn(blog.client, 'getAllContentIds').mockRejectedValue(error);
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    await expect(blog.fetchAllBlogId('blog')).rejects.toBe(error);
+    expect(notFound).not.toHaveBeenCalled();
+    expect(consoleError).not.toHaveBeenCalled();
+  });
+});
