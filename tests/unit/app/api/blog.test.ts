@@ -1,5 +1,6 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { LIMIT } from '@/src/constants/blog';
 import { createMicroCMSError, createNotFoundError } from '../../helpers/microcms';
 
 const { fetchBlogList, fetchBlogDetail } = vi.hoisted(() => ({
@@ -20,7 +21,6 @@ const get = async (path: string) => {
 };
 
 const getBlogList = (query: string) => get(`/api/blog?${query}`);
-
 
 describe('GET /api/blog', () => {
   beforeEach(() => {
@@ -55,6 +55,68 @@ describe('GET /api/blog', () => {
       'blog',
       expect.objectContaining({ filters: undefined })
     );
+  });
+});
+
+describe('GET /api/blog の limit・offset の検証', () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it.each([
+    ['limit=1&offset=0', 1, 0],
+    ['limit=100&offset=24', 100, 24],
+    // 検索画面（SearchExperience）が送る値
+    [`limit=${LIMIT}&offset=${LIMIT * 2}`, LIMIT, LIMIT * 2],
+    ['offset=9007199254740991', undefined, Number.MAX_SAFE_INTEGER],
+    // 同じキーが重なったら、Hono の c.req.query() は先の値を返す。検証した値と送る値が食い違わないことを固定する
+    ['limit=1&limit=2', 1, undefined],
+  ])('正しい値（%s）は数値にして渡す', async (query, limit, offset) => {
+    const res = await getBlogList(query);
+
+    expect(res.status).toBe(200);
+    expect(fetchBlogList).toHaveBeenCalledWith('blog', expect.objectContaining({ limit, offset }));
+  });
+
+  it.each(['', 'limit=&offset='])(
+    '未指定・空文字（%s）は渡さず、microCMS の既定値に任せる',
+    async (query) => {
+      const res = await getBlogList(query);
+
+      expect(res.status).toBe(200);
+      expect(fetchBlogList).toHaveBeenCalledWith(
+        'blog',
+        expect.objectContaining({ limit: undefined, offset: undefined })
+      );
+    }
+  );
+
+  it.each([
+    'limit=abc',
+    'limit=0',
+    'limit=101',
+    'limit=-1',
+    'limit=1.5',
+    'limit=1e2',
+    'limit=01',
+    'limit=%201',
+    'offset=abc',
+    'offset=-1',
+    'offset=1.5',
+    'offset=1e2',
+    'offset=01',
+    'offset=9007199254740992',
+    'limit=%EF%BC%91',
+  ])('不正な値（%s）は microCMS に送らず 400 を返す', async (query) => {
+    const res = await getBlogList(query);
+
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error: 'Invalid query' });
+    expect(fetchBlogList).not.toHaveBeenCalled();
   });
 });
 

@@ -19,7 +19,7 @@ next-auth の `SessionProvider` はどこにも置いていない。クライア
 
 カスタム API ルートは `src/app/api/[[...route]]/route.ts` の単一 Hono アプリにまとめられている。エンドポイント：
 
-- `GET /api/blog` — ブログ一覧
+- `GET /api/blog` — ブログ一覧。`limit`（1〜100）・`offset`（0 以上）は整数の表記（`0`、または 1〜9 の数字で始まる半角数字の並び）だけを受け付け、範囲外や `abc`・`1.5`・`1e2` などは microCMS に送らず 400 `{ error: 'Invalid query' }` を返す（microCMS に送ると 400 → `notFound()` で 404 になっていたため。#73）。未指定・空文字は microCMS の既定値に任せる
 - `GET /api/blog/:id` — ブログ詳細
 - `GET /api/skills` — スキル一覧
 - `GET /api/draft` — Next.js ドラフトモード有効化、`draft_key` Cookie をセット、`/blog/:id/preview/` にリダイレクト
