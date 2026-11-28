@@ -44,7 +44,7 @@ API ルートはミドルウェアの `matcher` 対象外のため認証され�
 
 ## ブログ一覧・検索の統合
 
-`/blog/` は `?q=`（検索キーワード）・`?page=`（ページ番号）を受け付ける唯一のブログ一覧エントリーポイントで、`src/features/blog/components/SearchExperience.tsx`（Client Component）が入力・ページ送りの両方をデバウンス付きの `/api/blog` フェッチと `window.history.replaceState` によるURL同期でライブに処理する（`next/navigation` のナビゲーションは発生しない）。`/blog/page/[num]` と `/blog/search` は `permanentRedirect` によって `/blog/` へのリダイレクトのみを行う薄いルートになっている。
+`/blog/` は `?q=`（検索キーワード）・`?page=`（ページ番号）を受け付ける唯一のブログ一覧エントリーポイントで、`src/features/blog/components/SearchExperience.tsx`（Client Component）が入力・ページ送りの両方をデバウンス付きの `/api/blog` フェッチと `window.history.replaceState` によるURL同期でライブに処理する（`next/navigation` のナビゲーションは発生しない）。`/blog/page/[num]` と `/blog/search` は `permanentRedirect` によって `/blog/` へのリダイレクトのみを行う薄いルートになっている。`?page=` と `/blog/page/[num]` のページ番号は `parsePageNumber`（`src/libs/blog/pagination.ts`）で読み、`1e2`・`01`・offset が安全な整数を超える巨大な値などの不正な番号は、`?page=` なら URL はそのままで 1 ページ目を表示し（canonical は `/blog/`）、`/blog/page/[num]` なら `/blog/` へ転送する（#81）。
 
 `src/app/(login)/blog/loading.tsx` はNext.jsのファイル規約上、`/blog/` 自身だけでなく `/blog/[postId]`・`/blog/archive/*`・`/blog/tags/*`・`/blog/categories/*` とそれぞれの `page/[num]` など、配下の全ルートの遷移時フォールバックにもなる（`loading.tsx` はそのセグメント以下の子ルート全てをSuspense境界でラップするため）。これにより、これらのページへの遷移時もルート直下の `src/app/loading.tsx`（ヘッダー・フッターごと覆う全画面オーバーレイ）ではなく、ヘッダー・フッターを残した狭いフォールバックに変わる。意図して設計した副作用ではなく、`/blog/` の統合ページ化に伴う波及効果だが、個別に切り分けるにはルートグループの再編が必要になる規模のため、現状は許容している。
 
