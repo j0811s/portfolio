@@ -4,6 +4,7 @@ import { LIMIT } from '@/src/constants/blog';
 import { Breadcrumb } from '@/src/components';
 import { fetchBlogList } from '@/src/libs/microcms/blog';
 import { buildSearchFilters } from '@/src/libs/blog/buildSearchFilters';
+import { parsePageNumber } from '@/src/libs/blog/pagination';
 import { AsideMenu, SearchExperience } from '@/src/features/blog';
 import type { Metadata } from 'next';
 import { metadata as rootMetadata } from '@/src/app/layout';
@@ -12,10 +13,9 @@ type Props = {
   searchParams: Promise<{ q?: string; page?: string }>;
 };
 
-const parsePage = (value: string | undefined): number => {
-  const parsed = Number(value);
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
-};
+/** `?page=` を読む。未指定や不正な値（`1e2`・`01`・巨大な値など）は 1 ページ目にする（#81） */
+const parsePage = (value: string | undefined): number =>
+  value === undefined ? 1 : (parsePageNumber(value) ?? 1);
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const { q, page } = await searchParams;

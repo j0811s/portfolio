@@ -13,11 +13,17 @@ export const pageNumbers = (totalCount: number, limit: number = LIMIT): string[]
   Array.from({ length: countPages(totalCount, limit) }, (_, i) => String(i + 1));
 
 /**
- * URL のページ番号を数値にする。1 以上の整数の表記でなければ undefined（`0`・`01`・`1.5`・`abc` など）。
+ * URL のページ番号を数値にする。1 以上の整数の表記でなければ undefined（`0`・`01`・`1.5`・`1e2`・`abc` など）。
  * microCMS へ不正な offset を送らないよう、取得の前に使う。
+ *
+ * 表記が正しくても、offset（`limit × (ページ番号 − 1)`）が安全な整数（`Number.MAX_SAFE_INTEGER`）を超えるほど
+ * 大きい番号は undefined にする。巨大な offset は文字列にすると指数表記（`1.2e+21`）になりうるため（#81）。
  */
-export const parsePageNumber = (num: string): number | undefined =>
-  /^[1-9]\d*$/.test(num) ? Number(num) : undefined;
+export const parsePageNumber = (num: string, limit: number = LIMIT): number | undefined => {
+  if (!/^[1-9]\d*$/.test(num)) return undefined;
+  const page = Number(num);
+  return Number.isSafeInteger(page) && Number.isSafeInteger(limit * (page - 1)) ? page : undefined;
+};
 
 /**
  * ページ番号が、記事数から見て存在するページかを判定する（ビルド後に記事が減った場合や、URL の直接入力のため）。
